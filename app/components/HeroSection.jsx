@@ -4,7 +4,7 @@ import Button from "./common/Button";
 
 export default function HeroSection() {
   return (
-    <section className="relative max-w-7xl m-auto text-center px-4 py-16 md:py-24">
+    <section className="relative max-w-7xl m-auto text-center px-4 py-16  md:py-24">
       {/* Decorative floating avatars */}
       <Image
         src="/images/1.png"

@@ -4,18 +4,25 @@ const reviews = [1, 2, 3]; // Dummy items to repeat card 3 times
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-white max-w-7xl m-auto py-10 px-6 ">
+    <section className="bg-white max-w-7xl m-auto py-10 px-6 md:px-20">
       <div className="mx-auto">
         {/* Top Section */}
          <div className="flex flex-col xl:flex-row justify-between">
         {/* Title */}
-        {/* <div className="relative"> */}
+        <div className="relative">
         <h2 className="text-4xl w-fit md:text-5xl font-bold max-w-2xl leading-tight">
           What our customer  <br />
         say about us
         </h2>
+          <Image
+                  src="/images/curve.png"
+                  alt="Avatar"
+                  width={100}
+                  height={100}
+                  className="absolute right-0 -bottom-16 hidden xl:block"
+                />
 
-        {/* </div> */}
+        </div>
 
         {/* Paragraphs */}
         <div className="mt-6 grid sm:grid-cols-2 gap-6 max-w-4xl">
@@ -31,9 +38,9 @@ export default function TestimonialsSection() {
       </div>
 
         {/* Review Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div className="flex relative overflow-scroll xl:overflow-none scrollbar-hide gap-6 mt-12 md:mt-20">
           {reviews.map((_, i) => (
-            <div key={i} className="rounded-xl border p-6 shadow-sm space-y-4">
+            <div key={i} className="rounded-xl border p-6 overflow-scroll min-w-[300px] shadow-sm space-y-4">
               <div className="flex items-center gap-3">
                 <Image
                   src="/images/2.png"
@@ -62,6 +69,20 @@ export default function TestimonialsSection() {
               </div>
             </div>
           ))}
+          <Image
+                  src="/images/left.png"
+                  alt="Avatar"
+                  width={25}
+                  height={25}
+                  className="absolute right-24 -top-8"
+                />
+                <Image
+                  src="/images/right.png"
+                  alt="Avatar"
+                  width={25}
+                  height={25}
+                  className="absolute right-16 -top-8 "
+                />
         </div>
       </div>
     </section>

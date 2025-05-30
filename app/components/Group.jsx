@@ -6,7 +6,8 @@ const Group = () => {
     <>
       <section className="bg-purple-50 mt-52 lg:mt-40 relative h-[30vh] sm:h-[40vh] md:h-[60vh] lg:h-[70vh] xl:h-screen ">
         <div className="absolute -top-28  w-full px-4 md:px-10 ">
-        <div className=" h-4 border rounded-t-2xl hidden xl:block  max-w-5xl m-auto "></div>
+                    <div className="absolute -top-2 sm:-top-4 inset-x-6 max-w-5xl m-auto lg:max-w-6xl rounded-2xl h-full border z-[-1]"></div>
+
         <div className="p-4 relative border max-w-7xl bg-white m-auto rounded-2xl">
           <Image
             width={2000}

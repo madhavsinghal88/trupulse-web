@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Report() {
   return (
-    <section className="py-10 px-6 bg-gray-50 ">
+    <section className="py-10 px-6  ">
       <div className="max-w-7xl m-auto">
         <div className="flex flex-col xl:flex-row justify-between">
           {/* Title */}
@@ -24,8 +24,8 @@ export default function Report() {
           </div>
         </div>
 
-        <div className="my-12">
-          <div className=" h-4 border rounded-t-2xl hidden xl:block max-w-6xl m-auto "></div>
+        <div className="my-12 relative">
+          <div className="absolute -top-2 sm:-top-4 inset-x-6 rounded-2xl h-full border z-[-1]"></div>
           <div className="p-4 border max-w-7xl bg-white m-auto rounded-2xl">
             <Image
               width={2000}

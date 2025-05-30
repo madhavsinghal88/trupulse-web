@@ -8,7 +8,7 @@ export default function ThreeStepsSection() {
       <div className="max-w-7xl mx-auto text-center">
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-start leading-tight mb-6">
-          AI-Powered Discussions in 3 Steps | <br/>
+          AI-Powered Discussions in 3 Steps | <br />
           From Setup to Smart Reports
         </h2>
 
@@ -22,7 +22,7 @@ export default function ThreeStepsSection() {
         {/* Steps Grid */}
         <div className="grid md:grid-cols-3 gap-10 text-left relative">
           {/* Step 1 */}
-          <div className="flex flex-col items-center text-center md:text-left md:items-start">
+          <div className="flex relative flex-col items-center text-center md:text-left md:items-start">
             <div className="relative flex items-center justify-center">
               <Image
                 src="/images/s1.png"
@@ -46,10 +46,17 @@ export default function ThreeStepsSection() {
               structure your conversation, and get smart suggestions based on
               intent.
             </p>
+            <Image
+              src="/images/c1.png"
+              alt="Avatar"
+              width={150}
+              height={150}
+              className="absolute -right-40 -top-16 hidden xl:block"
+            />
           </div>
 
           {/* Step 2 */}
-          <div className="flex flex-col items-center text-center md:text-left md:items-start">
+          <div className="relative flex flex-col items-center text-center md:text-left md:items-start">
             <div className="relative flex items-center justify-center">
               <Image
                 src="/images/s2.png"
@@ -73,6 +80,13 @@ export default function ThreeStepsSection() {
               discussions — let the system handle invites, reminders, and
               availability.
             </p>
+            <Image
+              src="/images/c2.png"
+              alt="Avatar"
+              width={200}
+              height={200}
+              className="absolute -right-20 -top-22 hidden xl:block"
+            />
           </div>
 
           {/* Step 3 */}
