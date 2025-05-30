@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HowWeUseAi() {
   return (
-    <section className="py-16 px-6  max-w-7xl m-auto">
+    <section className="pt-16 px-6  max-w-7xl m-auto">
       <div className="flex flex-col xl:flex-row justify-between">
         {/* Title */}
         {/* <div className="relative"> */}
@@ -36,12 +36,12 @@ export default function HowWeUseAi() {
       </div>
 
       <div className="my-12">
-          <div className="p-4 border max-w-7xl bg-white m-auto rounded-2xl">
+          <div className="p-4 max-w-7xl bg-white m-auto rounded-2xl">
             <Image
               width={2000}
               height={2000}
               className="md:p-4"
-              src="/images/video.png"
+              src="/images/img.png"
               alt="video"
             />
         </div>
