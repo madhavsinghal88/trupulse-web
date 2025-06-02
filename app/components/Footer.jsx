@@ -41,9 +41,9 @@ export default function Footer() {
         <div>
           <h3 className="font-bold text-base mb-4">Contacts</h3>
           <p>Sales</p>
-          <p className="mb-4">sales@truepulsh.con</p>
+          <p className="mb-4">sales@trupulse.con</p>
           <p>Markering</p>
-          <p className="mb-6">Markering@truepulsh.con</p>
+          <p className="mb-6">Marketing@trupulse.con</p>
 
           <h3 className="font-bold text-base mb-3">Follow us on</h3>
           <ul className="space-y-2">

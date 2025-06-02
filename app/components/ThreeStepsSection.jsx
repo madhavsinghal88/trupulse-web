@@ -14,7 +14,7 @@ export default function ThreeStepsSection() {
 
         {/* CTA Button and Text */}
         <div className="flex items-center justify-start gap-4 mt-6 mb-14">
-          <Button text="Jets Start Journey" icon={ArrowRight} />
+          <Button text="Lets Start Journey" icon={ArrowRight} />
 
           <span className="text-sm italic">7 Days free trial</span>
         </div>

@@ -40,7 +40,7 @@ export default function MeetAssistantSection() {
 
           {/* CTA Button */}
           <div className="mt-10">
-            <Button text="Jets Start Journey" icon={ArrowRight} />
+            <Button text="Lets Start Journey" icon={ArrowRight} />
           </div>
         </div>
 

@@ -15,7 +15,7 @@ const CtaSection = () => {
             It&apos;s time to harness AI-powered one-on-one chats, group
             discussions, and surveys—all in one seamless solution.
           </h2>
-          <Button text="Jets Start Journey" icon={ArrowRight} />
+          <Button text="Lets Start Journey" icon={ArrowRight} />
         </div>
       </div>
     </>

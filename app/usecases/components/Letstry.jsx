@@ -21,7 +21,7 @@ export default function Letstry() {
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-2">
-          <Button text="Jets Start Journey" icon={ArrowRight} />
+          <Button text="Lets Start Journey" icon={ArrowRight} />
 
           <Image
             width={200}
