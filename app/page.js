@@ -8,6 +8,7 @@ import Report from "./components/Report";
 import TestimonialsSection from "./components/TestimonialsSection";
 import ThreeStepsSection from "./components/ThreeStepsSection";
 import BlogShowcaseSection from "./components/BlogShowcaseSection";
+import CtaSection from "./components/common/CtaSection";
 
 const page = () => {
   return (
@@ -21,6 +22,7 @@ const page = () => {
       <TestimonialsSection/>
       <ThreeStepsSection/>
       <BlogShowcaseSection/>
+      <CtaSection/>
     </>
   );
 };
