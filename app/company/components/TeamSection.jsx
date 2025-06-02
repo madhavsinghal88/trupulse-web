@@ -13,7 +13,7 @@ const team = [
   {
     name: "Aisha Grant",
     title: "Chief Technology Officer, TruPulse",
-    image:"/images/p2.png",
+    image:"/images/p3.png",
     description:
       "Dccusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore",
   },
@@ -27,7 +27,7 @@ const team = [
   {
     name: "Natalie Rivera",
     title: "Director of Marketing, TruPulse",
-    image: "/images/p3.png",
+    image: "/images/p2.png",
     description:
       "Dccusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore",
   },
