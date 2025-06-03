@@ -2,15 +2,16 @@ export default function Footer() {
   return (
     <footer className="  py-4 px-6 md:px-20 text-sm ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
-
         {/* About Company */}
         <div className="md:col-span-2">
-          <h3 className="font-bold text-base mb-4">About company</h3>
+          <h3 className="font-bold text-base mb-4">About Scanta </h3>
           <p className="mb-4">
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore accusantium doloremque
-          </p>
-          <p>
-            totam rem aperiam, eaque ipsa quae ab illoinventore accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+            Scanta develops AI agents and automation solutions that transform
+            employee feedback. We empower HR leaders and managers to
+            effortlessly generate, conduct, and analyze 1:1 discussions, focus
+            groups, and surveys. With enterprise-grade security and privacy
+            controls, we deliver real-time insights to foster data-driven
+            cultures.{" "}
           </p>
         </div>
 
@@ -18,46 +19,66 @@ export default function Footer() {
         <div>
           <h3 className="font-bold text-base mb-4">Quick Links</h3>
           <ul className="space-y-2">
-            <li><a href="#">Our Pricing</a></li>
-            <li><a href="#">Key Use cases</a></li>
-            <li><a href="#">Company Blogs</a></li>
-            <li><a href="#">Terms of use</a></li>
-            <li><a href="#">Data Privacy</a></li>
-            <li><a href="#">Privacy Polity</a></li>
+            <li>
+              <a href="/usecases">Use Cases</a>
+            </li>
+            <li>
+              <a href="/pricing">Pricing</a>
+            </li>
+            <li>
+              <a href="/company">Company</a>
+            </li>
+            <li>
+              <a href="#">Try it</a>
+            </li>
+            <li>
+              <a href="#">Login</a>
+            </li>
+            <li>
+              <a href="#">Contact Us</a>
+            </li>
           </ul>
         </div>
 
         {/* Key Usecases */}
         <div>
-          <h3 className="font-bold text-base mb-4">Key usecases</h3>
-          <ul className="space-y-2">
-            <li><a href="#">HR Department</a></li>
-            <li><a href="#">Markering automation</a></li>
-            <li><a href="#">Finance</a></li>
-          </ul>
+          <h3 className="font-bold text-base mb-4">Contact Us</h3>
+          <p>General Questions</p>
+          <p className="mb-3">hello@trupulse.ai</p>
+          <p>Technical Support </p>
+          <p className="mb-3">support@trupulse.ai</p>
+          <p>Sales </p>
+          <p className="mb-3">sales@trupulse.ai</p>
         </div>
 
         {/* Contacts + Social */}
         <div>
-          <h3 className="font-bold text-base mb-4">Contacts</h3>
-          <p>Sales</p>
-          <p className="mb-4">sales@trupulse.con</p>
-          <p>Markering</p>
-          <p className="mb-6">Marketing@trupulse.con</p>
-
-          <h3 className="font-bold text-base mb-3">Follow us on</h3>
-          <ul className="space-y-2">
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Instagram</a></li>
+           <h3 className="font-bold text-base mb-3">Follow us on</h3>
+          <ul className="">
+            <li>
+              <a href="#">LinkedIn</a>
+            </li>
+            <li>
+              <a href="#">Facebook</a>
+            </li>
           </ul>
         </div>
       </div>
 
       {/* Copyright */}
-      <div className="mt-5 border-t pt-4 text-center text-xs ">
-        © Copyright 2025 Scanta Inc.
-      </div>
+   <div className="mt-3 border-t pt-2 text-center text-xs">
+  <p>Copyright © 2025 Scanta Inc. All Rights Reserved.</p>
+  <div className="mt-2 space-x-4">
+    <a href="/terms" className="hover:underline">
+      Terms of Use
+    </a>
+    <span>|</span>
+    <a href="/privacy" className="hover:underline">
+      Privacy Policy
+    </a>
+  </div>
+</div>
+
     </footer>
   );
 }

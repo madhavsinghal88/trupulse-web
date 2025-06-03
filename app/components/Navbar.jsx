@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +15,11 @@ import {
 export default function Navbar() {
   const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (path) =>
+    pathname === path
+      ? " underline underline-offset-10 decoration- duration-300 text-primary-text scale-105 font-bold"
+      : "";
 
   return (
     <header className="w-full  ">
@@ -21,8 +27,8 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/">
           <Image
-            width={200}
-            height={150}
+            width={160}
+            height={120}
             src="/images/logo.png"
             alt="logo"
             className="object-contain"
@@ -35,25 +41,33 @@ export default function Navbar() {
           <nav className="flex items-center gap-6">
             <Link
               href="/usecases"
-              className="hover:text-secondary-text transition"
+              className={`hover:text-secondary-text transition ${isActive(
+                "/usecases"
+              )}`}
             >
               Usecases
             </Link>
             <Link
               href="/pricing"
-              className="hover:text-secondary-text transition"
+              className={`hover:text-secondary-text transition ${isActive(
+                "/pricing"
+              )}`}
             >
               Pricing
             </Link>
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 hover:text-secondary-text transition focus:outline-none">
+              <DropdownMenuTrigger
+                className={`flex cursor-pointer items-center gap-1 hover:text-secondary-text transition focus:outline-none ${isActive(
+                  "/company"
+                )}`}
+              >
                 <span>Company</span>
                 <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80 p-2">
                 <div className="hover:bg-gray-100 p-2 rounded-md cursor-pointer">
                   <Link href="/company">
-                    <h4 className="font-semibold text-primary-text ">
+                    <h4 className="font-semibold text-primary-text">
                       About Company
                     </h4>
                     <p className="text-secondary-text text-sm">
@@ -84,13 +98,29 @@ export default function Navbar() {
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Link
+              href="#"
+              className={`hover:text-secondary-text transition ${isActive(
+                "/tryIt"
+              )}`}
+            >
+              Try It
+            </Link>
+              <Link
+              href="#"
+              className={`hover:text-secondary-text transition ${isActive(
+                "/contactUs"
+              )}`}
+            >
+              Contact Us
+            </Link>
           </nav>
 
           {/* Auth buttons */}
           <div className="flex items-center gap-3">
-            <button className="border border-secondarytext px-4 py-1.5 rounded-md hover:bg-gray-50 transition">
+            {/* <button className="border border-secondarytext px-4 py-1.5 rounded-md hover:bg-gray-50 transition">
               Signup
-            </button>
+            </button> */}
             <button className="border border-secondarytext px-4 py-1.5 rounded-md hover:bg-gray-50 transition">
               Login
             </button>
@@ -107,12 +137,14 @@ export default function Navbar() {
         <div className="md:hidden px-4 pb-4 font-semibold text-sm space-y-3">
           <Link
             href="/usecases"
+            onClick={() => setMenuOpen(false)}
             className="block hover:text-secondary-text transition"
           >
             Usecases
           </Link>
           <Link
             href="/pricing"
+            onClick={() => setMenuOpen(false)}
             className="block hover:text-secondary-text transition"
           >
             Pricing
@@ -132,13 +164,20 @@ export default function Navbar() {
             {showCompanyDropdown && (
               <div className="pl-4 pt-2 space-y-2">
                 <p className="hover:text-secondary-text cursor-pointer">
-                 <Link href="/company"> About Company</Link>
+                  <Link href="/company" onClick={() => setMenuOpen(false)}>
+                    About Company
+                  </Link>
                 </p>
                 <p className="hover:text-secondary-text cursor-pointer">
-                 <Link href="/blogs"> Our Blogs</Link>
+                  <Link href="/blogs" onClick={() => setMenuOpen(false)}>
+                    Our Blogs
+                  </Link>
                 </p>
                 <p className="hover:text-secondary-text cursor-pointer">
-                 <Link href="/support"> Support</Link>
+                  <Link href="/support" onClick={() => setMenuOpen(false)}>
+                    {" "}
+                    Support
+                  </Link>
                 </p>
               </div>
             )}
