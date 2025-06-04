@@ -6,14 +6,11 @@ export default function PricingHeroSection() {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Text Section */}
         <div className="flex-1 mt-14">
-          <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Let’s dive into our use <br />
-            cases and see the <br />
-            magic in action!
+          <h2 className="text-4xl md:text-6xl max-w-2xl font-bold leading-tight mb-6">
+            Pick the Plan that Fits! Affordable Pricing with Pay-As-You-Use Credit Top-Ups
           </h2>
           <p className="text-lg sm:text-2xl max-w-xl ">
-            Explore how our solution powers real-world results. From driving
-            high-intent leads to automating your goals
+            Select the plan that works for you and top up AI analysis credits as needed—no hidden fees, predictable costs, full transparency.
           </p>
         </div>
 

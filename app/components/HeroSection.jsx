@@ -11,7 +11,7 @@ export default function HeroSection() {
         alt="user"
         width={50}
         height={50}
-        className="absolute top-16 left-6 rounded-full shadow-md"
+        className="absolute top-16 left-6 hidden lg:block rounded-full shadow-md"
       />
       <Image
         src="/images/2.png"

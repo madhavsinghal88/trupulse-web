@@ -6,14 +6,13 @@ export default function BlogHeroSection() {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Text Section */}
         <div className="flex-1 mt-14">
-          <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Let’s dive into our use <br />
-            cases and see the <br />
-            magic in action!
+          <h2 className="text-4xl md:text-6xl max-w-2xl font-bold leading-tight mb-6">
+          Your go-to resource for AI-driven feedback, engagement, and culture trends.
           </h2>
           <p className="text-lg sm:text-2xl max-w-xl ">
-            Explore how our solution powers real-world results. From driving
-            high-intent leads to automating your goals
+       
+Discover expert posts on leveraging AI agents, boosting engagement, reducing fatigue, and turning employee feedback into strategic HR action.
+
           </p>
         </div>
 

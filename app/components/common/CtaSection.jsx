@@ -12,8 +12,7 @@ const CtaSection = () => {
 
         <div className="bg-primary-text text-white rounded-2xl px-6 md:px-12 py-12 text-center">
           <h2 className="text-2xl md:text-4xl font-bold leading-snug mb-6 text-start max-w-3xl ">
-            It&apos;s time to harness AI-powered one-on-one chats, group
-            discussions, and surveys—all in one seamless solution.
+            Revolutionize feedback with TruPulse: Seamless session creation, dynamic moderation, and instant reporting for smarter HR decisions.
           </h2>
           <Button text="Lets Start Journey" icon={ArrowRight} />
         </div>

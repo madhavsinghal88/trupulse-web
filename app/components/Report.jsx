@@ -6,20 +6,14 @@ export default function Report() {
       <div className="max-w-7xl m-auto">
         <div className="flex flex-col xl:flex-row justify-between">
           {/* Title */}
-          <h2 className="text-4xl w-fit md:text-5xl font-bold max-w-2xl leading-tight">
-            Report Compared to <br />
-            traditional tools
+          <h2 className="text-4xl w-fit md:text-5xl font-bold max-w-xl leading-tight">
+        Management Ready Reports
           </h2>
 
           {/* Paragraphs */}
-          <div className="mt-6 grid sm:grid-cols-2 gap-6 max-w-4xl">
-            <p className="text-base leading-relaxed xl:max-w-[200px]">
-              Dccusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore
-            </p>
-            <p className="text-base leading-relaxed xl:max-w-[200px]">
-              Deritatis et quasi architecto beatae vitae dicta architecto beatae
-              vitae dicta sunt explicabo
+          <div className="mt-6 max-w-xl">
+            <p className="text-base leading-relaxed">
+            Automatically create polished reports featuring executive summaries, highlighted findings, and more than fifteen AI generated, HR-centric employee metrics for instant insights.
             </p>
           </div>
         </div>

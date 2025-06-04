@@ -106,7 +106,7 @@ export default function Navbar() {
             >
               Try It
             </Link>
-              <Link
+            <Link
               href="#"
               className={`hover:text-secondary-text transition ${isActive(
                 "/contactUs"
@@ -182,13 +182,24 @@ export default function Navbar() {
               </div>
             )}
           </div>
+          <Link
+            href="#"
+            onClick={() => setMenuOpen(false)}
+            className="block hover:text-secondary-text transition"
+          >
+            Try It
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setMenuOpen(false)}
+            className="block hover:text-secondary-text transition"
+          >
+            Contact Us
+          </Link>
 
           <hr />
 
           <div className="flex flex-col gap-2 pt-2">
-            <button className="border border-secondarytext px-4 py-1.5 rounded-md hover:bg-gray-50 transition">
-              Signup
-            </button>
             <button className="border border-secondarytext px-4 py-1.5 rounded-md hover:bg-gray-50 transition">
               Login
             </button>

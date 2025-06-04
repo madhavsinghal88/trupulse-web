@@ -7,9 +7,9 @@ export default function ThreeStepsSection() {
     <section className="bg-primary-text text-white py-20 px-6 md:px-20">
       <div className="max-w-7xl mx-auto text-center">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-start leading-tight mb-6">
-          AI-Powered Discussions in 3 Steps | <br />
-          From Setup to Smart Reports
+        <h2 className="text-3xl md:text-4xl max-w-4xl lg:text-5xl font-bold text-start leading-tight mb-6">
+          See How TruPulse Automates Creation, Execution, and Analysis
+          End-to-End
         </h2>
 
         {/* CTA Button and Text */}
@@ -40,11 +40,12 @@ export default function ThreeStepsSection() {
                 />
               </div>
             </div>
-            <h3 className="mt-6 font-bold text-lg">Create & Define with AI</h3>
+            <h3 className="mt-6 font-bold text-lg">
+              Design Sessions in Seconds
+            </h3>
             <p className="text-sm mt-2 max-w-[400px] ">
-              Start by opening a new discussion. Use AI to define your goals,
-              structure your conversation, and get smart suggestions based on
-              intent.
+              Experience AI creating the perfect set of discussion topics and
+              survey questions based on any use case you choose.
             </p>
             <Image
               src="/images/c1.png"
@@ -74,11 +75,13 @@ export default function ThreeStepsSection() {
                 />
               </div>
             </div>
-            <h3 className="mt-6 font-bold text-lg">Connect & Schedule</h3>
+            <h3 className="mt-6 font-bold text-lg">
+              AI-Led Discussions and Interviews
+            </h3>
             <p className="text-sm mt-2 max-w-[400px] ">
-              Upload or connect your contact list. Easily schedule your
-              discussions — let the system handle invites, reminders, and
-              availability.
+              Watch AI moderators conduct interviews and focus groups,
+              generating topic-focused questions with real-time follow-up probes
+              for deeper understanding of employee sentiment.
             </p>
             <Image
               src="/images/c2.png"
@@ -109,12 +112,11 @@ export default function ThreeStepsSection() {
               </div>
             </div>
             <h3 className="mt-6 font-bold text-lg">
-              Distribute, Collect & Review
+              Automated Reporting and Insights
             </h3>
             <p className="text-sm mt-2 max-w-[400px] ">
-              Once discussions are live, the platform will handle distribution
-              and response collection. Finally, review smart reports with
-              insights that matter.
+              See AI transform sessions into executive summaries, actionable
+              insights, and visual dashboards—no manual analysis required.
             </p>
           </div>
         </div>

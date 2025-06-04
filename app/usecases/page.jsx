@@ -1,6 +1,5 @@
 import React from "react";
 import UseCaseHeroSection from "./components/UseCaseHeroSection";
-import SurveySolutionsSection from "./components/SurveySolutionsSection";
 import Letstry from "./components/Letstry";
 import HowWeUseAi from "../components/HowWeUseAi";
 import Report from "../components/Report";
@@ -13,7 +12,6 @@ const page = () => {
   return (
     <>
       <UseCaseHeroSection />
-      <SurveySolutionsSection />
       <Letstry />
       <HowWeUseAi />
       <Report />
