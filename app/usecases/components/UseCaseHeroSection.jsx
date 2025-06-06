@@ -240,7 +240,7 @@ export default function UseCaseHeroSection() {
       </section></div>
 
       {/* Tabs */}
-      <div className="max-w-7xl mx-auto mt-16 overflow-x-auto relative scrollbar-hide">
+      <div className="max-w-7xl mx-auto mt-16 overflow-x-auto px-10 relative scrollbar-hide">
         <div className="flex gap-10 font-semibold text-sm sm:text-lg whitespace-nowrap">
           {categories.map((cat) => (
             <button

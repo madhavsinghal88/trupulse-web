@@ -27,8 +27,8 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/">
           <Image
-            width={160}
-            height={120}
+            width={180}
+            height={140}
             src="/images/logo.png"
             alt="logo"
             className="object-contain"
