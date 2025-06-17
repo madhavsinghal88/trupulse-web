@@ -10,7 +10,7 @@ const avatars = [
     alt: "user 1",
     style:
       "top-16 cursor-pointer hover:scale-105 duration-300 left-6 hidden lg:block",
-    popupText: "I set the strategy, and AI did all the work",
+    popupText: "I set the strategy, and AI did all the work!!",
   },
   {
     src: "/images/2.png",
