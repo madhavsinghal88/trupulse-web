@@ -6,7 +6,7 @@ import TeamSection from './components/TeamSection'
 
 const page = () => {
   return (
-    <div>
+    <div className='pt-10'>
         <CompanyHeroSection/>
         <Guided/>
         <TeamSection/>

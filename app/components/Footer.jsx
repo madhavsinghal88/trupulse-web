@@ -53,7 +53,7 @@ export default function Footer() {
 
         {/* Contacts + Social */}
         <div>
-           <h3 className="font-bold text-base mb-3">Follow us on</h3>
+          <h3 className="font-bold text-base mb-3">Follow us on</h3>
           <ul className="">
             <li>
               <a href="#">LinkedIn</a>
@@ -66,19 +66,18 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-   <div className="mt-3 border-t pt-2 text-center text-xs">
-  <p>Copyright © 2025 Scanta Inc. All Rights Reserved.</p>
-  <div className="mt-2 space-x-4">
-    <a href="/terms" className="hover:underline">
-      Terms of Use
-    </a>
-    <span>|</span>
-    <a href="/privacy" className="hover:underline">
-      Privacy Policy
-    </a>
-  </div>
-</div>
-
+      <div className="mt-3 flex justify-between border-t pt-2 text-center text-xs">
+        <p>Copyright © 2025 Scanta Inc. All Rights Reserved.</p>
+        <div className="mt-2 space-x-4">
+          <a href="/terms" className="hover:underline">
+            Terms of Use
+          </a>
+          <span>|</span>
+          <a href="/privacy" className="hover:underline">
+            Privacy Policy
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }

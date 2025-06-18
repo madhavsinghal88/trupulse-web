@@ -10,7 +10,7 @@ import CtaSection from "../components/common/CtaSection";
 
 const page = () => {
   return (
-    <>
+    <div>
       <UseCaseHeroSection />
       <Letstry />
       <HowWeUseAi />
@@ -20,7 +20,7 @@ const page = () => {
       <BlogShowcaseSection />
             <CtaSection/>
 
-    </>
+    </div>
   );
 };
 

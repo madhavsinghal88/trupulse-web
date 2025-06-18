@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function BlogHero() {
   return (
-    <section className="bg-[#f3d6ff] py-16 px-6">
+    <section className="bg-[#f3d6ff] py-16 pt-28 px-6">
       <div className="max-w-7xl mx-auto">
         <p className="text-sm font-medium mb-4">Blog / Insights & Ideas</p>
         <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">

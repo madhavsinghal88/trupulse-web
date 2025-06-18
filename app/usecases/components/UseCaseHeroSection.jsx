@@ -200,7 +200,7 @@ export default function UseCaseHeroSection() {
   return (
     <div className="">
       {/* Hero Section */}
-      <div className=" bg-[#E9FCF9] px-6 md:px-20 pt-10 pb-28">
+      <div className=" bg-[#E9FCF9] px-6 md:px-20 py-28">
       <section className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         <div className="flex-1 mt-14">
           <h2 className="text-4xl md:text-6xl max-w-3xl font-bold leading-tight mb-6">

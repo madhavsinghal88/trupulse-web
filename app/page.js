@@ -9,19 +9,29 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import ThreeStepsSection from "./components/ThreeStepsSection";
 import BlogShowcaseSection from "./components/BlogShowcaseSection";
 import CtaSection from "./components/common/CtaSection";
+import FaqAccordion from "./support/components/FaqAccordion";
+import ManagementReadyReports from "./components/ManagementReadyReports";
+import SurveySection from "./components/SurveySection";
+import OneToOneSection from "./components/OneToOneSection";
+import UnifiedResearchSection from "./components/UnifiedResearchSection";
 
 const page = () => {
   return (
     <>
       <HeroSection/>
+      <UnifiedResearchSection/>
+      <OneToOneSection/>
       <Group/>
-      <Goals/>
+      {/* <Goals/> */}
+      <SurveySection/>
       <MeetAssistantSection/>
+            <Report/>
+      <ManagementReadyReports/>
       <HowWeUseAi/>
-      <Report/>
-      <TestimonialsSection/>
-      <ThreeStepsSection/>
-      <BlogShowcaseSection/>
+      {/* <ThreeStepsSection/> */}
+      {/* <BlogShowcaseSection/> */}
+            <TestimonialsSection/>
+      <FaqAccordion/>
       <CtaSection/>
     </>
   );

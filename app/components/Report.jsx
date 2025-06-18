@@ -1,21 +1,23 @@
 import Image from "next/image";
+import Button from "./common/Button";
 
 export default function Report() {
   return (
     <section className="py-10 px-6  ">
       <div className="max-w-7xl m-auto">
-        <div className="flex flex-col xl:flex-row justify-between">
+        <div className="flex flex-col w-fit justify-center items-center m-auto gap-5 ">
           {/* Title */}
-          <h2 className="text-4xl w-fit md:text-5xl font-bold max-w-xl leading-tight">
+          <h2 className="text-4xl w-fit md:text-5xl font-bold max-w-3xl leading-tight">
         Management Ready Reports
           </h2>
 
           {/* Paragraphs */}
-          <div className="mt-6 max-w-xl">
-            <p className="text-base leading-relaxed">
+          <div className=" max-w-4xl">
+            <p className="text-base text-center leading-relaxed">
             Automatically create polished reports featuring executive summaries, highlighted findings, and more than fifteen AI generated, HR-centric employee metrics for instant insights.
             </p>
           </div>
+          <Button text="Book a demo"/>
         </div>
 
         <div className="my-12 relative">
