@@ -114,7 +114,7 @@ export default function ManagementReadyReports() {
   return (
     <section className="bg-[#eff0ff] py-20 px-4">
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold mb-3">
+        <h2 className="text-4xl md:text-5xl w-full font-bold mb-3">
           Management Ready Reports
         </h2>
         <p className=" max-w-3xl mx-auto">

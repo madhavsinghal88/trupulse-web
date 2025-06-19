@@ -78,7 +78,7 @@ export default function Group() {
           <h3 className="text-xl sm:text-2xl font-semibold border-b-2 w-fit border-black mb-2 ">
             Group Discussion
           </h3>
-          <h2 className="text-3xl md:text-5xl font-semibold  mb-2 leading-14">
+          <h2 className="text-4xl md:text-6xl font-bold leading-10  mb-2 md:leading-16">
             AI-Powered Focus <br />
             Groups That Uncover <br />
             What Matters Most

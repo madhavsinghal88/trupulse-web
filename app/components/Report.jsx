@@ -7,7 +7,7 @@ export default function Report() {
       <div className="max-w-7xl m-auto">
         <div className="flex flex-col w-fit justify-center items-center m-auto gap-5 ">
           {/* Title */}
-          <h2 className="text-4xl w-fit md:text-5xl font-bold max-w-3xl leading-tight">
+          <h2 className="text-4xl text-center md:text-5xl w-full font-bold mb-3">
         Management Ready Reports
           </h2>
 

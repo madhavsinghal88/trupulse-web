@@ -6,7 +6,7 @@ export default function PricingHeroSection() {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Text Section */}
         <div className="flex-1 mt-14">
-          <h2 className="text-3xl sm:text-4xl lg:text-6xl text-center max-w-5xl m-auto font-bold leading-tight mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl text-center max-w-5xl m-auto font-bold leading-tight mb-6">
             Power Up Your AI Discussions – Pick the Plan That Fits{" "}
           </h2>
           <p className="text-xl lg:text-3xl text-center max-w-4xl m-auto  ">

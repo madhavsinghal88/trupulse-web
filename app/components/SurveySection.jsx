@@ -46,7 +46,7 @@ export default function SurveySection() {
           <h3 className="text-xl sm:text-2xl font-semibold border-b-2 border-black mb-2 ">
             Surveys
           </h3>
-          <h2 className="text-3xl md:text-5xl max-w-md leading-14 font-semibold mb-2">
+          <h2 className="text-4xl md:text-6xl font-bold leading-10 md:leading-18 max-w-lg mb-2">
             Intelligent Surveys for Deeper, Faster Insights
           </h2>
 

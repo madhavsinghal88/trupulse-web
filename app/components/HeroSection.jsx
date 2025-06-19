@@ -129,7 +129,7 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
         {/* Left Section */}
         <div className="flex flex-col w-fit justify-center items-start">
-          <h1 className="text-3xl md:text-6xl font-bold leading-18  mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold leading-10 md:leading-18  mb-4">
             Your{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B4F100] to-[#00D1FF]">
               AI

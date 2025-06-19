@@ -210,7 +210,6 @@
 //   );
 // }
 //
-
 "use client";
 
 import { useState } from "react";
@@ -254,18 +253,18 @@ export default function Navbar() {
               Our Product
             </Link>
             <Link
-              href="/support"
+              href="/usecases"
               className={`hover:text-orange-500 transition-colors font-medium ${isActive(
-                "/support"
+                "/usecases"
               )}`}
             >
               Why Trupulse
             </Link>
 
             <Link
-              href="/usecases"
+              href="/support"
               className={`hover:text-orange-500 transition-colors font-medium ${isActive(
-                "/usecases"
+                "/support"
               )}`}
             >
               Testimonials
