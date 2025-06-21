@@ -47,14 +47,14 @@ export default function SurveySection() {
             Surveys
           </h3>
           <h2 className="text-4xl md:text-6xl font-bold leading-10 md:leading-18 max-w-lg mb-2">
-            Intelligent Surveys for Deeper, Faster Insights
+            Smart AI surveys designed to capture meaningful employee insights{" "}
           </h2>
 
           <div className="space-y-6 max-w-md text-base mb-5 ">
             {[
-              "AI-Designed Questions: Deploy smart, adaptive surveys that ask the right questions every time.",
-              "Targeted Distribution: Customize delivery to reach precise segments of your audience.",
-              "Live Dashboards: Monitor trends and analyze responses in real-time with visual, actionable reports.",
+              "Craft AI-generated surveys on any topic with one click",
+              "Collect quantitative and qualitative data in a single streamlined survey workflow.",
+              "Get immediate reports with executive summaries, topical analysis and recommendations.",
             ].map((point, index) => (
               <div key={index} className="flex items-start gap-3">
                 <Check className=" mt-1" />
@@ -80,17 +80,17 @@ export default function SurveySection() {
           {/* Top card */}
           <div className="bg-white rounded-xl p-4 max-w-md shadow-sm border border-gray-200 flex justify-between items-center">
             <div>
-              <h4 className="font-semibold ">Anniversary Trip Ideas 2025</h4>
-              <p className="text-sm text-secondary-text max-w-sm">
-                Plan a memorable company trip to celebrate our [Xth] Anniversary
-              </p>
+              <h4 className="font-semibold ">
+                How well does the new CRM integrate with your existing tools
+                (email, calendar, chat)?
+              </h4>
+                <ul className="list-disc grid grid-cols-2 my-3 mx-4">
+                  <li>Excellent integration</li>
+                  <li>Fair integration</li>
+                  <li>Good integration</li>
+                  <li>Poor integration</li>
+                </ul>
             </div>
-            <Image
-              src="/images/cap.png"
-              alt="Celebration"
-              width={120}
-              height={120}
-            />
           </div>
 
           {surveyItems.map((item, index) => (

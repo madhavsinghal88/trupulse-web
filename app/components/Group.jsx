@@ -55,12 +55,12 @@ const discussion = {
     {
       type: "ai",
       avatar: "/images/2.png",
-      text: `Hey everyone! 🎉 As you know, our company anniversary is coming up next month. Leadership has approved a 2-day team trip! Let's start planning together — destination, type of trip, and activities.🔥`,
+      text: `This is your TruPulse Focus Group session on pain points in the company hiring process. What’s the biggest challenge you face in filling roles efficiently?`,
     },
     {
       type: "user",
       avatar: "/images/5.png",
-      text: `That’s awesome! Can we go somewhere cooler? Like Manali or Ooty? I think a hill station would be perfect for August.`,
+      text: `Our biggest challenge is screening through hundreds of unqualified resumes.`,
     },
     {
       type: "placeholder",
@@ -76,19 +76,16 @@ export default function Group() {
         {/* Left Column */}
         <div className="flex flex-col justify-center items-start gap-4">
           <h3 className="text-xl sm:text-2xl font-semibold border-b-2 w-fit border-black mb-2 ">
-            Group Discussion
-          </h3>
+Focus Groups          </h3>
           <h2 className="text-4xl md:text-6xl font-bold leading-10  mb-2 md:leading-16">
-            AI-Powered Focus <br />
-            Groups That Uncover <br />
-            What Matters Most
+           AI-powered group discussions for deeper employee insights
           </h2>
 
           <div className="space-y-6 text-base mb-4 ">
             {[
-              "Dynamic Group Moderation: Let AI guide rich, inclusive conversations across your audience.",
-              "Diverse Perspectives: Capture insights from multiple voices simultaneously.",
-              "Thematic Reports: Instantly surface key themes, sentiment, and takeaways in a single, clear report.",
+              "Leverage groups to workshop ideas, brainstorm proposals or collect group feedback",
+              "Use AI-driven moderation to guide conversations and ensure objective question flow.",
+              "AI summaries translate group findings into summaries and actionable recommendations",
             ].map((point, index) => (
               <div key={index} className="flex items-start gap-3">
                 <Check className=" mt-1" />

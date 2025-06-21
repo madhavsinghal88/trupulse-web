@@ -92,7 +92,7 @@ const steps = [
     key: "create",
     title: "TruPulse Creates It",
     description:
-      "AI generates discussion topics and survey questions based on the use case you choose.",
+      "TruPulse generates discussion topics and survey questions based on the use case you choose.",
     image: "/images/assist.png",
     border: "border-green-300",
   },
@@ -100,7 +100,7 @@ const steps = [
     key: "run",
     title: "TruPulse Runs It",
     description:
-      "AI conducts sessions, dynamically probing discussion topics and participant replies.",
+      "TruPulse conducts sessions, dynamically probing discussion topics and participant replies.",
     image: "/images/dashboard.png",
     border: "border-cyan-300",
   },
@@ -108,7 +108,7 @@ const steps = [
     key: "analyze",
     title: "TruPulse Analyzes It",
     description:
-      "AI distills feedback into themes, metrics, and polished executive summaries automatically.",
+      "TruPulse distills feedback into themes, metrics, and polished executive summaries automatically.",
     image: "/images/video.png",
     border: "border-blue-300",
   },

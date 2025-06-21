@@ -91,6 +91,22 @@ const tabs = [
     ],
   },
   {
+    title: "Workplace Environment",
+    desc: "Enhance the workplace environment through continuous AI feedback loops.",
+    content: [
+      {
+        icon: FileText,
+        title: "Change Impact Analysis",
+        desc: "Gauge employee response to major org changes.",
+      },
+      {
+        icon: ClipboardList,
+        title: "Policy Sentiment",
+        desc: "Understand employee acceptance of new rules.",
+      },
+    ],
+  },
+  {
     title: "Change & Policy",
     desc: "Navigate change initiatives with AI-facilitated employee feedback loops.",
     content: [
@@ -115,11 +131,9 @@ export default function ManagementReadyReports() {
     <section className="bg-[#eff0ff] py-20 px-4">
       <div className="max-w-7xl mx-auto text-center mb-12">
         <h2 className="text-4xl md:text-5xl w-full font-bold mb-3">
-          Management Ready Reports
-        </h2>
+Use Cases        </h2>
         <p className=" max-w-3xl mx-auto">
-          Automatically create polished reports featuring executive summaries, highlighted findings, and more than fifteen AI generated, HR-centric employee metrics for instant insights.
-        </p>
+Access AI-powered feedback use cases instantly—from onboarding and performance to weekly check-ins and exit interviews—tailored for HR and managers.        </p>
       </div>
 
       <div className="flex justify-center items-start gap-10 max-w-7xl mx-auto">

@@ -117,7 +117,6 @@
 //   );
 // }
 
-
 "use client";
 
 import Image from "next/image";
@@ -126,41 +125,21 @@ import Button from "./common/Button";
 export default function HeroSection() {
   return (
     <section className="relative bg-[#FFEFE6] px-4 pt-36">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
         {/* Left Section */}
-        <div className="flex flex-col w-fit justify-center items-start">
-          <h1 className="text-4xl md:text-6xl font-bold leading-10 md:leading-18  mb-4">
+        <div className="flex flex-col w-fit justify-center items-center m-auto">
+          <h1 className="text-4xl md:text-6xl font-bold max-w-3xl leading-10 md:leading-18 m-auto text-center  mb-4">
             Your{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B4F100] to-[#00D1FF]">
               AI
             </span>{" "}
-            Agent for smarter Employee Engagement
+            Agent Driving Real-Time People and Business Impact{" "}
           </h1>
           <p className="text-base md:text-lg mb-6 max-w-xl">
-            Our AI agent creates, conducts, & analyzes 1:1 discussions, focus
-            groups and surveys on any topic. TruPulse eliminates the work of
-            understanding employees.
+           TruPulse creates, conducts and analyzes 1:1 discussions, focus groups and surveys on any topic. TruPulse simplifies understanding employees.
           </p>
 
           {/* CTA Button */}
-         <Button text="Book a demo"/>
-        </div>
-
-        {/* Right Testimonials */}
-        <div className="space-y-4 pt-6 max-w-sm m-auto">
-          {[
-            "I set the strategy, and AI did all the work!",
-            "Saved 10 hours on my weekly 1:1!",
-            "Survey creation took seconds, not weeks.",
-          ].map((text, i) => (
-            <div
-              key={i}
-              className="bg-white  px-5 py-8 rounded-4xl shadow-md md:text-lg lg:text-2xl font-semibold"
-            >
-              {text}
-            </div>
-          ))}
-        </div>
+          <Button text="Book a demo" />
       </div>
 
       {/* Bottom Image Block */}

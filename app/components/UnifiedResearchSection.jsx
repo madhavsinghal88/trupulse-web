@@ -9,12 +9,10 @@ export default function UnifiedResearchSection() {
         {/* Left Text Block */}
         <div>
           <h2 className="text-3xl md:text-5xl font-bold  mb-6">
-            Unified Research, Powered <br />
-            by AI Conversations
+           Choose Your Feedback Mode and Accelerate Insights
           </h2>
           <p className="text-base md:text-lg text-secondary-text max-w-xl">
-            AI-powered conversations, focus groups, and surveys that deliver deep insights—
-            <span className="font-medium"> faster, smarter, and at scale</span>.
+           Engage teams via 1:1 chats, AI-moderated focus groups, or smart surveys for faster, deeper employee understanding.
           </p>
         </div>
 

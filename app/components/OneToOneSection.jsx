@@ -8,20 +8,20 @@ const messages = [
   {
     sender: "ai",
     avatar: "/images/2.png",
-    text: "An AI Agent will conduct defined discussions based on your specific requirements.",
+    text: "This is your TruPulse Discussion session on the company reorg. What positive changes have you noticed so far?",
   },
   {
     sender: "ai",
-    text: "Hi Rahul, do you have a few minutes to discuss your health insurance coverage?",
+    text: "Improved decision speed—fewer approval layers than before.",
   },
   {
     sender: "user",
     avatar: "/images/1.png",
-    text: "Sure,. Is everything okay?",
+    text: "That’s great. Any downsides to faster decisions?",
   },
   {
     sender: "ai",
-    text: "Yes, all good! We’re reviewing employee health insurance benefits this month",
+    text: "Sometimes we move forward without full stakeholder alignment, causing rework.",
   },
 ];
 
@@ -32,17 +32,16 @@ export default function OneToOneSection() {
         {/* Left */}
         <div className="flex flex-col justify-center items-start gap-4">
           <h3 className="text-xl font-semibold border-b-2 w-fit border-black mb-2 ">
-            1:1 Conversations
+1:1 Discussions
           </h3>
           <h2 className="text-4xl md:text-6xl font-bold leading-10 max-w-lg  mb-2 md:leading-16">
-            Smarter 1:1 Conversations, Powered by AI Agent
-          </h2>
+Personalized, AI-driven chats that capture real employee sentiment.          </h2>
 
           <div className="space-y-6 mb-4 text-base ">
             {[
-              "AI-led Conversations: Automate meaningful one-on-one chats that feel personal and engaging.",
-              "Deep Follow-ups: Uncover hidden insights with intelligent, context-aware follow-up questions.",
-              "Actionable Summaries: Instantly generate summaries for individuals and groups to accelerate decision-making.",
+              "Automated chat sessions deliver structured, one-on-one conversations without scheduling hassles, anytime.",
+              "Intelligent follow-up questions continuously probe responses to extract deeper, meaningful insights.",
+              "Session transcripts and executive summaries are automatically generated for quick review.",
             ].map((point, i) => (
               <div key={i} className="flex items-start gap-3">
                 <Check className=" mt-1" />
