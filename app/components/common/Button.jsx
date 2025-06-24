@@ -41,7 +41,7 @@ export default function Button({ text, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="relative cursor-pointer overflow-hidden px-8 py-2 rounded-full font-semibold text-base md:text-lg flex items-center gap-4 text-white shadow-lg group z-10"
+      className="relative cursor-pointer  hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] overflow-hidden px-8 py-2 rounded-full font-semibold text-base md:text-lg flex items-center gap-4 text-white shadow-lg group z-10"
     >
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient z-10" />

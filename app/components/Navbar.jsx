@@ -87,7 +87,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/"
-                className="text-center px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full hover:bg-orange-600 transition-all shadow-sm"
+                className="text-center px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full  hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] transition-all shadow-sm"
             >
               Book a demo
             </Link>
@@ -174,7 +174,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 onClick={() => setMenuOpen(false)}
-                className="text-center  bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradientpx-6 py-2.5 text-white font-medium rounded-full hover:bg-orange-600 transition-all shadow-sm"
+                className="text-center   hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradientpx-6 py-2.5 text-white font-medium rounded-full transition-all shadow-sm"
               >
                 Book a demo
               </Link>

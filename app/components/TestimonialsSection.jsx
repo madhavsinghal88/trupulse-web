@@ -341,7 +341,7 @@ export default function TestimonialsSection() {
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
             <div
-              data-aos="zoom-in-up"
+              data-aos="fade-up"
               key={index}
               className={`flex flex-col gap-6 items-start px-4 m-auto max-w-lg ${
                 index % 2 === 0
@@ -371,7 +371,7 @@ export default function TestimonialsSection() {
         {/* Mobile View with Swiper */}
         <div className="md:hidden">
           <Swiper
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
             loop={true}
             spaceBetween={16}
             modules={[Autoplay]}
