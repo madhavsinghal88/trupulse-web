@@ -336,7 +336,7 @@ export default function ManagementReadyReports() {
       {/* Desktop Layout */}
       <div className="hidden sm:flex justify-center items-start gap-10 max-w-7xl mx-auto">
         {/* Left Tabs */}
-        <div className="flex flex-col gap-3">
+        <div data-aos="fade-up-right" className="flex flex-col gap-3">
           {tabs.map((tab, index) => (
             <button
               key={index}
@@ -354,7 +354,7 @@ export default function ManagementReadyReports() {
         </div>
 
         {/* Right Content */}
-        <div className="">
+        <div data-aos="fade-up-left" className="">
           <p className="text-left font-semibold sm:text-xl max-w-2xl mb-6">
             Leverage continuous, automated feedback on onboarding, performance cycles, and exits to improve retention and employee satisfaction.
           </p>
@@ -382,7 +382,8 @@ export default function ManagementReadyReports() {
       <div className="sm:hidden max-w-md mx-auto">
         <div className="space-y-1">
           {tabs.map((tab, index) => (
-            <div key={index} className="bg-white rounded-2xl my-4 overflow-hidden">
+            <div                 data-aos="fade-up"
+ key={index} className="bg-white rounded-2xl my-4 overflow-hidden">
               <button
                 onClick={() => toggleAccordion(index)}
                 className="w-full px-6 py-6 text-left flex items-center justify-between"

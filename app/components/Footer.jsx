@@ -69,11 +69,11 @@ export default function Footer() {
       <div className="mt-3 flex justify-between border-t pt-2 text-center text-xs">
         <p>Copyright © 2025 Scanta Inc. All Rights Reserved.</p>
         <div className="mt-2 space-x-4">
-          <a href="/terms" className="hover:underline">
+          <a className="hover:underline">
             Terms of Use
           </a>
           <span>|</span>
-          <a href="/privacy" className="hover:underline">
+          <a className="hover:underline">
             Privacy Policy
           </a>
         </div>

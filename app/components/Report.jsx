@@ -20,7 +20,7 @@ export default function Report() {
           <Button text="Book a demo"/>
         </div>
 
-        <div className="my-12 relative">
+        <div className="my-12 relative " data-aos="fade-up">
           <div className="absolute -top-2 sm:-top-4 inset-x-6 rounded-2xl h-full border z-[-1]"></div>
           <div className="p-4 border max-w-7xl bg-white m-auto rounded-2xl">
             <Image

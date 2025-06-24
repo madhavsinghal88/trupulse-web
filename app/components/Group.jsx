@@ -98,12 +98,14 @@ Focus Groups          </h3>
         </div>
 
         {/* Right Discussion Preview */}
-        <div className="space-y-4 max-w-md m-auto">
+        <div
+ className="space-y-4 max-w-md m-auto">
           {/* Topic Card */}
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+          <div  className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
             <div className="flex items-center justify-center -gap-2 mb-2">
               {discussion.topic.avatars.map((src, i) => (
-                <Image
+                <Image                 data-aos="zoom-in"
+
                   key={i}
                   src={src}
                   alt="avatar"
@@ -113,10 +115,12 @@ Focus Groups          </h3>
                 />
               ))}
             </div>
-            <h4 className="font-semibold text-center  mb-1">
+            <h4                 data-aos="zoom-in"
+ className="font-semibold text-center  mb-1">
               {discussion.topic.title}
             </h4>
-            <p className="text-sm text-secondary-text text-center">
+            <p                 data-aos="zoom-in"
+ className="text-sm text-secondary-text text-center">
               {discussion.topic.desc}
             </p>
           </div>
@@ -125,7 +129,7 @@ Focus Groups          </h3>
           {discussion.messages.map((msg, index) => {
             if (msg.type === "placeholder") {
               return (
-                <div
+                <div     data-aos="zoom-in"
                   key={index}
                   className="bg-green-50 px-4 py-3 rounded-xl flex items-center gap-4"
                 >
@@ -145,7 +149,8 @@ Focus Groups          </h3>
             }
 
             return (
-              <div
+              <div                 data-aos="zoom-in"
+
                 key={index}
                 className={`flex items-start gap-4 px-4 py-3 rounded-xl ${
                   msg.type === "ai"

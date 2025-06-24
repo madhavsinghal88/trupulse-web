@@ -117,7 +117,7 @@ const features = [
 ];
 export default function WhyTruPulseSection() {
   return (
-    <section className="relative py-10 px-4 overflow-hidden">
+    <section id="whyTrupulse"  className="relative py-10 px-4 overflow-hidden">
       {/* Background image layer – replace src */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -130,7 +130,7 @@ export default function WhyTruPulseSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
         {/* Left content */}
-        <div className="m-auto">
+        <div   data-aos="zoom-in" className="m-auto">
           <h2 className="text-3xl md:text-5xl font-semibold max-w-xl mb-6">
            Why TruPulse Beats Conventional Solutions
           </h2>
@@ -139,7 +139,7 @@ export default function WhyTruPulseSection() {
         </div>
 
         {/* Right content */}
-        <div className="space-y-14 m-auto">
+        <div   data-aos="fade-left" className="space-y-14 m-auto">
           {features.map((item, id) => {
             const Icon = item.icon;
             return (

@@ -32,10 +32,11 @@ export default function OneToOneSection() {
         {/* Left */}
         <div className="flex flex-col justify-center items-start gap-4">
           <h3 className="text-xl font-semibold border-b-2 w-fit border-black mb-2 ">
-1:1 Discussions
+            1:1 Discussions
           </h3>
           <h2 className="text-4xl md:text-6xl font-bold leading-10 max-w-lg  mb-2 md:leading-16">
-Personalized, AI-driven chats that capture real employee sentiment.          </h2>
+            Personalized, AI-driven chats that capture real employee sentiment.{" "}
+          </h2>
 
           <div className="space-y-6 mb-4 text-base ">
             {[
@@ -50,7 +51,7 @@ Personalized, AI-driven chats that capture real employee sentiment.          </h
             ))}
           </div>
 
-          <Button text="Book a demo"/>
+          <Button text="Book a demo" />
         </div>
 
         {/* Right - Chat */}
@@ -65,6 +66,7 @@ Personalized, AI-driven chats that capture real employee sentiment.          </h
                 className={`rounded-xl px-4 py-3 bg-white border border-gray-300 flex ${
                   isUser ? "justify-end" : "justify-start"
                 }`}
+                data-aos="zoom-in"
               >
                 {isIntro ? (
                   <div className="flex items-start gap-3">
@@ -103,7 +105,13 @@ Personalized, AI-driven chats that capture real employee sentiment.          </h
               ...
             </div>
           </div>
-          <Image width={600} height={600} className="absolute -top-24 -right-0 -z-1 " src="/images/purple.png" alt="purple" />
+          <Image
+            width={600}
+            height={600}
+            className="absolute -top-24 -right-0 -z-1 "
+            src="/images/purple.png"
+            alt="purple"
+          />
         </div>
       </div>
     </section>

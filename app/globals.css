@@ -142,3 +142,36 @@
   display: none;            /* for Chrome, Safari, and Opera */
 }
 
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 15s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradientShift 2s ease infinite;
+}
+

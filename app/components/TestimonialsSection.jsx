@@ -323,7 +323,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="bg-white py-20 px-4">
+    <section id="testimonials" className="bg-white py-20 px-4">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">
           What HR Leaders Say
@@ -335,7 +335,7 @@ export default function TestimonialsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
-            <div
+            <div   data-aos="zoom-in-up"
               key={index}
               className={`flex flex-col gap-6 items-start px-4 m-auto max-w-lg ${
                 index % 2 === 0

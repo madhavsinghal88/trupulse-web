@@ -198,7 +198,7 @@ export default function FaqAccordion() {
 
         <div className="space-y-4 text-left">
           {faqs.slice(0, visibleCount).map((faq, index) => (
-            <div
+            <div   data-aos="zoom-in-up"
               key={index}
               className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition"
             >

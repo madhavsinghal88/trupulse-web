@@ -17,7 +17,7 @@ export default function UnifiedResearchSection() {
         </div>
 
         {/* Right Image Block */}
-        <div className="flex justify-center">
+        <div className="flex justify-center" data-aos="zoom-in">
           <Image
             src="/images/10.png" 
             alt="10x Research Graphic"

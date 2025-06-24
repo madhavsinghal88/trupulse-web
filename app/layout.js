@@ -1,6 +1,6 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import TopBanner from "./components/TopBanner";
+import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
 import "./globals.css";
 
 export const metadata = {
@@ -12,10 +12,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* <TopBanner /> */}
-        <Navbar />
-        {children}
-        <Footer />
+        <ClientLayoutWrapper>
+          {/* <TopBanner /> */}
+          <Navbar />
+          {children}
+          <Footer />
+        </ClientLayoutWrapper>
       </body>
     </html>
   );

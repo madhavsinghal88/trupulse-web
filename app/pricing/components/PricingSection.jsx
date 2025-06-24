@@ -360,7 +360,8 @@ export default function PricingSection() {
       {/* Desktop View - Keep original layout */}
       <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6">
         {plans.map((plan) => (
-          <div
+          <div                 data-aos="zoom-in-up"
+
             key={plan.title}
             className={`relative border ${
               plan.title === "Pro" ? "border-orange-500" : ""
@@ -393,7 +394,8 @@ export default function PricingSection() {
 
               {/* Features */}
               {plan.features.map((featureGroup, idx) => (
-                <div key={idx} className="my-8">
+                <div                 data-aos="zoom-in"
+ key={idx} className="my-8">
                   <h4 className="font-semibold text-primary-text">
                     {featureGroup.section}
                   </h4>
@@ -412,7 +414,8 @@ export default function PricingSection() {
       {/* Mobile View - New collapsible layout */}
       <div className="md:hidden space-y-4">
         {plans.map((plan) => (
-          <div
+          <div                 data-aos="zoom-in-up"
+
             key={plan.title}
             className={` ${
               plan.title === "Pro" ? "border-orange-500" : ""
@@ -453,7 +456,8 @@ export default function PricingSection() {
               <div className="px-6 pb-6 border-t border-gray-100">
                 <div className="pt-4 space-y-6">
                   {plan.features.map((featureGroup, idx) => (
-                    <div key={idx}>
+                    <div                 data-aos="zoom-in-up"
+ key={idx}> 
                       <h4 className="font-semibold text-gray-900 mb-3">
                         {featureGroup.section}
                       </h4>

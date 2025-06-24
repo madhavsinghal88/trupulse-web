@@ -130,10 +130,10 @@ export default function MeetAssistantSection() {
       </div>
 
       {/* Step Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div  className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {steps.map((step) => (
           <div key={step.key}>
-            <div
+            <div data-aos="zoom-in"
               className={`bg-white border-4 ${step.border} md:h-[350px] rounded-2xl p-4 shadow-md hover:shadow-lg transition`}
             >
               <Image

@@ -67,7 +67,7 @@ export default function SurveySection() {
         </div>
 
         {/* Right Survey Cards */}
-        <div className="space-y-4 relative m-auto">
+        <div data-aos="zoom-in" className="space-y-4 relative m-auto">
           {/* Right background image */}
           <div className="absolute -right-0 -top-20 w-[600px] h-full">
             <Image
@@ -94,7 +94,8 @@ export default function SurveySection() {
           </div>
 
           {surveyItems.map((item, index) => (
-            <div
+            <div                 data-aos="zoom-in"
+
               key={index}
               className={`rounded-xl flex items-center justify-between px-4 py-3 ${
                 item.completed
