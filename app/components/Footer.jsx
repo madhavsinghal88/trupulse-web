@@ -20,13 +20,13 @@ export default function Footer() {
           <h3 className="font-bold text-base mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/usecases">Use Cases</a>
+              <a href="/">Use Cases</a>
             </li>
             <li>
               <a href="/pricing">Pricing</a>
             </li>
             <li>
-              <a href="/company">Company</a>
+              <a href="/">Company</a>
             </li>
             <li>
               <a href="#">Try it</a>
