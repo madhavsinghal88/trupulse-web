@@ -194,6 +194,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
 
 const testimonials = [
   {
@@ -333,9 +337,11 @@ export default function TestimonialsSection() {
           actionable insights using TruPulse’s AI-powered feedback sessions.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
+        {/* Desktop View */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
-            <div   data-aos="zoom-in-up"
+            <div
+              data-aos="zoom-in-up"
               key={index}
               className={`flex flex-col gap-6 items-start px-4 m-auto max-w-lg ${
                 index % 2 === 0
@@ -362,15 +368,46 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
+        {/* Mobile View with Swiper */}
+        <div className="md:hidden">
+          <Swiper
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            loop={true}
+            spaceBetween={16}
+            modules={[Autoplay]}
+            className="max-w-sm mx-auto"
+          >
+            {testimonials.map((t, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white rounded-2xl p-6 shadow-md">
+                  <div className="flex items-start gap-4">
+                    <Image
+                      src={t.image}
+                      alt={t.name}
+                      width={48}
+                      height={48}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <p className="text-sm mb-2">“{t.quote}”</p>
+                      <p className="font-semibold text-sm text-black">
+                        — {t.name}, {t.title}, {t.company}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
         {/* Toggle Button */}
-        <div className="mt-10">
+        <div className="mt-10 hidden md:block">
           <button
             onClick={handleToggle}
             className="cursor-pointer underline font-medium hover:opacity-80 transition md:mr-14"
           >
-            {visibleCount + 1 > testimonials.length
-              ? "View Less"
-              : "View More"}
+            {visibleCount + 1 > testimonials.length ? "View Less" : "View More"}
           </button>
         </div>
       </div>

@@ -11,14 +11,14 @@ import CtaSection from "../components/common/CtaSection";
 const page = () => {
   return (
     <div>
-      <UseCaseHeroSection />
+      {/* <UseCaseHeroSection />
       <Letstry />
       <HowWeUseAi />
       <Report />
       <TestimonialsSection />
       <ThreeStepsSection />
       <BlogShowcaseSection />
-            <CtaSection/>
+            <CtaSection/> */}
 
     </div>
   );
