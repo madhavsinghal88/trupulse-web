@@ -208,27 +208,27 @@ const tabs = [
       {
         icon: FileText,
         title: "Onboarding Feedback",
-        desc: "Unlock potential with continuous AI-led performance insights.",
+        desc: "Collects feedback from new hires on their initial experience.",
       },
       {
         icon: Star,
         title: "New Hire Experience",
-        desc: "Unlock potential with continuous AI-led performance insights.",
+        desc: "Survey with hiring manager on new hire performance. Feedback into success/failure of the hiring process and interview process.",
       },
       {
         icon: Users,
         title: "Stay Interviews",
-        desc: "Unlock potential with continuous AI-led performance insights.",
+        desc: "Why do you stay, what would make you leave.",
       },
       {
         icon: ClipboardList,
         title: "Retention Risk Feedback",
-        desc: "Unlock potential with continuous AI-led performance insights.",
+        desc: "Gather insights from employees to identify turnover drivers and take proactive action to improve retention.",
       },
       {
         icon: LogOut,
         title: "Exit Interviews",
-        desc: "Unlock potential with continuous AI-led performance insights.",
+        desc: "Understands why employees leave and how to reduce turnover.",
       },
     ],
   },
@@ -238,13 +238,28 @@ const tabs = [
     content: [
       {
         icon: FileText,
-        title: "Quarterly Reviews",
-        desc: "Automated insights on performance trends and gaps.",
+        title: "Performance Reviews",
+        desc: "Gathers continuous feedback to supplement formal performance evaluations.",
       },
       {
         icon: Users,
-        title: "Mentorship Feedback",
-        desc: "Capture growth feedback from mentors.",
+        title: "Manager‑Employee 1:1 Check‑Ins",
+        desc: "Monitors ongoing relationships, identifies support needs.",
+      },
+      {
+        icon: ClipboardList,
+        title: "Learning & Development Feedback",
+        desc: "Identifies training needs, evaluates program effectiveness.",
+      },
+      {
+        icon: Star,
+        title: "Leadership Assessment",
+        desc: "Evaluates leaders' impact on motivation, communication, and team culture.",
+      },
+      {
+        icon: Smile,
+        title: "Top Performers Best Practices Analysis",
+        desc: "Gather insights from top performers on their most important success themes.",
       },
     ],
   },
@@ -254,13 +269,23 @@ const tabs = [
     content: [
       {
         icon: Smile,
-        title: "Culture Health",
-        desc: "Assess culture strength and gaps over time.",
+        title: "Employee Engagement",
+        desc: "Gauges overall employee satisfaction and commitment.",
       },
       {
         icon: Users,
-        title: "Team Sentiment",
-        desc: "AI-powered emotional tone analysis from feedback.",
+        title: "eNPS",
+        desc: "Measures how likely employees are to recommend the company.",
+      },
+      {
+        icon: FileText,
+        title: "Company Culture Check",
+        desc: "Monitors if company values resonate with employees and guide behaviors.",
+      },
+      {
+        icon: ClipboardList,
+        title: "Trending Workplace Topics",
+        desc: "Identify and collect employee sentiment on emerging workplace issues to understand their impact on the workplace experience.",
       },
     ],
   },
@@ -270,13 +295,28 @@ const tabs = [
     content: [
       {
         icon: ClipboardList,
-        title: "Benefit Feedback",
-        desc: "Understand how teams value benefits packages.",
+        title: "Benefits Satisfaction Feedback",
+        desc: "Checks employee sentiment on health coverage, perks, and other offerings.",
+      },
+      {
+        icon: FileText,
+        title: "Compensation Feedback",
+        desc: "Reviews fairness and transparency around salary structures.",
+      },
+      {
+        icon: Star,
+        title: "Holiday/Schedule Preferences",
+        desc: "Incorporates employee desires around time off and flexible scheduling.",
       },
       {
         icon: Smile,
-        title: "Wellbeing Monitor",
-        desc: "Track stress and burnout trends across the org.",
+        title: "Wellness/Mental Health Feedback",
+        desc: "Checks for burnout risk, stress levels, and overall emotional well-being.",
+      },
+      {
+        icon: Users,
+        title: "Recognition & Reward Feedback",
+        desc: "Evaluates whether employees feel valued and appreciated for their work.",
       },
     ],
   },
@@ -285,14 +325,24 @@ const tabs = [
     desc: "Enhance the workplace environment through continuous AI feedback loops.",
     content: [
       {
+        icon: Users,
+        title: "Remote/Hybrid Work Satisfaction",
+        desc: "Evaluates experiences and challenges with flexible work arrangements.",
+      },
+      {
         icon: FileText,
-        title: "Change Impact Analysis",
-        desc: "Gauge employee response to major org changes.",
+        title: "Workplace Environment Assessment",
+        desc: "Gathers opinions on office layout, resources, and comfort.",
       },
       {
         icon: ClipboardList,
-        title: "Policy Sentiment",
-        desc: "Understand employee acceptance of new rules.",
+        title: "Commute/Transportation Feedback",
+        desc: "Determines how travel impacts employee satisfaction and punctuality.",
+      },
+      {
+        icon: Star,
+        title: "Technology/Tools Feedback",
+        desc: "Examines whether software and hardware meet employee needs.",
       },
     ],
   },
@@ -302,13 +352,33 @@ const tabs = [
     content: [
       {
         icon: FileText,
-        title: "Change Impact Analysis",
-        desc: "Gauge employee response to major org changes.",
+        title: "Policy Change Feedback",
+        desc: "Collects opinions when introducing or modifying HR or company policies.",
       },
       {
         icon: ClipboardList,
-        title: "Policy Sentiment",
-        desc: "Understand employee acceptance of new rules.",
+        title: "New Policy Rollout Check",
+        desc: "Solicits employee input on recently implemented guidelines or procedures.",
+      },
+      {
+        icon: Users,
+        title: "Reorganization/Merger Feedback",
+        desc: "Assesses employees' perspectives during significant structural changes.",
+      },
+      {
+        icon: Star,
+        title: "Discussions on New Initiatives",
+        desc: "Dives deeper into employee views on upcoming projects or strategies.",
+      },
+      {
+        icon: Smile,
+        title: "Conflict Resolution Feedback",
+        desc: "Gathers insights to mediate issues and improve team cohesion.",
+      },
+      {
+        icon: LogOut,
+        title: "Safety & Compliance Feedback",
+        desc: "Ensures employees feel safe and that procedures meet their needs.",
       },
     ],
   },
@@ -341,7 +411,7 @@ export default function ManagementReadyReports() {
             <button
               key={index}
               onClick={() => setActiveTab(index)}
-              className={`text-left px-5 cursor-pointer hover:bg-white py-4 max-w-sm rounded-xl border transition font-medium text-sm ${
+              className={`text-left px-5 cursor-pointer hover:bg-white hover:scale-105 duration-300 py-4 max-w-sm rounded-xl border transition font-medium text-sm ${
                 index === activeTab
                   ? "bg-white border-orange-500 shadow"
                   : "bg-white/60 border border-gray-200 text-gray-700"
@@ -364,7 +434,7 @@ export default function ManagementReadyReports() {
               const Icon = item.icon;
               return (
                 <div key={i} className="flex items-start flex-col gap-4">
-                  <div className="min-w-[48px] min-h-[48px] bg-green-200 rounded-xl flex items-center justify-center p-4">
+                  <div className="min-w-[48px] min-h-[48px] bg-[#BEC1FF] rounded-xl flex items-center justify-center p-4">
                     <Icon className="w-10 h-10" />
                   </div>
                   <div>
@@ -412,7 +482,7 @@ export default function ManagementReadyReports() {
                       const Icon = item.icon;
                       return (
                         <div key={i} className="flex items-start gap-4">
-                          <div className="min-w-[40px] min-h-[40px] bg-green-200 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <div className="min-w-[40px] min-h-[40px] bg-[#BEC1FF] rounded-xl flex items-center justify-center flex-shrink-0">
                             <Icon className="w-5 h-5" />
                           </div>
                           <div>

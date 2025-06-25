@@ -163,16 +163,15 @@ import Button from "./common/Button";
 
 export default function HeroSection() {
   const testimonials = [
-    "I set the strategy, and AI did all the work!",
-    "Saved 10 hours on my weekly 1:1!",
+    "set the strategy and AI did all the work!",
+    "Saved 10 hours on my weekly 1:1s!",
     "Survey creation took seconds, not weeks.",
-    "I set the strategy, and AI did all the work!",
-    "Saved 10 hours on my weekly 1:1!",
-    "Survey creation took seconds, not weeks.",
+    "It’s so easy, every department wants to use it now!",
+    "I get better feedback with less work!",
   ];
 
   return (
-    <section id="ourProduct" className="relative bg-[#FFEFE6] px-4 pb-10 pt-36">
+    <section id="ourProduct" className="relative bg-[#FFEFE6] px-4 pt-36">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
         {/* Left Section */}
         <div className="flex flex-col w-fit justify-center items-start m-auto">
@@ -212,12 +211,12 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Image Block */}
-      <div data-aos="fade-up" className="relative max-w-7xl mx-auto mt-12">
+      <div data-aos="fade-up" className="relative max-w-7xl mx-auto ">
         <Image
-          src="/images/hero.png"
+          src="/images/herooo.png"
           alt="AI dashboard"
           width={1200}
-          height={800}
+          height={1000}
           className="w-full"
         />
       </div>

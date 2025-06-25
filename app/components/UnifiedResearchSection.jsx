@@ -19,7 +19,7 @@ export default function UnifiedResearchSection() {
         {/* Right Image Block */}
         <div className="flex justify-center" data-aos="zoom-in">
           <Image
-            src="/images/10.png" 
+            src="/images/neww.png" 
             alt="10x Research Graphic"
             width={400}
             height={400}

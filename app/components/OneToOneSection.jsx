@@ -34,7 +34,7 @@ export default function OneToOneSection() {
           <h3 className="text-xl font-semibold border-b-2 w-fit border-black mb-2 ">
             1:1 Discussions
           </h3>
-          <h2 className="text-4xl md:text-6xl font-bold leading-10 max-w-lg  mb-2 md:leading-16">
+          <h2 className="text-4xl md:text-5xl font-bold leading-10 max-w-lg  mb-2 md:leading-14">
             Personalized, AI-driven chats that capture real employee sentiment.{" "}
           </h2>
 

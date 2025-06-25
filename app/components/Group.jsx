@@ -23,7 +23,7 @@
 //             src="/images/play.png"
 //             alt="video"
 //           />
-    
+
 //         </div>
 //         </div>
 //       </section>
@@ -32,7 +32,6 @@
 // };
 
 // export default Group;
-
 
 "use client";
 
@@ -76,9 +75,10 @@ export default function Group() {
         {/* Left Column */}
         <div className="flex flex-col justify-center items-start gap-4">
           <h3 className="text-xl sm:text-2xl font-semibold border-b-2 w-fit border-black mb-2 ">
-Focus Groups          </h3>
-          <h2 className="text-4xl md:text-6xl font-bold leading-10  mb-2 md:leading-16">
-           AI-powered group discussions for deeper employee insights
+            Focus Groups{" "}
+          </h3>
+          <h2 className="text-4xl md:text-5xl font-bold leading-10  mb-2 md:leading-14">
+            AI-powered group discussions for deeper employee insights
           </h2>
 
           <div className="space-y-6 text-base mb-4 ">
@@ -94,18 +94,16 @@ Focus Groups          </h3>
             ))}
           </div>
 
-          <Button text="Book a demo"/>
+          <Button text="Book a demo" />
         </div>
 
         {/* Right Discussion Preview */}
-        <div
- className="space-y-4 max-w-md m-auto">
+        <div className="space-y-4 max-w-md m-auto">
           {/* Topic Card */}
-          <div  className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center justify-center -gap-2 mb-2">
+          <div   data-aos="zoom-in" className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+            <div   data-aos="zoom-in" className="flex items-center justify-center -gap-2 mb-2">
               {discussion.topic.avatars.map((src, i) => (
-                <Image                 data-aos="zoom-in"
-
+                <Image
                   key={i}
                   src={src}
                   alt="avatar"
@@ -115,12 +113,13 @@ Focus Groups          </h3>
                 />
               ))}
             </div>
-            <h4                 data-aos="zoom-in"
- className="font-semibold text-center  mb-1">
+            <h4 data-aos="zoom-in" className="font-semibold text-center  mb-1">
               {discussion.topic.title}
             </h4>
-            <p                 data-aos="zoom-in"
- className="text-sm text-secondary-text text-center">
+            <p
+              data-aos="zoom-in"
+              className="text-sm text-secondary-text text-center"
+            >
               {discussion.topic.desc}
             </p>
           </div>
@@ -129,7 +128,8 @@ Focus Groups          </h3>
           {discussion.messages.map((msg, index) => {
             if (msg.type === "placeholder") {
               return (
-                <div     data-aos="zoom-in"
+                <div
+                  data-aos="zoom-in"
                   key={index}
                   className="bg-green-50 px-4 py-3 rounded-xl flex items-center gap-4"
                 >
@@ -149,8 +149,8 @@ Focus Groups          </h3>
             }
 
             return (
-              <div                 data-aos="zoom-in"
-
+              <div
+                data-aos="zoom-in"
                 key={index}
                 className={`flex items-start gap-4 px-4 py-3 rounded-xl ${
                   msg.type === "ai"

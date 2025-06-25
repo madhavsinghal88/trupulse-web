@@ -93,7 +93,7 @@ const steps = [
     title: "TruPulse Creates It",
     description:
       "TruPulse generates discussion topics and survey questions based on the use case you choose.",
-    image: "/images/assist.png",
+    image: "/images/rr.png",
     border: "border-green-300",
   },
   {
@@ -101,7 +101,7 @@ const steps = [
     title: "TruPulse Runs It",
     description:
       "TruPulse conducts sessions, dynamically probing discussion topics and participant replies.",
-    image: "/images/dashboard.png",
+    image: "/images/r2.png",
     border: "border-cyan-300",
   },
   {
@@ -109,7 +109,7 @@ const steps = [
     title: "TruPulse Analyzes It",
     description:
       "TruPulse distills feedback into themes, metrics, and polished executive summaries automatically.",
-    image: "/images/video.png",
+    image: "/images/r3.png",
     border: "border-blue-300",
   },
 ];
@@ -134,14 +134,14 @@ export default function MeetAssistantSection() {
         {steps.map((step) => (
           <div key={step.key}>
             <div data-aos="zoom-in"
-              className={`bg-white border-4 ${step.border} md:h-[350px] rounded-2xl p-4 shadow-md hover:shadow-lg transition`}
+              className={`bg-white border-4 ${step.border} md:h-[350px] overflow-hidden rounded-2xl p-4 shadow-md hover:shadow-lg transition`}
             >
               <Image
                 src={step.image}
                 alt={step.title}
                 width={500}
                 height={350}
-                className="rounded-xl mb-4 w-full object-contain"
+                className="rounded-xl mb-4 w-full object-contian "
               />
             </div>
             <div className=" m-2 mt-6">

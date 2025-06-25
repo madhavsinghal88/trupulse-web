@@ -21,16 +21,13 @@ export default function Report() {
         </div>
 
         <div className="my-12 relative " data-aos="fade-up">
-          <div className="absolute -top-2 sm:-top-4 inset-x-6 rounded-2xl h-full border z-[-1]"></div>
-          <div className="p-4 border max-w-7xl bg-white m-auto rounded-2xl">
             <Image
               width={2000}
               height={2000}
               className="md:p-4"
-              src="/images/dashboard.png"
+              src="/images/sales.png"
               alt="video"
             />
-          </div>
         </div>
       </div>
     </section>
