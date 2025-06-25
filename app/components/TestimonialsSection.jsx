@@ -264,7 +264,7 @@ export default function TestimonialsSection() {
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
             <div
-              data-aos="fade-up" 
+              data-aos="fade-up" data-aos-offset="-200" 
               key={index}
               className={`flex flex-col gap-6 items-start px-4 m-auto max-w-lg ${
                 index % 2 === 0
