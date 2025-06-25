@@ -41,7 +41,7 @@ const CtaSection = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto">
+      <div className="relative z-10 max-w-3xl w-[90vw] mx-auto">
         <h2 className="text-2xl md:text-4xl font-bold text-primary-text leading-tight md:leading-snug">
           Revolutionize feedback with TruPulse: <br />
           Seamless session creation, dynamic moderation, and instant reporting for smarter HR decisions.

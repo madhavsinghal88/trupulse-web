@@ -40,7 +40,7 @@ const surveyItems = [
 export default function SurveySection() {
   return (
     <section className="py-20 px-4  overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+      <div className="max-w-7xl w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
         {/* Left Text */}
         <div className="flex flex-col gap-4 items-start justify-center">
           <h3 className="text-xl sm:text-2xl font-semibold border-b-2 border-black mb-2 ">

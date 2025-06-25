@@ -200,117 +200,40 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 
 const testimonials = [
-  {
-    name: "Daniel Martinez",
-    title: "Manager of People Ops",
-    company: "Omicron Labs",
-    image: "/images/1.png",
-    quote:
-      "Our managers love the AI-generated discussion prompts—every 1:1 is structured, relevant, and requires zero prep on their part.",
+ {
+    name: 'Danielle Strazzo',
+    position: 'VP of HR, BD',
+    content:
+      "We cannot fully deliver for our customers, and execute the business agenda, without an engaged workforce. TruPulse delivers insights into your employees' state, arming you to make positive changes to the experience without the burden of surveys.",
+    profilePic: '/images/danielle.png',
   },
   {
-    name: "Michael Chen",
-    title: "Head of HR Analytics",
-    company: "Zeta Group",
-    image: "/images/5.png",
-    quote:
-      "The automated executive reports are a game-changer—clear summaries, key themes, and recommended actions right in my inbox, no manual analysis needed.",
+    name: 'Richard E. Beyer',
+    position: 'Fmr Secretary of Labor, State of Kansas',
+    content:
+      'For years, I administered surveys in organizations. Although invaluable, feedback represented a snapshot in time. To monitor the pulse of organizations on a realtime, continual basis, the AI-driven TruPulse platform is a highly effective strategy.',
+    profilePic: '/images/richard.png',
   },
   {
-    name: "Anthony Brown",
-    title: "Talent Acquisition Lead",
-    company: "NuVentures",
-    image: "/images/7.png",
-    quote:
-      "The real-time probing AI follows up on employee responses dynamically, giving us deeper insights than static surveys ever could.",
+    name: 'Dan Mcculloch',
+    position: 'VP, GM of Full Circle, EA',
+    content:
+      'Employee surveys are amazing but usually very high level. With TruPulse I can see insights on employee morale at any altitude. I used to look forward to having survey results quarterly, now I can see those same results whenever I need them.',
+    profilePic: '/images/dan.png',
   },
   {
-    name: "Robert Williams",
-    title: "Global HR Director",
-    company: "Lambda Industries",
-    image: "/images/1.png",
-    quote:
-      "Scaling feedback across multiple departments is now effortless—the platform supports unlimited sessions without adding headcount or complexity.",
+    name: 'Nathan Mondragon, Ph.D.',
+    position: 'Chief IO Psychologist, HireVue',
+    content:
+      'Improving the workplace experience improves employee engagement and retention. The dynamic insights uncovered by TruPulse will help HR teams improve your workplace with real time, AI driven data that other departments have had for years',
+    profilePic: '/images/nathan.png',
   },
   {
-    name: "Emma Johnson",
-    title: "Culture Program Manager",
-    company: "Kappa Solutions",
-    image: "/images/2.png",
-    quote:
-      "Deep analysis across 15 different employee metrics highlighted cultural issues we never saw before, guiding our leadership to make informed changes.",
-  },
-  {
-    name: "Lisa Nguyen",
-    title: "People Manager",
-    company: "Gamma Solutions",
-    image: "/images/3.png",
-    quote:
-      "Our 1:1 check-ins went from manual scheduling nightmares to automated, personalized sessions—resulting in higher participation and more candid feedback from employees.",
-  },
-  {
-    name: "Sarah Lee",
-    title: "VP People Operations",
-    company: "Orion Industries",
-    image: "/images/5.png",
-    quote:
-      "We thought it was just an HR tool, but managers now rely on TruPulse for 1:1s, performance reviews, and progress reports—and no extra work required!",
-  },
-  {
-    name: "Jane Roberts",
-    title: "HR Director",
-    company: "Acme Technologies",
-    image: "/images/7.png",
-    quote:
-      "TruPulse Feedback cut our survey setup time in half and delivered actionable insights within minutes, freeing our team to focus on strategic initiatives rather than tedious admin tasks.",
-  },
-  {
-    name: "Priya Singh",
-    title: "Compliance Officer",
-    company: "MuTech",
-    image: "/images/1.png",
-    quote:
-      "Anonymized data and built-in compliance features gave us confidence to collect honest feedback while maintaining privacy and regulatory standards.",
-  },
-  {
-    name: "Mark Thompson",
-    title: "Talent Lead",
-    company: "Beta Enterprises",
-    image: "/images/2.png",
-    quote:
-      "With AI moderation, our focus groups ran seamlessly without hiring external consultants, and we received comprehensive summaries the same day, saving time and budget.",
-  },
-  {
-    name: "Carlos Ruiz",
-    title: "Employee Experience Lead",
-    company: "Iota LLC",
-    image: "/images/3.png",
-    quote:
-      "We’ve eliminated survey fatigue by sending targeted pulses only to relevant groups, resulting in significantly higher response rates and richer data.",
-  },
-  {
-    name: "Olivia Davis",
-    title: "VP People & Culture",
-    company: "Pi Innovations",
-    image: "/images/4.png",
-    quote:
-      "Automated pulse surveys, focus groups, and interviews deliver a holistic view of employee experience, enabling data-driven HR strategies.",
-  },
-  {
-    name: "Sarah Patel",
-    title: "HR Systems Manager",
-    company: "Epsilon Inc",
-    image: "/images/5.png",
-    quote:
-      "Integration with our HRIS meant we could target specific demographics effortlessly, delivering relevant surveys and discussions without manual cohort management.",
-  },
-  {
-    name: "Elena Garcia",
-    title: "HR Operations Manager",
-    company: "Xi Consulting",
-    image: "/images/7.png",
-    quote:
-      "TruPulse Feedback replaces three separate tools and consultants, centralizing feedback, reducing costs, and simplifying the technology stack.",
+    name: 'Mani Sundaram',
+    position: 'EVP & GM, Akamai Technologies',
+    content:
+      'The idea of being able to call up a report on what employee morale is like at any time I want to is a powerful feature of TruPulse. Demographic breakdowns make the insights even more useful.',
+    profilePic: '/images/mani.png',
   },
 ];
 
@@ -327,8 +250,8 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="bg-white py-20 px-4">
-      <div className="max-w-6xl mx-auto text-center">
+    <section id="testimonials" className="bg-white py-20 px-4 ">
+      <div className="max-w-6xl w-[90vw] mx-auto text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">
           What HR Leaders Say
         </h2>
@@ -341,7 +264,7 @@ export default function TestimonialsSection() {
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
             <div
-              data-aos="fade-up"
+              data-aos="fade-up"  data-aos-offset="-200"
               key={index}
               className={`flex flex-col gap-6 items-start px-4 m-auto max-w-lg ${
                 index % 2 === 0
@@ -351,16 +274,16 @@ export default function TestimonialsSection() {
             >
               <div className="flex items-start gap-4">
                 <Image
-                  src={t.image}
+                  src={t.profilePic}
                   alt={t.name}
                   width={48}
                   height={48}
                   className="rounded-full"
                 />
                 <div>
-                  <p className="text-sm sm:text-base mb-2">“{t.quote}”</p>
+                  <p className="text-sm sm:text-base mb-2">“{t.content}”</p>
                   <p className="font-semibold text-sm sm:text-base text-black">
-                    — {t.name}, {t.title}, {t.company}
+                    — {t.name}, {t.position},
                   </p>
                 </div>
               </div>
@@ -382,16 +305,16 @@ export default function TestimonialsSection() {
                 <div className="bg-white rounded-2xl p-6 shadow-md">
                   <div className="flex items-start gap-4">
                     <Image
-                      src={t.image}
+                      src={t.profilePic}
                       alt={t.name}
                       width={48}
                       height={48}
                       className="rounded-full"
                     />
                     <div>
-                      <p className="text-sm mb-2">“{t.quote}”</p>
+                      <p className="text-sm mb-2">“{t.content}”</p>
                       <p className="font-semibold text-sm text-black">
-                        — {t.name}, {t.title}, {t.company}
+                        — {t.name}, {t.position}, 
                       </p>
                     </div>
                   </div>

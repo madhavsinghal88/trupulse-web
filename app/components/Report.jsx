@@ -4,7 +4,7 @@ import Button from "./common/Button";
 export default function Report() {
   return (
     <section className="py-10 px-6  ">
-      <div className="max-w-7xl m-auto">
+      <div className="max-w-7xl w-[90vw] m-auto">
         <div className="flex flex-col w-fit justify-center items-center m-auto gap-5 ">
           {/* Title */}
           <h2 className="text-4xl text-center md:text-5xl w-full font-bold mb-3">

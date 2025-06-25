@@ -71,7 +71,7 @@ const discussion = {
 export default function Group() {
   return (
     <section className="py-20 px-4 bg-[#EEF0FF]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="max-w-7xl w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Left Column */}
         <div className="flex flex-col justify-center items-start gap-4">
           <h3 className="text-xl sm:text-2xl font-semibold border-b-2 w-fit border-black mb-2 ">

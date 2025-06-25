@@ -155,10 +155,6 @@
   animation: scroll-up 15s linear infinite;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;

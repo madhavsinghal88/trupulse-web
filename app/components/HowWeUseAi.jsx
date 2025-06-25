@@ -128,7 +128,7 @@ export default function WhyTruPulseSection() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
+      <div className="relative z-10 w-[90vw] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
         {/* Left content */}
         <div className="m-auto">
           <h2 className="text-3xl md:text-5xl font-semibold max-w-xl mb-6">
@@ -139,7 +139,7 @@ export default function WhyTruPulseSection() {
         </div>
 
         {/* Right content */}
-        <div   data-aos="fade-left" className="space-y-14 m-auto">
+        <div   data-aos="zoom-in-up"  data-aos-offset="-200"  className="space-y-14 m-auto">
           {features.map((item, id) => {
             const Icon = item.icon;
             return (

@@ -394,7 +394,7 @@ export default function ManagementReadyReports() {
 
   return (
     <section className="bg-[#eff0ff] py-20 px-4">
-      <div className="max-w-7xl mx-auto text-center mb-12">
+      <div className="max-w-7xl w-[90vw] mx-auto text-center mb-12">
         <h2 className="text-4xl md:text-5xl w-full font-bold mb-3 text-gray-800">
           Use Cases
         </h2>
@@ -406,7 +406,7 @@ export default function ManagementReadyReports() {
       {/* Desktop Layout */}
       <div className="hidden sm:flex justify-center items-start gap-10 max-w-7xl mx-auto">
         {/* Left Tabs */}
-        <div data-aos="fade-up-right" className="flex flex-col gap-3">
+        <div data-aos="zoom-in-right"  data-aos-offset="-200"  className="flex flex-col gap-3">
           {tabs.map((tab, index) => (
             <button
               key={index}
@@ -424,7 +424,7 @@ export default function ManagementReadyReports() {
         </div>
 
         {/* Right Content */}
-        <div data-aos="fade-up-left" className="">
+        <div data-aos="zoom-in-left"  data-aos-offset="-200"  className="">
           <p className="text-left font-semibold sm:text-xl max-w-2xl mb-6">
             Leverage continuous, automated feedback on onboarding, performance cycles, and exits to improve retention and employee satisfaction.
           </p>

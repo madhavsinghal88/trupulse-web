@@ -188,7 +188,7 @@ export default function FaqAccordion() {
 
   return (
     <section className="bg-[#f4f4f9] py-16 px-4">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-4xl w-[90vw] mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-text mb-2">
           Frequently Asked Questions
         </h2>
@@ -198,7 +198,7 @@ export default function FaqAccordion() {
 
         <div className="space-y-4 text-left">
           {faqs.slice(0, visibleCount).map((faq, index) => (
-            <div   data-aos="zoom-in-up"
+            <div   data-aos="zoom-in-up" data-aos-offset="-200"
               key={index}
               className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition"
             >

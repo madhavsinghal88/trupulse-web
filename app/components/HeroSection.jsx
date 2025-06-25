@@ -171,8 +171,8 @@ export default function HeroSection() {
   ];
 
   return (
-    <section id="ourProduct" className="relative bg-[#FFEFE6] px-4 pt-28 md:pt-36">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+    <section className="relative bg-[#FFEFE6] px-4 pt-28 md:pt-36">
+      <div className="max-w-7xl w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
         {/* Left Section */}
         <div className="flex flex-col w-fit justify-center items-start m-auto">
           <h1 className="text-4xl md:text-6xl font-bold md:leading-18 mb-4">
@@ -211,7 +211,7 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Image Block */}
-      <div data-aos="fade-up" className="relative max-w-7xl mx-auto ">
+      <div id="ourProduct"  data-aos="fade-up" className="relative max-w-7xl mx-auto ">
         <Image
           src="/images/herooo.png"
           alt="AI dashboard"

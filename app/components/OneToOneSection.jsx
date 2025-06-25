@@ -28,7 +28,7 @@ const messages = [
 export default function OneToOneSection() {
   return (
     <section className="pb-20 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="max-w-7xl w-[90vw] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Left */}
         <div className="flex flex-col justify-center items-start gap-4">
           <h3 className="text-xl font-semibold border-b-2 w-fit border-black mb-2 ">
