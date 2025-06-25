@@ -9,12 +9,8 @@ useEffect(() => {
   AOS.init({
     duration: 1000,
     once: true,
-    mirror: false,
     anchorPlacement: 'top-bottom',
-  });
-
-  // Refresh AOS in case of dynamic content
-  AOS.refresh();
+  })
 }, []);
 
   return <>{children}</>;
