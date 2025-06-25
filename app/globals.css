@@ -167,6 +167,9 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
 .animate-gradient {
   animation: gradientShift 2s ease infinite;
 }
