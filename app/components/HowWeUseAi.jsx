@@ -139,7 +139,7 @@ export default function WhyTruPulseSection() {
         </div>
 
         {/* Right content */}
-        <div   data-aos="zoom-in-up"  data-aos-offset="-200"  className="space-y-14 m-auto">
+        <div   data-aos="zoom-in-up"  className="space-y-14 m-auto">
           {features.map((item, id) => {
             const Icon = item.icon;
             return (

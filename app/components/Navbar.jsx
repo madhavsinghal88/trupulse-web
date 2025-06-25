@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,38 +33,31 @@ export default function Navbar() {
           </Link>
           {/* Nav links */}
           <nav className="flex items-center gap-8">
-            <ScrollLink
-              to="ourProduct"
-              smooth={true}
-              offset={100}
-              duration={500}
-              onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500 transition-colors cursor-pointer"
+            <a
+              href="/#ourProduct"
+              className={`hover:text-orange-500 transition-colors font-medium ${isActive(
+                "ourProduct"
+              )}`}
             >
               Our Product
-            </ScrollLink>
-
-            <ScrollLink
-              to="whyTrupulse"
-              smooth={true}
-              offset={-50}
-              duration={500}
-              onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500 transition-colors cursor-pointer"
+            </a>
+            <a
+              href="/#whyTrupulse"
+              className={`hover:text-orange-500 transition-colors font-medium ${isActive(
+                "whyTrupulse"
+              )}`}
             >
               Why Trupulse
-            </ScrollLink>
+            </a>
 
-            <ScrollLink
-              to="testimonials"
-              smooth={true}
-              offset={50}
-              duration={500}
-              onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500 transition-colors cursor-pointer"
+            <a
+              href="/#testimonials"
+              className={`hover:text-orange-500 transition-colors font-medium ${isActive(
+                "/testimonials"
+              )}`}
             >
               Testimonials
-            </ScrollLink>
+            </a>
 
             {/* <Link
               href="/pricing"
@@ -95,7 +87,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/"
-              className="text-center px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full  hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] transition-all shadow-sm"
+                className="text-center px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full  hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] transition-all shadow-sm"
             >
               Book a demo
             </Link>
@@ -130,38 +122,29 @@ export default function Navbar() {
       {menuOpen && (
         <div className="xl:hidden bg-white border-t border-pink-100 shadow-lg">
           <div className="px-6 py-4 space-y-4">
-            <ScrollLink
-              to="ourProduct"
-              smooth={true}
-              offset={-100}
-              duration={500}
+            <a
+              href="/#ourProduct"
               onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500 transition-colors cursor-pointer"
+              className="block font-medium hover:text-orange-500 transition-colors"
             >
               Our Product
-            </ScrollLink>
+            </a>
 
-            <ScrollLink
-              to="whyTrupulse"
-              smooth={true}
-              offset={0}
-              duration={500}
+            <a
+              href="/#whyTrupulse"
               onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500 transition-colors cursor-pointer"
+              className="block font-medium hover:text-orange-500 transition-colors"
             >
               Why Trupulse
-            </ScrollLink>
+            </a>
 
-            <ScrollLink
-              to="testimonials"
-              smooth={true}
-              offset={-100}
-              duration={500}
+            <a
+              href="/#testimonials"
               onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500 transition-colors cursor-pointer"
+              className="block font-medium hover:text-orange-500 transition-colors"
             >
               Testimonials
-            </ScrollLink>
+            </a>
 
             {/* <Link
               href="/pricing"

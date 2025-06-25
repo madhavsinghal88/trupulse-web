@@ -424,7 +424,7 @@ export default function ManagementReadyReports() {
         </div>
 
         {/* Right Content */}
-        <div data-aos="zoom-in-left"  data-aos-offset="-200"  className="">
+        <div data-aos="zoom-in-left" className="">
           <p className="text-left font-semibold sm:text-xl max-w-2xl mb-6">
             Leverage continuous, automated feedback on onboarding, performance cycles, and exits to improve retention and employee satisfaction.
           </p>
