@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function UnifiedResearchSection() {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-12 md:py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left Text Block */}
         <div>
