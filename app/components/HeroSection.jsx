@@ -212,11 +212,14 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Image Block */}
-      <Fade className="relative max-w-7xl mx-auto "  direction="up"
-                triggerOnce
-                delay={100}
-              >
+      <Fade
+        className="relative max-w-7xl mx-auto "
+        direction="up"
+        triggerOnce
+        delay={100}
+      >
         <Image
+          id="ourProduct"
           src="/images/herooo.png"
           alt="AI dashboard"
           width={1200}
@@ -224,7 +227,6 @@ export default function HeroSection() {
           className="w-full"
         />
       </Fade>
-
     </section>
   );
 }

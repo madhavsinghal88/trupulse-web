@@ -77,7 +77,7 @@
 // }
 
 "use client";
-import { Fade } from "react-awesome-reveal";
+import { Zoom } from "react-awesome-reveal";
 import Image from "next/image";
 import Button from "./common/Button";
 import {
@@ -139,7 +139,7 @@ export default function WhyTruPulseSection() {
         </div>
 
         {/* Right content */}     
-        <Fade direction="up"
+        <Zoom duration={600}
                 triggerOnce
                 delay={100}>
         <div  className="space-y-14 m-auto" 
@@ -160,7 +160,7 @@ export default function WhyTruPulseSection() {
               </div>
             );
           })}
-        </div></Fade>   
+        </div></Zoom>   
 
       </div>
     </section>

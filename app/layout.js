@@ -1,5 +1,4 @@
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
+
 import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
 import "./globals.css";
 
@@ -14,9 +13,7 @@ export default function RootLayout({ children }) {
       <body>
         <ClientLayoutWrapper>
           {/* <TopBanner /> */}
-          <Navbar />
           {children}
-          <Footer />
         </ClientLayoutWrapper>
       </body>
     </html>

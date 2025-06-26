@@ -22,7 +22,7 @@ export default function ThreeStepsSection() {
         {/* Steps Grid */}
         <div className="grid md:grid-cols-3 gap-10 text-left relative">
           {/* Step 1 */}
-          <div className="flex relative flex-col items-center text-center md:text-left md:items-start">
+          <div  className="flex relative flex-col items-center text-center md:text-left md:items-start">
             <div className="relative flex items-center justify-center">
               <Image
                 src="/images/s1.png"
