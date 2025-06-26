@@ -95,7 +95,7 @@ export default function Group() {
             ))}
           </div>
 
-          <Button text="Book a demo" />
+          <Button triggerCalendly text="Book a demo" />
         </div>
 
         {/* Right Discussion Preview */}

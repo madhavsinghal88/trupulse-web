@@ -18,7 +18,7 @@ export default function Report() {
             Automatically create polished reports featuring executive summaries, highlighted findings, and more than fifteen AI generated, HR-centric employee metrics for instant insights.
             </p>
           </div>
-          <Button text="Book a demo"/>
+          <Button triggerCalendly text="Book a demo"/>
         </div>
 
         <Fade className="my-12 relative " direction="up"

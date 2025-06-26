@@ -187,8 +187,6 @@
 //   );
 // }
 
-
-
 // "use client";
 
 // import { useState } from "react";
@@ -395,10 +393,13 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Button from "./common/Button";
+import { useCalendly } from "@/lib/CalendlyContext";
 export default function Navbar() {
   const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { openCalendly } = useCalendly();
 
   const isActive = (path) =>
     pathname === path
@@ -410,9 +411,9 @@ export default function Navbar() {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
       });
     }
     // Close mobile menu if open
@@ -437,7 +438,7 @@ export default function Navbar() {
           {/* Nav links */}
           <nav className="flex items-center gap-8">
             <button
-              onClick={() => scrollToSection('ourProduct')}
+              onClick={() => scrollToSection("ourProduct")}
               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
                 "ourProduct"
               )}`}
@@ -445,7 +446,7 @@ export default function Navbar() {
               Our Product
             </button>
             <button
-              onClick={() => scrollToSection('whyTrupulse')}
+              onClick={() => scrollToSection("whyTrupulse")}
               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
                 "whyTrupulse"
               )}`}
@@ -454,7 +455,7 @@ export default function Navbar() {
             </button>
 
             <button
-              onClick={() => scrollToSection('testimonials')}
+              onClick={() => scrollToSection("testimonials")}
               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
                 "/testimonials"
               )}`}
@@ -488,12 +489,12 @@ export default function Navbar() {
             >
               Login
             </Link>
-            <Link
-              href="/"
-              className="text-center px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] transition-all shadow-sm"
+            <button
+              className="text-center cursor-pointer px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] transition-all shadow-sm"
+              onClick={openCalendly}
             >
               Book a demo
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -526,21 +527,21 @@ export default function Navbar() {
         <div className="xl:hidden bg-white border-t border-pink-100 shadow-lg">
           <div className="px-6 py-4 space-y-4">
             <button
-              onClick={() => scrollToSection('ourProduct')}
+              onClick={() => scrollToSection("ourProduct")}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Our Product
             </button>
 
             <button
-              onClick={() => scrollToSection('whyTrupulse')}
+              onClick={() => scrollToSection("whyTrupulse")}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Why Trupulse
             </button>
 
             <button
-              onClick={() => scrollToSection('testimonials')}
+              onClick={() => scrollToSection("testimonials")}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Testimonials

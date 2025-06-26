@@ -127,7 +127,7 @@ export default function MeetAssistantSection() {
           feedback sessions.
         </p>
 
-        <Button text="Book a demo" />
+        <Button triggerCalendly text="Book a demo" />
       </div>
 
       {/* Step Cards */}

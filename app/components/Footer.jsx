@@ -1,4 +1,23 @@
+"use client";
+
+import { useState } from "react";
 export default function Footer() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Smooth scroll function using IDs
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+    // Close mobile menu if open
+    setMenuOpen(false);
+  };
+
   return (
     <footer className="  py-4 px-6 md:px-20 text-sm ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
@@ -20,22 +39,28 @@ export default function Footer() {
           <h3 className="font-bold text-base mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/">Use Cases</a>
+              <button
+                className="cursor-pointer"
+                onClick={() => scrollToSection("ourProduct")}
+              >
+                Our product
+              </button>
             </li>
             <li>
-              <a href="/pricing">Pricing</a>
+              <button
+                className="cursor-pointer"
+                onClick={() => scrollToSection("whyTrupulse")}
+              >
+                Why Trupulse
+              </button>
             </li>
             <li>
-              <a href="/">Company</a>
-            </li>
-            <li>
-              <a href="#">Try it</a>
-            </li>
-            <li>
-              <a href="#">Login</a>
-            </li>
-            <li>
-              <a href="#">Contact Us</a>
+              <button
+                className="cursor-pointer"
+                onClick={() => scrollToSection("testimonials")}
+              >
+                Testimonials
+              </button>
             </li>
           </ul>
         </div>
@@ -56,7 +81,13 @@ export default function Footer() {
           <h3 className="font-bold text-base mb-3">Follow us on</h3>
           <ul className="">
             <li>
-              <a href="#">LinkedIn</a>
+              <a
+                href="https://www.linkedin.com/company/trupulse/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
             </li>
           </ul>
         </div>
@@ -66,13 +97,9 @@ export default function Footer() {
       <div className="mt-3 flex justify-between border-t pt-2 text-center text-xs">
         <p>Copyright © 2025 Scanta Inc. All Rights Reserved.</p>
         <div className="mt-2 space-x-4">
-          <a className="hover:underline">
-            Terms of Use
-          </a>
+          <a className="hover:underline">Terms of Use</a>
           <span>|</span>
-          <a className="hover:underline">
-            Privacy Policy
-          </a>
+          <a className="hover:underline">Privacy Policy</a>
         </div>
       </div>
     </footer>

@@ -52,7 +52,7 @@ export default function OneToOneSection() {
             ))}
           </div>
 
-          <Button text="Book a demo" />
+          <Button triggerCalendly text="Book a demo" />
         </div>
 
         {/* Right - Chat */}

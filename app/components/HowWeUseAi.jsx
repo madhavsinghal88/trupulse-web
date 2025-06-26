@@ -135,7 +135,7 @@ export default function WhyTruPulseSection() {
            Why TruPulse Beats Conventional Solutions
           </h2>
 
-          <Button text="Book a demo" />
+          <Button triggerCalendly text="Book a demo" />
         </div>
 
         {/* Right content */}     

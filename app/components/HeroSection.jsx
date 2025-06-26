@@ -188,7 +188,7 @@ export default function HeroSection() {
             groups and surveys on any topic. TruPulse eliminates the work of
             understanding employees.
           </p>
-          <Button text="Book a demo" />
+          <Button triggerCalendly text="Book a demo" />
         </div>
 
         {/* Right Testimonials - Auto Scroll */}
