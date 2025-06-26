@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
 import Button from "./common/Button";
+import { Fade } from "react-awesome-reveal";
 
 const messages = [
   {
@@ -61,13 +62,16 @@ export default function OneToOneSection() {
             const isIntro = index === 0;
 
             return (
-              <div
-                key={index}
+              <Fade
                 className={`rounded-xl px-4 py-3 bg-white border border-gray-300 flex ${
                   isUser ? "justify-end" : "justify-start"
                 }`}
-                data-aos="zoom-in"
+                key={index}
+                direction="up"
+                triggerOnce
+                delay={100}
               >
+                {" "}
                 {isIntro ? (
                   <div className="flex items-start gap-3">
                     <Image
@@ -95,7 +99,7 @@ export default function OneToOneSection() {
                 ) : (
                   <p className=" text-sm">{msg.text}</p>
                 )}
-              </div>
+              </Fade>
             );
           })}
 

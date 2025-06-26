@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Fade } from "react-awesome-reveal";
 
 export default function UnifiedResearchSection() {
   return (
@@ -17,7 +18,11 @@ export default function UnifiedResearchSection() {
         </div>
 
         {/* Right Image Block */}
-        <div className="flex justify-center" data-aos="zoom-in">
+
+        <Fade className="flex justify-center"  direction="up"
+                triggerOnce
+                delay={100}
+              >
           <Image
             src="/images/neww.png" 
             alt="10x Research Graphic"
@@ -25,7 +30,8 @@ export default function UnifiedResearchSection() {
             height={400}
             className="object-contain w-full max-w-sm"
           />
-        </div>
+        </Fade>
+
       </div>
     </section>
   );

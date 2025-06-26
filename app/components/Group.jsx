@@ -38,6 +38,7 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
 import Button from "./common/Button";
+import { Fade } from "react-awesome-reveal";
 
 const discussion = {
   topic: {
@@ -98,10 +99,14 @@ export default function Group() {
         </div>
 
         {/* Right Discussion Preview */}
+        <Fade  direction="up"
+                triggerOnce
+                delay={100}>
         <div className="space-y-4 max-w-md m-auto">
           {/* Topic Card */}
-          <div   data-aos="zoom-in" className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
-            <div   data-aos="zoom-in" className="flex items-center justify-center -gap-2 mb-2">
+          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200" 
+              >
+            <div className="flex items-center justify-center -gap-2 mb-2">
               {discussion.topic.avatars.map((src, i) => (
                 <Image
                   key={i}
@@ -113,26 +118,26 @@ export default function Group() {
                 />
               ))}
             </div>
-            <h4 data-aos="zoom-in" className="font-semibold text-center  mb-1">
+            <h4 className="font-semibold text-center  mb-1">
               {discussion.topic.title}
             </h4>
             <p
-              data-aos="zoom-in"
+          
               className="text-sm text-secondary-text text-center"
             >
               {discussion.topic.desc}
             </p>
           </div>
 
+
           {/* Messages */}
           {discussion.messages.map((msg, index) => {
             if (msg.type === "placeholder") {
               return (
-                <div
-                  data-aos="zoom-in"
-                  key={index}
+
+                <div                  key={index}
                   className="bg-green-50 px-4 py-3 rounded-xl flex items-center gap-4"
-                >
+              >
                   <Image
                     src={msg.avatar}
                     alt="user"
@@ -145,12 +150,13 @@ export default function Group() {
                     <div className="h-3 bg-green-100 rounded-md w-2/4"></div>
                   </div>
                 </div>
+
               );
             }
 
             return (
+
               <div
-                data-aos="zoom-in"
                 key={index}
                 className={`flex items-start gap-4 px-4 py-3 rounded-xl ${
                   msg.type === "ai"
@@ -167,9 +173,11 @@ export default function Group() {
                 />
                 <p className="text-sm ">{msg.text}</p>
               </div>
+
             );
           })}
         </div>
+        </Fade>
       </div>
     </section>
   );

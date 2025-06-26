@@ -198,6 +198,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
+import { Fade } from "react-awesome-reveal";
 
 const testimonials = [
  {
@@ -263,15 +264,18 @@ export default function TestimonialsSection() {
         {/* Desktop View */}
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
-            <div
-              data-aos="fade-up" data-aos-offset="-200" 
+            <Fade
+
               key={index}
               className={`flex flex-col gap-6 items-start px-4 m-auto max-w-lg ${
                 index % 2 === 0
                   ? "md:border-r md:border-gray-300 md:pr-20"
                   : "md:pr-20"
               }`}
-            >
+             direction="up"
+                triggerOnce
+                delay={100}
+              >
               <div className="flex items-start gap-4">
                 <Image
                   src={t.profilePic}
@@ -287,7 +291,7 @@ export default function TestimonialsSection() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Fade>
           ))}
         </div>
 

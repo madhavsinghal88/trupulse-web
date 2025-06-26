@@ -77,7 +77,7 @@
 // }
 
 "use client";
-
+import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
 import Button from "./common/Button";
 import {
@@ -138,8 +138,12 @@ export default function WhyTruPulseSection() {
           <Button text="Book a demo" />
         </div>
 
-        {/* Right content */}
-        <div   data-aos="zoom-in-up" data-aos-offset="-200"   className="space-y-14 m-auto">
+        {/* Right content */}     
+        <Fade direction="up"
+                triggerOnce
+                delay={100}>
+        <div  className="space-y-14 m-auto" 
+              >
           {features.map((item, id) => {
             const Icon = item.icon;
             return (
@@ -156,7 +160,8 @@ export default function WhyTruPulseSection() {
               </div>
             );
           })}
-        </div>
+        </div></Fade>   
+
       </div>
     </section>
   );

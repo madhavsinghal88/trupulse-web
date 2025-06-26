@@ -185,7 +185,6 @@
 //   );
 // }
 
-
 "use client";
 
 import { useState } from "react";
@@ -199,6 +198,7 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
+import { Fade } from "react-awesome-reveal";
 
 const tabs = [
   {
@@ -399,61 +399,73 @@ export default function ManagementReadyReports() {
           Use Cases
         </h2>
         <p className="max-w-3xl mx-auto text-gray-600">
-          Access AI-powered feedback use cases instantly—from onboarding and performance to weekly check-ins and exit interviews—tailored for HR and managers.
+          Access AI-powered feedback use cases instantly—from onboarding and
+          performance to weekly check-ins and exit interviews—tailored for HR
+          and managers.
         </p>
       </div>
 
       {/* Desktop Layout */}
       <div className="hidden sm:flex justify-center items-start gap-10 max-w-7xl mx-auto">
         {/* Left Tabs */}
-        <div data-aos="zoom-in-right"  data-aos-offset="-200"  className="flex flex-col gap-3">
-          {tabs.map((tab, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveTab(index)}
-              className={`text-left px-5 cursor-pointer hover:bg-white hover:scale-105 duration-300 py-4 max-w-sm rounded-xl border transition font-medium text-sm ${
-                index === activeTab
-                  ? "bg-white border-orange-500 shadow"
-                  : "bg-white/60 border border-gray-200 text-gray-700"
-              }`}
-            >
-              <h4 className="font-semibold mb-1">{tab.title}</h4>
-              <p className="text-xs text-gray-600">{tab.desc}</p>
-            </button>
-          ))}
-        </div>
+        <Fade direction="up" triggerOnce delay={100}>
+          <div className="flex flex-col gap-3">
+            {tabs.map((tab, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                className={`text-left px-5 cursor-pointer hover:bg-white hover:scale-105 duration-300 py-4 max-w-sm rounded-xl border transition font-medium text-sm ${
+                  index === activeTab
+                    ? "bg-white border-orange-500 shadow"
+                    : "bg-white/60 border border-gray-200 text-gray-700"
+                }`}
+              >
+                <h4 className="font-semibold mb-1">{tab.title}</h4>
+                <p className="text-xs text-gray-600">{tab.desc}</p>
+              </button>
+            ))}
+          </div>
+        </Fade>
 
         {/* Right Content */}
-        <div data-aos="zoom-in-left" data-aos-offset="-200"  className="">
-          <p className="text-left font-semibold sm:text-xl max-w-2xl mb-6">
-            Leverage continuous, automated feedback on onboarding, performance cycles, and exits to improve retention and employee satisfaction.
-          </p>
+        <Fade direction="up" triggerOnce delay={100}>
+          <div className="">
+            <p className="text-left font-semibold sm:text-xl max-w-2xl mb-6">
+              Leverage continuous, automated feedback on onboarding, performance
+              cycles, and exits to improve retention and employee satisfaction.
+            </p>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
-            {tabs[activeTab].content.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="flex items-start flex-col gap-4">
-                  <div className="min-w-[48px] min-h-[48px] bg-[#BEC1FF] rounded-xl flex items-center justify-center p-4">
-                    <Icon className="w-10 h-10" />
+            <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
+              {tabs[activeTab].content.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="flex items-start flex-col gap-4">
+                    <div className="min-w-[48px] min-h-[48px] bg-[#BEC1FF] rounded-xl flex items-center justify-center p-4">
+                      <Icon className="w-10 h-10" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{item.title}</h4>
+                      <p className="text-sm text-gray-600">{item.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold">{item.title}</h4>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </Fade>
       </div>
 
       {/* Mobile Accordion Layout */}
       <div className="sm:hidden max-w-md mx-auto">
         <div className="space-y-1">
           {tabs.map((tab, index) => (
-            <div                 data-aos="fade-up"
- key={index} className="bg-white rounded-2xl my-4 overflow-hidden">
+            <Fade
+              key={index}
+              className="bg-white rounded-2xl my-4 overflow-hidden"
+              direction="up"
+              triggerOnce
+              delay={100}
+            >
               <button
                 onClick={() => toggleAccordion(index)}
                 className="w-full px-6 py-6 text-left flex items-center justify-between"
@@ -474,7 +486,7 @@ export default function ManagementReadyReports() {
                   )}
                 </div>
               </button>
-              
+
               {expandedAccordion === index && (
                 <div className="px-6 pb-6 border-t border-gray-100">
                   <div className="pt-4 space-y-4">
@@ -497,7 +509,7 @@ export default function ManagementReadyReports() {
                   </div>
                 </div>
               )}
-            </div>
+            </Fade>
           ))}
         </div>
       </div>

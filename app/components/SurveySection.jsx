@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
 import Button from "./common/Button";
+import { Fade } from "react-awesome-reveal";
 
 const surveyItems = [
   {
@@ -67,68 +68,70 @@ export default function SurveySection() {
         </div>
 
         {/* Right Survey Cards */}
-        <div data-aos="zoom-in" className="space-y-4 relative m-auto">
-          {/* Right background image */}
-          <div className="absolute -right-0 -top-20 w-[600px] h-full">
-            <Image
-              src="/images/purple.png"
-              alt="Survey background"
-              fill
-              className="object-cover -z-1"
-            />
-          </div>
-          {/* Top card */}
-          <div className="bg-white rounded-xl p-4 max-w-md shadow-sm border border-gray-200 flex justify-between items-center">
-            <div>
-              <h4 className="font-semibold ">
-                How well does the new CRM integrate with your existing tools
-                (email, calendar, chat)?
-              </h4>
+
+        <Fade direction="up" triggerOnce delay={100}>
+          <div className="space-y-4 relative m-auto max-w-md">
+            {/* Right background image */}
+            <div className="absolute -right-0 -top-20 w-[600px] h-full">
+              <Image
+                src="/images/purple.png"
+                alt="Survey background"
+                fill
+                className="object-cover -z-1"
+              />
+            </div>
+            {/* Top card */}
+            <div className="bg-white rounded-xl p-4 max-w-md shadow-sm border border-gray-200 flex justify-between items-center">
+              <div>
+                <h4 className="font-semibold ">
+                  How well does the new CRM integrate with your existing tools
+                  (email, calendar, chat)?
+                </h4>
                 <ul className="list-disc grid grid-cols-2 my-3 mx-4">
                   <li>Excellent integration</li>
                   <li>Fair integration</li>
                   <li>Good integration</li>
                   <li>Poor integration</li>
                 </ul>
-            </div>
-          </div>
-
-          {surveyItems.map((item, index) => (
-            <div                 data-aos="zoom-in"
-
-              key={index}
-              className={`rounded-xl flex items-center justify-between px-4 py-3 ${
-                item.completed
-                  ? "bg-green-50 text-green-700"
-                  : "bg-white border border-gray-200"
-              }`}
-            >
-              <div className="flex items-center gap-4 w-full">
-                <Image
-                  src={item.avatar}
-                  alt={item.name}
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-                {!item.completed ? (
-                  <div className="flex-1">
-                    <div className="h-3 bg-gray-100 rounded-full w-full">
-                      <div
-                        className="h-3 bg-green-500 rounded-full"
-                        style={{ width: `${item.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex-1 font-medium text-right pr-4">
-                    Completed
-                  </div>
-                )}
               </div>
             </div>
-          ))}
-        </div>
+
+            {surveyItems.map((item, index) => (
+              <div
+                key={index}
+                className={`rounded-xl flex items-center justify-between px-4 py-3 ${
+                  item.completed
+                    ? "bg-green-50 text-green-700"
+                    : "bg-white border border-gray-200"
+                }`}
+              >
+                <div className="flex items-center gap-4 w-full">
+                  <Image
+                    src={item.avatar}
+                    alt={item.name}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                  {!item.completed ? (
+                    <div className="flex-1">
+                      <div className="h-3 bg-gray-100 rounded-full w-full">
+                        <div
+                          className="h-3 bg-green-500 rounded-full"
+                          style={{ width: `${item.progress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex-1 font-medium text-right pr-4">
+                      Completed
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Fade>
       </div>
     </section>
   );

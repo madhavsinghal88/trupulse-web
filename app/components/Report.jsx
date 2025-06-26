@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "./common/Button";
+import { Fade } from "react-awesome-reveal";
 
 export default function Report() {
   return (
@@ -20,7 +21,10 @@ export default function Report() {
           <Button text="Book a demo"/>
         </div>
 
-        <div className="my-12 relative " data-aos="fade-up">
+        <Fade className="my-12 relative " direction="up"
+                triggerOnce
+                delay={100}
+              >
             <Image
               width={2000}
               height={2000}
@@ -28,7 +32,8 @@ export default function Report() {
               src="/images/sales.png"
               alt="video"
             />
-        </div>
+        </Fade>
+
       </div>
     </section>
   );

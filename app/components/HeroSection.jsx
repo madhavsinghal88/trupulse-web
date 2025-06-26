@@ -160,6 +160,7 @@
 
 import Image from "next/image";
 import Button from "./common/Button";
+import { Fade } from "react-awesome-reveal";
 
 export default function HeroSection() {
   const testimonials = [
@@ -211,7 +212,10 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Image Block */}
-      <div id="ourProduct"  data-aos="fade-up" className="relative max-w-7xl mx-auto ">
+      <Fade className="relative max-w-7xl mx-auto "  direction="up"
+                triggerOnce
+                delay={100}
+              >
         <Image
           src="/images/herooo.png"
           alt="AI dashboard"
@@ -219,7 +223,8 @@ export default function HeroSection() {
           height={1000}
           className="w-full"
         />
-      </div>
+      </Fade>
+
     </section>
   );
 }

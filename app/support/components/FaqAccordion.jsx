@@ -109,6 +109,7 @@
 "use client";
 
 import { useState } from "react";
+import { Fade } from "react-awesome-reveal";
 
 const faqs = [
   {
@@ -196,9 +197,12 @@ export default function FaqAccordion() {
           Got questions? We have answers to the most common ones right here!
         </p>
 
+<Fade direction="up"
+                triggerOnce
+                delay={100}>
         <div className="space-y-4 text-left">
           {faqs.slice(0, visibleCount).map((faq, index) => (
-            <div   data-aos="zoom-in-up" data-aos-offset="-200"
+            <div 
               key={index}
               className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition"
             >
@@ -209,6 +213,7 @@ export default function FaqAccordion() {
             </div>
           ))}
         </div>
+        </Fade>
 
         {/* View More / Less */}
         <div className="mt-6">

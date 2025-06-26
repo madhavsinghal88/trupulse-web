@@ -86,6 +86,7 @@
 
 import Image from "next/image";
 import Button from "./common/Button";
+import { Fade } from "react-awesome-reveal";
 
 const steps = [
   {
@@ -130,27 +131,32 @@ export default function MeetAssistantSection() {
       </div>
 
       {/* Step Cards */}
-      <div  className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {steps.map((step) => (
-          <div key={step.key}>
-            <div data-aos="zoom-in"
-              className={`bg-white border-4 ${step.border} md:h-[350px] overflow-hidden rounded-2xl p-4 shadow-md hover:shadow-lg transition`}
-            >
-              <Image
-                src={step.image}
-                alt={step.title}
-                width={500}
-                height={350}
-                className="rounded-xl mb-4 w-full object-contian "
-              />
+          <Fade direction="up" triggerOnce delay={100} key={step.key}>
+            <div >
+              <div
+                className={`bg-white border-4 ${step.border} md:h-[350px] overflow-hidden rounded-2xl p-4 shadow-md hover:shadow-lg transition`}
+              >
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  width={500}
+                  height={350}
+                  className="rounded-xl mb-4 w-full object-contian "
+                />
+              </div>
+              <div className=" m-2 mt-6">
+                <h3 className="text-lg md:text-xl font-semibold text-primary-text mb-1">
+                  {step.title}
+                </h3>
+                <p className="text-sm md:text-base text-secondary-text">
+                  {step.description}
+                </p>
+              </div>
             </div>
-            <div className=" m-2 mt-6">
-            <h3 className="text-lg md:text-xl font-semibold text-primary-text mb-1">
-              {step.title}
-            </h3>
-            <p className="text-sm md:text-base text-secondary-text">{step.description}</p>
-          </div>
-          </div>
+          </Fade>
         ))}
       </div>
     </section>
