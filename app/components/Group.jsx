@@ -42,8 +42,8 @@ import { Fade } from "react-awesome-reveal";
 
 const discussion = {
   topic: {
-    title: "Anniversary Trip Ideas 2025",
-    desc: "Plan a memorable company trip to celebrate our [Xth] Anniversary",
+    title: "This is your TruPulse agent",
+    desc: "Focus Group session on pain points in the company hiring process. What’s the biggest challenge you face in filling roles efficiently?",
     avatars: [
       "/images/1.png",
       "/images/2.png",
@@ -55,7 +55,7 @@ const discussion = {
     {
       type: "ai",
       avatar: "/images/2.png",
-      text: `This is your TruPulse Focus Group session on pain points in the company hiring process. What’s the biggest challenge you face in filling roles efficiently?`,
+      text: `It's difficult to get honest feedback from employees during exit interviews.`,
     },
     {
       type: "user",

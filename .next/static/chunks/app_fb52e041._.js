@@ -163,7 +163,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$awe
 ;
 function HeroSection() {
     const testimonials = [
-        "set the strategy and AI did all the work!",
+        "I set the strategy and AI did all the work!",
         "Saved 10 hours on my weekly 1:1s!",
         "Survey creation took seconds, not weeks.",
         "It’s so easy, every department wants to use it now!",
@@ -356,8 +356,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$awe
 ;
 const discussion = {
     topic: {
-        title: "Anniversary Trip Ideas 2025",
-        desc: "Plan a memorable company trip to celebrate our [Xth] Anniversary",
+        title: "This is your TruPulse agent",
+        desc: "Focus Group session on pain points in the company hiring process. What’s the biggest challenge you face in filling roles efficiently?",
         avatars: [
             "/images/1.png",
             "/images/2.png",
@@ -369,7 +369,7 @@ const discussion = {
         {
             type: "ai",
             avatar: "/images/2.png",
-            text: `This is your TruPulse Focus Group session on pain points in the company hiring process. What’s the biggest challenge you face in filling roles efficiently?`
+            text: `It's difficult to get honest feedback from employees during exit interviews.`
         },
         {
             type: "user",
@@ -887,7 +887,7 @@ const steps = [
         key: "create",
         title: "TruPulse Creates It",
         description: "TruPulse generates discussion topics and survey questions based on the use case you choose.",
-        image: "/images/rr.png",
+        image: "/images/types.png",
         border: "border-green-300"
     },
     {
@@ -1729,35 +1729,35 @@ const faqs = [
     },
     {
         q: "How does the AI moderate 1:1 discussions and focus groups?",
-        a: "It poses questions based on the topic agenda and follows up on responses until all topics are covered in detail to create a report."
+        a: "It poses questions based on the topic agenda and then dynamically follows up on responses until all the topics are covered in detail to create a report."
     },
     {
         q: "Which additional employee metrics does TruPulse calculate?",
         a: "Metrics include Morale, eNPS, Retention Risk, Engagement, Burnout Risk, Inclusion, and 10+ others automatically."
     },
     {
-        q: "How is employee data protected, and can employees opt out?",
+        q: "How is employee data protected, de-identified, and can employees opt out of feedback?",
         a: "All PII is stripped and responses are aggregated (no groups under 10). Data is encrypted at rest and in transit."
     },
     {
         q: "What encryption and access controls protect our data?",
-        a: "We use AES-256 for data at rest, TLS 1.2+ in transit, role-based permissions, SSO/MFA, and regular audits."
+        a: "We use AES-256 for data at rest, TLS 1.2+ in transit, role-based permissions, SSO/MFA support, and regular security audits and penetration tests."
     },
     {
-        q: "How does TruPulse comply with regulations like GDPR and CCPA?",
-        a: "We support data-subject requests, DPA templates, data residency, retention policies, and 'Do Not Sell' controls."
+        q: "How does TruPulse comply with GDPR, CCPA/CPRA, and other regulations?",
+        a: "We provide built-in DPA templates, support data-subject requests, configurable retention schedules, regional data residency options, and “Do Not Sell” controls."
     },
     {
-        q: "Which accessibility standards are supported?",
-        a: "TruPulse supports WCAG 2.1 AA, Section 508, EN 301 549, with features like keyboard nav, ARIA roles, and high-contrast mode."
+        q: "Which accessibility standards and features are supported?",
+        a: "TruPulse Feedback conforms to WCAG 2.1 AA, Section 508, and EN 301 549. Features include keyboard navigation, ARIA roles, high-contrast mode, text resizing, and reduced-motion support."
     },
     {
-        q: "Can I manage data retention or export/delete data?",
-        a: "Yes. Admins can export via API, configure retention policies, or request purges from the admin console."
+        q: "How can customers manage data retention, exports, or deletion?",
+        a: "Admins set custom retention policies (down to daily deletion), export full datasets via API, or request permanent data purges directly from the admin console."
     },
     {
         q: "Is TruPulse data used to train AI models?",
-        a: "No. We use APIs from AI partners. No customer data is used to train external models."
+        a: "No. We leverage APIs from our AI partners so no customer data is ever leaked to train outside models."
     }
 ];
 function FaqAccordion() {

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 export default function Footer() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -97,9 +98,9 @@ export default function Footer() {
       <div className="mt-3 flex justify-between border-t pt-2 text-center text-xs">
         <p>Copyright © 2025 Scanta Inc. All Rights Reserved.</p>
         <div className="mt-2 space-x-4">
-          <a className="hover:underline">Terms of Use</a>
+          <Link href="/terms&conditions" className="hover:underline">Terms of Use</Link>
           <span>|</span>
-          <a className="hover:underline">Privacy Policy</a>
+          <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
         </div>
       </div>
     </footer>
