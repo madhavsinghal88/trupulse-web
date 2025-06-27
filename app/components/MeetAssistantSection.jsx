@@ -94,7 +94,7 @@ const steps = [
     title: "TruPulse Creates It",
     description:
       "TruPulse generates discussion topics and survey questions based on the use case you choose.",
-    image: "/images/rr.png",
+    image: "/images/types.png",
     border: "border-green-300",
   },
   {

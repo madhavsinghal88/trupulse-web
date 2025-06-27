@@ -48,7 +48,7 @@ const CtaSection = () => {
         </h2>
 
         <div className="mt-8 flex justify-center">
-           <Button triggerCalendly text="Lets Start Journey" />
+           <Button triggerCalendly text="Book a demo" />
         </div>
       </div>
     </section>

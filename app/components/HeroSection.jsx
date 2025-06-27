@@ -164,7 +164,7 @@ import { Fade } from "react-awesome-reveal";
 
 export default function HeroSection() {
   const testimonials = [
-    "set the strategy and AI did all the work!",
+    "I set the strategy and AI did all the work!",
     "Saved 10 hours on my weekly 1:1s!",
     "Survey creation took seconds, not weeks.",
     "It’s so easy, every department wants to use it now!",
