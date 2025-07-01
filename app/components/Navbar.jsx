@@ -407,18 +407,18 @@ export default function Navbar() {
       : "";
 
   // Smooth scroll function using IDs
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
-    // Close mobile menu if open
-    setMenuOpen(false);
-  };
+  // const scrollToSection = (sectionId) => {
+  //   const element = document.getElementById(sectionId);
+  //   if (element) {
+  //     element.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //       inline: "nearest",
+  //     });
+  //   }
+  //   // Close mobile menu if open
+  //   setMenuOpen(false);
+  // };
 
   return (
     <header className="w-full absolute top-0 backdrop-blur-sm z-30">
@@ -437,31 +437,37 @@ export default function Navbar() {
           </Link>
           {/* Nav links */}
           <nav className="flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("ourProduct")}
-              className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
-                "ourProduct"
-              )}`}
-            >
-              Our Product
-            </button>
-            <button
-              onClick={() => scrollToSection("whyTrupulse")}
-              className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
-                "whyTrupulse"
-              )}`}
-            >
-              Why Trupulse
-            </button>
+            <Link href="/#ourProduct">
+              <button
+                // onClick={() => scrollToSection("ourProduct")}
+                className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+                  "ourProduct"
+                )}`}
+              >
+                Our Product
+              </button>
+            </Link>
+            <Link href="/#whyTrupulse">
+              <button
+                // onClick={() => scrollToSection("whyTrupulse")}
+                className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+                  "whyTrupulse"
+                )}`}
+              >
+                Why Trupulse
+              </button>
+            </Link>
 
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
-                "/testimonials"
-              )}`}
-            >
-              Testimonials
-            </button>
+            <Link href="/#testimonials">
+              <button
+                // onClick={() => scrollToSection("testimonials")}
+                className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+                  "/testimonials"
+                )}`}
+              >
+                Testimonials
+              </button>
+            </Link>
 
             {/* <Link
               href="/pricing"
