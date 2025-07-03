@@ -364,10 +364,6 @@
     pointer-events: none;
   }
 
-  .collapse {
-    visibility: collapse;
-  }
-
   .invisible {
     visibility: hidden;
   }
@@ -1568,10 +1564,6 @@
 
   .object-cover {
     object-fit: cover;
-  }
-
-  .object-center {
-    object-position: center;
   }
 
   .p-1 {
