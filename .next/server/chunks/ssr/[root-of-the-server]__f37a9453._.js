@@ -128,7 +128,7 @@ function Footer() {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             className: "cursor-pointer",
                                             onClick: ()=>scrollToSection("whyTrupulse"),
-                                            children: "Why Trupulse"
+                                            children: "Why TruPulse"
                                         }, void 0, false, {
                                             fileName: "[project]/app/components/Footer.jsx",
                                             lineNumber: 51,
@@ -950,7 +950,7 @@ function Navbar() {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             // onClick={() => scrollToSection("whyTrupulse")}
                                             className: `hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive("whyTrupulse")}`,
-                                            children: "Why Trupulse"
+                                            children: "Why TruPulse"
                                         }, void 0, false, {
                                             fileName: "[project]/app/components/Navbar.jsx",
                                             lineNumber: 451,
@@ -1087,7 +1087,7 @@ function Navbar() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: ()=>scrollToSection("whyTrupulse"),
                             className: "block font-medium hover:text-orange-500  transition-colors w-full text-left",
-                            children: "Why Trupulse"
+                            children: "Why TruPulse"
                         }, void 0, false, {
                             fileName: "[project]/app/components/Navbar.jsx",
                             lineNumber: 542,

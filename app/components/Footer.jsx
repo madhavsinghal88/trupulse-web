@@ -52,7 +52,7 @@ export default function Footer() {
                 className="cursor-pointer"
                 onClick={() => scrollToSection("whyTrupulse")}
               >
-                Why Trupulse
+                Why TruPulse
               </button>
             </li>
             <li>

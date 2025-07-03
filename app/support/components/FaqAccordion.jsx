@@ -113,7 +113,7 @@ import { Fade } from "react-awesome-reveal";
 
 const faqs = [
   {
-    q: "What is TruPulse Feedback?",
+    q: "What is TruPulse?",
     a: "An AI-powered platform that automates pulse surveys, 1:1 discussions, and focus groups, delivering instant insights and reports.",
   },
   {
@@ -122,11 +122,11 @@ const faqs = [
   },
   {
     q: "What types of feedback sessions can I run?",
-    a: "You can run AI-generated pulse surveys, AI-led 1:1 chats, and AI-moderated focus groups for virtually any HR use case.",
+    a: "You can run AI-generated pulse surveys, AI-led 1:1 chats, and AI-moderated focus groups for virtually any HR or management use case.",
   },
   {
     q: "How does TruPulse recommend questions or topics?",
-    a: "Our AI Prompt Engine suggests tailored topics and questions based on your selected use case and organizational context.",
+    a: "You can run AI-generated pulse surveys, AI-led 1:1 chats, and AI-moderated focus groups for virtually any HR or management use case.",
   },
   {
     q: "Can I customize the AI-generated questions?",
@@ -137,20 +137,20 @@ const faqs = [
     a: "Typically under 60 seconds: pick a use case, review AI prompts, and hit “Create.”",
   },
   {
-    q: "How are participants invited?",
-    a: "Via integrated chat platforms (Slack, Teams) or email, depending on your configuration.",
+    q: "How are participants invited to a session?",
+    a: "Via chat platforms or email, depending on your configuration.",
   },
   {
     q: "How does the AI moderate 1:1 discussions and focus groups?",
-    a: "It poses questions based on the topic agenda and then dynamically follows up on responses until all the topics are covered in detail to create a report.",
+    a: "It poses questions based on the agenda topics and then dynamically follows up on responses until all the topics are covered in enough detail to create a report.",
   },
   {
     q: "Which additional employee metrics does TruPulse calculate?",
-    a: "Metrics include Morale, eNPS, Retention Risk, Engagement, Burnout Risk, Inclusion, and 10+ others automatically.",
+    a: "Metrics include Morale, eNPS, Retention Risk, Engagement, Burnout Risk, Inclusion, and many more.",
   },
   {
     q: "How is employee data protected, de-identified, and can employees opt out of feedback?",
-    a: "All PII is stripped and responses are aggregated (no groups under 10). Data is encrypted at rest and in transit.",
+    a: "All sessions can be anonymized and aggregated statistics protect individuals. Data is encrypted at rest and in transit.",
   },
   {
     q: "What encryption and access controls protect our data?",
@@ -158,7 +158,7 @@ const faqs = [
   },
   {
     q: "How does TruPulse comply with GDPR, CCPA/CPRA, and other regulations?",
-    a: "We provide built-in DPA templates, support data-subject requests, configurable retention schedules, regional data residency options, and “Do Not Sell” controls.",
+    a: "We have implemented anonymization, opt out options, support data-subject requests, configurable retention schedules, regional data residency options, and “Do Not Sell” controls.",
   },
   {
     q: "Which accessibility standards and features are supported?",
@@ -170,7 +170,7 @@ const faqs = [
   },
   {
     q: "Is TruPulse data used to train AI models?",
-    a: "No. We leverage APIs from our AI partners so no customer data is ever leaked to train outside models.",
+    a: "No. We leverage APIs from our AI partners so no customer data is ever exposed to train outside models.",
   },
 ];
 
@@ -179,9 +179,9 @@ export default function FaqAccordion() {
 
   const handleToggle = () => {
     if (visibleCount >= faqs.length) {
-      setVisibleCount(3); // collapse
+      setVisibleCount(3);
     } else {
-      setVisibleCount((prev) => Math.min(prev + 3, faqs.length)); // show more
+      setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
     }
   };
 

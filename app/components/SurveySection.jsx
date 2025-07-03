@@ -53,7 +53,7 @@ export default function SurveySection() {
 
           <div className="space-y-6 max-w-md text-base mb-5 ">
             {[
-              "Craft AI-generated surveys on any topic with one click",
+              "Craft AI-generated surveys with a few clicks.",
               "Collect quantitative and qualitative data in a single streamlined survey workflow.",
               "Get immediate reports with executive summaries, topical analysis and recommendations.",
             ].map((point, index) => (

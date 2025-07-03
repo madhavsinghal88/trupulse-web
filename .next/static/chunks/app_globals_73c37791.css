@@ -1570,6 +1570,10 @@
     object-fit: cover;
   }
 
+  .object-center {
+    object-position: center;
+  }
+
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }

@@ -137,14 +137,14 @@ export default function MeetAssistantSection() {
           <Fade direction="up" triggerOnce delay={100} key={step.key}>
             <div >
               <div
-                className={`bg-white border-4 ${step.border} md:h-[350px] overflow-hidden rounded-2xl p-4 shadow-md hover:shadow-lg transition`}
+                className={`bg-white border-4 ${step.border} md:h-[350px] overflow-hidden rounded-2xl p-2 shadow-md hover:shadow-lg transition`}
               >
                 <Image
                   src={step.image}
                   alt={step.title}
                   width={500}
                   height={350}
-                  className="rounded-xl mb-4 w-full object-contian "
+                  className="rounded-xl mb-4 w-full object-contian"
                 />
               </div>
               <div className=" m-2 mt-6">

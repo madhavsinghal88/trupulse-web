@@ -21,7 +21,7 @@ export default function TopBanner() {
             className="mt-0.5 sm:mt-0"
           />
           <p className="leading-snug">
-            <span className="font-semibold">Trupulse.AI</span> – AI-driven
+            <span className="font-semibold">TruPulse.AI</span> – AI-driven
             discussions platform with the stability of low-code
             <span className="ml-1">≫</span>
             <a

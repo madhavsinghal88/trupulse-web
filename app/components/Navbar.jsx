@@ -454,7 +454,7 @@ export default function Navbar() {
                   "whyTrupulse"
                 )}`}
               >
-                Why Trupulse
+                Why TruPulse
               </button>
             </Link>
 
@@ -543,7 +543,7 @@ export default function Navbar() {
               onClick={() => scrollToSection("whyTrupulse")}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
-              Why Trupulse
+              Why TruPulse
             </button>
 
             <button

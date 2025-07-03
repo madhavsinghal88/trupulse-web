@@ -204,6 +204,7 @@ const tabs = [
   {
     title: "Talent Lifecycle",
     desc: "Seamless lifecycle feedback ensures smooth transitions at every stage.",
+    tag: "Leverage continuous, automated feedback on onboarding, performance cycles, and exits to improve retention and employee satisfaction.",
     content: [
       {
         icon: FileText,
@@ -235,6 +236,7 @@ const tabs = [
   {
     title: "Performance & Development",
     desc: "Unlock potential with continuous AI-led performance insights.",
+    tag: "Conduct AI-driven performance reviews, manager check-ins, and leadership assessments—delivering actionable development insights without manual scheduling or follow-up.",
     content: [
       {
         icon: FileText,
@@ -266,6 +268,8 @@ const tabs = [
   {
     title: "Engagement & Culture",
     desc: "Foster engagement and culture with AI-driven feedback insights.",
+    tag: "Automate eNPS, culture checks, and recognition surveys—uncovering engagement drivers and cultural health metrics for immediate action.",
+
     content: [
       {
         icon: Smile,
@@ -292,6 +296,8 @@ const tabs = [
   {
     title: "Compensation, Benefits & Wellbeing",
     desc: "Optimize compensation, benefits, and wellbeing through AI feedback.",
+    tag: "Automate feedback on health coverage, pay, recognition and work-life balance—ensuring benefits meet employee needs and boost satisfaction.",
+
     content: [
       {
         icon: ClipboardList,
@@ -323,6 +329,8 @@ const tabs = [
   {
     title: "Workplace Environment",
     desc: "Enhance the workplace environment through continuous AI feedback loops.",
+    tag: "Gather AI-powered feedback on remote work experiences, office comfort, commute challenges, and collaboration tools—optimizing the environment for productivity.",
+
     content: [
       {
         icon: Users,
@@ -349,6 +357,8 @@ const tabs = [
   {
     title: "Change & Policy",
     desc: "Navigate change initiatives with AI-facilitated employee feedback loops.",
+    tag: "Leverage AI feedback loops to assess merger impacts, policy adoption, and safety compliance—enabling proactive adjustments.",
+
     content: [
       {
         icon: FileText,
@@ -396,10 +406,10 @@ export default function ManagementReadyReports() {
     <section className="bg-[#eff0ff] py-20 px-4">
       <div className="max-w-7xl w-[90vw] mx-auto text-center mb-12">
         <h2 className="text-4xl md:text-5xl w-full font-bold mb-3 text-gray-800">
-          Use Cases
+          Time-Saving Feedback Templates{" "}
         </h2>
         <p className="max-w-3xl mx-auto text-gray-600">
-          Access AI-powered feedback use cases instantly—from onboarding and
+          Access AI-optimized feedback templates instantly—from onboarding and
           performance to weekly check-ins and exit interviews—tailored for HR
           and managers.
         </p>
@@ -431,8 +441,7 @@ export default function ManagementReadyReports() {
         <Fade direction="up" triggerOnce delay={100}>
           <div className="">
             <p className="text-left font-semibold sm:text-xl max-w-2xl mb-6">
-              Leverage continuous, automated feedback on onboarding, performance
-              cycles, and exits to improve retention and employee satisfaction.
+              {tabs[activeTab].tag}
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">

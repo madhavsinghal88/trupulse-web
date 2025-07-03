@@ -8,11 +8,12 @@ import { Fade } from "react-awesome-reveal";
 const messages = [
   {
     sender: "ai",
-    avatar: "/images/2.png",
+    avatar: "/images/image.png",
     text: "This is your TruPulse Discussion session on the company reorg. What positive changes have you noticed so far?",
   },
   {
-    sender: "ai",
+    sender: "user",
+    avatar: "/images/1.png",
     text: "Improved decision speed—fewer approval layers than before.",
   },
   {
@@ -21,7 +22,8 @@ const messages = [
     text: "That’s great. Any downsides to faster decisions?",
   },
   {
-    sender: "ai",
+    sender: "user",
+    avatar: "/images/1.png",
     text: "Sometimes we move forward without full stakeholder alignment, causing rework.",
   },
 ];

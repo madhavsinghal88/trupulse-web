@@ -84,9 +84,9 @@ export default function Group() {
 
           <div className="space-y-6 text-base mb-4 ">
             {[
-              "Leverage groups to workshop ideas, brainstorm proposals or collect group feedback",
+              "Leverage groups to workshop ideas, brainstorm proposals or collect group feedback.",
               "Use AI-driven moderation to guide conversations and ensure objective question flow.",
-              "AI summaries translate group findings into summaries and actionable recommendations",
+              "AI summaries translate group findings into summaries and actionable recommendations.",
             ].map((point, index) => (
               <div key={index} className="flex items-start gap-3">
                 <Check className=" mt-1" />

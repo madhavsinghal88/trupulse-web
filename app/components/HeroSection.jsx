@@ -181,10 +181,10 @@ export default function HeroSection() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B4F100] to-[#00D1FF]">
               AI
             </span>{" "}
-            Agent for smarter Employee Engagement
+            Agent for Smarter Employee Engagement
           </h1>
           <p className="text-base md:text-lg text-secondary-text mb-6 max-w-xl">
-            Our AI agent creates, conducts, & analyzes 1:1 discussions, focus
+            TruPulse creates, conducts, & analyzes 1:1 discussions, focus
             groups and surveys on any topic. TruPulse eliminates the work of
             understanding employees.
           </p>
