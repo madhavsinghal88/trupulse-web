@@ -33,7 +33,7 @@ const testimonials = [
     name: "Nathan Mondragon, Ph.D.",
     position: "Chief IO Psychologist, HireVue",
     content:
-      "Improving the workplace experience improves employee engagement and retention. The dynamic insights uncovered by TruPulse will help HR teams improve your workplace with real time, AI driven data that other departments have had for years",
+      "TruPulse simplifies the HR tech stack by replacing three separate tools and consultants with an AI engine that runs your bespoke survey, feedback, and strategic planning discussions.",
     profilePic: "/images/nathan.png",
   },
   {
