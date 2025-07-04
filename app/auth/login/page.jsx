@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Button from "@/app/components/common/Button";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -57,9 +58,9 @@ export default function LoginPage() {
           </div>
 
           <div className="text-right text-sm">
-            <a href="#" className="text-orange-500 hover:underline">
+            <Link href="/auth/forgot-password" className="text-orange-500 hover:underline">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           <Button type="submit" text="Log In" className="w-full" />
@@ -67,9 +68,9 @@ export default function LoginPage() {
 
         <p className="text-center text-sm text-gray-600">
           Don’t have an account?{" "}
-          <a href="#" className="text-orange-500 font-medium hover:underline">
+          <Link href="/auth/signup" className="text-orange-500 font-medium hover:underline">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </section>

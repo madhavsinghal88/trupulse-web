@@ -12,15 +12,14 @@ const testimonials = [
   {
     name: "Danielle Strazzo",
     position: "VP of HR, BD",
-    content:
-      "We cannot fully deliver for our customers, and execute the business agenda, without an engaged workforce. TruPulse delivers insights into your employees' state, arming you to make positive changes to the experience without the burden of surveys.",
+    content: "TruPulse empowers HR and Business Leaders to turn employee insights into strategic changes that uplift culture and drive organizational performance  - with notable speed.",
     profilePic: "/images/danielle.png",
   },
   {
     name: "Richard E. Beyer",
     position: "Fmr Secretary of Labor, State of Kansas",
     content:
-      "For years, I administered surveys in organizations. Although invaluable, feedback represented a snapshot in time. To monitor the pulse of organizations on a realtime, continual basis, the AI-driven TruPulse platform is a highly effective strategy.",
+      "The AI agent in TruPulse transforms employee voice into a catalyst for collective operational improvements—setting the stage for enhancing culture, accelerating team success, and transforming organizational performance.",
     profilePic: "/images/richard.png",
   },
   {

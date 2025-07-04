@@ -490,7 +490,7 @@ export default function Navbar() {
           {/* Auth buttons */}
           <div className="flex items-center gap-4">
             <Link
-              href="/"
+              href="/auth/login"
               className="px-10 py-2 border rounded-full hover:bg-gray-50 transition-all duration-200 font-medium"
             >
               Login
@@ -572,19 +572,21 @@ export default function Navbar() {
 
             <div className="flex flex-col gap-3 pt-2">
               <Link
-                href="/"
+                href="/auth/login"
                 onClick={() => setMenuOpen(false)}
                 className="text-center px-6 py-2.5 border border-secondarytext font-medium rounded-full hover:bg-gray-50 transition-all"
               >
                 Login
               </Link>
-              <Link
-                href="/"
-                onClick={() => setMenuOpen(false)}
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  openCalendly();
+                }}
                 className="text-center hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient px-6 py-2.5 text-white font-medium rounded-full transition-all shadow-sm"
               >
                 Book a demo
-              </Link>
+              </button>
             </div>
           </div>
         </div>
