@@ -12,7 +12,8 @@ const testimonials = [
   {
     name: "Danielle Strazzo",
     position: "VP of HR, BD",
-    content: "TruPulse empowers HR and Business Leaders to turn employee insights into strategic changes that uplift culture and drive organizational performance  - with notable speed.",
+    content:
+      "TruPulse empowers HR and Business Leaders to turn employee insights into strategic changes that uplift culture and drive organizational performance  - with notable speed.",
     profilePic: "/images/danielle.png",
   },
   {
@@ -23,11 +24,11 @@ const testimonials = [
     profilePic: "/images/richard.png",
   },
   {
-    name: "Dan Mcculloch",
-    position: "VP, GM of Full Circle, EA",
+    name: "Gail Gibbs",
+    position: "VP HR, Best Buy",
     content:
-      "Employee surveys are amazing but usually very high level. With TruPulse I can see insights on employee morale at any altitude. I used to look forward to having survey results quarterly, now I can see those same results whenever I need them.",
-    profilePic: "/images/dan.png",
+      "TruPulse sessions are engaging and effortless, translating employee insights into strategic initiatives that enhance culture, collaboration and organizational performance.",
+    profilePic: "/images/gail.jpg",
   },
   {
     name: "Nathan Mondragon, Ph.D.",
@@ -42,6 +43,13 @@ const testimonials = [
     content:
       "The idea of being able to call up a report on what employee morale is like at any time I want to is a powerful feature of TruPulse. Demographic breakdowns make the insights even more useful.",
     profilePic: "/images/mani.png",
+  },
+  {
+    name: "Dan Mcculloch",
+    position: "VP, GM of Full Circle, EA",
+    content:
+      "Employee surveys are amazing but usually very high level. With TruPulse I can see insights on employee morale at any altitude. I used to look forward to having survey results quarterly, now I can see those same results whenever I need them.",
+    profilePic: "/images/dan.png",
   },
 ];
 
@@ -88,7 +96,7 @@ export default function TestimonialsSection() {
                   alt={t.name}
                   width={48}
                   height={48}
-                  className="rounded-full"
+                  className="rounded-full object-contain"
                 />
                 <div>
                   <p className="text-sm sm:text-base mb-2">“{t.content}”</p>
