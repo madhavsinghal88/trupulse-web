@@ -46,12 +46,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import { Zoom } from "react-awesome-reveal";
 
 export default function Report() {
   const images = [
-    "/images/nnn.png",
-    "/images/q.png",
-    "/images/w.png",
+    "/images/np.png",
+    // "/images/q.png",
+    // "/images/w.png",
   ];
 
   return (
@@ -74,7 +75,9 @@ export default function Report() {
         </div>
 
         {/* Swiper Image Carousel */}
-        <div className="my-12 lg:my-18 relative w-full max-w-7xl h-auto mx-auto">
+         <Zoom duration={600}
+                        triggerOnce
+                        delay={100} className="my-12 lg:my-18 relative w-full max-w-7xl h-auto mx-auto">
           <Swiper
             modules={[Autoplay, EffectFade]}
             autoplay={{ delay: 3000 }}
@@ -94,8 +97,7 @@ export default function Report() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-      </div>
+</Zoom>       </div>
     </section>
   );
 }

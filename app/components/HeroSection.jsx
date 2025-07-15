@@ -220,11 +220,11 @@ export default function HeroSection() {
       >
         <Image
           id="ourProduct"
-          src="/images/herooo.png"
+          src="/images/nh.png"
           alt="AI dashboard"
           width={1200}
           height={1000}
-          className="w-full"
+          className="w-full mt-20"
         />
       </Fade>
     </section>

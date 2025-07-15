@@ -38,6 +38,13 @@ const testimonials = [
     profilePic: "/images/nathan.png",
   },
   {
+    name: "Matthew Kelly",
+    position: "Finance SVP,  Benefits Administration Industry",
+    content:
+      "TruPulse will eliminate manual work, boost productivity, and justify itself with hard dollar ROI from day one.",
+    profilePic: "/images/placeholder.png",
+  },
+  {
     name: "Mani Sundaram",
     position: "EVP & GM, Akamai Technologies",
     content:
