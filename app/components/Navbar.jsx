@@ -406,20 +406,6 @@ export default function Navbar() {
       ? " underline underline-offset-10 decoration- duration-300 text-orange-500 scale-105 font-bold"
       : "";
 
-  // Smooth scroll function using IDs
-  // const scrollToSection = (sectionId) => {
-  //   const element = document.getElementById(sectionId);
-  //   if (element) {
-  //     element.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //       inline: "nearest",
-  //     });
-  //   }
-  //   // Close mobile menu if open
-  //   setMenuOpen(false);
-  // };
-
   return (
     <header className="w-full absolute top-0 backdrop-blur-sm z-30">
       <div className="max-w-7xl mx-auto px-6 py-4">
@@ -439,7 +425,6 @@ export default function Navbar() {
           <nav className="flex items-center gap-8">
             <Link href="/#ourProduct">
               <button
-                // onClick={() => scrollToSection("ourProduct")}
                 className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
                   "ourProduct"
                 )}`}
@@ -449,7 +434,6 @@ export default function Navbar() {
             </Link>
             <Link href="/#whyTrupulse">
               <button
-                // onClick={() => scrollToSection("whyTrupulse")}
                 className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
                   "whyTrupulse"
                 )}`}
@@ -460,7 +444,6 @@ export default function Navbar() {
 
             <Link href="/#testimonials">
               <button
-                // onClick={() => scrollToSection("testimonials")}
                 className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
                   "/testimonials"
                 )}`}
@@ -532,26 +515,23 @@ export default function Navbar() {
       {menuOpen && (
         <div className="xl:hidden bg-white border-t border-pink-100 shadow-lg">
           <div className="px-6 py-4 space-y-4">
-            <button
-              onClick={() => scrollToSection("ourProduct")}
+            <Link href="/#ourProduct"
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Our Product
-            </button>
+            </Link>
 
-            <button
-              onClick={() => scrollToSection("whyTrupulse")}
+            <Link href="/#whyTrupulse"
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Why TruPulse
-            </button>
+            </Link>
 
-            <button
-              onClick={() => scrollToSection("testimonials")}
+            <Link href="/#testimonials"
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Testimonials
-            </button>
+            </Link>
 
             {/* <Link
               href="/pricing"

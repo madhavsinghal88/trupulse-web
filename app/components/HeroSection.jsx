@@ -183,7 +183,7 @@ export default function HeroSection() {
             </span>{" "}
             Agent for Smarter Employee Engagement
           </h1>
-          <p className="text-base md:text-lg text-secondary-text mb-6 max-w-xl">
+          <p className="text-base md:text-lg mb-6 max-w-xl">
             TruPulse creates, conducts, & analyzes 1:1 discussions, focus
             groups and surveys on any topic. TruPulse eliminates the work of
             understanding employees.

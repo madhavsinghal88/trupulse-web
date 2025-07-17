@@ -56,8 +56,8 @@ export default function Report() {
   ];
 
   return (
-    <section className="py-10 px-6">
-      <div className="max-w-7xl w-[90vw] m-auto">
+    <section className="py-10 px-6 relative">
+      <div className="max-w-7xl w-[90vw] m-auto ">
         <div className="flex flex-col w-fit justify-center items-center m-auto gap-5">
           {/* Title */}
           <h2 className="text-4xl text-center md:text-5xl w-full font-bold mb-3">
@@ -67,7 +67,9 @@ export default function Report() {
           {/* Paragraph */}
           <div className="max-w-4xl">
             <p className="text-base text-center leading-relaxed">
-              Automatically create polished reports featuring executive summaries, highlighted findings, and more than fifteen AI generated, HR-centric employee metrics for instant insights.
+              Automatically create polished reports featuring executive
+              summaries, highlighted findings, and more than fifteen AI
+              generated, HR-centric employee metrics for instant insights.
             </p>
           </div>
 
@@ -75,9 +77,12 @@ export default function Report() {
         </div>
 
         {/* Swiper Image Carousel */}
-         <Zoom duration={600}
-                        triggerOnce
-                        delay={100} className="my-12 lg:my-18 relative w-full max-w-7xl h-auto mx-auto">
+        <Zoom
+          duration={600}
+          triggerOnce
+          delay={100}
+          className="my-12 z-10 lg:my-18 relative w-full max-w-7xl h-auto mx-auto"
+        >
           <Swiper
             modules={[Autoplay, EffectFade]}
             autoplay={{ delay: 3000 }}
@@ -92,12 +97,27 @@ export default function Report() {
                   alt={`slide-${index}`}
                   width={2000}
                   height={2000}
-                  className="w-full border rounded-3xl object-contain p-2 sm:p-4"
+                  className="w-full rounded-3xl object-contain  sm:p-4"
                 />
               </SwiperSlide>
             ))}
           </Swiper>
-</Zoom>       </div>
+        </Zoom>
+        <Image
+          className="absolute top-36 hidden xl:block left-[15%]"
+          width={1000}
+          height={1000}
+          src="/images/pur.png"
+          alt="img"
+        /> 
+        <Image
+          className="absolute -bottom-12 hidden xl:block  left-[15%]"
+          width={1000}
+          height={1000}
+          src="/images/green.png"
+          alt="img"
+        /> 
+      </div>
     </section>
   );
 }

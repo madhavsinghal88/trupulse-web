@@ -73,9 +73,9 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="bg-white py-20 px-4 ">
+    <section id="testimonials" className="bg-white py-20 px-4 ">
       <div className="max-w-6xl w-[90vw] mx-auto text-center">
-        <h2 id="testimonials" className="text-3xl md:text-5xl font-bold mb-4">
+        <h2  className="text-4xl md:text-5xl font-bold mb-4">
           What HR Leaders Say
         </h2>
         <p className="text-secondary-text text-base md:text-lg max-w-2xl mx-auto mb-12">
@@ -84,7 +84,7 @@ export default function TestimonialsSection() {
         </p>
 
         {/* Desktop View */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
+        <div  className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 max-w-5xl mx-auto">
           {testimonials.slice(0, visibleCount).map((t, index) => (
             <Zoom
               key={index}

@@ -131,7 +131,7 @@ export default function WhyTruPulseSection() {
       <div className="relative z-10 w-[90vw] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
         {/* Left content */}
         <div className="m-auto">
-          <h2 className="text-3xl md:text-5xl font-semibold max-w-xl mb-6">
+          <h2 className="text-4xl md:text-5xl font-semibold max-w-xl mb-6">
            Why TruPulse Beats Conventional Solutions
           </h2>
 

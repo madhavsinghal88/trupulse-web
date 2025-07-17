@@ -190,7 +190,7 @@ export default function FaqAccordion() {
   return (
     <section className="bg-[#f4f4f9] py-16 px-4">
       <div className="max-w-4xl w-[90vw] mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-text mb-2">
+        <h2 className="text-4xl md:text-5xl font-bold text-primary-text mb-2">
           Frequently Asked Questions
         </h2>
         <p className="mb-8">

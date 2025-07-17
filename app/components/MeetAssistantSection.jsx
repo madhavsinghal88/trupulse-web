@@ -119,7 +119,7 @@ export default function MeetAssistantSection() {
   return (
     <section className="bg-[#F3FFE6] py-20 px-4">
       <div className="max-w-7xl w-[90vw] mx-auto text-center flex flex-col justify-center items-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-primary-text mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-primary-text mb-4">
           Meet TruPulse, Your <span className="text-[#542EFF]">AI</span> Agent!
         </h2>
         <p className="text-secondary-text text-lg md:text-xl mb-6">

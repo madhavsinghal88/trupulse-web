@@ -354,6 +354,8 @@
   body {
     background-color: var(--background);
     color: var(--primary-text);
+    font-family: var(--font-geist-sans);
+    font-family: Inter, sans-serif;
   }
 }
 
@@ -460,6 +462,10 @@
     top: calc(var(--spacing) * 20);
   }
 
+  .top-36 {
+    top: calc(var(--spacing) * 36);
+  }
+
   .top-40 {
     top: calc(var(--spacing) * 40);
   }
@@ -520,6 +526,10 @@
     right: 45%;
   }
 
+  .-bottom-12 {
+    bottom: calc(var(--spacing) * -12);
+  }
+
   .-bottom-16 {
     bottom: calc(var(--spacing) * -16);
   }
@@ -570,6 +580,10 @@
 
   .left-40 {
     left: calc(var(--spacing) * 40);
+  }
+
+  .left-\[15\%\] {
+    left: 15%;
   }
 
   .-z-1 {
@@ -1764,6 +1778,10 @@
 
   .text-start {
     text-align: start;
+  }
+
+  .font-sans {
+    font-family: var(--font-geist-sans);
   }
 
   .text-2xl {
