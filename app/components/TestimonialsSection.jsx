@@ -42,7 +42,7 @@ const testimonials = [
     position: "Finance SVP,  Benefits Administration Industry",
     content:
       "TruPulse will eliminate manual work, boost productivity, and justify itself with hard dollar ROI from day one.",
-    profilePic: "/images/placeholder.png",
+    profilePic: "/images/matt.jpg",
   },
   {
     name: "Mani Sundaram",
