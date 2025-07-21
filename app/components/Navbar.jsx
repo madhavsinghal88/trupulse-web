@@ -472,12 +472,12 @@ export default function Navbar() {
 
           {/* Auth buttons */}
           <div className="flex items-center gap-4">
-            <Link
-              href="/auth/login"
+            <a
+              href="https://dashboard.trupulse.ai/"
               className="px-10 py-2 border rounded-full hover:bg-gray-50 transition-all duration-200 font-medium"
             >
               Login
-            </Link>
+            </a>
             <button
               className="text-center cursor-pointer px-6 py-2.5 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient text-white font-medium rounded-full hover:shadow-[0_0_20px_5px_rgba(255,144,0,0.6)] transition-all shadow-sm"
               onClick={openCalendly}
@@ -515,19 +515,19 @@ export default function Navbar() {
       {menuOpen && (
         <div className="xl:hidden bg-white border-t border-pink-100 shadow-lg">
           <div className="px-6 py-4 space-y-4">
-            <Link href="/#ourProduct"
+            <Link href="/#ourProduct"  onClick={() => setMenuOpen(!menuOpen)}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Our Product
             </Link>
 
-            <Link href="/#whyTrupulse"
+            <Link href="/#whyTrupulse"  onClick={() => setMenuOpen(!menuOpen)}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Why TruPulse
             </Link>
 
-            <Link href="/#testimonials"
+            <Link href="/#testimonials"  onClick={() => setMenuOpen(!menuOpen)}
               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
             >
               Testimonials
@@ -551,13 +551,13 @@ export default function Navbar() {
             <hr className="border-pink-200" />
 
             <div className="flex flex-col gap-3 pt-2">
-              <Link
-                href="/auth/login"
+              <a
+                href="https://dashboard.trupulse.ai/"
                 onClick={() => setMenuOpen(false)}
                 className="text-center px-6 py-2.5 border border-secondarytext font-medium rounded-full hover:bg-gray-50 transition-all"
               >
                 Login
-              </Link>
+              </a>
               <button
                 onClick={() => {
                   setMenuOpen(false);
