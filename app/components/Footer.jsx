@@ -69,12 +69,12 @@ export default function Footer() {
         {/* Key Usecases */}
         <div>
           <h3 className="font-bold text-base mb-4">Contact Us</h3>
-          <p>General Questions</p>
-          <p className="mb-3">hello@trupulse.ai</p>
+          {/* <p>General Questions</p>
+          <p className="mb-3">hello@trupulse.ai</p> */}
           <p>Technical Support </p>
           <p className="mb-3">support@trupulse.ai</p>
-          <p>Sales </p>
-          <p className="mb-3">sales@trupulse.ai</p>
+          <p>Sales</p>
+          <p className="mb-3">hello@trupulse.ai</p>
         </div>
 
         {/* Contacts + Social */}

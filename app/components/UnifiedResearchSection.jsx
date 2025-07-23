@@ -13,7 +13,7 @@ export default function UnifiedResearchSection() {
            Choose Your Feedback Mode and Accelerate Insights
           </h2>
           <p className="text-base md:text-lg text-secondary-text max-w-xl">
-           Engage teams via 1:1 chats, AI-moderated focus groups, or smart surveys for faster, deeper employee understanding.
+          Engage teams via AI-led 1:1 chats, AI-moderated focus groups, or AI-generated smart surveys for faster, deeper employee understanding.
           </p>
         </div>
 

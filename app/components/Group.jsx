@@ -43,7 +43,7 @@ import { Fade } from "react-awesome-reveal";
 const discussion = {
   topic: {
     title: "This is your TruPulse agent",
-    desc: "Focus Group session on pain points in the company hiring process. What’s the biggest challenge you face in filling roles efficiently?",
+    desc: "Focus Group on Pain Points in the Company Hiring Process",
     avatars: [
       "/images/1.png",
       "/images/2.png",
@@ -54,6 +54,11 @@ const discussion = {
   messages: [
     {
       type: "ai",
+      avatar: "/images/image.png",
+      text: `Hello, this is your TruPulse Moderator! What’s the biggest challenge you face in filling roles efficiently?`,
+    },
+    {
+      type: "user",
       avatar: "/images/2.png",
       text: `It's difficult to get honest feedback from employees during exit interviews.`,
     },
@@ -99,84 +104,79 @@ export default function Group() {
         </div>
 
         {/* Right Discussion Preview */}
-        <Fade  direction="up"
-                triggerOnce
-                delay={100}>
-        <div className="space-y-4 max-w-md m-auto">
-          {/* Topic Card */}
-          <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200" 
-              >
-            <div className="flex items-center justify-center -gap-2 mb-2">
-              {discussion.topic.avatars.map((src, i) => (
-                <Image
-                  key={i}
-                  src={src}
-                  alt="avatar"
-                  width={40}
-                  height={40}
-                  className="rounded-full border border-white -ml-2 first:ml-0"
-                />
-              ))}
+        <Fade direction="up" triggerOnce delay={100}>
+          <div className="space-y-4 max-w-md m-auto">
+            {/* Topic Card */}
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center justify-center -gap-2 mb-2">
+                {discussion.topic.avatars.map((src, i) => (
+                  <Image
+                    key={i}
+                    src={src}
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    className="rounded-full border border-white -ml-2 first:ml-0"
+                  />
+                ))}
+              </div>
+              <h4 className="font-semibold text-center  mb-1">
+                {discussion.topic.title}
+              </h4>
+              <p className="text-sm text-secondary-text text-center">
+                {discussion.topic.desc}
+              </p>
             </div>
-            <h4 className="font-semibold text-center  mb-1">
-              {discussion.topic.title}
-            </h4>
-            <p
-          
-              className="text-sm text-secondary-text text-center"
-            >
-              {discussion.topic.desc}
-            </p>
-          </div>
 
+            {/* Messages */}
+            {discussion.messages.map((msg, index) => {
+              if (msg.type === "placeholder") {
+                return (
+                  <div
+                    key={index}
+                    className="bg-green-50 px-4 py-3 rounded-xl flex items-center gap-4"
+                  >
+                    
+                    <div className="flex-1 space-y-2">
+                      <div className="h-3 bg-green-100 rounded-md w-3/4"></div>
+                      <div className="h-3 bg-green-100 rounded-md w-2/4"></div>
+                    </div>
+                    <Image
+                      src={msg.avatar}
+                      alt="user"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                  </div>
+                );
+              }
 
-          {/* Messages */}
-          {discussion.messages.map((msg, index) => {
-            if (msg.type === "placeholder") {
+              const isUser = msg.type != "ai";
+              const alignmentClass = isUser
+                ? "flex-row-reverse"
+                : "";
+              const borderClass = isUser
+                ? "border-gray-300"
+                : "border-orange-400";
+
               return (
-
-                <div                  key={index}
-                  className="bg-green-50 px-4 py-3 rounded-xl flex items-center gap-4"
-              >
+                <div
+                  key={index}
+                  className={`flex items-start gap-4 px-4 py-3 rounded-xl border ${borderClass} bg-white ${alignmentClass}`}
+                >
                   <Image
                     src={msg.avatar}
-                    alt="user"
+                    alt="msg"
                     width={40}
                     height={40}
                     className="rounded-full"
                   />
-                  <div className="flex-1 space-y-2">
-                    <div className="h-3 bg-green-100 rounded-md w-3/4"></div>
-                    <div className="h-3 bg-green-100 rounded-md w-2/4"></div>
-                  </div>
+                  <p className="text-sm">{msg.text}</p>
                 </div>
-
               );
-            }
-
-            return (
-
-              <div
-                key={index}
-                className={`flex items-start gap-4 px-4 py-3 rounded-xl ${
-                  msg.type === "ai"
-                    ? "border border-orange-400"
-                    : "border border-gray-300"
-                } bg-white`}
-              >
-                <Image
-                  src={msg.avatar}
-                  alt="msg"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-                <p className="text-sm ">{msg.text}</p>
-              </div>
-
-            );
-          })}
-        </div>
+            })}
+          </div>
         </Fade>
       </div>
     </section>

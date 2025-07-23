@@ -43,7 +43,7 @@ export default function OneToOneSection() {
 
           <div className="space-y-6 mb-4 text-base ">
             {[
-              "Automated chat sessions deliver structured, one-on-one conversations without scheduling hassles, anytime.",
+              "Automated chat sessions deliver structured, one-on-one conversations without scheduling hassles.",
               "Intelligent follow-up questions continuously probe responses to extract deeper, meaningful insights.",
               "Session transcripts and executive summaries are automatically generated for quick review.",
             ].map((point, i) => (
