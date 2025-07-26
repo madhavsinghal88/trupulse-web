@@ -34,7 +34,7 @@ export default function BlogShowcaseSection() {
               Insights & Innovations <br /> Explore Our Latest Blogs!
             </h2>
           </div>
-          <a href="#" className="text-orange-500 text-sm font-medium flex items-center gap-1 hover:underline">
+          <a href="#" className="text-theme text-sm font-medium flex items-center gap-1 hover:underline">
             View All Blogs →
           </a>
         </div>

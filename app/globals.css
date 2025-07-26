@@ -178,3 +178,15 @@ html {
 }
 
 
+@layer utilities {
+  .bg-theme {
+    background-color: #FF5900 !important;
+  }
+  .text-theme {
+    color: #FF5900 !important;
+  }
+  .border-theme {
+    border-color: #FF5900 !important;
+  }
+}
+

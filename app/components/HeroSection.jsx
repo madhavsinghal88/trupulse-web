@@ -202,7 +202,7 @@ export default function HeroSection() {
             {[...testimonials, ...testimonials].map((text, i) => (
               <div
                 key={i}
-                className="bg-white rounded-4xl hover:scale-105 border hover:border-orange-500 duration-300 cursor-pointer p-10 my-3 py-4 max-w-sm shadow-md m-auto md:text-xl font-semibold"
+                className="bg-white rounded-4xl hover:scale-105 border hover:border-theme duration-300 cursor-pointer p-10 my-3 py-4 max-w-sm shadow-md m-auto md:text-xl font-semibold"
               >
                 {text}
               </div>

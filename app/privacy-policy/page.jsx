@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             1. GENERAL INFORMATION
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             2. THE SOURCES OF THE INFORMATION WE COLLECT
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -44,7 +44,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             3. THE TYPES OF PERSONAL DATA WE COLLECT
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -74,7 +74,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             4. HOW WE USE YOUR INFORMATION
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -116,7 +116,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             5. DISCLOSURE OF INFORMATION TO THIRD PARTIES
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -132,7 +132,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             6. INTERNATIONAL TRANSFERS OF PERSONAL DATA
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -152,7 +152,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             7. YOUR RIGHTS
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -177,7 +177,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             8. HOW WE SAFEGUARD YOUR INFORMATION
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -195,7 +195,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             9. THIRD PARTIES
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -204,7 +204,7 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             10. HOW LONG WE KEEP YOUR PERSONAL DATA
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -213,29 +213,29 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             11. CHILDREN'S PRIVACY
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            We do not knowingly collect, maintain, or use Personal Data from children under 16 years of age ("Minors"), and no parts of our Services are directed at children. If you learn that a Minor has provided us with Personal Data in violation of this Privacy Policy, please alert us at <a href="mailto:hello@scanta.com" className="text-orange-600 hover:underline">hello@scanta.com</a>.
+            We do not knowingly collect, maintain, or use Personal Data from children under 16 years of age ("Minors"), and no parts of our Services are directed at children. If you learn that a Minor has provided us with Personal Data in violation of this Privacy Policy, please alert us at <a href="mailto:hello@scanta.com" className="text-theme hover:underline">hello@scanta.com</a>.
           </p>
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             12. DESIGNATED REPRESENTATIVE
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            Scanta's registered office may be contacted using the following contact information: Address: Scanta Inc., 50 Moulton Street, San Francisco Ca 94123 Attention: Legal Department Email Address: <a href="mailto:hello@scanta.io" className="text-orange-600 hover:underline">hello@scanta.io</a>.
+            Scanta's registered office may be contacted using the following contact information: Address: Scanta Inc., 50 Moulton Street, San Francisco Ca 94123 Attention: Legal Department Email Address: <a href="mailto:hello@scanta.io" className="text-theme hover:underline">hello@scanta.io</a>.
           </p>
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             13. QUESTIONS, CONCERNS AND UPDATES
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            If you have any questions or concerns about Scanta's handling of your Personal Data, or about this Policy, please contact our Privacy Officer using the following contact information: Address: Scanta Inc 50 Moulton Street, San Francisco Ca 94123 Attention: Legal Department Email Address: <a href="mailto:hello@scanta.io" className="text-orange-600 hover:underline">hello@scanta.io</a>. We are typically able to resolve privacy questions or concerns promptly and effectively. If you are not satisfied with the response you receive from our Privacy Officer, you may escalate concerns to the applicable privacy regulator in your jurisdiction. Upon request, Scanta's Data Protection Officer will provide you with the contact information for that regulator. We will post any adjustments to the Privacy Policy on this page, and the revised version will be effective when it is posted.
+            If you have any questions or concerns about Scanta's handling of your Personal Data, or about this Policy, please contact our Privacy Officer using the following contact information: Address: Scanta Inc 50 Moulton Street, San Francisco Ca 94123 Attention: Legal Department Email Address: <a href="mailto:hello@scanta.io" className="text-theme hover:underline">hello@scanta.io</a>. We are typically able to resolve privacy questions or concerns promptly and effectively. If you are not satisfied with the response you receive from our Privacy Officer, you may escalate concerns to the applicable privacy regulator in your jurisdiction. Upon request, Scanta's Data Protection Officer will provide you with the contact information for that regulator. We will post any adjustments to the Privacy Policy on this page, and the revised version will be effective when it is posted.
           </p>
         </section>
       </div>

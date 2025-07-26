@@ -28,7 +28,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             1. SERVICES
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -44,7 +44,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             2. RIGHT TO USE AND RESTRICTIONS
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -160,7 +160,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             3. MAINTENANCE AND SUPPORT
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -173,7 +173,7 @@ const TermsAndConditions = () => {
             service level agreement available at{" "}
             <a
               href="https://www.trupulse.ai/support-services/support-plans/"
-              className="text-orange-600 hover:underline"
+              className="text-theme hover:underline"
             >
               www.trupulse.ai/support-services/support-plans/
             </a>{" "}
@@ -191,7 +191,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             4. SERVICE LEVEL
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -328,7 +328,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             5. PRIVACY
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -339,7 +339,7 @@ const TermsAndConditions = () => {
             Privacy Policy, which is available at{" "}
             <a
               href="https://www.trupulse.ai/downloads/company/esg-privacy-policy.pdf"
-              className="text-orange-600 hover:underline"
+              className="text-theme hover:underline"
             >
               www.trupulse.ai/downloads/company/esg-privacy-policy.pdf
             </a>{" "}
@@ -365,7 +365,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             6. TITLE AND INTELLECTUAL PROPERTY
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -381,7 +381,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             7. TERM AND TERMINATION
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -400,7 +400,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             8. INDEMNIFICATION
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -476,7 +476,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             9. LIMITED WARRANTY, WARRANTY DISCLAIMERS AND LIMITATION OF
             LIABILITY
           </h2>
@@ -520,7 +520,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             10. PRE-RELEASE VERSIONS
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -555,7 +555,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             11. COMPLIANCE WITH LAW
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
@@ -574,7 +574,7 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-4">
+          <h2 className="text-2xl font-semibold text-theme mb-4">
             12. GENERAL
           </h2>
           <p className="text-gray-700 leading-relaxed mb-2">
@@ -608,7 +608,7 @@ const TermsAndConditions = () => {
             respectively, unless they are specifically listed and addressed at{" "}
             <a
               href="https://www.trupulse.ai/about-us/third-party-trademarks-and-copyrights/"
-              className="text-orange-600 hover:underline"
+              className="text-theme hover:underline"
             >
               www.trupulse.ai/about-us/third-party-trademarks-and-copyrights/
             </a>

@@ -14,7 +14,7 @@
 
 //   const isActive = (path) =>
 //     pathname === path
-//       ? " underline underline-offset-10 decoration- duration-300 text-orange-500 scale-105 font-bold"
+//       ? " underline underline-offset-10 decoration- duration-300 text-theme scale-105 font-bold"
 //       : "";
 
 //   return (
@@ -36,7 +36,7 @@
 //           <nav className="flex items-center gap-8">
 //             <a
 //               href="/#ourProduct"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "ourProduct"
 //               )}`}
 //             >
@@ -44,7 +44,7 @@
 //             </a>
 //             <a
 //               href="/#whyTrupulse"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "whyTrupulse"
 //               )}`}
 //             >
@@ -53,7 +53,7 @@
 
 //             <a
 //               href="/#testimonials"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "/testimonials"
 //               )}`}
 //             >
@@ -62,7 +62,7 @@
 
 //             {/* <Link
 //               href="/pricing"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "/pricing"
 //               )}`}
 //             >
@@ -70,7 +70,7 @@
 //             </Link> */}
 //             {/* <Link
 //               href="/blogs"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "/blogs"
 //               )}`}
 //             >
@@ -126,7 +126,7 @@
 //             <a
 //               href="/#ourProduct"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Our Product
 //             </a>
@@ -134,7 +134,7 @@
 //             <a
 //               href="/#whyTrupulse"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Why Trupulse
 //             </a>
@@ -142,7 +142,7 @@
 //             <a
 //               href="/#testimonials"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Testimonials
 //             </a>
@@ -150,14 +150,14 @@
 //             {/* <Link
 //               href="/pricing"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Pricing
 //             </Link> */}
 //             {/* <Link
 //               href="/blogs"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Blogs
 //             </Link> */}
@@ -202,7 +202,7 @@
 
 //   const isActive = (path) =>
 //     pathname === path
-//       ? " underline underline-offset-10 decoration- duration-300 text-orange-500 scale-105 font-bold"
+//       ? " underline underline-offset-10 decoration- duration-300 text-theme scale-105 font-bold"
 //       : "";
 
 //   // Smooth scroll function
@@ -238,7 +238,7 @@
 //           <nav className="flex items-center gap-8">
 //             <button
 //               onClick={() => scrollToSection('ourProduct')}
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "ourProduct"
 //               )}`}
 //             >
@@ -246,7 +246,7 @@
 //             </button>
 //             <button
 //               onClick={() => scrollToSection('whyTrupulse')}
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "whyTrupulse"
 //               )}`}
 //             >
@@ -255,7 +255,7 @@
 
 //             <button
 //               onClick={() => scrollToSection('testimonials')}
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "/testimonials"
 //               )}`}
 //             >
@@ -264,7 +264,7 @@
 
 //             {/* <Link
 //               href="/pricing"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "/pricing"
 //               )}`}
 //             >
@@ -272,7 +272,7 @@
 //             </Link> */}
 //             {/* <Link
 //               href="/blogs"
-//               className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+//               className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
 //                 "/blogs"
 //               )}`}
 //             >
@@ -327,21 +327,21 @@
 //           <div className="px-6 py-4 space-y-4">
 //             <button
 //               onClick={() => scrollToSection('ourProduct')}
-//               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
+//               className="block font-medium hover:text-theme  transition-colors w-full text-left"
 //             >
 //               Our Product
 //             </button>
 
 //             <button
 //               onClick={() => scrollToSection('whyTrupulse')}
-//               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
+//               className="block font-medium hover:text-theme  transition-colors w-full text-left"
 //             >
 //               Why Trupulse
 //             </button>
 
 //             <button
 //               onClick={() => scrollToSection('testimonials')}
-//               className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
+//               className="block font-medium hover:text-theme  transition-colors w-full text-left"
 //             >
 //               Testimonials
 //             </button>
@@ -349,14 +349,14 @@
 //             {/* <Link
 //               href="/pricing"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Pricing
 //             </Link> */}
 //             {/* <Link
 //               href="/blogs"
 //               onClick={() => setMenuOpen(false)}
-//               className="block font-medium hover:text-orange-500  transition-colors"
+//               className="block font-medium hover:text-theme  transition-colors"
 //             >
 //               Blogs
 //             </Link> */}
@@ -403,7 +403,7 @@ export default function Navbar() {
 
   const isActive = (path) =>
     pathname === path
-      ? " underline underline-offset-10 decoration- duration-300 text-orange-500 scale-105 font-bold"
+      ? " underline underline-offset-10 decoration- duration-300 text-theme scale-105 font-bold"
       : "";
 
   return (
@@ -425,7 +425,7 @@ export default function Navbar() {
           <nav className="flex items-center gap-8">
             <Link href="/#ourProduct">
               <button
-                className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+                className={`hover:text-theme min-w-28  transition-colors font-medium cursor-pointer ${isActive(
                   "ourProduct"
                 )}`}
               >
@@ -434,7 +434,7 @@ export default function Navbar() {
             </Link>
             <Link href="/#whyTrupulse">
               <button
-                className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+                className={`hover:text-theme min-w-28 transition-colors font-medium cursor-pointer ${isActive(
                   "whyTrupulse"
                 )}`}
               >
@@ -444,17 +444,27 @@ export default function Navbar() {
 
             <Link href="/#testimonials">
               <button
-                className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+                className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
                   "/testimonials"
                 )}`}
               >
                 Testimonials
               </button>
             </Link>
+            <Link href="/blogs">
+            <button
+                className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
+                  "/blogs"
+                )}`}
+              >
+                Blogs
+              </button>
+              </Link>
+
 
             {/* <Link
               href="/pricing"
-              className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+              className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
                 "/pricing"
               )}`}
             >
@@ -462,7 +472,7 @@ export default function Navbar() {
             </Link> */}
             {/* <Link
               href="/blogs"
-              className={`hover:text-orange-500 transition-colors font-medium cursor-pointer ${isActive(
+              className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
                 "/blogs"
               )}`}
             >
@@ -516,34 +526,39 @@ export default function Navbar() {
         <div className="xl:hidden bg-white border-t border-pink-100 shadow-lg">
           <div className="px-6 py-4 space-y-4">
             <Link href="/#ourProduct"  onClick={() => setMenuOpen(!menuOpen)}
-              className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
+              className="block font-medium hover:text-theme  transition-colors w-full text-left"
             >
               Our Product
             </Link>
 
             <Link href="/#whyTrupulse"  onClick={() => setMenuOpen(!menuOpen)}
-              className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
+              className="block font-medium hover:text-theme  transition-colors w-full text-left"
             >
               Why TruPulse
             </Link>
 
             <Link href="/#testimonials"  onClick={() => setMenuOpen(!menuOpen)}
-              className="block font-medium hover:text-orange-500  transition-colors w-full text-left"
+              className="block font-medium hover:text-theme  transition-colors w-full text-left"
             >
               Testimonials
+            </Link>
+            <Link href="/blogs"  onClick={() => setMenuOpen(!menuOpen)}
+              className="block font-medium hover:text-theme  transition-colors w-full text-left"
+            >
+              Blogs
             </Link>
 
             {/* <Link
               href="/pricing"
               onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500  transition-colors"
+              className="block font-medium hover:text-theme  transition-colors"
             >
               Pricing
             </Link> */}
             {/* <Link
               href="/blogs"
               onClick={() => setMenuOpen(false)}
-              className="block font-medium hover:text-orange-500  transition-colors"
+              className="block font-medium hover:text-theme  transition-colors"
             >
               Blogs
             </Link> */}

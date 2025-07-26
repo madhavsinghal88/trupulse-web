@@ -158,7 +158,7 @@ export default function Group() {
                 : "";
               const borderClass = isUser
                 ? "border-gray-300"
-                : "border-orange-400";
+                : "border-theme";
 
               return (
                 <div
