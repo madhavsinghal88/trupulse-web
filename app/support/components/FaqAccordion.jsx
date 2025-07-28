@@ -174,18 +174,50 @@ const faqs = [
   },
 ];
 
+
+// Helper function to highlight matched text
+function highlightText(text, highlight) {
+  if (!highlight) return text;
+
+  const regex = new RegExp(`(${highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  const parts = text.split(regex);
+
+  return parts.map((part, i) =>
+    regex.test(part) ? (
+      <mark key={i} className="bg-yellow-200 rounded px-0.5">{part}</mark>
+    ) : (
+      part
+    )
+  );
+}
+
 export default function FaqAccordion() {
   const [visibleCount, setVisibleCount] = useState(3);
+  const [search, setSearch] = useState("");
+
+  const filteredFaqs = search
+    ? faqs.filter(
+        (faq) =>
+          faq.q.toLowerCase().includes(search.toLowerCase()) ||
+          faq.a.toLowerCase().includes(search.toLowerCase())
+      )
+    : faqs;
+
+  const showViewMore = !search && filteredFaqs.length > 3;
+
+  const faqsToShow = search
+    ? filteredFaqs
+    : filteredFaqs.slice(0, visibleCount);
 
   const handleToggle = () => {
-    if (visibleCount >= faqs.length) {
+    if (visibleCount >= filteredFaqs.length) {
       setVisibleCount(3);
     } else {
-      setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
+      setVisibleCount((prev) => Math.min(prev + 3, filteredFaqs.length));
     }
   };
 
-  const isAllVisible = visibleCount >= faqs.length;
+  const isAllVisible = visibleCount >= filteredFaqs.length;
 
   return (
     <section className="bg-[#f4f4f9] py-16 px-4">
@@ -197,33 +229,54 @@ export default function FaqAccordion() {
           Got questions? We have answers to the most common ones right here!
         </p>
 
-<Fade direction="up"
-                triggerOnce
-                delay={100}>
-        <div className="space-y-4 text-left">
-          {faqs.slice(0, visibleCount).map((faq, index) => (
-            <div 
-              key={index}
-              className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition"
-            >
-              <h3 className="font-semibold text-[16px] text-primary-text mb-1">
-                {faq.q}
-              </h3>
-              <p className="text-secondary-text text-sm">{faq.a}</p>
-            </div>
-          ))}
+        {/* SEARCH BAR */}
+        <div className="mb-6 flex justify-center">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setVisibleCount(3);
+            }}
+            placeholder="Search FAQs..."
+            className="w-full max-w-md px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:ring focus:ring-blue-200 outline-none text-base"
+          />
         </div>
+
+        <Fade direction="up" triggerOnce delay={100}>
+          <div className="space-y-4 text-left">
+            {faqsToShow.length > 0 ? (
+              faqsToShow.map((faq, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition"
+                >
+                  <h3 className="font-semibold text-[16px] text-primary-text mb-1">
+                    {highlightText(faq.q, search)}
+                  </h3>
+                  <p className="text-secondary-text text-sm">
+                    {highlightText(faq.a, search)}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-500 p-5 text-center">
+                No results found for "{search}"
+              </div>
+            )}
+          </div>
         </Fade>
 
-        {/* View More / Less */}
-        <div className="mt-6">
-          <button
-            onClick={handleToggle}
-            className="cursor-pointer underline text-sm hover:opacity-80 transition"
-          >
-            {isAllVisible ? "View less" : "View more"}
-          </button>
-        </div>
+        {showViewMore && (
+          <div className="mt-6">
+            <button
+              onClick={handleToggle}
+              className="cursor-pointer underline text-sm hover:opacity-80 transition"
+            >
+              {isAllVisible ? "View less" : "View more"}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
