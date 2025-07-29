@@ -50,8 +50,8 @@ import { Zoom } from "react-awesome-reveal";
 
 export default function Report() {
   const images = [
-    // "/images/summ.png",
-    "/images/np.png",
+    "/images/summ.png",
+    // "/images/np.png",
     // "/images/q.png",
     // "/images/w.png",
   ];
