@@ -94,7 +94,7 @@ const steps = [
     title: "TruPulse Creates It",
     description:
       "TruPulse generates discussion topics and survey questions based on the use case you choose.",
-    image: "/images/types.png",
+    image: "/images/feedback.jpeg",
     border: "border-green-300",
   },
   {
@@ -102,7 +102,7 @@ const steps = [
     title: "TruPulse Runs It",
     description:
       "TruPulse conducts sessions, dynamically probing discussion topics and participant replies.",
-    image: "/images/r2.png",
+    image: "/images/grp.png",
     border: "border-cyan-300",
   },
   {
@@ -110,7 +110,7 @@ const steps = [
     title: "TruPulse Analyzes It",
     description:
       "TruPulse distills feedback into themes, metrics, and polished executive summaries automatically.",
-    image: "/images/r3.png",
+    image: "/images/report.jpeg",
     border: "border-blue-300",
   },
 ];

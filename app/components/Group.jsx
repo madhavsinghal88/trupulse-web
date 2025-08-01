@@ -42,8 +42,8 @@ import { Fade } from "react-awesome-reveal";
 
 const discussion = {
   topic: {
-    title: "This is your TruPulse agent",
-    desc: "Focus Group on Pain Points in the Company Hiring Process",
+    title: "Focus Group on Pain Points in the Company Hiring Process",
+    agent: "/images/image.png",
     avatars: [
       "/images/1.png",
       "/images/2.png",
@@ -107,25 +107,23 @@ export default function Group() {
         <Fade direction="up" triggerOnce delay={100}>
           <div className="space-y-4 max-w-md m-auto">
             {/* Topic Card */}
-            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
-              <div className="flex items-center justify-center -gap-2 mb-2">
+            <div className="bg-white p-4 rounded-xl shadow-sm border relative border-gray-200">
+            <Image className="absolute top-[-40px] left-1/2 -translate-x-1/2" width={60} height={60} src={discussion.topic.agent} alt="agent" />
+              <div className="flex items-center justify-center -gap-2 my-2">
                 {discussion.topic.avatars.map((src, i) => (
                   <Image
                     key={i}
                     src={src}
                     alt="avatar"
-                    width={40}
-                    height={40}
-                    className="rounded-full border border-white -ml-2 first:ml-0"
+                    width={45}
+                    height={45}
+                    className="rounded-full  -ml-2 first:ml-0"
                   />
                 ))}
               </div>
               <h4 className="font-semibold text-center  mb-1">
                 {discussion.topic.title}
               </h4>
-              <p className="text-sm text-secondary-text text-center">
-                {discussion.topic.desc}
-              </p>
             </div>
 
             {/* Messages */}
@@ -136,7 +134,6 @@ export default function Group() {
                     key={index}
                     className="bg-green-50 px-4 py-3 rounded-xl flex items-center gap-4"
                   >
-                    
                     <div className="flex-1 space-y-2">
                       <div className="h-3 bg-green-100 rounded-md w-3/4"></div>
                       <div className="h-3 bg-green-100 rounded-md w-2/4"></div>
@@ -153,9 +150,7 @@ export default function Group() {
               }
 
               const isUser = msg.type != "ai";
-              const alignmentClass = isUser
-                ? "flex-row-reverse"
-                : "";
+              const alignmentClass = isUser ? "flex-row-reverse" : "";
               const borderClass = isUser
                 ? "border-gray-300"
                 : "border-theme";

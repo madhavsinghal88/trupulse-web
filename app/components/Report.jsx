@@ -50,7 +50,8 @@ import { Zoom } from "react-awesome-reveal";
 
 export default function Report() {
   const images = [
-    "/images/np.png",
+    "/images/sss.png",
+    // "/images/np.png",
     // "/images/q.png",
     // "/images/w.png",
   ];
@@ -88,7 +89,7 @@ export default function Report() {
             autoplay={{ delay: 3000 }}
             loop={true}
             effect="fade"
-            className="rounded-3xl"
+            className="rounded-3xl  shadow-xl "
           >
             {images.map((src, index) => (
               <SwiperSlide key={index}>
@@ -97,7 +98,7 @@ export default function Report() {
                   alt={`slide-${index}`}
                   width={2000}
                   height={2000}
-                  className="w-full rounded-3xl object-contain  sm:p-4"
+                  className="w-full rounded-3xl object-contain"
                 />
               </SwiperSlide>
             ))}
