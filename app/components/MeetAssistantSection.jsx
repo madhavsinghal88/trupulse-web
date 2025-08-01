@@ -102,7 +102,7 @@ const steps = [
     title: "TruPulse Runs It",
     description:
       "TruPulse conducts sessions, dynamically probing discussion topics and participant replies.",
-    image: "/images/groupchat.jpeg",
+    image: "/images/grp.png",
     border: "border-cyan-300",
   },
   {
