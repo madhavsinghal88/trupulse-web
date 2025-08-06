@@ -1,254 +1,311 @@
 // "use client";
+// import moment from "moment";
+// import parse from "html-react-parser";
+// import {
+//   FacebookShareButton,
+//   FacebookIcon,
+//   WhatsappShareButton,
+//   WhatsappIcon,
+//   EmailShareButton,
+//   EmailIcon,
+//   PinterestShareButton,
+//   PinterestIcon,
+//   LinkedinShareButton,
+//   LinkedinIcon,
+//   TwitterShareButton,
+//   TwitterIcon,
+//   RedditShareButton,
+//   RedditIcon,
+// } from "next-share";
 
-// import BlogCard from "@/app/blogs/components/BlogCard";
-// import Image from "next/image";
-// import blogs from "@/app/blogs/components/DummyBlogs";
+// export default function BlogContent({ post }) {
+//   const link = post?.data?.customURL?.length > 3
+//     ? `https://www.trupulse.ai/blog/${post.data.customURL}`
+//     : `https://www.trupulse.ai/blog/${post.data.title
+//         ?.toLowerCase()
+//         .replace(/[^a-zA-Z ]/g, "")
+//         .split(" ")
+//         .join("-")}`;
 
-// export default function BlogContent() {
-//   const blog = blogs[0];
+//   const parseOption = {
+//     replace: (domNode) => {
+//       if (domNode.attribs && domNode.attribs.class === "remove") {
+//         return <></>;
+//       }
+//     },
+//   };
 
 //   return (
-//     <div className="bg-white text-sm sm:text-base">
-//       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-[250px_1fr_320px] gap-10">
-//         {/* Left Navigation */}
-//         <aside className="space-y-6 text-xs font-medium">
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">Introduction</div>
-//             <div className="pl-3 font-normal">
-//               The Importance of Staying Informed in a Fast-Paced Digital World
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">Emerging Business Trends</div>
-//             <div className="pl-3 font-normal">
-//               • Key Shifts in Consumer Behavior
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • The Rise of AI and Automation
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Remote Work and Digital Collaboration
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">
-//               Growth Strategies That Work
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Data-Driven Decision Making
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Building a Scalable Marketing Engine
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Customer-Centric Product Development
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">Technology as a Catalyst</div>
-//             <div className="pl-3 font-normal">
-//               • Leveraging Cloud and SaaS Solutions
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • The Integration of AI for Competitive Advantage
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Cybersecurity and Data Privacy Essentials
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">
-//               Case Studies & Success Stories
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • How Businesses Thrived with Innovation
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Lessons from Real-World Digital Transformation
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">
-//               Expert Insights & Thought Leadership
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Interviews with Industry Leaders
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Predictions for the Next 5 Years
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">Conclusion</div>
-//             <div className="pl-3 font-normal">
-//               • Turning Insight into Action for Sustainable Growth
-//             </div>
-//           </div>
-
-//           <div className="space-y-3 text-xs sm:text-sm">
-//             <div className="font-bold sm:text-lg">
-//               Further Reading & Resources
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • Recommended Tools, Books, and Podcasts
-//             </div>
-//             <div className="pl-3 font-normal">
-//               • How to Stay Updated with Our Blog
-//             </div>
-//           </div>
-//         </aside>
-
-//         {/* Main Content */}
-//         <main className="space-y-10">
-//           <div className="space-y-4">
-//             <p>
-//               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-//               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-//               quae ab illo inventore veritatis et quasi architecto beatae vitae
-//               dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-//               sit.
-//             </p>
-//             <p>
-//               Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-//               eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-//               est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-//               velit.
-//             </p>
-//           </div>
-
-//           <div className="space-y-4">
-//             <p>
-//               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-//               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-//               quae ab illo inventore veritatis.
-//             </p>
-//             <p>
-//               Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-//               eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-//               est, qui dolorem ipsum quia dolor sit amet.
-//             </p>
-//           </div>
-
-//           <div className="w-full">
-//             <Image
-//               src="/images/dashboard.png"
-//               alt="browser screenshot"
-//               width={1280}
-//               height={720}
-//               className="rounded-md w-full"
-//             />
-//           </div>
-
-//           <div className="space-y-4">
-//             <p>
-//               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-//               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-//               quae ab illo inventore veritatis.
-//             </p>
-//             <p>
-//               Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-//               eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-//               est, qui dolorem ipsum quia dolor sit amet.
-//             </p>
-//           </div>
-
-//           <div className="space-y-4">
-//             <p>
-//               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-//               accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-//               quae ab illo inventore veritatis.
-//             </p>
-//             <p>
-//               Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-//               eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-//               est, qui dolorem ipsum quia dolor sit amet.
-//             </p>
-//           </div>
-//         </main>
-
-//         {/* Right Highlight Section */}
-//         <aside className="hidden lg:block">
-//           <BlogCard blog={blog} />
-//         </aside>
+//     <section className="max-w-4xl mx-auto px-4 py-10">
+//       {/* Social Share Buttons */}
+//       <div className="flex justify-center gap-3 flex-wrap mb-8">
+//         <FacebookShareButton url={link} quote={post?.data?.title}>
+//           <FacebookIcon size={32} round />
+//         </FacebookShareButton>
+//         <EmailShareButton url={link} subject={post?.data?.title} body={post.data.content}>
+//           <EmailIcon size={32} round />
+//         </EmailShareButton>
+//         <WhatsappShareButton url={link} title={post?.data?.title}>
+//           <WhatsappIcon size={32} round />
+//         </WhatsappShareButton>
+//         <PinterestShareButton url={link} media={post?.data?.cover_image}>
+//           <PinterestIcon size={32} round />
+//         </PinterestShareButton>
+//         <LinkedinShareButton url={link}>
+//           <LinkedinIcon size={32} round />
+//         </LinkedinShareButton>
+//         <RedditShareButton url={link} title={post?.data?.title}>
+//           <RedditIcon size={32} round />
+//         </RedditShareButton>
+//         <TwitterShareButton url={link} title={post?.data?.title}>
+//           <TwitterIcon size={32} round />
+//         </TwitterShareButton>
 //       </div>
-//     </div>
+
+//       {/* Main Blog Content */}
+//       <div>
+//         {parse(post?.data?.content || "", parseOption)}
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import moment from "moment";
+// import parse from "html-react-parser";
+// import {
+//   FacebookShareButton,
+//   FacebookIcon,
+//   WhatsappShareButton,
+//   WhatsappIcon,
+//   EmailShareButton,
+//   EmailIcon,
+//   PinterestShareButton,
+//   PinterestIcon,
+//   LinkedinShareButton,
+//   LinkedinIcon,
+//   TwitterShareButton,
+//   TwitterIcon,
+//   RedditShareButton,
+//   RedditIcon,
+// } from "next-share";
+
+// export default function BlogContent({ post }) {
+//   const [headings, setHeadings] = useState([]);
+//   const [parsedHTML, setParsedHTML] = useState(null);
+
+//   const content = post?.data?.content || "";
+//   const link =
+//     post?.data?.customURL?.length > 3
+//       ? `https://www.trupulse.ai/blogs/blog/${post.data.customURL}`
+//       : `https://www.trupulse.ai/blogs/blog/${post.data.title
+//           ?.toLowerCase()
+//           .replace(/[^a-zA-Z ]/g, "")
+//           .split(" ")
+//           .join("-")}`;
+
+//   useEffect(() => {
+//     if (typeof window !== "undefined" && content) {
+//       const parser = new DOMParser();
+//       const doc = parser.parseFromString(content, "text/html");
+//       const headingElements = [...doc.querySelectorAll("h2, h3, h4, h5, h6")];
+
+//       const extractedHeadings = headingElements.map((el, i) => {
+//         const id = `heading-${i}`;
+//         el.setAttribute("id", id);
+
+//         // Get 2–3 line description (up to 200 chars from sibling)
+//         let preview = "";
+//         let next = el.nextElementSibling;
+//         while (next && !preview && next.textContent.trim().length < 40) {
+//           next = next.nextElementSibling;
+//         }
+//         preview = next?.textContent?.slice(0, 100).replace(/\n/g, " ") + "...";
+
+//         return {
+//           id,
+//           text: el.textContent,
+//           preview,
+//         };
+//       });
+
+//       setHeadings(extractedHeadings);
+//       setParsedHTML(doc.body.innerHTML);
+//     }
+//   }, [content]);
+
+//   return (
+//     <section className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+//       {/* Sidebar Index */}
+//       <aside className="md:col-span-1 border-r pr-4 space-y-6 sticky top-10 max-h-screen overflow-auto hidden md:block">
+//         <h3 className="text-lg font-semibold">On this page</h3>
+//         <ul className="space-y-4">
+//           {headings.map((heading) => (
+//             <li key={heading.id}>
+//               <a
+//                 href={`#${heading.id}`}
+//                 className="block text-sm font-medium hover:underline"
+//               >
+//                 {heading.text}
+//               </a>
+//               <p className="text-xs text-gray-500">{heading.preview}</p>
+//             </li>
+//           ))}
+//         </ul>
+//       </aside>
+
+//       {/* Main Content */}
+//       <div className="md:col-span-3">
+//         {/* Social Share Buttons */}
+//         <div className="flex justify-start gap-3 flex-wrap mb-8">
+//           <FacebookShareButton url={link} quote={post?.data?.title}>
+//             <FacebookIcon size={32} round />
+//           </FacebookShareButton>
+//           <EmailShareButton
+//             url={link}
+//             subject={post?.data?.title}
+//             body={post.data.content}
+//           >
+//             <EmailIcon size={32} round />
+//           </EmailShareButton>
+//           <WhatsappShareButton url={link} title={post?.data?.title}>
+//             <WhatsappIcon size={32} round />
+//           </WhatsappShareButton>
+//           <PinterestShareButton
+//             url={link}
+//             media={post?.data?.cover_image}
+//           >
+//             <PinterestIcon size={32} round />
+//           </PinterestShareButton>
+//           <LinkedinShareButton url={link}>
+//             <LinkedinIcon size={32} round />
+//           </LinkedinShareButton>
+//           <RedditShareButton url={link} title={post?.data?.title}>
+//             <RedditIcon size={32} round />
+//           </RedditShareButton>
+//           <TwitterShareButton url={link} title={post?.data?.title}>
+//             <TwitterIcon size={32} round />
+//           </TwitterShareButton>
+//         </div>
+
+//         {/* Blog Title and Date */}
+//         <h1 className="text-3xl font-bold mb-2">{post?.data?.title}</h1>
+//         <p className="text-sm text-gray-500 mb-6">
+//           {post?.data?.created_at?.seconds
+//             ? moment(post.data.created_at.seconds * 1000).format("dddd, MMMM Do YYYY")
+//             : ""}
+//         </p>
+
+//         {/* Main Blog HTML */}
+//         <div className="prose prose-lg max-w-none">
+//           {parse(parsedHTML || "")}
+//         </div>
+//       </div>
+//     </section>
 //   );
 // }
 
 
 "use client";
-import moment from "moment";
+
+import { useEffect, useState } from "react";
 import parse from "html-react-parser";
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  WhatsappShareButton,
-  WhatsappIcon,
-  EmailShareButton,
-  EmailIcon,
-  PinterestShareButton,
-  PinterestIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  RedditShareButton,
-  RedditIcon,
-} from "next-share";
+import moment from "moment";
 
 export default function BlogContent({ post }) {
-  const link = post?.data?.customURL?.length > 3
-    ? `https://www.trupulse.ai/blog/${post.data.customURL}`
-    : `https://www.trupulse.ai/blog/${post.data.title
-        ?.toLowerCase()
-        .replace(/[^a-zA-Z ]/g, "")
-        .split(" ")
-        .join("-")}`;
+  const [headings, setHeadings] = useState([]);
+  const [parsedHTML, setParsedHTML] = useState(null);
 
-  const parseOption = {
-    replace: (domNode) => {
-      if (domNode.attribs && domNode.attribs.class === "remove") {
-        return <></>;
-      }
-    },
-  };
+  const content = post?.data?.content || "";
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && content) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(content, "text/html");
+      const headingElements = [...doc.querySelectorAll("h2, h3, h4, h5, h6")];
+
+      const extractedHeadings = headingElements.map((el, i) => {
+        const id = `heading-${i}`;
+        el.setAttribute("id", id);
+
+        let preview = "";
+        let next = el.nextElementSibling;
+        while (next && !preview && next.textContent.trim().length < 40) {
+          next = next.nextElementSibling;
+        }
+        preview = next?.textContent?.slice(0, 100).replace(/\n/g, " ") + "...";
+        return {
+          id,
+          text: el.textContent,
+          preview,
+        };
+      });
+
+      setHeadings(extractedHeadings);
+      setParsedHTML(doc.body.innerHTML);
+    }
+  }, [content]);
 
   return (
-    <section className="max-w-4xl mx-auto px-4 py-10">
-      {/* Social Share Buttons */}
-      <div className="flex justify-center gap-3 flex-wrap mb-8">
-        <FacebookShareButton url={link} quote={post?.data?.title}>
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-        <EmailShareButton url={link} subject={post?.data?.title} body={post.data.content}>
-          <EmailIcon size={32} round />
-        </EmailShareButton>
-        <WhatsappShareButton url={link} title={post?.data?.title}>
-          <WhatsappIcon size={32} round />
-        </WhatsappShareButton>
-        <PinterestShareButton url={link} media={post?.data?.cover_image}>
-          <PinterestIcon size={32} round />
-        </PinterestShareButton>
-        <LinkedinShareButton url={link}>
-          <LinkedinIcon size={32} round />
-        </LinkedinShareButton>
-        <RedditShareButton url={link} title={post?.data?.title}>
-          <RedditIcon size={32} round />
-        </RedditShareButton>
-        <TwitterShareButton url={link} title={post?.data?.title}>
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-      </div>
+    <section className="max-w-7xl w-[90vw] mx-auto px-4 py-10">
+      <div className="grid grid-cols-1 md:grid-cols-8 gap-10">
+        {/* Sidebar Index */}
+        <aside className="md:col-span-2 border-r pr-4 space-y-6 sticky top-24 h-max hidden md:block">
+          <h3 className="text-lg font-semibold tracking-wide mb-2">On this page</h3>
+          <ul className="space-y-4">
+            {headings.map((heading) => (
+              <li key={heading.id}>
+                <a
+                  href={`#${heading.id}`}
+                  className="block text-sm font-medium hover:underline "
+                >
+                  {heading.text}
+                </a>
+                <p className="text-xs text-gray-500">{heading.preview}</p>
+              </li>
+            ))}
+          </ul>
+        </aside>
 
-      {/* Main Blog Content */}
-      <div>
-        {parse(post?.data?.content || "", parseOption)}
+        {/* Main Content */}
+        <div className="md:col-span-6">
+
+          {/* Featured Box Section */}
+          {post?.data?.featured && (
+            <div className="bg-gradient-to-tr from-orange-100 to-pink-100 p-6 rounded-xl shadow mb-8 flex flex-col md:flex-row items-center gap-6">
+              <img
+                src={post?.data?.featured_image || '/featured.png'}
+                alt="Featured"
+                className="w-24 h-24 object-cover rounded"
+              />
+              <div>
+                <h4 className="text-orange-700 font-bold mb-1">
+                  {post.data.featured_title || "Featured"}
+                </h4>
+                <p className="text-base ">{post.data.featured_description || ""}</p>
+              </div>
+            </div>
+          )}
+          {/* The Blog Main HTML Content */}
+          <div className="prose prose-lg max-w-none">
+            {parse(parsedHTML || "")}
+          </div>
+           {/* Featured image/cover inserted at the top of content */}
+           {post?.data?.cover_image && (
+            <div className="mb-10">
+              <img
+                src={post.data.cover_image}
+                alt={post?.data?.altTag || "Blog cover"}
+                className="rounded-md w-full max-h-[400px] my-10 object-cover mx-auto"
+              />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
