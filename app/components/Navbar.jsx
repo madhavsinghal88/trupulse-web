@@ -451,7 +451,7 @@ export default function Navbar() {
                 Testimonials
               </button>
             </Link>
-            <Link href="/blogs">
+            {/* <Link href="/blogs">
             <button
                 className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
                   "/blogs"
@@ -459,7 +459,7 @@ export default function Navbar() {
               >
                 Blogs
               </button>
-              </Link>
+              </Link> */}
 
 
             {/* <Link
@@ -542,11 +542,11 @@ export default function Navbar() {
             >
               Testimonials
             </Link>
-            <Link href="/blogs"  onClick={() => setMenuOpen(!menuOpen)}
+            {/* <Link href="/blogs"  onClick={() => setMenuOpen(!menuOpen)}
               className="block font-medium hover:text-theme  transition-colors w-full text-left"
             >
               Blogs
-            </Link>
+            </Link> */}
 
             {/* <Link
               href="/pricing"
