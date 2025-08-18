@@ -22,6 +22,9 @@ export default function AdminDashboard() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingPosts, setLoadingPosts] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("newest");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const router = useRouter();
 
@@ -49,8 +52,38 @@ export default function AdminDashboard() {
     return () => unsubscribe();
   }, []);
 
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-  const paginatedPosts = posts.slice(
+  // Filter and sort posts
+  const filteredAndSortedPosts = posts
+    .filter((post) => {
+      // Search filter
+      const matchesSearch = post.data.title
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      
+      // Status filter
+      const matchesStatus = 
+        statusFilter === "all" || 
+        (statusFilter === "published" && post.data?.isPublished) ||
+        (statusFilter === "unpublished" && !post.data?.isPublished);
+      
+      return matchesSearch && matchesStatus;
+    })
+    .sort((a, b) => {
+      const dateA = a.data.created_at?.seconds || 0;
+      const dateB = b.data.created_at?.seconds || 0;
+      
+      switch (sortBy) {
+        case "oldest":
+          return dateA - dateB;
+        case "newest":
+          return dateB - dateA;
+        default:
+          return dateB - dateA;
+      }
+    });
+
+  const totalPages = Math.ceil(filteredAndSortedPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = filteredAndSortedPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE
   );
@@ -60,6 +93,11 @@ export default function AdminDashboard() {
       await deleteDoc(doc(db, "posts", id));
     }
   };
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, sortBy, statusFilter]);
 
   if (loading || loadingPosts) {
     return <Loader text="Loading admin dashboard..." full />;
@@ -82,8 +120,53 @@ export default function AdminDashboard() {
       </div>
       </div>
 
+      {/* Search and Filters */}
+      <div className="mb-6 space-y-4">
+        {/* Search Bar */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Search blogs by title..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent"
+            />
+          </div>
+          
+          {/* Sort Dropdown */}
+          <div className="flex gap-2">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-2 cursor-pointer border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent"
+            >
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+            
+            {/* Status Filter */}
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="px-4 cursor-pointer py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent"
+            >
+              <option value="all">All Blogs</option>
+              <option value="published">Published Only</option>
+              <option value="unpublished">Unpublished Only</option>
+            </select>
+          </div>
+        </div>
+        
+        {/* Results Count */}
+        <div className="text-sm text-gray-600">
+          Showing {filteredAndSortedPosts.length} of {posts.length} blogs
+        </div>
+      </div>
+
       {/* Desktop Table */}
-      <div className="hidden md:block overflow-x-auto rounded-md shadow border border-gray-200">
+      {paginatedPosts.length > 0 ? (
+        <div className="hidden md:block overflow-x-auto rounded-md shadow border border-gray-200">
         <table className="min-w-full bg-white text-sm text-left">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
@@ -145,10 +228,19 @@ export default function AdminDashboard() {
             })}
           </tbody>
         </table>
-      </div>
+        </div>
+      ) : (
+        <div className="hidden md:flex items-center justify-center py-12 text-gray-500">
+          <div className="text-center">
+            <p className="text-lg font-medium">No blogs found</p>
+            <p className="text-sm">Try adjusting your search or filters</p>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Cards */}
-      <div className="md:hidden space-y-4">
+      {paginatedPosts.length > 0 ? (
+        <div className="md:hidden space-y-4">
         {paginatedPosts.map((post) => {
               const isPublished = post.data?.isPublished ?? false;
 
@@ -199,24 +291,34 @@ export default function AdminDashboard() {
             </div>
           );
         })}
-      </div>
+        </div>
+      ) : (
+        <div className="md:hidden flex items-center justify-center py-12 text-gray-500">
+          <div className="text-center">
+            <p className="text-lg font-medium">No blogs found</p>
+            <p className="text-sm">Try adjusting your search or filters</p>
+          </div>
+        </div>
+      )}
 
       {/* Pagination */}
-      <div className="flex justify-center gap-2 mt-10 flex-wrap">
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-4 py-2 rounded-md border text-sm ${
-              currentPage === i + 1
-                ? "bg-theme text-white"
-                : "bg-white text-black hover:bg-gray-100"
-            }`}
-          >
-            {i + 1}
+      {totalPages > 0 && (
+        <div className="flex justify-center gap-2 mt-10 flex-wrap">
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-4 py-2 rounded-md border text-sm ${
+                currentPage === i + 1
+                  ? "bg-theme text-white"
+                  : "bg-white text-black hover:bg-gray-100"
+              }`}
+            >
+              {i + 1}
           </button>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

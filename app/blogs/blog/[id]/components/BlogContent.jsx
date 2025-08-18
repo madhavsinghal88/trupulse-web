@@ -228,28 +228,41 @@ export default function BlogContent({ post }) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(content, "text/html");
       const headingElements = [...doc.querySelectorAll("h2, h3, h4, h5, h6")];
-
+  
       const extractedHeadings = headingElements.map((el, i) => {
         const id = `heading-${i}`;
         el.setAttribute("id", id);
-
+  
+        // ✅ collect all siblings until the next heading
         let preview = "";
         let next = el.nextElementSibling;
-        while (next && !preview && next.textContent.trim().length < 40) {
+        while (next && !/^H[2-6]$/.test(next.tagName)) {
+          const text = next.textContent?.trim();
+          if (text) {
+            preview += " " + text; // append
+          }
           next = next.nextElementSibling;
         }
-        preview = next?.textContent?.slice(0, 100).replace(/\n/g, " ") + "...";
+  
+        // shorten to ~250 chars if needed
+        const cleanPreview = preview
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 80) + (preview.length > 200 ? "…" : "");
+  
         return {
           id,
           text: el.textContent,
-          preview,
+          preview: cleanPreview,
         };
       });
-
+  
       setHeadings(extractedHeadings);
       setParsedHTML(doc.body.innerHTML);
     }
   }, [content]);
+  
+  
 
   return (
     <section className="max-w-7xl w-[90vw] mx-auto px-4 py-10">
