@@ -25,6 +25,7 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [showOldBlogs, setShowOldBlogs] = useState(false);
 
   const router = useRouter();
 
@@ -66,7 +67,12 @@ export default function AdminDashboard() {
         (statusFilter === "published" && post.data?.isPublished) ||
         (statusFilter === "unpublished" && !post.data?.isPublished);
       
-      return matchesSearch && matchesStatus;
+      // Date filter - show only blogs from 2025 onwards by default
+      const postDate = post.data.created_at?.seconds ? new Date(post.data.created_at.seconds * 1000) : null;
+      const isFrom2025OrLater = postDate && postDate.getFullYear() >= 2025;
+      const matchesDateFilter = showOldBlogs || isFrom2025OrLater;
+      
+      return matchesSearch && matchesStatus && matchesDateFilter;
     })
     .sort((a, b) => {
       const dateA = a.data.created_at?.seconds || 0;
@@ -97,7 +103,7 @@ export default function AdminDashboard() {
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, sortBy, statusFilter]);
+  }, [searchTerm, sortBy, statusFilter, showOldBlogs]);
 
   if (loading || loadingPosts) {
     return <Loader text="Loading admin dashboard..." full />;
@@ -158,6 +164,30 @@ export default function AdminDashboard() {
           </div>
         </div>
         
+        {/* Toggle Switch for Old Blogs */}
+        <div className="flex items-center gap-3">
+          <label className="flex items-center cursor-pointer">
+            <div className="relative">
+              <input
+                type="checkbox"
+                className="sr-only"
+                checked={showOldBlogs}
+                onChange={(e) => setShowOldBlogs(e.target.checked)}
+              />
+              <div className={`block w-14 h-7 rounded-full transition-colors duration-200 ease-in-out ${
+                showOldBlogs ? 'bg-theme' : 'bg-gray-300'
+              }`}>
+                <div className={`absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200 ease-in-out ${
+                  showOldBlogs ? 'transform translate-x-7' : 'transform translate-x-0'
+                }`}></div>
+              </div>
+            </div>
+            <span className="ml-3 text-sm font-medium text-gray-700">
+              Show blogs before 2025
+            </span>
+          </label>
+        </div>
+        
         {/* Results Count */}
         <div className="text-sm text-gray-600">
           Showing {filteredAndSortedPosts.length} of {posts.length} blogs
@@ -169,8 +199,9 @@ export default function AdminDashboard() {
         <div className="hidden md:block overflow-x-auto rounded-md shadow border border-gray-200">
         <table className="min-w-full bg-white text-sm text-left">
           <thead className="bg-gray-100 text-gray-700">
-            <tr>
+            <tr className="">
               <th className="px-6 py-3 font-medium">Title</th>
+              <th className="px-6 py-3 font-medium">Date Posted</th>
               <th className="px-6 py-3 font-medium">Published</th>
               <th className="px-6 py-3 font-medium">Actions</th>
             </tr>
@@ -185,6 +216,16 @@ export default function AdminDashboard() {
                   className="border-t hover:bg-gray-50 transition-colors"
                 >
                   <td className="px-6 py-4">{post.data.title}</td>
+                  <td className="px-6 py-4">
+                    {post.data.created_at?.seconds 
+                      ? new Date(post.data.created_at.seconds * 1000).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })
+                      : 'N/A'
+                    }
+                  </td>
                   <td className="px-6 py-4">{isPublished ? "Yes" : "No"}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-3 items-center">
@@ -250,6 +291,16 @@ export default function AdminDashboard() {
               className="border rounded-md shadow p-4 space-y-2"
             >
               <div className="font-semibold text-base">{post.data.title}</div>
+              <div className="text-sm text-gray-600">
+                Date Posted: {post.data.created_at?.seconds 
+                  ? new Date(post.data.created_at.seconds * 1000).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric'
+                    })
+                  : 'N/A'
+                }
+              </div>
               <div className="text-sm text-gray-600">
                 Published: {isPublished ? "Yes" : "No"}
               </div>
