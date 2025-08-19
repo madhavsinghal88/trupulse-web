@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, storage } from "@/firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import Loader from "@/app/components/common/Loader";
 
 // Use the compatible editor!
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -49,6 +50,7 @@ export default function EditBlog({ posts }) {
   const [createDate, setCreateDate] = useState("");
   const [tags, setTags] = useState([]);
   const [mounted, setMounted] = useState(false);
+  const [postLoading, setPostLoading] = useState(true);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -82,13 +84,14 @@ export default function EditBlog({ posts }) {
           selectedPost.data.tags ? selectedPost.data.tags.split(",") : []
         );
         setCreateDate(selectedPost.data.created_at || "");
-      }
-      {
+        setPostLoading(false);
+      } else {
         console.log("Post not found for ID:", currentId); // Debug log
         console.log(
           "Available posts:",
           posts.map((p) => ({ id: p.id, title: p.data.title }))
         ); // Debug log
+        setPostLoading(false);
       }
     }
   }, [posts, currentId]);
@@ -203,6 +206,10 @@ export default function EditBlog({ posts }) {
         </div>
       </div>
     );
+  }
+
+  if (postLoading) {
+    return <Loader text="Loading blog for editing..." full />;
   }
 
   return (

@@ -56,7 +56,9 @@ export default function BlogGrid() {
     async function load() {
       setLoading(true);
       const data = await getAllBlogs();
-      setBlogs(data);
+      // Filter only published blogs
+      const publishedBlogs = data.filter((blog) => blog.isPublished === true);
+      setBlogs(publishedBlogs);
       setLoading(false);
     }
     load();

@@ -1,22 +1,3 @@
-// import React from 'react'
-// import BlogHero from './components/BlogHero'
-// import BlogContent from './components/BlogContent'
-// import RelatedBlogs from './components/RelatedBlogs'
-// import CtaSection from '@/app/components/common/CtaSection'
-
-// const page = () => {
-//   return (
-//     <div>
-//         <BlogHero/>
-//         <BlogContent/>
-//         <RelatedBlogs/>
-//         <CtaSection/>
-//     </div>
-//   )
-// }
-
-// export default page
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -51,14 +32,20 @@ export default function BlogDetailPage() {
       );
 
       setBlog(selected);
-      setRelated(blogs.filter((b) => b.id !== selected?.id));
+      // Only show published blogs as related content
+      setRelated(blogs.filter((b) => b.id !== selected?.id && b.isPublished === true));
       setLoading(false);
     }
     if (id) load();
   }, [id]);
 
   if (loading) return <Loader full text="Loading blog details..." />;
-  if (!blog) return <div className="text-center p-10">Blog not found.</div>;
+  if (!blog || !blog.isPublished) return (
+    <div className="text-center p-10">
+      <h1 className="text-2xl font-semibold text-gray-800 mb-2">Blog Not Found</h1>
+      <p className="text-gray-600">This blog post may not be published or doesn't exist.</p>
+    </div>
+  );
 
   return (
     <div>

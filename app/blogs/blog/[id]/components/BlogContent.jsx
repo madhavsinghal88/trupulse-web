@@ -70,9 +70,6 @@
 //   );
 // }
 
-
-
-
 // "use client";
 
 // import { useEffect, useState } from "react";
@@ -210,7 +207,6 @@
 //   );
 // }
 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -227,72 +223,79 @@ export default function BlogContent({ post }) {
     if (typeof window !== "undefined" && content) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(content, "text/html");
-      const headingElements = [...doc.querySelectorAll("h2, h3, h4, h5, h6")];
-  
-      const extractedHeadings = headingElements.map((el, i) => {
-        const id = `heading-${i}`;
-        el.setAttribute("id", id);
-  
-        // ✅ collect all siblings until the next heading
-        let preview = "";
-        let next = el.nextElementSibling;
-        while (next && !/^H[2-6]$/.test(next.tagName)) {
-          const text = next.textContent?.trim();
-          if (text) {
-            preview += " " + text; // append
-          }
-          next = next.nextElementSibling;
-        }
-  
-        // shorten to ~250 chars if needed
-        const cleanPreview = preview
+      const headingEls = [...doc.querySelectorAll("h2, h3, h4, h5, h6")];
+
+      const norm = (s = "") =>
+        s
+          .replace(/\u00a0/g, " ")
           .replace(/\s+/g, " ")
-          .trim()
-          .slice(0, 80) + (preview.length > 200 ? "…" : "");
-  
-        return {
-          id,
-          text: el.textContent,
-          preview: cleanPreview,
-        };
+          .trim();
+
+      const extracted = [];
+      headingEls.forEach((el) => {
+        const text = norm(el.textContent);
+        if (!text) return; // 🚫 skip <hX><br></hX> etc.
+
+        // stable slug id from text (fallback if empty after slugging)
+        const slug =
+          text
+            .toLowerCase()
+            .replace(/[^\w]+/g, "-")
+            .replace(/(^-|-$)/g, "") || `heading-${extracted.length}`;
+        el.setAttribute("id", slug);
+
+        // pick the first meaningful sibling (not another heading, not empty)
+        let sib = el.nextElementSibling;
+        while (sib && /^H[2-6]$/.test(sib.tagName))
+          sib = sib.nextElementSibling;
+
+        const sibText = sib ? norm(sib.textContent) : "";
+        const preview = sibText ? sibText.slice(0, 80) : "";
+
+        extracted.push({ id: slug, text, preview });
       });
-  
-      setHeadings(extractedHeadings);
+
+      setHeadings(extracted);
       setParsedHTML(doc.body.innerHTML);
     }
   }, [content]);
-  
-  
 
   return (
     <section className="max-w-7xl w-[90vw] mx-auto px-4 py-10">
       <div className="grid grid-cols-1 md:grid-cols-8 gap-10">
         {/* Sidebar Index */}
         <aside className="md:col-span-2 border-r pr-4 space-y-6 sticky top-24 h-max hidden md:block">
-          <h3 className="text-lg font-semibold tracking-wide mb-2">On this page</h3>
-          <ul className="space-y-4">
-            {headings.map((heading) => (
-              <li key={heading.id}>
-                <a
-                  href={`#${heading.id}`}
-                  className="block text-sm font-medium hover:underline "
-                >
-                  {heading.text}
-                </a>
-                <p className="text-xs text-gray-500">{heading.preview}</p>
-              </li>
-            ))}
+          <h3 className="text-lg font-semibold tracking-wide mb-2">
+            On this page
+          </h3>
+          <ul className="space-y-4 list-none">
+            {" "}
+            {/* <- remove discs */}
+            {headings
+              .filter((h) => h.text && h.text.trim())
+              .map((h) => (
+                <li key={h.id}>
+                  <a
+                    href={`#${h.id}`}
+                    className="block text-sm font-medium hover:underline"
+                  >
+                    {h.text}
+                  </a>
+                  {h.preview ? (
+                    <p className="text-xs text-gray-500">{h.preview}</p>
+                  ) : null}
+                </li>
+              ))}
           </ul>
         </aside>
 
         {/* Main Content */}
         <div className="md:col-span-6">
-
           {/* Featured Box Section */}
           {post?.data?.featured && (
             <div className="bg-gradient-to-tr from-orange-100 to-pink-100 p-6 rounded-xl shadow mb-8 flex flex-col md:flex-row items-center gap-6">
               <img
-                src={post?.data?.featured_image || '/featured.png'}
+                src={post?.data?.featured_image || "/featured.png"}
                 alt="Featured"
                 className="w-24 h-24 object-cover rounded"
               />
@@ -300,7 +303,9 @@ export default function BlogContent({ post }) {
                 <h4 className="text-orange-700 font-bold mb-1">
                   {post.data.featured_title || "Featured"}
                 </h4>
-                <p className="text-base ">{post.data.featured_description || ""}</p>
+                <p className="text-base ">
+                  {post.data.featured_description || ""}
+                </p>
               </div>
             </div>
           )}
@@ -308,8 +313,8 @@ export default function BlogContent({ post }) {
           <div className="prose prose-lg max-w-none">
             {parse(parsedHTML || "")}
           </div>
-           {/* Featured image/cover inserted at the top of content */}
-           {post?.data?.cover_image && (
+          {/* Featured image/cover inserted at the top of content */}
+          {post?.data?.cover_image && (
             <div className="mb-10">
               <img
                 src={post.data.cover_image}

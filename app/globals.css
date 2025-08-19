@@ -190,14 +190,15 @@ html {
   }
 }
 
-/* Put in a global CSS file that's loaded (e.g., globals.css) */
-.ql-editor ol { list-style-type: decimal; }
-.ql-editor ul { list-style-type: disc; }
-.ql-editor ul ul { list-style-type: circle; }
-.ql-editor ul ul ul { list-style-type: square; }
 
-/* If you use Tailwind Typography (`prose`), avoid it on the editor wrapper,
-   or reset inside: */
-.prose .ql-editor ol { list-style-type: decimal; }
-.prose .ql-editor ul { list-style-type: disc; }
+ ul {
+  list-style:disc;
+}
 
+ol{
+  list-style:decimal;
+}
+
+ li[data-list="bullet"] {
+  list-style: disc !important;
+}

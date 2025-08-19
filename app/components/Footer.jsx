@@ -38,32 +38,32 @@ export default function Footer() {
         {/* Quick Links */}
         <div>
           <h3 className="font-bold text-base mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <li>
-              <button
+          <div className="space-y-2">
+            <div>
+            <Link href="/#ourProduct"
                 className="cursor-pointer"
-                onClick={() => scrollToSection("ourProduct")}
+                // {/* onClick={() => scrollToSection("ourProduct")} */}
               >
                 Our product
-              </button>
-            </li>
-            <li>
-              <button
+              </Link>
+            </div>
+            <div>
+            <Link href="/#whyTrupulse"
                 className="cursor-pointer"
-                onClick={() => scrollToSection("whyTrupulse")}
+                // {/* onClick={() => scrollToSection("whyTrupulse")} */}
               >
                 Why TruPulse
-              </button>
-            </li>
-            <li>
-              <button
+              </Link>
+            </div>
+            <div>
+            <Link href="/#testimonials"
                 className="cursor-pointer"
-                onClick={() => scrollToSection("testimonials")}
+                // onClick={() => scrollToSection("testimonials")}
               >
                 Testimonials
-              </button>
-            </li>
-          </ul>
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Key Usecases */}
@@ -80,8 +80,8 @@ export default function Footer() {
         {/* Contacts + Social */}
         <div>
           <h3 className="font-bold text-base mb-3">Follow us on</h3>
-          <ul className="">
-            <li>
+          <div className="">
+            <span>
               <a
                 href="https://www.linkedin.com/company/trupulse/posts/?feedView=all"
                 target="_blank"
@@ -89,8 +89,8 @@ export default function Footer() {
               >
                 LinkedIn
               </a>
-            </li>
-          </ul>
+            </span>
+          </div>
         </div>
       </div>
 

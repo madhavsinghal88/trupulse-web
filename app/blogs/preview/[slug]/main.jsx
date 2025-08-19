@@ -9,10 +9,12 @@ import moment from 'moment'
 import RelatedBlogs from '../../blog/[id]/components/RelatedBlogs'
 import BlogHero from '../../blog/[id]/components/BlogHero'
 import BlogContent from '../../blog/[id]/components/BlogContent'
+import Loader from '@/app/components/common/Loader'
 
 export default function PreviewPage({ posts }) {
   const [post, setPost] = useState(null)
   const [user, loading] = useAuthState(auth)
+  const [postLoading, setPostLoading] = useState(true)
   const pathname = usePathname()
   const router = useRouter()
   const currentURL = pathname.split('/')[3]
@@ -28,6 +30,7 @@ export default function PreviewPage({ posts }) {
         : p.data.title.toLowerCase().replace(/[^a-zA-Z ]/g, '').split(' ').join('-') === currentURL
     )
     setPost(found)
+    setPostLoading(false)
   }, [posts, currentURL])
 
   const handlePublishToggle = async () => {
@@ -54,6 +57,10 @@ export default function PreviewPage({ posts }) {
       console.error(err)
       alert('Failed to update publish status')
     }
+  }
+
+  if (postLoading) {
+    return <Loader text="Loading blog preview..." full />;
   }
 
   if (!post) {

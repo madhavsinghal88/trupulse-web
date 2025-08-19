@@ -18,17 +18,12 @@ const ReactQuill = dynamic(() => import('react-quill-new'), {
   loading: () => <div className="h-64 bg-gray-100 rounded-md flex items-center justify-center">Loading editor...</div>,
 })
 
-const fontSizeArr = [
-  '21px', '8px', '9px', '10px', '12px', '14px',
-  '16px', '20px', '24px', '32px', '42px', '54px', '68px', '84px', '98px',
-]
-
 const modules = {
   toolbar: [
     [{ header: [1, 2, 3, false] }],
     [{ font: [] }],
-    [{ size: fontSizeArr }],
-    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike'],
     ['blockquote', 'code-block', 'link'],
     ['image'],
     [{ list: 'ordered' }, { list: 'bullet' }],
@@ -120,6 +115,7 @@ export default function CreateBlogPage() {
       alert('Something went wrong while creating the blog.')
     }
   }
+  console.log("content:",content)
 
   if (!mounted) {
     return (
