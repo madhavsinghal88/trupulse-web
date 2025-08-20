@@ -1,24 +1,24 @@
 
-import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
-import "./globals.css";
+// import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
+// import "./globals.css";
 
-export const metadata = {
-  title: "TruPulse",
-  description: "Unlock real-time HR insights with TruPulse. TruPulse’s AI Agent conducts employee 1:1s, focus groups, and surveys—delivering polished executive summaries and metrics in minutes.",
-};
+// export const metadata = {
+//   title: "TruPulse",
+//   description: "Unlock real-time HR insights with TruPulse. TruPulse’s AI Agent conducts employee 1:1s, focus groups, and surveys—delivering polished executive summaries and metrics in minutes.",
+// };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <ClientLayoutWrapper>
-          {/* <TopBanner /> */}
-          {children}
-        </ClientLayoutWrapper>
-      </body>
-    </html>
-  );
-}
+// export default function RootLayout({ children }) {
+//   return (
+//     <html lang="en">
+//       <body>
+//         <ClientLayoutWrapper>
+//           {/* <TopBanner /> */}
+//           {children}
+//         </ClientLayoutWrapper>
+//       </body>
+//     </html>
+//   );
+// }
 
 
 // import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
@@ -63,3 +63,45 @@ export default function RootLayout({ children }) {
 //     </html>
 //   );
 // }
+
+
+
+// app/layout.jsx
+import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
+import Script from "next/script";
+import "./globals.css";
+
+export const metadata = {
+  title: "TruPulse",
+  description:
+    "Unlock real-time HR insights with TruPulse. TruPulse’s AI Agent conducts employee 1:1s, focus groups, and surveys—delivering polished executive summaries and metrics in minutes.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XLP9J3VE6L"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XLP9J3VE6L');
+            `,
+          }}
+        />
+      </head>
+      <body>
+        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+      </body>
+    </html>
+  );
+}
