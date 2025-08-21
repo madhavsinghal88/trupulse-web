@@ -156,7 +156,6 @@ export default function EditBlog({ posts }) {
               .join("-"),
         content,
         tags: tags.join(","),
-        created_at: createDate,
         last_edit: serverTimestamp(),
         isPublished: post.data.isPublished,
       });
