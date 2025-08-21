@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, storage } from "@/firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Loader from "@/app/components/common/Loader";
 
@@ -141,7 +141,7 @@ export default function EditBlog({ posts }) {
       return;
     }
     try {
-      await setDoc(doc(db, "posts", post.id), {
+      await updateDoc(doc(db, "posts", post.id), {
         title,
         cover_image: coverImage,
         altTag,
