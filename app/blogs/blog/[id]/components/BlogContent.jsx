@@ -223,7 +223,7 @@ export default function BlogContent({ post }) {
     if (typeof window !== "undefined" && content) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(content, "text/html");
-      const headingEls = [...doc.querySelectorAll("h2, h3, h4, h5, h6")];
+      const headingEls = [...doc.querySelectorAll("h1,h2, h3, h4, h5, h6")];
 
       const norm = (s = "") =>
         s
@@ -309,20 +309,20 @@ export default function BlogContent({ post }) {
               </div>
             </div>
           )}
-          {/* The Blog Main HTML Content */}
-          <div className="prose prose-lg max-w-none">
-            {parse(parsedHTML || "")}
-          </div>
-          {/* Featured image/cover inserted at the top of content */}
-          {post?.data?.cover_image && (
+            {/* Featured image/cover inserted at the top of content */}
+            {post?.data?.cover_image && (
             <div className="mb-10">
               <img
                 src={post.data.cover_image}
                 alt={post?.data?.altTag || "Blog cover"}
-                className="rounded-md w-full max-h-[400px] my-10 object-cover mx-auto"
+                className="rounded-md w-full h-full max-h-[500px] my-10 mx-auto"
               />
             </div>
           )}
+                    {/* The Blog Main HTML Content */}
+          <div className="prose prose-lg max-w-none">
+            {parse(parsedHTML || "")}
+          </div>
         </div>
       </div>
     </section>

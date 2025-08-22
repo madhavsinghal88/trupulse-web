@@ -23,7 +23,52 @@ export default function BlogHero({ post }) {
     post?.data?.description ||
     post?.data?.excerpt ||
     (post?.data?.content
-      ? post.data.content.replace(/<[^>]+>/g, "").slice(0, 200) + "..."
+      ? (() => {
+          // Clean HTML tags and normalize whitespace
+          let cleanContent = post.data.content
+            .replace(/<[^>]+>/g, " ") // Replace HTML tags with spaces
+            .replace(/\s+/g, " ") // Normalize multiple spaces to single space
+            .trim();
+          
+          // Find the first paragraph break (look for common heading patterns or paragraph breaks)
+          const firstBreakIndex = cleanContent.search(/\s+(?:Introduction|Chapter|Section|Part|#|\d+\.|[A-Z][a-z]+:)/);
+          
+          if (firstBreakIndex !== -1 && firstBreakIndex <= 200) {
+            // Stop at the first break if it's within 200 characters
+            return cleanContent.slice(0, firstBreakIndex).trim();
+          }
+          
+          // If no break found or break is beyond 200 chars, limit to 200 chars with smart break
+          if (cleanContent.length <= 200) {
+            return cleanContent;
+          }
+          
+          // Find the best break point within 200 characters
+          const truncated = cleanContent.slice(0, 200);
+          
+          // Look for natural break points (periods, commas, spaces) near the end
+          let bestBreakPoint = 200;
+          
+          // Try to find a period within the last 50 characters
+          const lastPeriodIndex = truncated.lastIndexOf('.', 200);
+          if (lastPeriodIndex > 150) {
+            bestBreakPoint = lastPeriodIndex + 1;
+          } else {
+            // Try to find a comma within the last 30 characters
+            const lastCommaIndex = truncated.lastIndexOf(',', 200);
+            if (lastCommaIndex > 170) {
+              bestBreakPoint = lastCommaIndex + 1;
+            } else {
+              // Try to find a space within the last 20 characters
+              const lastSpaceIndex = truncated.lastIndexOf(' ', 200);
+              if (lastSpaceIndex > 180) {
+                bestBreakPoint = lastSpaceIndex;
+              }
+            }
+          }
+          
+          return cleanContent.slice(0, bestBreakPoint) + "...";
+        })()
       : "");
 
   const link =

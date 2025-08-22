@@ -56,9 +56,37 @@ export default function BlogGrid() {
     async function load() {
       setLoading(true);
       const data = await getAllBlogs();
-      // Filter only published blogs
-      const publishedBlogs = data.filter((blog) => blog.isPublished === true);
-      setBlogs(publishedBlogs);
+      
+      // Filter only published blogs and blogs from 2025 onwards
+      const currentYear = 2025;
+      const filteredBlogs = data.filter((blog) => {
+        // Check if blog is published
+        if (blog.isPublished !== true) return false;
+        
+        // Check if blog has a creation date
+        if (!blog.created_at) return false;
+        
+        // Get the year from the blog's creation date
+        let blogYear;
+        if (blog.created_at.seconds) {
+          // Handle Firebase Timestamp
+          blogYear = new Date(blog.created_at.seconds * 1000).getFullYear();
+        } else if (blog.created_at instanceof Date) {
+          // Handle Date object
+          blogYear = blog.created_at.getFullYear();
+        } else if (typeof blog.created_at === 'number') {
+          // Handle timestamp in milliseconds
+          blogYear = new Date(blog.created_at).getFullYear();
+        } else {
+          // If we can't determine the year, exclude the blog
+          return false;
+        }
+        
+        // Only include blogs from 2025 onwards
+        return blogYear >= currentYear;
+      });
+      
+      setBlogs(filteredBlogs);
       setLoading(false);
     }
     load();

@@ -12,6 +12,18 @@ export default function BlogCard({ blog }) {
   const createdAt = data?.created_at;
   const alt = data?.altTag || data?.title || "blog image";
 
+  const formatDate = (value) => {
+    if (!value) return "Unknown date";
+    
+    // Handle Firebase Timestamp objects
+    if (typeof value === 'object' && value.seconds) {
+      return moment(new Date(value.seconds * 1000)).format("dddd, MMMM Do YYYY");
+    }
+    
+    // Handle converted milliseconds or other date formats
+    return moment(value).format("dddd, MMMM Do YYYY");
+  };
+
   const getSlug = () => {
     const title = blog?.title || blog?.data?.title;
     const customURL = blog?.customURL || blog?.data?.customURL;
@@ -55,9 +67,7 @@ export default function BlogCard({ blog }) {
           </p>
         )}
         <p className="text-xs text-gray-600">
-          {createdAt?.seconds
-            ? moment(createdAt.seconds * 1000).format("dddd, MMMM Do YYYY")
-            : "Unknown date"}
+         {formatDate(createdAt)}
         </p>
       </div>
     </Link>

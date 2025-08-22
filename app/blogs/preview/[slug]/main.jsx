@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '@/firebase'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import moment from 'moment'
 import RelatedBlogs from '../../blog/[id]/components/RelatedBlogs'
 import BlogHero from '../../blog/[id]/components/BlogHero'
@@ -37,21 +37,23 @@ export default function PreviewPage({ posts }) {
     if (!post) return
 
     try {
-      const updatedPost = {
-        ...post.data,
+      // Use updateDoc instead of setDoc to preserve existing fields like created_at
+      await updateDoc(doc(db, 'posts', post.id), {
         isPublished: !post.data.isPublished,
-      }
-      await setDoc(doc(db, 'posts', post.id), updatedPost)
+      })
 
       // Optional: Notify Zapier if publishing
-      if (updatedPost.isPublished) {
+      if (!post.data.isPublished) {
         await fetch('https://hooks.zapier.com/hooks/catch/14238222/3t7o2n2/', {
           method: 'POST',
-          body: JSON.stringify(updatedPost),
+          body: JSON.stringify({
+            ...post.data,
+            isPublished: true,
+          }),
         })
       }
 
-      alert(`Blog ${updatedPost.isPublished ? 'Published' : 'Unpublished'} Successfully`)
+      alert(`Blog ${!post.data.isPublished ? 'Published' : 'Unpublished'} Successfully`)
       router.push('/blogs/dashboard')
     } catch (err) {
       console.error(err)
