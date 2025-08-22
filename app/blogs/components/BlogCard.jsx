@@ -62,7 +62,7 @@ export default function BlogCard({ blog }) {
           {title}
         </h3>
         {preview && (
-          <p className="font-light text-xs sm:text-base text-gray-700 leading-snug">
+          <p className="font-light text-xs sm:text-sm leading-snug">
             {preview}
           </p>
         )}

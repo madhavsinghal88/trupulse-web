@@ -1,44 +1,3 @@
-// "use client";
-
-// import BlogCard from "./BlogCard";
-// import DummyBlogs from "./DummyBlogs";
-
-// export default function BlogGrid() {
-//   return (
-//     <section className="max-w-7xl mx-auto px-4 md:px-6 py-12">
-//       <div className="flex items-center justify-between mb-6">
-//         <h2 className="text-xl sm:text-2xl font-semibold">
-//           {DummyBlogs.length} Blogs founded
-//         </h2>
-//         <button className="flex items-center gap-1 text-sm sm:text-xl font-medium">
-//           All Category
-//           <svg
-//             xmlns="http://www.w3.org/2000/svg"
-//             className="h-4 w-4"
-//             fill="none"
-//             viewBox="0 0 24 24"
-//             stroke="currentColor"
-//           >
-//             <path
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//               strokeWidth="2"
-//               d="M19 9l-7 7-7-7"
-//             />
-//           </svg>
-//         </button>
-//       </div>
-
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-//         {DummyBlogs.map((blog, index) => (
-//           <BlogCard key={index} blog={blog} />
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-
 "use client";
 import { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
@@ -111,29 +70,56 @@ export default function BlogGrid() {
         </h2>
       </div>
 
-      {/* Blog Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {getPaginatedBlogs().map((blog, index) => (
-          <BlogCard key={index} blog={blog} />
-        ))}
-      </div>
+      {/* Show placeholder when no blogs */}
+      {blogs.length === 0 && (
+        <div className="text-center py-20">
+          <div className="max-w-md mx-auto">
+            <div className="w-20 h-20 bg-gray-100 rounded-full mx-auto flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            
+            <h3 className="text-2xl font-semibold text-gray-700 mb-3">
+              No blogs available yet
+            </h3>
+            
+            <p className="text-gray-500 leading-relaxed">
+              We're working on creating great content for you. Check back soon!
+            </p>
+          </div>
+        </div>
+      )}
 
-      {/* Pagination */}
-      <div className="flex flex-wrap justify-center gap-2 mt-10">
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-4 py-2 text-sm rounded-md border cursor-pointer ${
-              currentPage === i + 1
-                ? "bg-theme text-white"
-                : "bg-white text-black hover:bg-gray-100"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      {/* Blog Cards */}
+      {blogs.length > 0 && (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {getPaginatedBlogs().map((blog, index) => (
+              <BlogCard key={index} blog={blog} />
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex flex-wrap justify-center gap-2 mt-10">
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-4 py-2 text-sm rounded-md border cursor-pointer ${
+                    currentPage === i + 1
+                      ? "bg-theme text-white"
+                      : "bg-white text-black hover:bg-gray-100"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </section>
   );
 }
