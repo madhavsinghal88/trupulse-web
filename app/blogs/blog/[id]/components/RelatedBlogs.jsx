@@ -2,7 +2,36 @@
 import BlogCard from "@/app/blogs/components/BlogCard";
 
 export default function RelatedBlogs({ posts }) {
-  const related = posts?.slice(0, 3) || [];
+  // Filter only published blogs and blogs from 2025 onwards
+  const currentYear = 2025;
+  const filteredPosts = posts?.filter((post) => {
+    // Check if blog is published
+    if (post.isPublished !== true) return false;
+    
+    // Check if blog has a creation date
+    if (!post.created_at) return false;
+    
+    // Get the year from the blog's creation date
+    let postYear;
+    if (post.created_at.seconds) {
+      // Handle Firebase Timestamp
+      postYear = new Date(post.created_at.seconds * 1000).getFullYear();
+    } else if (post.created_at instanceof Date) {
+      // Handle Date object
+      postYear = post.created_at.getFullYear();
+    } else if (typeof post.created_at === 'number') {
+      // Handle timestamp in milliseconds
+      postYear = new Date(post.created_at).getFullYear();
+    } else {
+      // If we can't determine the year, exclude the blog
+      return false;
+    }
+    
+    // Only include blogs from 2025 onwards
+    return postYear >= currentYear;
+  }) || [];
+
+  const related = filteredPosts.slice(0, 3);
 
   if (!related.length) return null;
 
