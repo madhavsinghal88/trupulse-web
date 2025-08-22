@@ -81,20 +81,22 @@ export default function PreviewPage({ posts }) {
 
   return (
     <>
-      {/* Publish/Unpublish Button - Fixed Position */}
-      <div className="fixed bottom-4 right-4 z-50">
-        <button
-          type="button"
-          onClick={handlePublishToggle}
-          className={`font-semibold px-6 py-3 cursor-pointer rounded-lg shadow-lg transition-all duration-300 ${
-            post?.data?.isPublished 
-              ? 'bg-red-600 hover:bg-red-700 text-white' 
-              : 'bg-green-600 hover:bg-green-700 text-white'
-          }`}
-        >
-          {post?.data?.isPublished ? 'Unpublish' : 'Publish'}
-        </button>
-      </div>
+      {/* Publish/Unpublish Button - Fixed Position - Only for authorized users */}
+      {user && (user.email === 'hitesh@trupulse.ai' || user.email === 'dirk@trupulse.ai') && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            type="button"
+            onClick={handlePublishToggle}
+            className={`font-semibold px-6 py-3 cursor-pointer rounded-lg shadow-lg transition-all duration-300 ${
+              post?.data?.isPublished 
+                ? 'bg-red-600 hover:bg-red-700 text-white' 
+                : 'bg-green-600 hover:bg-green-700 text-white'
+            }`}
+          >
+            {post?.data?.isPublished ? 'Unpublish' : 'Publish'}
+          </button>
+        </div>
+      )}
 
       {/* Blog Design using same components as blog page */}
       <BlogHero post={post} />
