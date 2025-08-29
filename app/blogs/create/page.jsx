@@ -235,7 +235,7 @@ export default function CreateBlogPage() {
 
         <button
           onClick={handleSubmit}
-          className="mt-6 px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+          className="mt-6 px-6 py-2 cursor-pointer  bg-green-600 text-white rounded-md hover:bg-green-700"
         >
           Create Blog
         </button>

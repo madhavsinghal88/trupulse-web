@@ -191,17 +191,24 @@ html {
 }
 
 
- ul {
-  list-style:disc;
+ul {
+  list-style: disc;
+  margin-left: 0;       /* remove default browser margin */
+  padding-left: 1rem; /* adjust this so bullets align with paragraph text */
 }
 
-ol{
-  list-style:decimal;
+ol {
+  list-style: decimal;
+  margin-left: 0;
+  padding-left: 1rem;
 }
 
- li[data-list="bullet"] {
+li[data-list="bullet"] {
   list-style: disc !important;
+  margin: 0.3rem 0;     /* optional: spacing between list items */
+
 }
+
 
 /* Heading styles for blog editor */
 h1 {
@@ -242,7 +249,7 @@ h3 {
 }
 
 /* Ensure proper spacing for list items */
-.ql-editor li {
+/* .ql-editor li {
   margin-bottom: 0.25rem !important;
 }
 
@@ -250,4 +257,4 @@ h3 {
 .ql-editor ol {
   margin-bottom: 1rem !important;
   padding-left: 1.5rem !important;
-}
+} */

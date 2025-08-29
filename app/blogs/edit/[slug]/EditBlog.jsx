@@ -290,7 +290,7 @@ export default function EditBlog({ posts }) {
 
         <button
           onClick={handleSubmit}
-          className="bg-green-600 text-white px-6 py-2 rounded"
+          className="bg-green-600 cursor-pointer hover:bg-green-700 text-white px-6 py-2 rounded"
         >
           Save Blog
         </button>

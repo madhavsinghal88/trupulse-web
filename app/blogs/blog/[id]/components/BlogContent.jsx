@@ -319,7 +319,7 @@ export default function BlogContent({ post }) {
               />
             </div>
           )}
-                    {/* The Blog Main HTML Content */}
+        {/* The Blog Main HTML Content */}
           <div className="prose prose-lg max-w-none">
             {parse(parsedHTML || "")}
           </div>
