@@ -1,19 +1,33 @@
 import React from 'react'
 import CtaSection from '../components/common/CtaSection'
-import BlogShowcaseSection from '../components/BlogShowcaseSection'
+import RelatedBlogs from '../blogs/blog/[id]/components/RelatedBlogs'
 import SupportHero from './components/SupportHero'
 import FaqAccordion from './components/FaqAccordion'
 import SupportContact from './components/SupportContact'
-import OfficeLocations from './components/OfficeLocations'
+import { getAllBlogs } from '@/lib/getBlogs'
 
-const page = () => {
+const page = async () => {
+  const posts = await getAllBlogs()
+  
+  // Serialize Firebase Timestamps to plain objects for Client Components
+  const serializedPosts = posts.map(post => ({
+    ...post,
+    created_at: post.created_at ? {
+      seconds: post.created_at.seconds,
+      nanoseconds: post.created_at.nanoseconds
+    } : null,
+    last_edit: post.last_edit ? {
+      seconds: post.last_edit.seconds,
+      nanoseconds: post.last_edit.nanoseconds
+    } : null
+  }))
+  
   return (
     <div>
         <SupportHero/>
         <FaqAccordion/>
         <SupportContact/>
-        <OfficeLocations/>
-        <BlogShowcaseSection/>
+        <RelatedBlogs posts={serializedPosts}/>
         <CtaSection/>
     </div>
   )

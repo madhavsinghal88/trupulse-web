@@ -37,12 +37,18 @@ export default function BlogCard({ blog }) {
       .join("-");
   };
 
-  // Extract preview from HTML
+  // Extract preview from HTML (server-safe)
   let preview = "";
-  if (typeof window !== "undefined" && content) {
+  if (content) {
     try {
-      const doc = new DOMParser().parseFromString(content, "text/html");
-      preview = doc?.body?.textContent?.slice(0, 120) + "...";
+      // Simple regex-based text extraction for server-side compatibility
+      const textContent = content
+        .replace(/<[^>]*>/g, '') // Remove HTML tags
+        .replace(/&[^;]+;/g, ' ') // Remove HTML entities
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .trim();
+      
+      preview = textContent.slice(0, 120) + "...";
     } catch (e) {
       preview = "";
     }
