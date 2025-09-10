@@ -61,8 +61,8 @@ export default function BlogCard({ blog }) {
           src={cover}
           alt={alt}
           width={400}
-          height={160}
-          className="object-cover w-full h-60 rounded-md"
+          height={225}
+          className="w-full aspect-video object-cover rounded-md"
         />
         <h3 className="font-bold text-sm sm:text-xl line-clamp-2 leading-snug">
           {title}

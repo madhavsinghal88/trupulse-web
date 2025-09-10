@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -8,6 +8,8 @@ import { auth, db, storage } from "@/firebase";
 import { doc, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Loader from "@/app/components/common/Loader";
+import ReactCrop, { centerCrop, makeAspectCrop, Crop, PixelCrop } from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 
 // Use the compatible editor!
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -51,6 +53,16 @@ export default function EditBlog({ posts }) {
   const [tags, setTags] = useState([]);
   const [mounted, setMounted] = useState(false);
   const [postLoading, setPostLoading] = useState(true);
+
+  // Image cropping states
+  const [imgSrc, setImgSrc] = useState('');
+  const [crop, setCrop] = useState();
+  const [completedCrop, setCompletedCrop] = useState();
+  const [scale, setScale] = useState(1);
+  const [rotate, setRotate] = useState(0);
+  const [aspect, setAspect] = useState(16 / 9);
+  const imgRef = useRef(null);
+  const previewCanvasRef = useRef(null);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -112,11 +124,113 @@ export default function EditBlog({ posts }) {
     }
     // Then set prefill fields
   }, [posts, currentId]);
-  const handleFileChange = (e) => setFile(e.target.files[0]);
+
+  // Image cropping utility functions
+  function onImageLoad(e) {
+    if (aspect) {
+      const { width, height } = e.currentTarget
+      setCrop(centerCrop(
+        makeAspectCrop(
+          {
+            unit: '%',
+            width: 90,
+          },
+          aspect,
+          width,
+          height
+        ),
+        width,
+        height
+      ))
+    }
+  }
+
+  function getCroppedImg(image, crop, fileName) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+
+    if (!ctx) {
+      throw new Error('No 2d context')
+    }
+
+    const scaleX = image.naturalWidth / image.width
+    const scaleY = image.naturalHeight / image.height
+    const pixelRatio = window.devicePixelRatio
+
+    canvas.width = crop.width * pixelRatio * scaleX
+    canvas.height = crop.height * pixelRatio * scaleY
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+    ctx.imageSmoothingQuality = 'high'
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width * scaleX,
+      crop.height * scaleY
+    )
+
+    return new Promise((resolve) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            console.error('Canvas is empty')
+            return
+          }
+          blob.name = fileName
+          resolve(blob)
+        },
+        'image/jpeg',
+        1
+      )
+    })
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // Check file size (400KB = 400 * 1024 bytes)
+      const maxSize = 400 * 1024 // 400KB in bytes
+      if (file.size > maxSize) {
+        alert('Image size must be less than 400KB. Please choose a smaller image.')
+        e.target.value = '' // Clear the input
+        return
+      }
+
+      const reader = new FileReader()
+      reader.addEventListener('load', () => {
+        setImgSrc(reader.result?.toString() || '')
+      })
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleCropComplete = async () => {
+    if (!completedCrop || !imgRef.current) return
+
+    try {
+      const croppedImageBlob = await getCroppedImg(
+        imgRef.current,
+        completedCrop,
+        'cropped-image.jpg'
+      )
+      
+      setFile(croppedImageBlob)
+      setCoverImage(URL.createObjectURL(croppedImageBlob))
+    } catch (error) {
+      console.error('Error cropping image:', error)
+      alert('Error cropping image. Please try again.')
+    }
+  }
 
   const handleUpload = () => {
-    if (!file) return alert("Please select a file.");
-    const storageRef = ref(storage, `/${file.name}`);
+    if (!file) return alert("Please crop and process the image first!");
+    const storageRef = ref(storage, `/${Date.now()}-${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(
       "state_changed",
@@ -130,6 +244,7 @@ export default function EditBlog({ posts }) {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setCoverImage(url);
+          alert('Image uploaded successfully!');
         });
       }
     );
@@ -232,21 +347,81 @@ export default function EditBlog({ posts }) {
 
         <div>
           <label className="block text-sm font-medium mb-1">
-            Cover Image *
+            Cover Image * (16:9 aspect ratio, max 400KB)
           </label>
           <input
             type="file"
+            accept="image/*"
             onChange={handleFileChange}
-            className="block w-full text-sm text-gray-900 cursor-pointer bg-gray-50 border border-gray-300 p-2 rounded-lg"
+            className="block w-full text-sm text-gray-900 cursor-pointer bg-gray-50 border border-gray-300 p-2 rounded-lg mb-4"
           />
-          {percent > 0 && <p className="text-sm mt-1">{percent}%</p>}
-          <button
-            type="button"
-            onClick={handleUpload}
-            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Upload Image
-          </button>
+          
+          {imgSrc && (
+            <div className="space-y-4">
+              <div className="max-w-2xl">
+                <ReactCrop
+                  crop={crop}
+                  onChange={(_, percentCrop) => setCrop(percentCrop)}
+                  onComplete={(c) => setCompletedCrop(c)}
+                  aspect={aspect}
+                  minWidth={160}
+                  minHeight={90}
+                >
+                  <img
+                    ref={imgRef}
+                    alt="Crop me"
+                    src={imgSrc}
+                    style={{ maxHeight: '400px', maxWidth: '100%' }}
+                    onLoad={onImageLoad}
+                  />
+                </ReactCrop>
+              </div>
+              
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={handleCropComplete}
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                >
+                  Crop Image
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImgSrc('')
+                    setCrop(undefined)
+                    setCompletedCrop(undefined)
+                    setFile(null)
+                    setCoverImage('')
+                  }}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          )}
+          
+          {coverImage && (
+            <div className="mt-4">
+              <p className="text-sm text-green-600 mb-2">✓ Image cropped successfully!</p>
+              <div className="max-w-md">
+                <img
+                  src={coverImage}
+                  alt="Cropped preview"
+                  className="w-full h-auto rounded-lg border"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={handleUpload}
+                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                disabled={percent > 0}
+              >
+                {percent > 0 ? `Uploading... ${percent}%` : 'Upload to Storage'}
+              </button>
+            </div>
+          )}
         </div>
 
         <input

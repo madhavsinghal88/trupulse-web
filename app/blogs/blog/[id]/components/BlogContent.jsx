@@ -315,7 +315,7 @@ export default function BlogContent({ post }) {
               <img
                 src={post.data.cover_image}
                 alt={post?.data?.altTag || "Blog cover"}
-                className="rounded-md w-full h-full max-h-[500px] my-10 mx-auto"
+                className="rounded-lg w-full aspect-video object-cover my-10 mx-auto shadow-lg"
               />
             </div>
           )}

@@ -1,21 +1,3 @@
-// import EditBlog from './EditBlog'
-// import { db } from '@/firebase'
-// import { collection, getDocs } from 'firebase/firestore'
-
-// async function getPosts() {
-//   const postsRef = collection(db, 'posts')
-//   const snapshot = await getDocs(postsRef)
-//   return snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-// }
-
-// export default async function Page() {
-//   const posts = await getPosts()
-//   const sortedPosts = posts.sort((a, b) => b.data.created_at.seconds - a.data.created_at.seconds)
-
-//   return <EditBlog posts={sortedPosts} />
-// }
-
-
 import EditBlog from "./EditBlog"
 import { collection, getDocs } from "firebase/firestore"
 import { db } from "@/firebase"

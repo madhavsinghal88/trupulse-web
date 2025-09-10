@@ -271,7 +271,7 @@ export default function Navbar() {
                   Blogs
                 </button>
                 </Link>
-                {/* <Link href="/support">
+                <Link href="/support">
               <button
                   className={`hover:text-theme transition-colors font-medium cursor-pointer ${isActive(
                     "/support"
@@ -279,7 +279,7 @@ export default function Navbar() {
                 >
                   Support
                 </button>
-                </Link> */}
+                </Link>
 
 
             {/* <Link
@@ -367,11 +367,11 @@ export default function Navbar() {
             >
               Blogs
             </Link>
-            {/* <Link href="/support"  onClick={() => setMenuOpen(!menuOpen)}
+            <Link href="/support"  onClick={() => setMenuOpen(!menuOpen)}
               className="block font-medium hover:text-theme  transition-colors w-full text-left"
             >
               Support
-            </Link> */}
+            </Link>
 
             {/* <Link
               href="/pricing"
