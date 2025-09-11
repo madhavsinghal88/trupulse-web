@@ -1,72 +1,45 @@
 'use client';
 
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 
 export default function SupportContact() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    workEmail: '',
-    companyName: '',
-    phoneNumber: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [company, setCompany] = useState('');
+  const [query, setQuery] = useState('');
+  const [alert, setAlert] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log({ firstName, lastName, email, jobTitle, company, query })
+    fetch('https://hooks.zapier.com/hooks/catch/14238222/bj1e0wg/', {
+      method: 'POST',
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        jobTitle,
+        company,
+        query,
+      }),
+    }).then((res) => {
+      if (res.status === 200) {
+       
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setJobTitle('')
+        setCompany('')
+        setQuery('')
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      // EmailJS configuration - you'll need to replace these with your actual values
-      const serviceId = 'service_your_service_id'; // Replace with your EmailJS service ID
-      const templateId = 'template_your_template_id'; // Replace with your EmailJS template ID
-      const publicKey = 'your_public_key'; // Replace with your EmailJS public key
-
-      // Prepare template parameters
-      const templateParams = {
-        from_name: formData.fullName,
-        from_email: formData.workEmail,
-        company_name: formData.companyName,
-        phone_number: formData.phoneNumber || 'Not provided',
-        subject: formData.subject,
-        message: formData.message,
-        to_email: 'support@trupulse.ai'
-      };
-
-      // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      
-      setSubmitStatus('success');
-      
-      // Reset form after successful submission
-      setFormData({
-        fullName: '',
-        workEmail: '',
-        companyName: '',
-        phoneNumber: '',
-        subject: '',
-        message: ''
-      });
-
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+        setAlert('Thanks for reaching out! We will be in touch soon.')
+      } else {
+        setAlert('Something went wrong! Please try again')
+      }
+    })
+  }
 
   return (
     <section className="bg-[#FFEFE6] py-16 px-4 md:px-6">
@@ -90,34 +63,34 @@ export default function SupportContact() {
             {/* Row 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="fullName" className="block text-sm font-semibold text-primary-text mb-2">
-                  Full Name <span className="text-theme">*</span>
+                <label htmlFor="firstName" className="block text-sm font-semibold text-primary-text mb-2">
+                  First Name <span className="text-theme">*</span>
                 </label>
                 <input
                   type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleInputChange}
+                  id="firstName"
+                  name="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
-                  placeholder="Enter your full name"
+                  placeholder="Enter your first name"
                 />
               </div>
               
               <div>
-                <label htmlFor="workEmail" className="block text-sm font-semibold text-primary-text mb-2">
-                  Work Email Address <span className="text-theme">*</span>
+                <label htmlFor="lastName" className="block text-sm font-semibold text-primary-text mb-2">
+                  Last Name <span className="text-theme">*</span>
                 </label>
                 <input
-                  type="email"
-                  id="workEmail"
-                  name="workEmail"
-                  value={formData.workEmail}
-                  onChange={handleInputChange}
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
-                  placeholder="Enter your work email"
+                  placeholder="Enter your last name"
                 />
               </div>
             </div>
@@ -125,68 +98,64 @@ export default function SupportContact() {
             {/* Row 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="companyName" className="block text-sm font-semibold text-primary-text mb-2">
-                  Company Name <span className="text-theme">*</span>
+                <label htmlFor="email" className="block text-sm font-semibold text-primary-text mb-2">
+                  Email Address <span className="text-theme">*</span>
                 </label>
                 <input
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleInputChange}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
-                  placeholder="Enter your company name"
+                  placeholder="Enter your email address"
                 />
               </div>
               
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-semibold text-primary-text mb-2">
-                  Phone Number <span className="text-gray-500 text-sm">(optional)</span>
+                <label htmlFor="jobTitle" className="block text-sm font-semibold text-primary-text mb-2">
+                  Job Title <span className="text-gray-500 text-sm">(optional)</span>
                 </label>
                 <input
-                  type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange}
+                  type="text"
+                  id="jobTitle"
+                  name="jobTitle"
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
-                  placeholder="Enter your phone number"
+                  placeholder="Enter your job title"
                 />
               </div>
             </div>
 
-            {/* Subject */}
+            {/* Company */}
             <div>
-              <label htmlFor="subject" className="block text-sm font-semibold text-primary-text mb-2">
-                Subject <span className="text-theme">*</span>
+              <label htmlFor="company" className="block text-sm font-semibold text-primary-text mb-2">
+                Company Name <span className="text-theme">*</span>
               </label>
-              <select
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleInputChange}
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
                 required
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
-              >
-                <option value="">Select a subject</option>
-                <option value="Sales Inquiry">Sales Inquiry</option>
-                <option value="Support">Support</option>
-                <option value="Partnership">Partnership</option>
-                <option value="Other">Other</option>
-              </select>
+                placeholder="Enter your company name"
+              />
             </div>
 
-            {/* Message */}
+            {/* Query */}
             <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-primary-text mb-2">
+              <label htmlFor="query" className="block text-sm font-semibold text-primary-text mb-2">
                 Message <span className="text-theme">*</span>
               </label>
               <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
+                id="query"
+                name="query"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 required
                 rows={5}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors resize-none"
@@ -194,28 +163,25 @@ export default function SupportContact() {
               />
             </div>
 
-            {/* Status Messages */}
-            {submitStatus === 'success' && (
-              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+            {/* Alert Message */}
+            {alert && (
+              <div className={`px-4 py-3 rounded-lg ${
+                alert.includes('Thanks') 
+                  ? 'bg-green-100 border border-green-400 text-green-700' 
+                  : 'bg-red-100 border border-red-400 text-red-700'
+              }`}>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="font-medium">Message sent successfully!</span>
+                  {alert.includes('Thanks') ? (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  )}
+                  <span className="font-medium">{alert}</span>
                 </div>
-                <p className="text-sm mt-1">We'll get back to you within 24 hours.</p>
-              </div>
-            )}
-
-            {submitStatus === 'error' && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  <span className="font-medium">Failed to send message</span>
-                </div>
-                <p className="text-sm mt-1">Please try again or email us directly at support@trupulse.ai</p>
               </div>
             )}
 
@@ -223,29 +189,12 @@ export default function SupportContact() {
             <div className="flex justify-center pt-4">
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`${
-                  isSubmitting 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-[#FF9000] to-[#FF5900] hover:shadow-lg'
-                } text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2`}
+                className="bg-gradient-to-r from-[#FF9000] to-[#FF5900] hover:shadow-lg text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </>
-                )}
+                Send Message
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
               </button>
             </div>
           </form>
