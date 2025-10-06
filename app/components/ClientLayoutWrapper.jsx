@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import CalendlyModal from "./common/CalendlyModal";
+import NewsletterPopup from "./common/NewsletterPopup";
 import { CalendlyProvider } from "@/lib/CalendlyContext";
 import { Inter } from "next/font/google";
 
@@ -19,6 +20,7 @@ export default function ClientLayoutWrapper({ children }) {
         {!isAuthPage && <Navbar />}
         {children}
         <CalendlyModal />
+        <NewsletterPopup />
         {!isAuthPage && <Footer />}
       </div>
     </CalendlyProvider>

@@ -6,23 +6,27 @@ export default function SupportContact() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [company, setCompany] = useState('');
   const [query, setQuery] = useState('');
+  const [isAgreed, setIsAgreed] = useState(false);
   const [alert, setAlert] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log({ firstName, lastName, email, jobTitle, company, query })
+    console.log({ firstName, lastName, email, phone, jobTitle, company, query, isAgreed })
     fetch('https://hooks.zapier.com/hooks/catch/14238222/bj1e0wg/', {
       method: 'POST',
       body: JSON.stringify({
         firstName,
         lastName,
         email,
+        phone,
         jobTitle,
         company,
         query,
+        isAgreed,
       }),
     }).then((res) => {
       if (res.status === 200) {
@@ -30,9 +34,11 @@ export default function SupportContact() {
         setFirstName('')
         setLastName('')
         setEmail('')
+        setPhone('')
         setJobTitle('')
         setCompany('')
         setQuery('')
+        setIsAgreed(false)
 
         setAlert('Thanks for reaching out! We will be in touch soon.')
       } else {
@@ -114,6 +120,24 @@ export default function SupportContact() {
               </div>
               
               <div>
+                <label htmlFor="phone" className="block text-sm font-semibold text-primary-text mb-2">
+                  Phone Number <span className="text-gray-500 text-sm">(optional)</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+            </div>
+
+            {/* Row 3 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
                 <label htmlFor="jobTitle" className="block text-sm font-semibold text-primary-text mb-2">
                   Job Title <span className="text-gray-500 text-sm">(optional)</span>
                 </label>
@@ -127,24 +151,24 @@ export default function SupportContact() {
                   placeholder="Enter your job title"
                 />
               </div>
+              
+              <div>
+                <label htmlFor="company" className="block text-sm font-semibold text-primary-text mb-2">
+                  Company Name <span className="text-theme">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
+                  placeholder="Enter your company name"
+                />
+              </div>
             </div>
 
-            {/* Company */}
-            <div>
-              <label htmlFor="company" className="block text-sm font-semibold text-primary-text mb-2">
-                Company Name <span className="text-theme">*</span>
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors"
-                placeholder="Enter your company name"
-              />
-            </div>
 
             {/* Query */}
             <div>
@@ -161,6 +185,23 @@ export default function SupportContact() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-theme transition-colors resize-none"
                 placeholder="Tell us how we can help you..."
               />
+            </div>
+
+            {/* Agreement Checkbox */}
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="agreement"
+                checked={isAgreed}
+                onChange={(e) => setIsAgreed(e.target.checked)}
+                className="mt-1 w-4 h-4 text-theme bg-gray-100 border-gray-300 rounded focus:ring-theme focus:ring-2"
+              />
+              <label 
+                htmlFor="agreement" 
+                className="text-sm text-gray-600 leading-relaxed cursor-pointer"
+              >
+                I agree to receive promotional text messages from TruPulse about product updates, webinars, events, and insights.
+              </label>
             </div>
 
             {/* Alert Message */}
