@@ -27,10 +27,8 @@ Allow: /blogs/blog/
 Allow: /static/
 Allow: /images/
 
-# Sitemap locations
-Sitemap: https://www.trupulse.ai/sitemap
-Sitemap: https://www.trupulse.ai/blog-sitemap.xml
-Sitemap: https://www.trupulse.ai/sitemap-index
+# Sitemap location
+Sitemap: https://www.trupulse.ai/sitemap.xml
 
 # Crawl delay (be nice to servers)
 Crawl-delay: 1`;
