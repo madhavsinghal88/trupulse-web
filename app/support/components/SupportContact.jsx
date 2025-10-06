@@ -26,7 +26,7 @@ export default function SupportContact() {
         jobTitle,
         company,
         query,
-        isAgreed,
+        moreInfo: isAgreed,
       }),
     }).then((res) => {
       if (res.status === 200) {
