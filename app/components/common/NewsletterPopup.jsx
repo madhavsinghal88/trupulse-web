@@ -12,12 +12,15 @@ export default function NewsletterPopup() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Check if user has already subscribed
+    // Check if user has already subscribed or dismissed the popup
     const hasSubscribed = localStorage.getItem('trupulse-newsletter-subscribed');
-    if (hasSubscribed) {
-      return; // Don't show popup if already subscribed
+    const hasDismissed = localStorage.getItem('trupulse-newsletter-dismissed');
+    
+    if (hasSubscribed || hasDismissed) {
+      return; // Don't show popup if already subscribed or dismissed permanently
     }
 
     // Show popup after 3 seconds
@@ -60,6 +63,13 @@ export default function NewsletterPopup() {
     setIsVisible(false);
   };
 
+  const handleDontShowAgain = () => {
+    // Save dismissal preference to localStorage
+    localStorage.setItem('trupulse-newsletter-dismissed', 'true');
+    setIsDismissed(true);
+    setIsVisible(false);
+  };
+
   if (!isVisible) return null;
 
   return (
@@ -67,9 +77,9 @@ export default function NewsletterPopup() {
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50" />
       
-      {/* Popup */}
-      <div className="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-96 z-50 animate-in slide-in-from-bottom-4 duration-500">
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+      {/* Popup - centered at bottom with elegant positioning */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] md:w-[420px] z-50 animate-in slide-in-from-bottom-8 duration-500">
+        <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden backdrop-blur-xl">
           {/* Close Button */}
           <button
             onClick={handleClose}
@@ -79,36 +89,40 @@ export default function NewsletterPopup() {
           </button>
 
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#252257] to-[#252257] p-6 pb-4">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-white/10 rounded-full">
+          <div className="bg-gradient-to-br from-[#FF5900] via-[#FF7700] to-[#FF9000] px-6  py-2 relative overflow-hidden">
+            {/* Decorative circles */}
+            <div className="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div className="absolute -left-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+            
+            <div className="relative flex items-center gap-3 mb-2">
+              <div className="p-2.5 bg-white/20 backdrop-blur-sm rounded-full shadow-lg">
                 <Mail className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">Stay Updated!</h3>
+              <h3 className="text-2xl font-bold text-white">Stay in the Loop!</h3>
             </div>
-            <p className="text-white/90 text-sm">
-              Subscribe to our newsletter for the latest insights and updates
+            <p className="relative text-white/95 text-sm font-medium">
+              Get exclusive insights, product updates & industry trends delivered to your inbox
             </p>
           </div>
 
           {/* Content */}
-          <div className="p-6">
+          <div className="p-6 bg-gradient-to-b from-gray-50/50 to-white">
             {!isSubscribed ? (
               <form onSubmit={handleSubscribe} className="space-y-4">
                 {/* Email Input */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                    Email Address <span className="text-red-500">*</span>
+                  <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                    Email Address <span className="text-[#FF5900]">*</span>
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#FF5900]" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="Enter your email address"
+                      placeholder="your.email@company.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10"
+                      className="w-full pl-10 border-gray-200 focus:border-[#FF5900] focus:ring-[#FF5900]"
                       required
                     />
                   </div>
@@ -116,18 +130,18 @@ export default function NewsletterPopup() {
 
                 {/* Phone Input */}
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
-                    Phone Number <span className="text-gray-400 text-xs">(Optional)</span>
+                  <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">
+                    Phone Number <span className="text-gray-400 text-xs font-normal">(Optional)</span>
                   </Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#FF5900]" />
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="Enter your phone number"
+                      placeholder="+1 (555) 000-0000"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full pl-10"
+                      className="w-full pl-10 border-gray-200 focus:border-[#FF5900] focus:ring-[#FF5900]"
                     />
                   </div>
                 </div>
@@ -153,12 +167,27 @@ export default function NewsletterPopup() {
                 <button
                   type="submit"
                   disabled={!email || !isAgreed}
-                  className="w-full cursor-pointer relative overflow-hidden px-6 py-3 rounded-full font-semibold text-white shadow-lg group disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full cursor-pointer relative overflow-hidden px-6 py-3.5 rounded-full font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {/* Animated Gradient Background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-[#FF9000] via-[#FF5900] to-[#FF9000] bg-[length:200%_200%] animate-gradient" />
-                  <span className="relative z-10">Subscribe Now</span>
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    Subscribe Now
+                  </span>
                 </button>
+
+                {/* Don't Show Again Button */}
+                <div className="pt-2 border-t border-gray-100">
+                  <button
+                    type="button"
+                    onClick={handleDontShowAgain}
+                    className="w-full text-center text-xs text-gray-400 hover:text-gray-600 transition-colors cursor-pointer flex items-center justify-center gap-1.5 group"
+                  >
+                    <X className="w-3 h-3 group-hover:rotate-90 transition-transform duration-200" />
+                    <span>No thanks, don&apos;t show me this again</span>
+                  </button>
+                </div>
               </form>
             ) : (
               /* Success State */
