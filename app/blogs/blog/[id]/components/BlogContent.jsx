@@ -250,7 +250,21 @@ export default function BlogContent({ post }) {
           sib = sib.nextElementSibling;
 
         const sibText = sib ? norm(sib.textContent) : "";
-        const preview = sibText ? sibText.slice(0, 80) : "";
+        
+        // Truncate to ~80 chars, but end at word boundary with ellipsis
+        let preview = "";
+        if (sibText) {
+          if (sibText.length <= 80) {
+            preview = sibText;
+          } else {
+            // Find the last word boundary before 80 chars
+            const truncated = sibText.slice(0, 80);
+            const lastSpace = truncated.lastIndexOf(" ");
+            // Use word boundary if it's reasonable (not too close to start)
+            const cutoff = lastSpace > 40 ? lastSpace : 80;
+            preview = truncated.slice(0, cutoff) + "...";
+          }
+        }
 
         extracted.push({ id: slug, text, preview });
       });
