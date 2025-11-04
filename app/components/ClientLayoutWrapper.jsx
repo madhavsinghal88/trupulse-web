@@ -1,10 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import CalendlyModal from "./common/CalendlyModal";
 import NewsletterPopup from "./common/NewsletterPopup";
+import CalendlyUrlHandler from "./common/CalendlyUrlHandler";
 import { CalendlyProvider } from "@/lib/CalendlyContext";
 import { Inter } from "next/font/google";
 
@@ -16,6 +18,9 @@ export default function ClientLayoutWrapper({ children }) {
 
   return (
     <CalendlyProvider>
+      <Suspense fallback={null}>
+        <CalendlyUrlHandler />
+      </Suspense>
       <div className={`${inter.variable} font-sans`}>
         {!isAuthPage && <Navbar />}
         {children}
