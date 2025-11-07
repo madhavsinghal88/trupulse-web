@@ -15,6 +15,20 @@ export default function NewsletterPopup() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
+    // Only run in browser environment
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    // Check if user is visiting from a Calendly demo link
+    const urlParams = new URLSearchParams(window.location.search);
+    const isCalendlyLink = urlParams.get('calendly') === 'true';
+    
+    // Don't show popup if user came to book a demo
+    if (isCalendlyLink) {
+      return;
+    }
+
     // Check if user has already subscribed or dismissed the popup
     const hasSubscribed = localStorage.getItem('trupulse-newsletter-subscribed');
     const hasDismissed = localStorage.getItem('trupulse-newsletter-dismissed');
