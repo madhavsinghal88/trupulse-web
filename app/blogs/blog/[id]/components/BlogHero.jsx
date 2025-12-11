@@ -19,57 +19,35 @@ export default function BlogHero({ post }) {
     return moment(value).format("dddd, MMMM Do YYYY");
   };
 
-  const description =
-    post?.data?.description ||
-    post?.data?.excerpt ||
-    (post?.data?.content
-      ? (() => {
-          // Clean HTML tags and normalize whitespace
-          let cleanContent = post.data.content
-            .replace(/<[^>]+>/g, " ") // Replace HTML tags with spaces
-            .replace(/\s+/g, " ") // Normalize multiple spaces to single space
-            .trim();
-          
-          // Find the first paragraph break (look for common heading patterns or paragraph breaks)
-          const firstBreakIndex = cleanContent.search(/\s+(?:Introduction|Chapter|Section|Part|#|\d+\.|[A-Z][a-z]+:)/);
-          
-          if (firstBreakIndex !== -1 && firstBreakIndex <= 200) {
-            // Stop at the first break if it's within 200 characters
-            return cleanContent.slice(0, firstBreakIndex).trim();
-          }
-          
-          // If no break found or break is beyond 200 chars, limit to 200 chars with smart break
-          if (cleanContent.length <= 200) {
-            return cleanContent;
-          }
-          
-          // Find the best break point within 200 characters
-          const truncated = cleanContent.slice(0, 200);
-          
-          // Look for natural break points (periods, commas, spaces) near the end
-          let bestBreakPoint = 200;
-          
-          // Try to find a period within the last 50 characters
-          const lastPeriodIndex = truncated.lastIndexOf('.', 200);
-          if (lastPeriodIndex > 150) {
-            bestBreakPoint = lastPeriodIndex + 1;
-          } else {
-            // Try to find a comma within the last 30 characters
-            const lastCommaIndex = truncated.lastIndexOf(',', 200);
-            if (lastCommaIndex > 170) {
-              bestBreakPoint = lastCommaIndex + 1;
-            } else {
-              // Try to find a space within the last 20 characters
-              const lastSpaceIndex = truncated.lastIndexOf(' ', 200);
-              if (lastSpaceIndex > 180) {
-                bestBreakPoint = lastSpaceIndex;
-              }
-            }
-          }
-          
-          return cleanContent.slice(0, bestBreakPoint) + "...";
-        })()
-      : "");
+  const getDescription = () => {
+    const metaDes = post?.data?.metaDes;
+    if (!metaDes) return "";
+    
+    // Limit to 200 characters, truncate at word boundary if possible
+    if (metaDes.length <= 200) {
+      return metaDes;
+    }
+    
+    // Find the best break point within 200 characters
+    const truncated = metaDes.slice(0, 200);
+    
+    // Try to find a period within the last 50 characters
+    const lastPeriodIndex = truncated.lastIndexOf('.', 200);
+    if (lastPeriodIndex > 150) {
+      return truncated.slice(0, lastPeriodIndex + 1);
+    }
+    
+    // Try to find a space within the last 20 characters
+    const lastSpaceIndex = truncated.lastIndexOf(' ', 200);
+    if (lastSpaceIndex > 180) {
+      return truncated.slice(0, lastSpaceIndex) + "...";
+    }
+    
+    // If no good break point, just truncate at 200
+    return truncated + "...";
+  };
+
+  const description = getDescription();
 
   const link =
     post?.data?.customURL?.length > 3
