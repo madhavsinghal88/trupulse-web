@@ -63,6 +63,13 @@ export default function Footer() {
                 Testimonials
               </Link>
             </div>
+            <div>
+            <Link href="/case-study"
+                className="cursor-pointer"
+              >
+                Case Study
+              </Link>
+            </div>
           </div>
         </div>
 
