@@ -33,7 +33,7 @@ const staticPages = () => [
 
 export async function GET() {
   try {
-    // Published articles from 2025 on: the same list the articles page shows.
+    // The same list the articles page shows.
     const articles = await getListedArticles();
     const blogPages = articles.map((a) => ({
       url: `${SITE}/blogs/blog/${a.slug}`,

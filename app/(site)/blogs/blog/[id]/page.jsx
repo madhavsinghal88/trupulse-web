@@ -1,6 +1,6 @@
 import "../../../../styles/article.css";
 import { notFound } from "next/navigation";
-import { getArticle } from "@/lib/articles";
+import { getArticle, listedSlugs } from "@/lib/articles";
 import { SITE, crumbNode, orgNode, pageMetadata, pageNode, siteNode } from "@/lib/site";
 import { ArticleHeader } from "../../../_components/InnerHeader";
 import SiteFooter from "../../../_components/SiteFooter";
@@ -8,11 +8,10 @@ import JsonLd from "../../../_components/JsonLd";
 import ArticleView from "../../../_components/blog/ArticleView";
 import BackLink from "../../../_components/blog/BackLink";
 
-export const revalidate = 300;
+export const dynamicParams = false;
 
-// Articles are rendered on first request and then cached like the index.
 export async function generateStaticParams() {
-  return [];
+  return listedSlugs().map((id) => ({ id }));
 }
 
 export async function generateMetadata({ params }) {
