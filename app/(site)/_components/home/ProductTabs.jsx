@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { hasVideo, openVideo, videoSource } from "./VideoPlayer";
+import { hasVideo, openVideo } from "./VideoPlayer";
 import AutoplayVideo from "./AutoplayVideo";
 import { tabKeyDown, useEqualHeight } from "./tabs";
 
@@ -157,7 +157,7 @@ export default function ProductTabs() {
             <strong>{item.video}</strong>
             <small>{item.note}</small>
             {!hasVideo(item.video) && <span className="tp-soon">Video coming soon</span>}
-            <AutoplayVideo key={item.video} src={videoSource(item.video)} label={item.video} />
+            <AutoplayVideo key={item.video} videoKey={item.video} label={item.video} />
           </div>
         </div>
       </div>

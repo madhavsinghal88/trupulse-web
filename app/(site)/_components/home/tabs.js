@@ -13,7 +13,9 @@ export function useEqualHeight(panelRef, count, active, setActive) {
     let timer;
     function equalise() {
       const el = panelRef.current;
-      if (!el) return;
+      // Entering fullscreen fires a resize; measuring would re-render the tabs and
+      // unmount the video that just went fullscreen, closing it straight away.
+      if (!el || document.fullscreenElement || document.webkitFullscreenElement) return;
       const restore = activeRef.current;
       el.style.minHeight = "0px";
       let max = 0;

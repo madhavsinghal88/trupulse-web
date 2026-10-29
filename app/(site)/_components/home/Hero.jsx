@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { useDemo } from "../DemoProvider";
-import { videoSource } from "./VideoPlayer";
 import AutoplayVideo from "./AutoplayVideo";
 
 // The walkthrough frame is positioned with CSS variables measured from the hero copy, so
@@ -69,7 +68,7 @@ export default function Hero() {
         </div>
         <div className="signal-stage reveal in delay-1" aria-label="TruPulse walkthrough video preview">
           <div className="developer-video-slot hero-video-frame tp-autoplay">
-            <AutoplayVideo src={videoSource("hero")} label="TruPulse product walkthrough" />
+            <AutoplayVideo videoKey="hero" label="TruPulse product walkthrough" />
           </div>
         </div>
       </div>

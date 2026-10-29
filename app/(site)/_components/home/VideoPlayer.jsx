@@ -12,12 +12,13 @@ const SOURCES = {
 };
 
 const EVENT = "tp-open-video";
+export const CLOSED_EVENT = "tp-video-closed";
 
 export const hasVideo = (key) => Boolean(SOURCES[key]);
 export const videoSource = (key) => SOURCES[key] || "";
 
-export function openVideo(key, title) {
-  window.dispatchEvent(new CustomEvent(EVENT, { detail: { key, title } }));
+export function openVideo(key, title, startAt = 0) {
+  window.dispatchEvent(new CustomEvent(EVENT, { detail: { key, title, startAt } }));
 }
 
 // Full-screen player for the home page walkthroughs. Shows "coming soon" until a
@@ -41,7 +42,13 @@ export default function VideoPlayer() {
     if (!video) return;
     document.documentElement.classList.add("tp-dm-lock");
     closeRef.current?.focus();
-    if (src) videoRef.current?.play().catch(() => {});
+    const v = videoRef.current;
+    if (src && v) {
+      // Continue from where the inline preview was, with sound.
+      if (video.startAt) v.currentTime = video.startAt;
+      v.muted = false;
+      v.play().catch(() => {});
+    }
     function onKey(event) {
       if (event.key === "Escape") { close(); return; }
       if (event.key !== "Tab") return;
@@ -61,6 +68,7 @@ export default function VideoPlayer() {
     videoRef.current?.pause();
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     video?.last?.focus?.();
+    window.dispatchEvent(new CustomEvent(CLOSED_EVENT, { detail: { key: video?.key } }));
     setVideo(null);
   }
 
