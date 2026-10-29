@@ -12,7 +12,6 @@ const nextConfig = {
         { source: '/usecases', destination: '/#use-cases', permanent: true },
         { source: '/company', destination: '/', permanent: true },
         { source: '/support', destination: '/#faq', permanent: true },
-        { source: '/login', destination: 'https://dashboard.trupulse.ai/login?redirect=%2F', permanent: false },
       ];
     },
   };

@@ -57,12 +57,12 @@ export default function HomeHeader() {
               <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
             ))}
             <div className="mobile-actions">
-              <a className="login" href="https://dashboard.trupulse.ai/login?redirect=%2F">Sign in</a>
+              <Link className="login" href="/login">Sign in</Link>
               {demoButton}
             </div>
           </nav>
           <div className="nav-actions">
-            <a className="login" href="https://dashboard.trupulse.ai/login?redirect=%2F">Sign in</a>
+            <Link className="login" href="/login">Sign in</Link>
             {demoButton}
             <button
               className="icon-btn menu-toggle"
