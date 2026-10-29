@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { auth, db, storage } from '@/firebase'
+import { CATEGORIES } from '@/lib/articles'
 import ReactCrop, { centerCrop, makeAspectCrop, Crop, PixelCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
@@ -48,6 +49,11 @@ export default function CreateBlogPage() {
   const [metaTitle, setMetaTitle] = useState('')
   const [metaDescription, setMetaDescription] = useState('')
   const [customURL, setCustomURL] = useState('')
+  const [category, setCategory] = useState('')
+  const [excerpt, setExcerpt] = useState('')
+  const [readTime, setReadTime] = useState('')
+  const [titleInBanner, setTitleInBanner] = useState(false)
+  const [tags, setTags] = useState('')
   const [content, setContent] = useState('')
   const [file, setFile] = useState(null)
   const [percent, setPercent] = useState(0)
@@ -212,6 +218,11 @@ export default function CreateBlogPage() {
         cover_image: coverImage,
         content,
         altTag,
+        category,
+        excerpt,
+        readTime,
+        titleInBanner,
+        tags: tags.split(',').map((t) => t.trim()).filter(Boolean).join(','),
         metaTitle,
         metaDes: metaDescription,
         customURL: customURL.includes('-')
@@ -380,6 +391,58 @@ export default function CreateBlogPage() {
             placeholder="Meta description for SEO"
           />
         </div>
+
+        {/* Article card and header fields */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full border border-gray-300 p-2 rounded-md"
+          >
+            <option value="">None (shown under All only)</option>
+            {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">Excerpt</label>
+          <textarea
+            value={excerpt}
+            onChange={(e) => setExcerpt(e.target.value)}
+            className="w-full border border-gray-300 p-2 rounded-md"
+            rows={3}
+            placeholder="Shown on article cards and under the article title. Defaults to the meta description."
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Read time</label>
+            <input
+              type="text"
+              value={readTime}
+              onChange={(e) => setReadTime(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded-md"
+              placeholder="e.g. 4 min (worked out from the content if empty)"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Tags</label>
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded-md"
+              placeholder="Comma separated, e.g. AI Research, Surveys"
+            />
+          </div>
+        </div>
+
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" checked={titleInBanner} onChange={(e) => setTitleInBanner(e.target.checked)} />
+          The cover image already shows the article title (hides the text title under it)
+        </label>
 
         {/* Custom URL */}
         <div>

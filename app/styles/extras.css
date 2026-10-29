@@ -1,0 +1,24 @@
+/* Additions the design export does not cover. */
+
+/* Calendly replaces the design's own date-and-time picker after "Pick a Time". */
+.tp-calendly{position:relative;height:min(700px,calc(100vh - 260px));min-height:420px;margin-top:8px}
+.tp-calendly .calendly-inline-widget{height:100%}
+.tp-calendly-back{display:block;margin-top:10px;padding:0;border:0;background:none;color:var(--violet,#433EB1);font-weight:700;font-size:.8125rem;cursor:pointer}
+
+/* The design's article stylesheet hides the heading, meta and deck because its banner
+   images carry the title. Posts whose cover is a plain image (titleInBanner unset) show
+   them in the band under the banner instead. */
+html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text h1,
+html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text .article-meta{position:static!important;width:auto!important;height:auto!important;overflow:visible!important;clip:auto!important;white-space:normal!important}
+html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text .article-meta{display:inline-block;margin:0 0 12px!important;padding:5px 11px!important}
+html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text h1{margin:0 0 4px!important}
+html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text .article-deck{display:block!important;margin-bottom:14px}
+
+/* Home walkthroughs (hero and product tabs): the video plays muted inside its slot,
+   with mute and fullscreen buttons at the bottom. */
+html:has(.tp-home) .tp-autoplay{overflow:hidden}
+html:has(.tp-home) .tp-autoplay .tp-autoplay-video{position:absolute;inset:0;z-index:4;width:100%;height:100%;object-fit:cover;background:#110f35}
+html:has(.tp-home) .tp-autoplay-controls{position:absolute;right:16px;bottom:16px;z-index:5;display:flex;gap:8px}
+html:has(.tp-home) .tp-autoplay-controls button{display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid rgba(255,255,255,.3);border-radius:50%;background:rgba(17,15,53,.55);color:#fff;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s ease}
+html:has(.tp-home) .tp-autoplay-controls button:hover,html:has(.tp-home) .tp-autoplay-controls button:focus-visible{background:rgba(17,15,53,.85)}
+html:has(.tp-home) .tp-autoplay-controls svg{width:20px;height:20px}

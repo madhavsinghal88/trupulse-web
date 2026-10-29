@@ -1,86 +1,26 @@
-
-// import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
-// import "./globals.css";
-
-// export const metadata = {
-//   title: "TruPulse",
-//   description: "Unlock real-time HR insights with TruPulse. TruPulse’s AI Agent conducts employee 1:1s, focus groups, and surveys—delivering polished executive summaries and metrics in minutes.",
-// };
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body>
-//         <ClientLayoutWrapper>
-//           {/* <TopBanner /> */}
-//           {children}
-//         </ClientLayoutWrapper>
-//       </body>
-//     </html>
-//   );
-// }
-
-
-// import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
-// import Script from "next/script";
-// import "./globals.css";
-
-// export const metadata = {
-//   title: "TruPulse",
-//   description:
-//     "Unlock real-time HR insights with TruPulse. TruPulse’s AI Agent conducts employee 1:1s, focus groups, and surveys—delivering polished executive summaries and metrics in minutes.",
-// };
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <head>
-//         {/* Tawk.to Script */}
-//         <Script
-//           id="tawk-to"
-//           strategy="afterInteractive"
-//           dangerouslySetInnerHTML={{
-//             __html: `
-//               var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-//               (function(){
-//                 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-//                 s1.async=true;
-//                 s1.src='https://embed.tawk.to/68a454ec84efb51929abe507/1j30unh0i';
-//                 s1.charset='UTF-8';
-//                 s1.setAttribute('crossorigin','*');
-//                 s0.parentNode.insertBefore(s1,s0);
-//               })();
-//             `,
-//           }}
-//         />
-//       </head>
-//       <body>
-//         <ClientLayoutWrapper>
-//           {/* <TopBanner /> */}
-//           {children}
-//         </ClientLayoutWrapper>
-//       </body>
-//     </html>
-//   );
-// }
-
-
-
-// app/layout.jsx
-import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
 import Script from "next/script";
-import "./globals.css";
+import { SITE } from "@/lib/site";
 
+// Tailwind (globals.css) is loaded by the blog admin layout only: its preflight reset
+// would override the browser defaults the marketing pages' stylesheets rely on.
 export const metadata = {
-  title: "TruPulse",
+  metadataBase: new URL(SITE),
+  title: "TruPulse | AI-Led Surveys, 1:1 Discussions & Focus Groups",
   description:
-    "Unlock real-time HR insights with TruPulse. TruPulse’s AI Agent conducts employee 1:1s, focus groups, and surveys—delivering polished executive summaries and metrics in minutes.",
+    "AI-led research to understand the people who matter to your organization. Create, conduct, and analyze surveys, 1:1 discussions, and focus groups—with your team guiding the process.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XLP9J3VE6L"
@@ -98,28 +38,8 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-          {/* Tawk.to only on Pricing */}
-      <Script
-        id="tawk-to"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-              s1.async=true;
-              s1.src='https://embed.tawk.to/68ba8a2e3c8ad919211982bf/1j4cani0j';
-              s1.charset='UTF-8';
-              s1.setAttribute('crossorigin','*');
-              s0.parentNode.insertBefore(s1,s0);
-            })();
-          `,
-        }}
-      />
       </head>
-      <body>
-        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

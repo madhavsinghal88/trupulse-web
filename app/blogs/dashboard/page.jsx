@@ -237,7 +237,7 @@ export default function AdminDashboard() {
                           <Pencil size={16} />
                         </button>
                       </Link>
-                      <Link
+                      <a
                         href={
                           post.data.customURL?.length > 3
                             ? `/blogs/preview/${post.data.customURL}`
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
                         >
                           <Eye size={16} />
                         </button>
-                      </Link>
+                      </a>
                       <button
                         title="Delete"
                         onClick={() => handleDelete(post.id)}
@@ -313,7 +313,7 @@ export default function AdminDashboard() {
                     <Pencil size={16} />
                   </button>
                 </Link>
-                <Link
+                <a
                   href={
                     post.data.customURL?.length > 3
                       ? `/blogs/preview/${post.data.customURL}`
@@ -330,7 +330,7 @@ export default function AdminDashboard() {
                   >
                     <Eye size={16} />
                   </button>
-                </Link>
+                </a>
                 <button
                   title="Delete"
                   onClick={() => handleDelete(post.id)}

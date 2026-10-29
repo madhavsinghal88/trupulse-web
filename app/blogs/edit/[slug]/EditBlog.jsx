@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, storage } from "@/firebase";
+import { CATEGORIES } from "@/lib/articles";
 import { doc, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Loader from "@/app/components/common/Loader";
@@ -51,6 +52,10 @@ export default function EditBlog({ posts }) {
   const [percent, setPercent] = useState(0);
   const [createDate, setCreateDate] = useState("");
   const [tags, setTags] = useState([]);
+  const [category, setCategory] = useState("");
+  const [excerpt, setExcerpt] = useState("");
+  const [readTime, setReadTime] = useState("");
+  const [titleInBanner, setTitleInBanner] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [postLoading, setPostLoading] = useState(true);
 
@@ -95,6 +100,10 @@ export default function EditBlog({ posts }) {
         setTags(
           selectedPost.data.tags ? selectedPost.data.tags.split(",") : []
         );
+        setCategory(selectedPost.data.category || "");
+        setExcerpt(selectedPost.data.excerpt || "");
+        setReadTime(selectedPost.data.readTime || "");
+        setTitleInBanner(selectedPost.data.titleInBanner === true);
         setCreateDate(selectedPost.data.created_at || "");
         setPostLoading(false);
       } else {
@@ -270,7 +279,11 @@ export default function EditBlog({ posts }) {
               .split(" ")
               .join("-"),
         content,
-        tags: tags.join(","),
+        tags: tags.map((t) => t.trim()).filter(Boolean).join(","),
+        category,
+        excerpt,
+        readTime,
+        titleInBanner,
         last_edit: serverTimestamp(),
         isPublished: post.data.isPublished,
       });
@@ -451,6 +464,44 @@ export default function EditBlog({ posts }) {
           placeholder="Custom URL"
           className="w-full border rounded p-2"
         />
+
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full border rounded p-2"
+          aria-label="Category"
+        >
+          <option value="">No category (shown under All only)</option>
+          {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+
+        <textarea
+          value={excerpt}
+          onChange={(e) => setExcerpt(e.target.value)}
+          placeholder="Excerpt: shown on article cards and under the title (defaults to the meta description)"
+          rows={3}
+          className="w-full border rounded p-2"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            value={readTime}
+            onChange={(e) => setReadTime(e.target.value)}
+            placeholder="Read time, e.g. 4 min (worked out from the content if empty)"
+            className="w-full border rounded p-2"
+          />
+          <input
+            value={tags.join(",")}
+            onChange={(e) => setTags(e.target.value.split(","))}
+            placeholder="Tags, comma separated"
+            className="w-full border rounded p-2"
+          />
+        </div>
+
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" checked={titleInBanner} onChange={(e) => setTitleInBanner(e.target.checked)} />
+          The cover image already shows the article title (hides the text title under it)
+        </label>
 
         <label className="block font-medium">Blog Content</label>
         <div className="bg-white border border-gray-300 rounded-md">
