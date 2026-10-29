@@ -13,6 +13,7 @@ import ProductTabs from "./_components/home/ProductTabs";
 import HowItWorks from "./_components/home/HowItWorks";
 import UseCases from "./_components/home/UseCases";
 import BrandRotator from "./_components/home/BrandRotator";
+import ReportViews from "./_components/home/ReportViews";
 import SampleReports from "./_components/home/SampleReports";
 import { FAQ } from "./_components/faq";
 import VideoPlayer from "./_components/home/VideoPlayer";
@@ -72,7 +73,7 @@ export default async function HomePage() {
               From your first question to findings you can use, in four steps.
             </SectionHead>
             <HowItWorks />
-            <div className="human-note reveal"><strong>Keep the learning going</strong><p>Bring related sessions together in campaigns to support ongoing listening and follow-up research.</p></div>
+            <div className="human-note reveal"><strong>Connect your sessions. See the bigger picture.</strong><p>Group related sessions into a Campaign. Review each session’s report, then explore a Campaign report that brings together insights from all its sessions.</p></div>
           </div>
         </section>
 
@@ -81,17 +82,7 @@ export default async function HomePage() {
             <SectionHead label="Reports built around your question" title="From every response to one clear view.">
               TruPulse turns participant feedback into structured reports that connect findings to your research objectives&mdash;with supporting evidence and suggested next steps for your team to review.
             </SectionHead>
-            <div className="split-feature reveal">
-              <div className="tp-shot" style={{ aspectRatio: "5/3" }}>
-                <img className="on" src="/assets/home/report-session.webp" alt="Session report: Sales Attrition Insights with themes, counts and a participant quote" width="1600" height="960" loading="lazy" decoding="async" />
-              </div>
-              <ul className="feature-rows plain-rows">
-                <li><div><h3>See the key findings</h3><p>Understand the main takeaways and how they relate to what you set out to learn.</p></div></li>
-                <li><div><h3>Explore patterns and differences</h3><p>Explore recurring themes, contrasting perspectives, and question-level findings, with context from participants&rsquo; responses.</p></div></li>
-                <li><div><h3>Examine the supporting evidence</h3><p>Examine the supporting evidence and illustrative quotes included in each report. Explore the complete source material through discussion transcripts and survey responses.</p></div></li>
-                <li><div><h3>Consider what comes next</h3><p>Use conclusions and Suggested Next Steps to guide discussion, further research, and decisions.</p></div></li>
-              </ul>
-            </div>
+            <ReportViews />
             <div className="report-formats reveal">
               <strong>Your findings, your format.</strong>
               <p>Get reports for an entire session or one participant, and customize them by adding or removing sections and making editorial comments. Access discussion transcripts and complete survey responses. Download reports in Word, PDF, or PowerPoint where available, and export survey response data to Excel or CSV.</p>
@@ -137,13 +128,10 @@ export default async function HomePage() {
             <div className="reveal faq-intro">
               <p className="eyebrow">Questions about TruPulse?</p>
               <h2>Start here. Ask us more.</h2>
-              <p>Get a quick introduction below, or ask our AI assistant about session types, how TruPulse works, and research for your organization.</p>
-              <ChatButton className="btn primary">Ask the TruPulse AI Assistant <span>&rarr;</span></ChatButton>
-              <div className="faq-prompts">
-                <ChatButton ask="Which session type fits my question?">Which session type fits my question?</ChatButton>
-                <ChatButton ask="How could TruPulse help my organization?">How could TruPulse help my organization?</ChatButton>
-              </div>
-              <p className="faq-alt">Prefer a conversation? <DemoButton className="linkish">Book a Demo</DemoButton>.</p>
+              <p>Explore the FAQs, or ask our AI assistant how TruPulse works and how it could help your organization.</p>
+              <ChatButton className="btn primary" data-chat-ask="">Ask the TruPulse AI Assistant <span>&rarr;</span></ChatButton>
+              <p className="faq-alt tp-faq-alt">Prefer a conversation?</p>
+              <DemoButton className="btn outline tp-faq-demo">Book a Demo <span>&rarr;</span></DemoButton>
             </div>
             <div className="faq-list reveal delay-1">
               {FAQ.map(([q, answers]) => (

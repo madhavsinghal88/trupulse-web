@@ -64,7 +64,7 @@ export default function Hero() {
             <button className="btn primary" type="button" onClick={() => openDemo("form")}>Book a Demo <span>&rarr;</span></button>
           </div>
           <p className="hero-cta-support">Bring one question about your organization. See how TruPulse researches it.</p>
-          <div className="hero-keyline"><i aria-hidden="true"></i><span><strong>1:1 Discussions</strong> · Focus Groups · Surveys</span></div>
+          <div className="hero-keyline"><i aria-hidden="true"></i><span className="tp-kl"><strong>1:1 Discussions</strong><b aria-hidden="true">·</b>Focus Groups<b aria-hidden="true">·</b>Surveys</span></div>
         </div>
         <div className="signal-stage reveal in delay-1" aria-label="TruPulse walkthrough video preview">
           <div className="developer-video-slot hero-video-frame tp-autoplay">

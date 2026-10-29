@@ -18,8 +18,8 @@ const PRODUCTS = [
   {
     tab: "Surveys with AI-powered follow-ups",
     title: "Go beyond the score. Understand the answer.",
-    body: "Approve your survey questions, then add follow-up questions where you want deeper insight. Choose their intent—understand drivers, gather examples, identify systemic issues, or surface actionable recommendations—to explore participants’ answers during the survey.",
-    benefits: ["Fixed: Everyone receives the same follow-up question.", "Conditional: A follow-up question appears when an answer meets your criteria.", "Adaptive: AI asks a relevant follow-up question based on the response and your research intent."],
+    body: "Combine structured questions with follow-ups that explore the reasons behind each answer. AI helps recommend questions and follow-up approaches based on your research objectives. Review and approve the survey before launch.",
+    benefits: [<><strong>Base questions:</strong> The core questions that address your research objectives.</>, <><strong>Fixed follow-ups:</strong> The same follow-up question for everyone, gathering consistent detail.</>, <><strong>Conditional follow-ups:</strong> Follow-up questions that appear only when an answer meets criteria you set.</>, <><strong>Adaptive follow-ups:</strong> Follow-up questions tailored to each participant’s answers to explore the reasons behind them.</>],
     best: "Employee engagement · Customer satisfaction · Member experience",
     video: "Employee Survey product walkthrough",
     note: "See a survey built and analyzed",
@@ -144,7 +144,7 @@ export default function ProductTabs() {
           <span className="kicker">{item.tab}</span>
           <h3>{item.title}</h3>
           <p>{item.body}</p>
-          <ul className="feature-list">{item.benefits.map((b) => <li key={b}><i>✓</i>{b}</li>)}</ul>
+          <ul className="feature-list">{item.benefits.map((b, i) => <li key={i}><i>✓</i><span>{b}</span></li>)}</ul>
           <div className="best-for">
             <small>EXAMPLE USE CASES</small>
             <strong hidden={narrow}>{item.best}</strong>

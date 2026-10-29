@@ -70,28 +70,12 @@ function useStepHeights(listRef) {
 
 export default function HowItWorks() {
   const [active, setActive] = useState(0);
-  const [visible, setVisible] = useState(false);
-  const [restartKey, setRestartKey] = useState(0);
-  const sceneRef = useRef(null);
   const listRef = useRef(null);
   useStepHeights(listRef);
 
-  // Advance every 5s while the section is on screen; a click restarts the count.
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => setVisible(entries[0].isIntersecting), { threshold: 0.2 });
-    observer.observe(sceneRef.current);
-    return () => observer.disconnect();
-  }, []);
-  useEffect(() => {
-    if (!visible) return;
-    const timer = setInterval(() => {
-      if (!document.hidden) setActive((a) => (a + 1) % STEPS.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [visible, restartKey]);
 
   return (
-    <div className="split-feature reveal" ref={sceneRef}>
+    <div className="split-feature reveal">
       <div className="tp-shot tp-hiw-stage" style={{ aspectRatio: "16/9" }} data-step-visual="">
         {STEPS.map((s, i) => (
           <img key={s.img} src={s.img} alt={s.alt} width="1600" height="900" loading="lazy" decoding="async" className={i === active ? "on" : undefined} />
@@ -100,7 +84,7 @@ export default function HowItWorks() {
       <ol className="feature-rows step-rows" data-step-rows="" ref={listRef}>
         {STEPS.map((s, i) => (
           <li key={s.title} className={i === active ? "active" : undefined}>
-            <button type="button" onClick={() => { setActive(i); setRestartKey((k) => k + 1); }}>
+            <button type="button" onClick={() => setActive(i)}>
               <span>{String(i + 1).padStart(2, "0")}</span>
               <div><h3>{s.title}</h3><p>{s.body}</p></div>
             </button>

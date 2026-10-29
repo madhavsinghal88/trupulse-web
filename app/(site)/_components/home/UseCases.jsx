@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useDemo } from "../DemoProvider";
 import { tabKeyDown, useEqualHeight } from "./tabs";
 
 const USE_CASES = [
@@ -50,7 +49,6 @@ const USE_CASES = [
 ];
 
 export default function UseCases() {
-  const { openDemo } = useDemo();
   const [active, setActive] = useState(0);
   const panelRef = useRef(null);
   useEqualHeight(panelRef, USE_CASES.length, active, setActive);
@@ -83,9 +81,6 @@ export default function UseCases() {
         <p className="uc-chip-label">Example use cases</p>
         <div className="use-case-tags">{item.tags.map((t) => <span key={t}>{t}</span>)}</div>
         <div className="use-case-ways"><small>Ways to explore it</small><p>{item.ways}</p></div>
-        <button className="btn primary uc-demo" type="button" onClick={() => openDemo("form", { useCase: `${item.kicker}: ${item.title}` })}>
-          Explore this in a demo <span>&rarr;</span>
-        </button>
       </div>
     </div>
   );
