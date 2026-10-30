@@ -27,7 +27,7 @@ export function initChat(dock, { faq, openDemo }) {
   var picker = dock.querySelector("[data-chat-picker]");
   var threadsEl = dock.querySelector("[data-chat-threads]");
   var emptyEl = dock.querySelector("[data-chat-empty]");
-  var view = "home";
+  var view = "chat";
   var threads = [];
   var current = null;
 
@@ -44,7 +44,12 @@ export function initChat(dock, { faq, openDemo }) {
     if (!open) closeMenu();
   }
   setOpen(false);                       /* closed until the icon is clicked */
-  listen(launch, "click", function () { setOpen(panel.hidden); });
+  /* Opening goes straight into a conversation; reopening keeps the current one. */
+  listen(launch, "click", function () {
+    var opening = panel.hidden;
+    if (opening && !current) startConversation();
+    setOpen(opening);
+  });
   listen(dock.querySelector("[data-chat-close]"), "click", function () { setOpen(false); launch.focus(); });
   on("keydown", function (e) {
     if (e.key !== "Escape") return;
@@ -60,7 +65,7 @@ export function initChat(dock, { faq, openDemo }) {
     [].forEach.call(dock.querySelectorAll("[data-chat-tab]"), function (t) {
       t.classList.toggle("is-on", t.dataset.chatTab === next || (next === "chat" && t.dataset.chatTab === "messages"));
     });
-    backBtn.hidden = next === "home";
+    backBtn.hidden = next !== "chat";
     picker.hidden = true;
     closeMenu();
     if (next === "chat") {
@@ -79,7 +84,7 @@ export function initChat(dock, { faq, openDemo }) {
   [].forEach.call(dock.querySelectorAll("[data-chat-tab]"), function (t) {
     listen(t, "click", function () { go(t.dataset.chatTab); });
   });
-  listen(backBtn, "click", function () { go(view === "chat" && threads.length > 1 ? "messages" : "home"); });
+  listen(backBtn, "click", function () { go("messages"); });
 
   /* ---------- the conversation menu ---------- */
   function closeMenu() { menu.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); }
@@ -95,7 +100,7 @@ export function initChat(dock, { faq, openDemo }) {
       closeMenu();
       if (b.dataset.chatAction === "new") startConversation();
       else if (b.dataset.chatAction === "clear") { if (current) { current.msgs = []; } log.innerHTML = ""; greet(); }
-      else { setOpen(false); openDemo(); }
+      else { setOpen(false); openDemo(null); }
     });
   });
 
@@ -160,30 +165,74 @@ export function initChat(dock, { faq, openDemo }) {
       return words.filter(function (w) { return q.indexOf(w) > -1; }).length >= 2;
     });
     if (hit) return hit.a;
-    if (score(q, APP_HELP.keywords) > 0) return APP_HELP.answer;
     var best = null, bestScore = 0;
     KNOWLEDGE.forEach(function (k) {
       var sc = score(q, k.keywords);
       if (sc > bestScore) { best = k; bestScore = sc; }
     });
-    return best ? best.answer : FALLBACK;
+    if (best) return best.answer;
+    if (score(q, APP_HELP.keywords) > 0) return APP_HELP.answer;
+    return overlap(q) || FALLBACK;
+  }
+  /* Last resort before the fallback: the answer that shares the most meaningful words
+     with the question (at least two), so unlisted phrasings still find something. */
+  var STOP = ["what", "which", "would", "could", "should", "there", "their", "about", "does", "have", "with", "your", "that", "this", "from", "into", "they", "them", "when", "where", "will", "just", "like", "want", "need", "know", "tell", "trupulse"];
+  function overlap(q) {
+    var words = q.replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(function (w) { return w.length > 3 && STOP.indexOf(w) < 0; });
+    var best = null, bestHits = 1;
+    KNOWLEDGE.forEach(function (k) {
+      var text = k.answer.toLowerCase();
+      var hits = words.filter(function (w) { return text.indexOf(w.replace(/s$/, "")) > -1; }).length;
+      if (hits > bestHits) { best = k; bestHits = hits; }
+    });
+    return best && best.answer;
   }
   /* Matched keywords, weighted by length so specific phrases beat single words.
-     Short keywords only count as whole words ("hi" is not in "this"). */
+     Short keywords only count as whole words ("hi" is not in "this"), and a plural
+     keyword also matches its singular ("contacts" matches "contact"). */
   function score(q, keywords) {
     return keywords.reduce(function (sum, k) {
-      var found = k.length <= 4 && /^[a-z0-9]+$/.test(k) ? new RegExp("\\b" + k + "\\b").test(q) : q.indexOf(k) > -1;
+      var stem = k.length > 4 && /s$/.test(k) ? k.slice(0, -1) : k;
+      var found = k.length <= 4 && /^[a-z0-9]+$/.test(k) ? new RegExp("\\b" + k + "\\b").test(q) : q.indexOf(stem) > -1;
       return found ? sum + k.length : sum;
     }, 0);
   }
+  /* Booking a demo in the chat: ask for the same details as the demo form, one at a
+     time, then open the calendar with them filled in. */
+  var BOOK_INTENT = /\b(book|schedule|arrange|set up|get)\b.*\b(demo|call|meeting)\b|\b(demo|call) (please|for me)\b|^demo\??$/;
+  var BOOK_STEPS = [
+    { key: "name", ask: "Great, let’s book your demo. What’s your full name?" },
+    { key: "email", ask: "Thanks! What’s your work email address?", check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "That doesn’t look like an email address—could you check it?"; } },
+    { key: "organization", ask: "Which organization are you with?" },
+    { key: "explore", ask: "What would you like to explore in the demo? Tell us about your audience or what you want to learn—or type “skip”." },
+  ];
+  var booking = null;
+  function bookStep(text) {
+    var step = BOOK_STEPS[booking.at];
+    var problem = step.check && step.check(text);
+    if (problem) return problem;
+    booking.details[step.key] = step.key === "explore" && /^skip$/i.test(text) ? "" : text;
+    booking.at += 1;
+    if (booking.at < BOOK_STEPS.length) return BOOK_STEPS[booking.at].ask;
+    var details = booking.details;
+    booking = null;
+    setTimeout(function () { setOpen(false); openDemo(details); }, 1200);
+    return "Thanks, " + details.name.split(" ")[0] + "! Opening the calendar so you can pick a time—your details are already filled in.";
+  }
   function say(text) {
     bubble(text, true);
-    typing(function () { bubble(reply(text), false); });
+    typing(function () {
+      var answer;
+      if (booking && /^(cancel|stop|never ?mind)$/i.test(text)) { booking = null; answer = "No problem—I’ve stopped the booking. What else would you like to know about TruPulse?"; }
+      else if (booking) answer = bookStep(text);
+      else if (BOOK_INTENT.test(text.toLowerCase())) { booking = { at: 0, details: {} }; answer = BOOK_STEPS[0].ask + " (Type “cancel” anytime to stop.)"; }
+      else answer = reply(text);
+      bubble(answer, false);
+    });
   }
 
   function greet() {
-    bubble("Hi! I can help you explore how TruPulse uses AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups\u2014with your team guiding the process.", false);
-    bubble("What would you like to understand about your employees, customers, students, members, or community?", false);
+    bubble("Hi! I can help you explore how TruPulse uses AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups\u2014with your team guiding the process. What would you like to understand about your employees, customers, students, members, or community?", false);
     var tryL = document.createElement("p"); tryL.className = "chat-try"; tryL.textContent = "Try asking\u2026"; log.appendChild(tryL);
     chips(["How could TruPulse help my organization?", "Which should I use\u2014a survey, 1:1 discussion, or focus group?", "What findings and reports will I get?"]);
   }

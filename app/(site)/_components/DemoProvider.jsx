@@ -11,12 +11,12 @@ export const useDemo = () => useContext(DemoContext);
 const FOCUSABLE = 'a[href],button:not([disabled]),input,textarea,select,iframe,[tabindex]:not([tabindex="-1"])';
 
 export function DemoProvider({ children }) {
-  const [demo, setDemo] = useState({ open: false, mode: "form", step: "form", useCase: "" });
+  const [demo, setDemo] = useState({ open: false, mode: "form", step: "form", useCase: "", prefill: null });
 
   // mode "form" shows the request form, "video" the walkthrough. step "calendly" skips
-  // straight to scheduling, for ?calendly=1 links.
-  const openDemo = useCallback((mode = "form", { useCase = "", step = "form" } = {}) => {
-    setDemo({ open: true, mode, step, useCase });
+  // straight to scheduling, for ?calendly=1 links and for details collected in the chat.
+  const openDemo = useCallback((mode = "form", { useCase = "", step = "form", details = null } = {}) => {
+    setDemo({ open: true, mode, step, useCase, prefill: details });
   }, []);
   const closeDemo = useCallback(() => setDemo((d) => ({ ...d, open: false })), []);
 
@@ -28,7 +28,7 @@ export function DemoProvider({ children }) {
   );
 }
 
-function DemoModal({ open, mode, step: startStep, useCase, onClose }) {
+function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
   const modalRef = useRef(null);
   const exploreRef = useRef(null);
   const [step, setStep] = useState("form");
@@ -38,6 +38,7 @@ function DemoModal({ open, mode, step: startStep, useCase, onClose }) {
     if (!open) return;
     const lastFocused = document.activeElement;
     setStep(startStep);
+    if (prefill) setDetails(prefill);
     document.body.classList.add("modal-open");
     const timer = setTimeout(() => {
       const target = mode === "form" && startStep === "form" ? "input" : ".modal-close";
@@ -52,7 +53,7 @@ function DemoModal({ open, mode, step: startStep, useCase, onClose }) {
       // Return focus to whatever opened the dialog.
       lastFocused?.focus?.();
     };
-  }, [open, mode, startStep, useCase, onClose]);
+  }, [open, mode, startStep, useCase, prefill, onClose]);
 
   // "Explore this in a demo" carries the chosen use case into the form. Runs once the
   // form step is mounted, which can be a render after opening.

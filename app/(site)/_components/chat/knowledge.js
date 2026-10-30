@@ -1,46 +1,77 @@
-// What the website assistant knows beyond the FAQ, drawn from the TruPulse User Guide
-// (trupulse-feedback-be/src/dashboard/data/trupulse_user_guide.pdf).
+// What the website assistant knows beyond the FAQ, drawn from the customer knowledge base
+// (KNOWLEDGE_BASE.md, next to this file). Update that document first, then mirror it here.
 //
-// Only what a prospective customer should hear on the public site. Deliberately left out:
-// how to use the signed-in app (navigation, wizard steps, settings screens, sign-in and
-// passwords), plan prices, and anything the guide marks as feature-flagged or unconfirmed.
-// Questions about using the app are answered by APP_HELP instead.
+// Scope: product features, what they are for, and how organizations use TruPulse.
+// Out of scope: Dashboard click-paths, TruPulse Connect (participant app) steps, internal
+// admin troubleshooting, and plan prices. Questions about using the app get APP_HELP.
 //
 // Each entry: keywords (lowercase words or phrases matched against the question; the
 // best-scoring entry wins) and the answer.
 
 export const KNOWLEDGE = [
   {
-    keywords: ["session type", "which should i use", "survey, 1:1", "fits my question", "difference between", "choose between"],
-    answer: "It depends on what you need to learn. Use a survey to hear from a wide audience with structured questions and AI follow-ups. Use AI-led 1:1 discussions to explore individual experiences in depth. Use an AI-moderated focus group when you want people to build on each other’s perspectives. Many teams combine them—for example, a survey first, then discussions to explore the themes that emerge.",
+    keywords: ["what is trupulse", "what does trupulse do", "about trupulse", "tell me about", "what is this", "overview"],
+    answer: "TruPulse is an AI-led research platform that creates, conducts, and analyzes surveys, 1:1 discussions, and focus groups. Your team sets the direction, approves the research, and reviews the findings, while AI prepares the session, runs the conversations or surveys, and structures the analysis. The goal: go beyond what people think and understand why, with richer feedback and less manual work.",
   },
   {
-    keywords: ["help my organization", "help my company", "what can trupulse do", "how could trupulse", "use case", "use cases"],
-    answer: "TruPulse helps you understand the people your decisions affect—employees, customers, students, members, and communities. Teams use it to understand experiences, discover unmet needs, test ideas, navigate change, strengthen engagement, and check that messages land as intended. You set the question; TruPulse creates the session, conducts it with AI, and prepares findings for your team to review.",
+    keywords: ["feature", "features", "benefit", "benefits", "advantage", "why use", "why should", "what can it do", "what can trupulse do", "how can it help", "how it can help", "how can trupulse help", "help my org", "help us", "value"],
+    answer: "Key features and how they help: 1) A session creation agent turns your question into a ready-to-review survey, 1:1 discussion, or focus group—no research design from scratch. 2) AI conducts the research, asking follow-ups so you learn why, not just what. 3) Participants join anytime, by chat or voice, in 17 languages. 4) Reports bring key findings, themes, quotes, and suggested next steps together—no manual analysis. 5) You stay in control with approvals, research guidelines, roles, branding, and anonymity options. The result: richer feedback with less manual work for your team.",
   },
   {
-    keywords: ["1:1", "one-on-one", "one on one", "1 on 1", "discussion", "interview"],
-    answer: "In an AI-led 1:1 discussion, TruPulse’s AI has a private conversation with each participant about the topics you approved, asking follow-up questions to understand the reasons behind their answers. Participants take part whenever it suits them, by chat or voice, in any of 17 languages. You get transcripts, individual reports, and a session report with themes and supporting quotes.",
+    keywords: ["who is it for", "who uses", "who can use", "schools", "nonprofit", "public agenc", "government", "small business", "industry", "industries", "sector", "hospital", "healthcare", "university", "retail", "bank"],
+    answer: "TruPulse is for businesses, schools, nonprofits, public agencies, and other organizations that need to understand employees, customers, students, members, or communities.",
   },
   {
-    keywords: ["focus group", "group discussion", "moderat", "observer"],
-    answer: "In an AI-moderated focus group, several participants join one live discussion while TruPulse’s AI moderates: it invites quieter voices, manages dominant speakers, asks for examples, and shares summaries so people can clarify or add more. You can add observers who watch live without taking part; participants are told when an observer is present.",
+    keywords: ["different from", "difference from", "compared to", "versus", "traditional survey", "survey tool", "why not just", "qualtrics", "surveymonkey", "google forms"],
+    answer: "Unlike a traditional survey tool, TruPulse can ask relevant follow-up questions, run individual and group discussions, and analyze the responses—so your team sees people’s experiences and the reasons behind them, not only scores or raw answers.",
   },
   {
-    keywords: ["survey", "follow-up", "follow up", "question types", "rating", "multiple choice"],
-    answer: "TruPulse surveys support single choice, multiple choice, rating, and open-text questions. You can add follow-ups where you want deeper insight: Fixed (everyone sees it), Conditional (shown when an answer meets a rule, such as a rating below a threshold or a particular choice), or Adaptive (AI asks a relevant follow-up based on the response and your research intent).",
+    keywords: ["how does it work", "how does trupulse work", "how it works", "journey", "get started", "getting started"],
+    answer: "Four steps: 1) Define what you want to understand—start from a topic, objective, or use-case template, and TruPulse’s session creation agent helps you shape a session guide for your approval. 2) Invite the right participants from saved contacts, groups, or an imported list, and track who has started. 3) Let AI conduct the research, asking relevant follow-ups. 4) Review the findings—key findings, themes, and supporting evidence—and decide what’s next.",
   },
   {
-    keywords: ["create", "set up", "setup", "get started", "how does it work", "how it works", "template", "prompt"],
-    answer: "You start with a question or research objective—or a template from the use case library. TruPulse’s AI asks a few questions to clarify your audience and goals, then drafts the session: topics or questions, participant-facing descriptions, and the invitation. Your team reviews and edits everything, chooses participants, and approves the session before launch. You can also test it with a few people first.",
+    keywords: ["session type", "which should i use", "which format", "format should", "survey, 1:1", "fits my question", "difference between", "choose between", "which one"],
+    answer: "Choose the format that fits the question. Surveys give breadth with explanation—structured questions plus AI follow-ups. AI-led 1:1 discussions give depth on individual experiences. AI-moderated focus groups let people build on each other’s perspectives. Many teams combine them—for example, a survey first, then discussions to explore the themes that emerge.",
   },
   {
-    keywords: ["report", "findings", "insight", "analysis", "analyze", "export", "pdf", "powerpoint", "word", "excel", "csv"],
-    answer: "TruPulse prepares reports built around your research objective: key findings, themes and differences, supporting quotes, engagement measures, and suggested next steps for your team to review. Reports are available for a whole session or an individual participant, and can be customized and branded. Download them as PDF, Word, or PowerPoint, and export survey responses to Excel or CSV.",
+    keywords: ["1:1", "one-on-one", "one on one", "1 on 1", "discussion", "interview", "stay interview"],
+    answer: "AI-led 1:1 discussions are private, AI-conducted interviews. Your team approves the discussion guide; AI runs each discussion, asking follow-ups that explore reasons and examples. Participants join when it suits them, by chat or voice, in any of 17 languages—so your team doesn’t have to schedule or run every interview. Great for stay interviews, customer discovery, and member feedback.",
   },
   {
-    keywords: ["metric", "score", "enps", "morale", "retention risk", "sentiment"],
-    answer: "Alongside themes and quotes, sessions can include AI-driven measures such as morale, retention risk, workload balance, communication clarity, and eNPS. You choose which measures to include for each session.",
+    keywords: ["survey", "follow-up", "follow up", "base question", "fixed", "conditional", "adaptive", "question types", "rating", "multiple choice"],
+    answer: "Surveys combine base questions with follow-ups that explore why someone answered as they did. Fixed follow-ups are the same for everyone; conditional follow-ups appear only when an answer meets criteria you set (including sentiment on free text); adaptive follow-ups are generated in real time from each participant’s answer. You choose the kind of “why” you want—what influenced the answer, an example, whether it’s a pattern, or suggestions—and approve the survey before launch.",
+  },
+  {
+    keywords: ["focus group", "group discussion", "moderat", "workshop", "observer"],
+    answer: "In an AI-moderated focus group, participants join a live group discussion while AI moderates: it invites quieter voices and manages dominant speakers, asks for examples and probes differing viewpoints, and shares summaries so people can clarify or add more. Your team approves the guide. Ideal for idea workshops, product concept feedback, and team improvement.",
+  },
+  {
+    keywords: ["create session", "create a session", "new session", "create a survey", "create a discussion", "create a focus group", "session creation", "creation agent", "set up", "setup", "prompt", "design research"],
+    answer: "TruPulse’s session creation agent turns your research question into a ready-to-review session. Choose a format (or ask which fits), describe your goals or start from a template, and answer a short clarifying Q&A. The agent then prepares the questions or topics, descriptions, invitations, and suggested follow-ups. You edit, approve, and launch when ready—your role stays on what you want to learn, not writing everything from a blank page.",
+  },
+  {
+    keywords: ["template", "templates", "use case library", "reuse"],
+    answer: "Templates are optional starters: begin from a use-case template, reuse a previous session, or use your own saved template. You can always bring your own topic, audience, and objectives instead.",
+  },
+  {
+    keywords: ["report", "findings", "insight", "analysis", "analyze", "summary", "quotes", "evidence", "next steps"],
+    answer: "Reports move you from collected responses to a shared view your team can act on: key findings tied to your objective, themes and differences, supporting evidence and quotes (with paths to transcripts or full responses), conclusions, and Suggested Next Steps for your team to consider. 1:1 reports are organized by topic, survey reports by question with follow-up explanations, and focus group reports show agreement and disagreement.",
+  },
+  {
+    keywords: ["export", "download", "pdf", "powerpoint", "word", "excel", "csv", "customize report", "individual report", "transcript"],
+    answer: "Get reports for an entire session or one participant, and customize them by adding or removing sections and editorial comments. Download reports in Word, PDF, or PowerPoint where available, and export survey response data to Excel or CSV. Discussion and focus group transcripts are available too.",
+  },
+  {
+    keywords: ["campaign", "campaigns", "multiple sessions", "combine sessions", "bigger picture"],
+    answer: "Group related sessions into a Campaign. Review each session’s report, then explore a Campaign report that brings insights together across all its sessions.",
+  },
+  {
+    keywords: ["use case", "use cases", "help my organization", "help my organisation", "help my company", "how could trupulse", "benefit my", "my organization", "my organisation", "my company", "my team", "my school", "examples", "onboarding", "retention", "customer satisfaction", "engagement", "change management", "communication"],
+    answer: "Teams use TruPulse to understand experiences, discover unmet needs, test ideas, navigate change, strengthen engagement, and check that communication lands as intended—with employees, customers, students, members, or communities. For example: surveys for breadth and 1:1s for depth on onboarding, focus groups to react to a product concept, or 1:1s to understand why people stay or leave. You can also bring your own question.",
+  },
+  {
+    keywords: ["participant", "invite", "invitation", "contact", "contacts", "audience", "groups", "import", "hris", "add user", "new user", "add employee", "phone", "mobile", "device", "laptop", "app to install", "download an app"],
+    answer: "You invite participants from your saved contacts, participant groups, or an imported list, then track who has started and finished in one workspace. Participants take part on any device—phone, tablet, or computer—at a time that suits them while the session is open.",
   },
   {
     keywords: ["language", "languages", "translate", "spanish", "arabic", "multilingual"],
@@ -48,59 +79,51 @@ export const KNOWLEDGE = [
   },
   {
     keywords: ["voice", "by voice", "speak", "spoken", "talk instead", "microphone", "audio"],
-    answer: "Yes—in 1:1 discussions, participants can respond by voice as well as chat, where their browser supports it.",
+    answer: "Yes—in 1:1 discussions, participants can respond by voice as well as chat.",
   },
   {
-    keywords: ["anonymous", "anonymity", "identified", "identity", "confidential"],
-    answer: "For each session, the creator chooses whether it is anonymous or identified, and participants are told which applies before they take part. In anonymous sessions, names are hidden from responses and reports—though details people share may still reveal who they are.",
+    keywords: ["anonymous", "anonymity", "identified", "identity", "confidential", "who can see", "privacy"],
+    answer: "The session Creator chooses anonymous or identified, and participants are told which applies before they take part. In anonymous sessions, names are hidden in responses and reports—though what people share may still identify them. In identified sessions, individual reports include the participant’s name for the Creator, people they authorize, and admins with global viewing access. Privacy also differs by type: surveys are solo, 1:1s are participant and AI, and focus groups include multiple participants.",
   },
   {
-    keywords: ["participant", "invite", "invitation", "join", "how do participants", "account"],
-    answer: "Participants are invited by email and join through a link—they see what the session is about, whether it is anonymous or identified, and the topics it will cover before they begin. They can take part on any device, at a time that suits them, while the session is open.",
-  },
-  {
-    keywords: ["contacts", "import", "hris", "upload", "audience", "groups"],
-    answer: "You choose participants from your own contact list: add people individually, import a CSV, save reusable groups, or sync from your HRIS. You can filter by attributes such as department or location to reach the right audience.",
-  },
-  {
-    keywords: ["schedule", "recurring", "repeat", "ongoing", "campaign", "pulse"],
-    answer: "Sessions can launch immediately or be scheduled, and can repeat on a regular cadence for ongoing listening. Related sessions can be brought together in campaigns, with a combined report across them.",
+    keywords: ["train", "training data", "model training", "machine learning", "use my data"],
+    answer: "No. Participant responses are not used to train AI models. They are used only to run your research and generate findings for your organization.",
   },
   {
     keywords: ["brand", "branding", "logo", "colors", "colours", "white label"],
-    answer: "You can bring your organization’s identity to the experience—your logo, colors, and fonts appear in participant invitations, sessions, and reports.",
+    answer: "Your organization’s identity appears on invitations, sessions, and reports, so participants get a consistent experience that reflects your brand.",
   },
   {
-    keywords: ["guardrail", "sensitive", "tone", "control the ai", "rules", "compliance"],
-    answer: "Your team sets guardrails for the AI: topics to avoid, tone, compliance language, and how sensitive subjects are handled. They apply across sessions, and every session is reviewed and approved by your team before launch.",
+    keywords: ["guardrail", "guideline", "sensitive", "tone", "control the ai", "rules", "compliance", "human review", "approve"],
+    answer: "You stay in control. Research guidelines set rules for the AI’s language, questions, and sensitive topics in line with your standards. Your team approves every session before launch and evaluates findings and evidence before acting.",
   },
   {
-    keywords: ["roles", "permissions", "access", "who can see", "admin"],
-    answer: "Access is managed with roles and permissions, so you decide who can create and run research, review responses, and see reports.",
+    keywords: ["roles", "permissions", "access", "admin", "team member", "teammate", "colleague", "add my team"],
+    answer: "Roles and permissions control who on your team can create research, review responses, and access reports.",
+  },
+  {
+    keywords: ["retention", "delete", "deletion", "how long", "keep data", "purge"],
+    answer: "You decide how long research data is kept and how deletion is managed, in line with your organization’s policy.",
   },
   {
     keywords: ["security", "secure", "encrypt", "aws", "hosting", "hosted", "data residency", "gdpr", "where is data", "stored"],
     answer: "TruPulse is hosted on Amazon Web Services. Data is encrypted in transit and at rest, and can be stored in the region that matches your regulatory requirements (for example, the US or Europe). TruPulse provides aggregated insight, not individual monitoring.",
   },
   {
-    keywords: ["retention", "delete", "deletion", "how long", "keep data", "purge"],
-    answer: "You control how long research data is kept. Set a retention period that matches your organization’s policy and data is deleted automatically when it ends.",
-  },
-  {
-    keywords: ["train", "training data", "model training", "machine learning"],
-    answer: "No. TruPulse does not use participant responses or any client data to train AI models. Your data is used only to conduct your research and prepare findings for your organization.",
+    keywords: ["case study", "customer story", "success story", "example customer", "proof"],
+    answer: "A global medical technology company used TruPulse to learn from 50 top sales performers in two weeks, with two leaders overseeing the work. AI ran ~30-minute 1:1 discussions plus follow-up surveys and prepared individual and executive reports—25+ hours of discussion analyzed. The findings informed targeted training, updated job descriptions, and plans to expand the research.",
   },
   {
     keywords: ["who is behind", "company behind", "scanta", "who makes"],
     answer: "TruPulse is developed by Scanta Inc.",
   },
   {
-    keywords: ["demo", "call", "meet", "see it", "trial"],
-    answer: "Happy to—use Book a Demo to pick a time, and bring one question about your organization. We’ll show you how TruPulse would research it.",
+    keywords: ["demo", "call", "meet", "see it", "trial", "walkthrough", "contact sales", "talk to"],
+    answer: "Happy to—use Book a Demo and bring one research question about your organization. We’ll show you how TruPulse creates, conducts, and reports on it. You can also email hello@trupulse.ai.",
   },
   {
     keywords: ["price", "pricing", "cost", "plan", "how much"],
-    answer: "Pricing depends on how many people you research and how often. Book a demo or email sales@trupulse.ai and we’ll put together the right option for you.",
+    answer: "Pricing depends on how many people you research and how often. Book a demo or email hello@trupulse.ai and we’ll put together the right option for you.",
   },
   {
     keywords: ["hello", "hi", "hey"],
@@ -108,10 +131,10 @@ export const KNOWLEDGE = [
   },
 ];
 
-// Questions about using the signed-in app are answered here rather than from the guide.
+// Questions about using the signed-in app: no click-paths here, just where to get help.
 export const APP_HELP = {
-  keywords: ["log in", "login", "sign in", "password", "sidebar", "dashboard", "settings", "my account", "subscription", "upgrade my plan", "error", "bug", "not working", "technical support"],
-  answer: "For help using the TruPulse app, signed-in users can find video walkthroughs under Tutorials and get help in Settings → Support & Troubleshooting. You can also email support@trupulse.ai and our team will help.",
+  keywords: ["log in", "login", "sign in", "password", "otp", "verification code", "notification", "tutorial", "sidebar", "dashboard", "settings", "my account", "subscription", "upgrade my plan", "error", "bug", "not working", "technical support"],
+  answer: "I can’t walk through the TruPulse app itself here. If you already use TruPulse, email support@trupulse.ai and our team will help. If you’re exploring TruPulse, Book a Demo and we’ll show you how it works for your question.",
 };
 
-export const FALLBACK = "I could not answer that one. Book a demo and we will walk through it with you, or email hello@trupulse.ai and a person will reply.";
+export const FALLBACK = "I can help with questions about TruPulse—sessions, surveys, 1:1 discussions, focus groups, reports, and privacy. For anything else, Book a Demo or email hello@trupulse.ai and a person will reply.";

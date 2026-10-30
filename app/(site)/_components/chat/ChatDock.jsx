@@ -18,13 +18,13 @@ function Dock() {
   const { openDemo } = useDemo();
 
   // The engine drives this markup directly; React renders it once and leaves it alone.
-  useEffect(() => initChat(dockRef.current, { faq: FAQ_ANSWERS, openDemo: () => openDemo("form") }), [openDemo]);
+  useEffect(() => initChat(dockRef.current, { faq: FAQ_ANSWERS, openDemo: (details) => details ? openDemo("form", { step: "calendly", details }) : openDemo("form") }), [openDemo]);
 
   return (
     <div className="chat-dock" ref={dockRef}>
         <div className="chat-panel" data-chat-panel hidden role="dialog" aria-label="TruPulse AI Assistant">
           <header className="chat-head">
-            <button className="chat-icon chat-back" type="button" aria-label="Back" data-chat-back hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+            <button className="chat-icon chat-back" type="button" aria-label="Your conversations" data-chat-back><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
             <span className="chat-avatar" data-chat-avatar aria-hidden="true"><svg className="ico-bubble" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
     <path d="M16 4c7.2 0 13 4.6 13 10.3S23.2 24.6 16 24.6c-1.2 0-2.4-.1-3.5-.4l-6 3a.7.7 0 0 1-1-.8l1.2-4A9.6 9.6 0 0 1 3 14.3C3 8.6 8.8 4 16 4Z" fill="currentColor" />
     <circle cx="10.6" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)" /><circle cx="16" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)" /><circle cx="21.4" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)" />
@@ -43,20 +43,9 @@ function Dock() {
     
           <div className="chat-body">
             
-            <section className="chat-view is-on" data-view="home">
-              <div className="chat-greet">
-                <p className="chat-hi">Hi! <span className="chat-wave" aria-hidden="true">👋</span></p>
-                <p className="chat-greet-sub">I can help you explore how TruPulse uses AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups—with your team guiding the process.</p>
-              </div>
-              
-              <button className="chat-card chat-card-btn" type="button" data-chat-new>
-                <span><strong>New conversation</strong><small>AI assistant</small></span>
-                <i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.6 21 12 3.4 3.4l2.1 7.2 9 1.4-9 1.4-2.1 7.2Z" fill="currentColor" /></svg></i>
-              </button>
-            </section>
     
             
-            <section className="chat-view" data-view="chat">
+            <section className="chat-view is-on" data-view="chat">
               <div className="chat-log" data-chat-log role="log" aria-live="polite"></div>
               <form className="chat-form" data-chat-form>
                 <label className="sr-only" htmlFor="chat-input">Your message</label>
@@ -86,10 +75,6 @@ function Dock() {
             </section>
           </div>
     
-          <nav className="chat-tabs" aria-label="Assistant sections">
-            <button type="button" className="is-on" data-chat-tab="home" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /></svg><span>Home</span></button>
-            <button type="button" data-chat-tab="messages" aria-label="Messages"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12.4c0 3.6-3.6 6.5-8 6.5-.9 0-1.7-.1-2.5-.3L5 21l1-3.2A6.6 6.6 0 0 1 4 12.4C4 8.8 7.6 6 12 6s8 2.8 8 6.4Z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /></svg><span>Messages</span></button>
-          </nav>
         </div>
     
         <button className="chat-launch" type="button" aria-expanded="false" aria-label="Open chat" data-chat-launch>
