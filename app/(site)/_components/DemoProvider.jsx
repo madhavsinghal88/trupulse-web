@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { InlineWidget } from "react-calendly";
 import { CALENDLY_URL } from "@/lib/site";
 
@@ -11,6 +12,7 @@ export const useDemo = () => useContext(DemoContext);
 const FOCUSABLE = 'a[href],button:not([disabled]),input,textarea,select,iframe,[tabindex]:not([tabindex="-1"])';
 
 export function DemoProvider({ children }) {
+  const pathname = usePathname();
   const [demo, setDemo] = useState({ open: false, mode: "form", step: "form", useCase: "", prefill: null });
 
   // mode "form" shows the request form, "video" the walkthrough. step "calendly" skips
@@ -20,10 +22,17 @@ export function DemoProvider({ children }) {
   }, []);
   const closeDemo = useCallback(() => setDemo((d) => ({ ...d, open: false })), []);
 
+  // Sign-in should stay clear of marketing overlays.
+  useEffect(() => {
+    if (pathname === "/login") closeDemo();
+  }, [pathname, closeDemo]);
+
+  const showModal = demo.open && pathname !== "/login";
+
   return (
     <DemoContext.Provider value={{ openDemo }}>
       {children}
-      <DemoModal {...demo} onClose={closeDemo} />
+      {showModal ? <DemoModal {...demo} onClose={closeDemo} /> : null}
     </DemoContext.Provider>
   );
 }
