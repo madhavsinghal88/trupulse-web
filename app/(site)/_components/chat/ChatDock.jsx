@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDemo } from "../DemoProvider";
 import { FAQ_ANSWERS } from "../faq";
@@ -53,6 +54,7 @@ function Dock() {
                 <button className="chat-icon chat-emoji" type="button" aria-label="Insert emoji" title="Insert emoji" data-chat-emoji><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" strokeWidth="1.9" /><circle cx="9.3" cy="10.2" r="1.15" fill="currentColor" /><circle cx="14.7" cy="10.2" r="1.15" fill="currentColor" /><path d="M8.4 14.2a4.4 4.4 0 0 0 7.2 0" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg></button>
                 <button className="chat-send" type="submit" aria-label="Send message" title="Send" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.6 21 12 3.4 3.4l2.1 7.2 9 1.4-9 1.4-2.1 7.2Z" fill="currentColor" /></svg></button>
               </form>
+              <p className="tp-privnote">Conversations are stored and may be reviewed to answer inquiries and improve this assistant. Please don&rsquo;t share confidential or sensitive information. <Link href="/privacy">Privacy Policy</Link></p>
               <div className="chat-picker" data-chat-picker hidden>
                 <label className="chat-search">
                   <span className="sr-only">Search emoji</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.4" fill="none" stroke="currentColor" strokeWidth="2" /><path d="M15.8 15.8 20 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { InlineWidget } from "react-calendly";
 import { CALENDLY_URL } from "@/lib/site";
@@ -10,6 +11,16 @@ const DemoContext = createContext({ openDemo: () => {} });
 export const useDemo = () => useContext(DemoContext);
 
 const FOCUSABLE = 'a[href],button:not([disabled]),input,textarea,select,iframe,[tabindex]:not([tabindex="-1"])';
+
+// Shown over the scheduler until the Calendly iframe has loaded.
+function CalendarLoading() {
+  return (
+    <div className="tp-cal-loading" role="status">
+      <span className="tp-cal-spin" aria-hidden="true" />
+      <span>Loading available times&hellip;</span>
+    </div>
+  );
+}
 
 export function DemoProvider({ children }) {
   const pathname = usePathname();
@@ -122,6 +133,7 @@ function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
                 <InlineWidget
                   url={CALENDLY_URL}
                   styles={{ height: "100%" }}
+                  LoadingSpinner={CalendarLoading}
                   prefill={details ? { name: details.name, email: details.email, customAnswers: notes ? { a1: notes } : undefined } : undefined}
                 />
               )}
@@ -155,6 +167,7 @@ function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
               <label className="field">Organization<input required type="text" name="organization" placeholder="Organization name" defaultValue={details?.organization} /></label>
               <label className="field">What would you like to explore?<textarea ref={exploreRef} name="explore" placeholder="Tell us about your audience, intended use or what specifically you want to learn." defaultValue={details?.explore} /></label>
               <button className="btn primary" type="submit">Pick a Time</button>
+              <p className="tp-privnote">We&rsquo;ll use your details to arrange your demo and respond to your inquiry. <Link href="/privacy" onClick={onClose}>Privacy Policy</Link></p>
             </form>
           </div>
         )}

@@ -15,13 +15,19 @@ html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text h1{m
 html:has(.tp-article) .article-hero.tp-banner-untitled .article-banner-text .article-deck{display:block!important;margin-bottom:14px}
 
 /* Home walkthroughs (hero and product tabs): the video plays muted inside its slot,
-   with mute and fullscreen buttons at the bottom. */
+   with transport controls (rewind/play/stop/forward) plus mute and expand. */
 html:has(.tp-home) .tp-autoplay{overflow:hidden}
 html:has(.tp-home) .tp-autoplay .tp-autoplay-video{position:absolute;inset:0;z-index:4;width:100%;height:100%;object-fit:cover;background:#110f35}
-html:has(.tp-home) .tp-autoplay-controls{position:absolute;right:16px;bottom:16px;z-index:5;display:flex;gap:8px}
+html:has(.tp-home) .tp-autoplay-controls{position:absolute;left:12px;right:12px;bottom:12px;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:8px;pointer-events:none}
+html:has(.tp-home) .tp-autoplay-transport,html:has(.tp-home) .tp-autoplay-meta{display:flex;gap:6px;pointer-events:auto}
 html:has(.tp-home) .tp-autoplay-controls button{display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid rgba(255,255,255,.3);border-radius:50%;background:rgba(17,15,53,.55);color:#fff;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s ease}
 html:has(.tp-home) .tp-autoplay-controls button:hover,html:has(.tp-home) .tp-autoplay-controls button:focus-visible{background:rgba(17,15,53,.85)}
 html:has(.tp-home) .tp-autoplay-controls svg{width:20px;height:20px}
+@media (max-width:480px){
+  html:has(.tp-home) .tp-autoplay-controls{left:8px;right:8px;bottom:8px;gap:6px}
+  html:has(.tp-home) .tp-autoplay-controls button{width:36px;height:36px}
+  html:has(.tp-home) .tp-autoplay-controls svg{width:18px;height:18px}
+}
 
 
 /* v119: tp-rep-css */
@@ -36,3 +42,27 @@ html:has(.tp-home) .tp-autoplay-controls svg{width:20px;height:20px}
 @media (max-width:980px){main>section.trust-strip{padding-top:56px!important}}@media (min-width:1181px){main>section.final-cta{padding-top:51px!important}}@media (min-width:981px) and (max-width:1180px){main>section.final-cta{padding-top:43px!important}}@media (max-width:980px){main>section.final-cta{padding-top:34px!important}}@media (min-width:681px) and (max-width:980px){main>section.trust-strip{padding-top:8px!important}main>section.final-cta{padding-top:35px!important}}
 /* v119: tp-kl */
 .hero-keyline .tp-kl{display:inline-flex;align-items:center;flex-wrap:wrap;gap:0}.hero-keyline .tp-kl strong{margin:0!important;padding:0!important}.hero-keyline .tp-kl b{display:inline-block;margin:0 4px;font-weight:inherit}
+/* v120: tp-v120. The design's "html body" prefix becomes "html:root body" so these still
+   outrank the page sheets' html:has(.tp-*) scoping, which loads after this file. */
+@media (max-width:767px){
+ html:root body .use-case-panel>p.uc-chip-label,html:root body .use-case-panel .use-case-ways small,html:root body .bc-eyebrow,html:root body .tp-sro{font-size:12px!important}
+ html:root body .site-footer a,html:root body .case-study-link,html:root body .tp-sr-link,html:root body .linkish,html:root body .cs-cta-link{display:inline-flex;align-items:center;min-height:32px}
+ html:root body .cs-aside a{display:flex;align-items:center;min-height:32px}
+}
+.tp-cal-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(255,255,255,.94);border-radius:inherit;z-index:3;font-size:14px;color:#475467;text-align:center}
+.tp-cal-loading[hidden]{display:none}
+.tp-cal-spin{width:28px;height:28px;border-radius:50%;border:3px solid rgba(238,133,27,.2);border-top-color:#EE851B;animation:tpspin .8s linear infinite}
+@keyframes tpspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.tp-cal-spin{animation-duration:2.4s}}
+/* v121: tp-v121 (the mobile short greeting is left out: this chat has no greeting card) */
+.tp-privnote{margin:8px 0 0;font-size:12px;line-height:1.5;color:var(--muted,#667085);text-align:left}
+.tp-privnote a{color:inherit;text-decoration:underline;font-weight:600}
+.chat-view[data-view="chat"] .tp-privnote{margin:6px 14px 10px;padding:0}
+form .tp-privnote{margin-top:12px;text-align:center}
+
+/* Chat assistant route actions (Answer Library v2) */
+.chat-actions{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 10px 44px;max-width:calc(100% - 44px)}
+.chat-actions a,.chat-actions button{display:inline-flex;align-items:center;padding:7px 12px;border:1px solid rgba(103,95,252,.28);border-radius:999px;background:#fff;color:var(--violet,#433EB1);font:inherit;font-size:.75rem;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer;box-shadow:0 2px 8px rgba(45,40,154,.06);transition:background .15s ease,color .15s ease,border-color .15s ease,transform .15s ease}
+.chat-actions a:hover,.chat-actions button:hover{background:var(--violet,#433EB1);border-color:var(--violet,#433EB1);color:#fff;transform:translateY(-1px)}
+.chat-actions a:focus-visible,.chat-actions button:focus-visible{outline:2px solid var(--violet,#433EB1);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.chat-actions a,.chat-actions button{transition:none}.chat-actions a:hover,.chat-actions button:hover{transform:none}}

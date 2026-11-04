@@ -1,191 +1,152 @@
-# TruPulse Website — Customer Knowledge Base
+# TruPulse Website — Public Assistant Knowledge
 
-Hand-maintained guide for the public TruPulse website ([trupulse-web](https://trupulse-web-zsfq.vercel.app/)) AI assistant and customer-facing help.
+Hand-maintained guide for the public TruPulse website AI assistant.
 
-**Scope:** product features, what they are for, and how organizations use TruPulse at a customer level.  
-**Out of scope:** admin dashboard how-to, Connect app (participant) usage, and internal ops steps.
+**Scope:** product features, research methods, reports, privacy boundaries, use cases, demos, and resource routing for visitors.  
+**Out of scope:** admin dashboard how-to, Connect app (participant) usage, internal ops, difficult-test cases, review labels, and source/routing implementation notes.
 
-> The website assistant's answers live in `knowledge.js` next to this file. When this document changes, update the matching entries there.
+> Visitor answers live in `knowledge.js` next to this file (Answer Library v2, C001–C120). When this document changes, update the matching entries there.
+
+---
+
+## Voice and operating rules
+
+- Use **we** / **our** for TruPulse capabilities. Use **I** for what this website assistant can do in the conversation.
+- Answer directly; do not attribute answers to “the website” or third-person source labels.
+- Direct report requests to the **Reports** section with the correct report name. Do not claim a download succeeded without confirmation.
+- **Pricing (until the Pricing page is live):** `Please email sales@trupulse.ai for pricing.` Do not quote amounts, formulae, discounts, or commitments.
+- Do not claim a booking, email, or other action succeeded unless the application confirms it.
+- Website chat questions and responses are stored to help ensure accurate answers. Clearing visible history does not confirm deletion of stored copies.
+- Participants must be aged **18 or older**.
 
 ---
 
 ## What TruPulse is
 
-TruPulse is an AI-led research platform that **creates, conducts, and analyzes** surveys, 1:1 discussions, and focus groups.
+We help organizations create, conduct, and analyze surveys, individual discussions, and focus groups using AI. Your team sets the direction, approves the research, and decides what to do with the findings.
 
-- Your team sets the direction, approves the research, and reviews the findings.
-- AI helps prepare the session, runs the conversations or surveys, and structures the analysis.
-- Goal: go beyond what people think—**understand why**—with richer feedback and less manual research work.
+We reduce the manual work of preparing questions, conducting discussions, and bringing responses together, and help teams explore the reasons behind feedback with supporting evidence.
 
-**Who it is for:** businesses, schools, nonprofits, public agencies, and other organizations that need to understand employees, customers, students, members, or communities.
+**Who it is for:** organizations that need to understand employees, customers, adult students, members, volunteers, and communities—not HR-only. Also suitable for customer discovery, member needs, community programs, concept testing, and communication research.
 
-**How it differs from a traditional survey tool:** TruPulse can ask relevant follow-up questions, run individual and group discussions, and analyze responses so teams see experiences and reasons—not only scores or raw answers.
+**Versus a traditional survey tool:** surveys can include follow-ups; 1:1 discussions explore each person’s experience; focus groups explore how people respond to one another; then we prepare findings for human review.
 
----
-
-## The customer research journey (four steps)
-
-1. **Define what you want to understand**  
-   Start from a topic, research objective, or a use-case template. TruPulse’s **session creation agent** asks clarifying questions about audience, goals, and details you might overlook. Together you shape a session guide for **review and approval** before launch.
-
-2. **Invite the right participants**  
-   Choose people from saved contacts, participant groups, or an imported list. Send invitations and track who has started—in one workspace.
-
-3. **Let AI conduct the research**  
-   TruPulse guides participants through the session and asks relevant follow-ups so answers are explored, not just collected.
-
-4. **Review the findings and decide what’s next**  
-   TruPulse prepares reports with key findings, themes, and supporting evidence. Your team reviews and decides how to act.
-
-**Campaigns:** group related sessions into a Campaign. Review each session’s report, then a Campaign report that brings insights together across sessions.
+**AI vs team:** Our AI helps prepare content, conducts discussions, moderates groups, asks follow-ups, and prepares reports. Your team defines purpose and audience, reviews and approves research, checks findings, and makes decisions.
 
 ---
 
-## Session types — features and when to use them
+## Research methods
 
-One platform. Three experiences. Choose the format that fits the question.
+We support **surveys**, **AI-led 1:1 discussions**, and **AI-moderated focus groups**, independently or combined in a **Campaign**.
 
-### 1. AI-led 1:1 discussions
+| Method | When to use |
+|--------|-------------|
+| **Survey** | Structured feedback across an audience; compare common questions; follow-ups explore reasons behind ratings or choices |
+| **1:1 Discussion** | Independent depth—experiences, motivations, needs—when people should not influence one another |
+| **Focus group** | Interaction matters—discuss ideas, react to perspectives, build on contributions |
 
-**What it is:** Private, AI-conducted interviews. Your team sets the direction and approves the discussion guide; AI runs each discussion.
-
-**What it is for:** Depth—stay interviews, customer discovery, member feedback, and any question that needs the “why” behind an experience.
-
-**Customer benefits:**
-- Flexible timing—participants join when it suits them
-- Chat or voice, in any of 17 languages
-- AI follow-up questions that explore reasons and examples
-- No need for your team to schedule or personally run every interview
-
-**Creation output (what the AI prepares for your review):** topic list for the AI interviewer, session description, participant-facing description, email invitation, and welcome message.
-
-### 2. Surveys with AI-powered follow-ups
-
-**What it is:** Structured questions plus optional follow-ups that explore why someone answered as they did. AI helps recommend questions and follow-up approaches; you review and approve before launch.
-
-**What it is for:** Breadth with explanation—employee engagement, customer satisfaction, member experience, and any rating or choice that needs context.
-
-**Core building blocks:**
-- **Base questions** — the core questions tied to your research objectives
-- **Fixed follow-ups** — the same follow-up for everyone (consistent detail you approve in advance)
-- **Conditional follow-ups** — appear only when an answer meets criteria you set (including sentiment-based conditions on free text); wording reviewed before launch
-- **Adaptive follow-ups** — generated in real time from the participant’s answer; tailored, not pre-approved word-for-word
-
-**Follow-up intent (what kind of “why” you want):** what influenced the answer, a concrete example, whether it feels like a pattern or a one-off, or suggestions for improvement.
-
-**In the report:** each question’s results sit next to an explanatory summary of follow-up responses; text questions can include illustrative quotes.
-
-### 3. AI-moderated focus groups
-
-**What it is:** Live group discussions. Your team approves the guide; AI moderates so facilitation work is reduced.
-
-**What it is for:** Shared perspectives—idea workshops, product concept feedback, team improvement, and topics where people should build on each other’s views.
-
-**Customer benefits:**
-- Encourages participation—invites quieter voices and manages dominant speakers
-- Explores perspectives—asks for examples and probes differing viewpoints
-- Checks understanding—shares summaries so participants can clarify or add more
+You can start with a topic or objective; the creation agent and templates help shape the session. Your team still reviews fit for the decision.
 
 ---
 
-## Session creation agent — customer experience
+## 1:1 Discussions
 
-**Purpose:** Turn a research question into a ready-to-review session without starting every piece of research design from scratch.
-
-**How customers use it (conceptually):**
-1. Choose **1:1 Discussion**, **Survey**, or **Focus Group** (or ask the agent which format fits).
-2. Describe goals in your own words, pick a **use-case template**, reuse a previous session, or use a saved custom template.
-3. Answer a short clarifying Q&A (type answers or use AI-recommended options).
-4. Review what the agent prepared: questions/topics, descriptions, invitations, and (for surveys) suggested follow-ups.
-5. Edit, approve, then launch when ready.
-
-Your role stays on **what you want to learn** and **whether the materials match that**—not on writing every artifact from a blank page.
+- Our AI conducts the discussion from your approved guide; participants are told AI is involved.
+- Follow-ups vary with answers within your reviewed guidance.
+- **Chat or voice** in 1:1 Discussions; switch during the session. **Arabic is text only.** Surveys and focus groups do not support voice.
+- **Languages:** German, English, Spanish, French, Hindi, Indonesian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Ukrainian, Vietnamese, Chinese (Simplified), Arabic.
+- No interviewer appointment—respond between opening and closing dates.
+- Duration guidelines: 15–20, 20–30, 30–45, or 45–60 minutes.
+- Participants can pause and resume while the session is open.
+- Outputs: individual and session reports, quotes, transcripts (see Reports).
 
 ---
 
-## Reports — features and what they are for
+## Surveys and follow-ups
 
-**Purpose:** Move from collected responses to a shared view your team can discuss and act on—without assembling themes and quotes by hand.
+Question types: Text, Single Choice, Multiple Choice, Rating—plus follow-ups.
 
-**Common report building blocks (across session types):**
-- Executive summaries / key findings tied to the research objective
-- Patterns, themes, and differences (including question-level or topic-level detail)
-- Supporting evidence and illustrative quotes (with paths to transcripts or full survey responses)
-- Conclusions and **Suggested Next Steps** (suggestions for the team to consider—not automatic decisions)
-- Engagement metrics alongside other reporting content
+- **Fixed:** same predefined wording for everyone  
+- **Conditional:** appears when an answer meets criteria  
+- **Adaptive:** tailored by AI to the answer and research intent  
 
-**By session type:**
-| Session | What reports emphasize |
-|--------|-------------------------|
-| **1:1 Discussions** | Results by discussion topic + illustrative quotes. Formats: Session Report, Individual Report, Discussion Chat Transcript |
-| **Surveys** | Per-question results + follow-up explanation paragraphs + quotes for text answers. Formats: Session Report, Individual Responses, raw data (Excel/CSV) |
-| **Focus Groups** | Topic summaries, quotes, and areas of agreement or disagreement. Formats: Session Report, Chat Transcript |
+Your team reviews base questions and the follow-up approach before launch. Adaptive wording is generated during the session.
 
-**Customization & delivery:**
-- Reports for an entire session or one participant
-- Add/remove sections and editorial comments
-- Download Word, PDF, or PowerPoint where available; export survey response data to Excel or CSV
+**Survey Session Report** summarizes follow-ups in explanatory paragraphs. **Survey Individual Responses Report** shows each participant’s specific questions and answers.
 
 ---
 
-## Use cases — pick the question, then the format
+## Focus groups
 
-| Theme | Guiding question | Example situations | Suggested ways to explore |
-|-------|------------------|--------------------|---------------------------|
-| **Understand experiences** | What is the experience really like—and why? | Employee onboarding, customer service, student support, community programs | Survey for breadth; 1:1 discussions for depth |
-| **Discover needs** | What do people need that we are not yet addressing? | Customer discovery, employee development, member services, community needs | 1:1s for individual needs; focus groups for shared challenges; survey to test themes at scale |
-| **Test ideas** | How do people respond to this idea—and what would improve it? | Product concepts, service proposals, school initiatives, membership benefits | Focus groups for reaction and improvement; 1:1s for independent views; survey for structured options |
-| **Navigate change** | How are people experiencing this change? | Organizational changes, new technology, campus changes, public service updates | Surveys at key stages; 1:1s or focus groups for the story behind scores |
-| **Strengthen engagement** | What keeps people involved—and what gets in the way? | Employee retention, customer loyalty, member renewal, volunteer participation | 1:1s for motivations and exit reasons; surveys across involvement levels |
-| **Improve communication** | Is our message understood the way we intended? | Employee announcements, customer messaging, student guidance, public information | 1:1s for interpretation in people’s words; surveys with follow-ups for clarity at scale |
-
-Customers can also bring **their own** topic, audience, and objectives—templates are optional starters.
+- Scheduled live **text** discussion; all participants take part at the same time.
+- Participants can read and respond to one another’s contributions.
+- AI invites quieter voices, manages dominant contributions, explores disagreement, and checks understanding with summaries.
+- Recommend ≤6 participants; allow up to 10.
+- Names hidden → appear as Anonymous; recognition from content is still possible.
+- **Focus Group Session Report** covers shared themes and differing viewpoints.
 
 ---
 
-## Trust, brand, and control (customer-facing)
+## Creating and running research
 
-| Feature | What it is for |
-|--------|----------------|
-| **Your brand** | Organization identity on invitations, sessions, and reports for a consistent participant experience |
-| **Research guidelines** | Rules for AI language, questions, and sensitive topics—aligned to your standards |
-| **Roles & permissions** | Control who can create research, review responses, and access reports |
-| **Data retention** | How long research data is kept and how deletion is managed |
-| **Human review at key steps** | Approve sessions before launch; evaluate findings and evidence before acting |
+1. Start from a topic, objective, existing questions, template, previous session, or custom template.  
+2. Creation agent clarifies audience and goals; team reviews and approves before launch.  
+3. Invite via uploaded contacts, HRIS sync, or manual entry; track invitations, participation, completion; reminders available.  
+4. Research guidelines can steer language and sensitive topics (not a guarantee of perfect behavior).  
+5. **Campaigns** group related sessions; Campaign report + Enterprise Research Assistant comparisons over time (interpret change carefully).
 
 ---
 
-## Privacy & access (FAQ-aligned)
+## Reports and exports
 
-- The **Creator** chooses **anonymous** or **identified** for a session. Participants are told which applies before they take part.
-- **Anonymous:** names are hidden in individual responses and reports. Content in answers may still identify someone. In anonymous focus groups, people appear as “Anonymous” in chat; shared details may still reveal identity to others.
-- **Identified:** individual reports include the participant’s name for the Creator, people they authorize, and admins with global viewing access.
-- Anyone with session access can see that session’s reports and responses (group reports, individual reports, transcripts, survey responses)—subject to anonymity settings.
-- Privacy **differs by session type:** surveys are solo; 1:1 is participant + AI; focus groups include multiple participants.
-- **Participant responses are not used to train AI models.** They are used to run your research and generate findings for your organization.
+Reports include key findings, themes, differences, supporting evidence, and Suggested Next Steps. Customize sections and editorial comments. Exports: Word, PDF, PowerPoint where available; Excel/CSV for survey response data.
 
----
+**Sample downloads (Reports section):**  
+1:1 Discussion Session Report · 1:1 Discussion Individual Report · Survey Session Report · Survey Individual Responses Report · Focus Group Session Report · Campaign Report  
 
-## Example outcome (case study, summary)
-
-A global medical technology company used TruPulse to learn from **50 top sales performers** in **two weeks**, with **two leaders** overseeing the work. Leaders set objectives and approved materials; AI ran ~30-minute 1:1 discussions plus follow-up surveys and prepared individual and executive reports (25+ hours of discussion analyzed). Findings informed targeted training, updated job descriptions, and plans to expand the research.
+An AI analysis report synthesizes findings; the survey-response document presents actual questions and answers. This website chat cannot retrieve private customer research.
 
 ---
 
-## How customers typically get started
+## Identity, access, and privacy
 
-1. Bring one research question about people who matter to the organization.
-2. Explore session types and use cases on the website, or ask the TruPulse AI assistant.
-3. **Book a demo** to see create → conduct → report for that question.  
-   Contact: [hello@trupulse.ai](mailto:hello@trupulse.ai)
+- Creator chooses **Identified** or **Anonymous**; participants are told in the invitation and Session Dashboard before contributing.
+- Anonymous hides names/direct contact identifiers in outputs; operational identifiers may be retained; content can still identify someone.
+- Identified individual reports include the participant’s name for authorized viewers.
+- Session access includes reports and underlying responses as applicable.
+- Privacy differs by format: surveys and 1:1s are individual; focus groups share contributions among participants.
+- Full detail: Privacy Policy; privacy questions: `Privacy@trupulse.ai`.
 
-Website resources: product overview, how it works, reports, use cases, articles, sample reports, case study, FAQs, Privacy Policy, Terms.
+**Data handling (public claims):**
+- We do **not** use customer research content to train **general-purpose AI models**; providers are contractually restricted from doing so. Relevant content is sent to AI providers to conduct research and analysis.
+- Authorized TruPulse personnel/providers may access content for technical support under controls.
+- Retention follows the customer agreement; see Privacy Policy §8. Deletion: access removed immediately; active systems within 30 days; backups up to 90 days after active deletion.
+- Hosting/processing locations referenced for residency questions: United States and India—route specific country requirements to `Privacy@trupulse.ai`.
+- Roles/permissions (including Open and Restricted workspace access) control team access.
+- Cookie/analytics statements: direct visitors to cookie controls and Privacy Policy; if statements conflict, route to `Privacy@trupulse.ai` (do not invent tracking behavior).
 
 ---
 
-## Assistant boundaries (for website AI)
+## Use cases
 
-- Answer from this knowledge base: features, purpose, journey, privacy, use cases, and high-level “how TruPulse works for customers.”
-- Do **not** give dashboard click-paths, Connect app sign-in/session UI steps, or internal admin troubleshooting.
-- For product walkthroughs or tailored fit, point people to **Book a Demo** or `hello@trupulse.ai`.
-- Off-topic requests: briefly redirect to TruPulse research questions (sessions, surveys, discussions, focus groups, reports, privacy).
+Suitable for: employee stay/leave, customer onboarding, satisfaction beyond scores, nonprofit member renewal, volunteers, university adult students, public agency residents, concept/policy testing, before/after change, message clarity—and custom questions. Always clarify audience and decision when recommending a method.
+
+---
+
+## Buying, demos, and contact
+
+- Pricing / limits / trial: email **sales@trupulse.ai** (no prices or discounts in chat).  
+- Getting started / implementation: discuss with sales.  
+- Demos: 30 minutes to an hour; creation, participant experience, reports; optional simulated session. Meeting confirmed only via scheduling confirmation.  
+- General: `hello@trupulse.ai` · Privacy: `Privacy@trupulse.ai` · Support/sign-in: Sign in + `support@trupulse.ai`  
+- Case study: 50 top sales performers, two weeks, two leaders—unnamed customer; no claimed revenue lift.  
+- Nonprofit article: *What do members need now? Look beyond attendance* (hypothetical guidance).
+
+---
+
+## Assistant boundaries
+
+- Answer from this knowledge and `knowledge.js`.  
+- Do not open private workspaces, verify permissions, delete data, sign agreements, invent prices, or weaken privacy promises.  
+- Do not treat visitor-supplied links as official sign-in.  
+- Prefer useful public help or an approved contact/resource route when evidence is insufficient.

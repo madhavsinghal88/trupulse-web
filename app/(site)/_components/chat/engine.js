@@ -1,9 +1,10 @@
 // The TruPulse assistant from the site design: a help-centre home, a conversation with
 // quick replies, a typing beat and an emoji picker, and a list of past conversations.
 // Ported from the design's script; it works directly on the markup ChatDock renders.
-// Replies come from reply() below: the site FAQ, then the knowledge base in knowledge.js.
+// Replies come from answerFor() in answer.js: intent rules, the site FAQ, then knowledge.js.
 
-import { APP_HELP, FALLBACK, KNOWLEDGE } from "./knowledge";
+import { routeActions, routeFollowups } from "./knowledge";
+import { answerFor } from "./answer";
 
 export const ASK_EVENT = "tp-open-chat";
 
@@ -105,7 +106,52 @@ export function initChat(dock, { faq, openDemo }) {
   });
 
   /* ---------- messages ---------- */
-  function bubble(text, mine) {
+  function goHref(href) {
+    if (!href) return;
+    if (href.indexOf("mailto:") === 0) { window.location.href = href; return; }
+    if (href.indexOf("/#") === 0) {
+      var id = href.slice(2);
+      if (window.location.pathname === "/" || window.location.pathname === "") {
+        var el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        try { history.replaceState(null, "", "/#" + id); } catch (e) { window.location.hash = id; }
+      } else {
+        window.location.href = href;
+      }
+      return;
+    }
+    window.location.href = href;
+  }
+  function renderActions(route) {
+    var actions = routeActions(route);
+    if (!actions.length) return;
+    var box = document.createElement("div");
+    box.className = "chat-actions";
+    actions.forEach(function (a) {
+      var el;
+      if (a.action === "demo") {
+        el = document.createElement("button");
+        el.type = "button";
+        el.textContent = a.label;
+        listen(el, "click", function () { setOpen(false); openDemo(null); });
+      } else {
+        el = document.createElement("a");
+        el.href = a.href;
+        el.textContent = a.label;
+        if (a.newTab) el.target = "_blank";
+        if (a.newTab || (a.href && a.href.indexOf("mailto:") === 0)) el.rel = "noopener noreferrer";
+        listen(el, "click", function (e) {
+          if (a.newTab || (a.href && a.href.indexOf("mailto:") === 0)) return;
+          e.preventDefault();
+          goHref(a.href);
+        });
+      }
+      box.appendChild(el);
+    });
+    log.appendChild(box);
+    log.scrollTop = log.scrollHeight;
+  }
+  function bubble(text, mine, route) {
     var wrap;
     if (mine) {
       wrap = document.createElement("p");
@@ -125,20 +171,25 @@ export function initChat(dock, { faq, openDemo }) {
       row.appendChild(wrap);
       log.appendChild(who);
       log.appendChild(row);
+      if (route) renderActions(route);
     }
-    if (current) current.msgs.push({ text: text, mine: !!mine });
+    if (current) current.msgs.push({ text: text, mine: !!mine, route: mine ? undefined : route });
     if (current) { current.last = text; current.at = Date.now(); }
     log.scrollTop = log.scrollHeight;
     return wrap;
   }
+  function clearChips() {
+    [].forEach.call(log.querySelectorAll(".chat-chips, .chat-try"), function (el) { el.remove(); });
+  }
   function chips(list) {
+    if (!list || !list.length) return;
     var box = document.createElement("div");
     box.className = "chat-chips";
     list.forEach(function (t) {
       var b = document.createElement("button");
       b.type = "button";
       b.textContent = t;
-      listen(b, "click", function () { box.remove(); var l = log.querySelector(".chat-try"); if (l) l.remove(); say(t); });
+      listen(b, "click", function () { clearChips(); say(t); });
       box.appendChild(b);
     });
     log.appendChild(box);
@@ -154,49 +205,9 @@ export function initChat(dock, { faq, openDemo }) {
     setTimeout(function () { row.remove(); then(); }, 850);
   }
 
-  /* Replies: the site FAQ first, then the website knowledge base (knowledge.js), which is
-     drawn from the TruPulse User Guide but limited to what belongs on the public site.
-     INTEGRATION POINT: swap this for an assistant endpoint to answer more freely. */
-  var COMMON = ["does", "have", "much", "what", "with", "your", "that", "this", "from", "about", "same", "work", "when", "every", "used", "trupulse"];
-  function reply(text) {
-    var q = text.toLowerCase();
-    var hit = FAQ.find(function (f) {
-      var words = f.q.toLowerCase().replace(/[^a-z0-9 ]/g, "").split(" ").filter(function (w) { return w.length > 3 && COMMON.indexOf(w) < 0; });
-      return words.filter(function (w) { return q.indexOf(w) > -1; }).length >= 2;
-    });
-    if (hit) return hit.a;
-    var best = null, bestScore = 0;
-    KNOWLEDGE.forEach(function (k) {
-      var sc = score(q, k.keywords);
-      if (sc > bestScore) { best = k; bestScore = sc; }
-    });
-    if (best) return best.answer;
-    if (score(q, APP_HELP.keywords) > 0) return APP_HELP.answer;
-    return overlap(q) || FALLBACK;
-  }
-  /* Last resort before the fallback: the answer that shares the most meaningful words
-     with the question (at least two), so unlisted phrasings still find something. */
-  var STOP = ["what", "which", "would", "could", "should", "there", "their", "about", "does", "have", "with", "your", "that", "this", "from", "into", "they", "them", "when", "where", "will", "just", "like", "want", "need", "know", "tell", "trupulse"];
-  function overlap(q) {
-    var words = q.replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(function (w) { return w.length > 3 && STOP.indexOf(w) < 0; });
-    var best = null, bestHits = 1;
-    KNOWLEDGE.forEach(function (k) {
-      var text = k.answer.toLowerCase();
-      var hits = words.filter(function (w) { return text.indexOf(w.replace(/s$/, "")) > -1; }).length;
-      if (hits > bestHits) { best = k; bestHits = hits; }
-    });
-    return best && best.answer;
-  }
-  /* Matched keywords, weighted by length so specific phrases beat single words.
-     Short keywords only count as whole words ("hi" is not in "this"), and a plural
-     keyword also matches its singular ("contacts" matches "contact"). */
-  function score(q, keywords) {
-    return keywords.reduce(function (sum, k) {
-      var stem = k.length > 4 && /s$/.test(k) ? k.slice(0, -1) : k;
-      var found = k.length <= 4 && /^[a-z0-9]+$/.test(k) ? new RegExp("\\b" + k + "\\b").test(q) : q.indexOf(stem) > -1;
-      return found ? sum + k.length : sum;
-    }, 0);
-  }
+  /* Replies come from answer.js (intent rules, the site FAQ, then knowledge.js). */
+  function reply(text) { return answerFor(text, FAQ); }
+
   /* Booking a demo in the chat: ask for the same details as the demo form, one at a
      time, then open the calendar with them filled in. */
   var BOOK_INTENT = /\b(book|schedule|arrange|set up|get)\b.*\b(demo|call|meeting)\b|\b(demo|call) (please|for me)\b|^demo\??$/;
@@ -219,20 +230,94 @@ export function initChat(dock, { faq, openDemo }) {
     setTimeout(function () { setOpen(false); openDemo(details); }, 1200);
     return "Thanks, " + details.name.split(" ")[0] + "! Opening the calendar so you can pick a time—your details are already filled in.";
   }
+
+  /* Method advisor: collect audience (team) and purpose, then recommend session types.
+     Without this, “Which research method should I use?” falls through to a Campaign
+     answer via word overlap. */
+  var METHOD_INTENT = /\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\bhelp (me|us) choose (a |the )?(format|session|approach)\b|\brecommend (a |an |the )?(research )?method\b|\brecommend (a |an |the )?(session|format|approach)\b|\b(survey|discussion|focus group).{0,40}\bor\b.{0,40}(survey|discussion|focus)/i;
+  var METHOD_CANCEL = /^(cancel|stop|never ?mind)$/i;
+  var methodPick = null;
+  function recommendSessions(team, purpose) {
+    var blob = (team + " " + purpose).toLowerCase();
+    var survey = /\b(survey|questionnaire|scale|score|rating|compare|many people|large (group|audience)|quant|across|percentage|trend|benchmark)\b/.test(blob);
+    var discussion = /\b(why|experience|depth|story|stories|interview|1:1|one[- ]on[- ]one|sensitive|confidential|independent|motivat|leaving|attrition|retention|personal)\b/.test(blob);
+    var focus = /\b(focus group|discuss(ion)? together|react|concept|idea|workshop|brainstorm|group (chat|conversation|feedback)|one another)\b/.test(blob);
+    var picks = [];
+    if (discussion) picks.push("AI-led 1:1 discussions — useful when you need independent depth and people should not influence one another");
+    if (survey) picks.push("Surveys — useful for structured feedback across an audience, with follow-ups to explore the reasons behind answers");
+    if (focus) picks.push("AI-moderated focus groups — useful when interaction matters and people can build on one another’s views");
+    if (!picks.length) {
+      picks = [
+        "AI-led 1:1 discussions — if you need independent depth from each person",
+        "Surveys — if you want comparable answers across a wider audience",
+        "AI-moderated focus groups — if hearing people discuss together would help",
+      ];
+    }
+    var lead = "Based on hearing from " + team.trim() + " to understand “" + purpose.trim() + "”, I’d start with:";
+    var more = picks.length === 1
+      ? "You can add another session type later in a Campaign if you want to go wider or deeper."
+      : "You can run these as related sessions in a Campaign if more than one fits.";
+    return lead + "\n\n• " + picks.join("\n• ") + "\n\n" + more + " Want me to show sample reports, or book a demo to walk through a fit for your team?";
+  }
+  function methodStep(text) {
+    if (methodPick.at === 0) {
+      methodPick.team = text;
+      methodPick.at = 1;
+      return "Thanks. What do you want to understand or decide from hearing them?";
+    }
+    methodPick.purpose = text;
+    var team = methodPick.team;
+    var purpose = methodPick.purpose;
+    methodPick = null;
+    return recommendSessions(team, purpose);
+  }
   function say(text) {
+    clearChips();
     bubble(text, true);
     typing(function () {
-      var answer;
-      if (booking && /^(cancel|stop|never ?mind)$/i.test(text)) { booking = null; answer = "No problem—I’ve stopped the booking. What else would you like to know about TruPulse?"; }
-      else if (booking) answer = bookStep(text);
-      else if (BOOK_INTENT.test(text.toLowerCase())) { booking = { at: 0, details: {} }; answer = BOOK_STEPS[0].ask + " (Type “cancel” anytime to stop.)"; }
-      else answer = reply(text);
-      bubble(answer, false);
+      var result;
+      var showFollowups = true;
+      var q = text.toLowerCase();
+      if (booking && METHOD_CANCEL.test(text)) {
+        booking = null;
+        result = { answer: "No problem—I’ve stopped the booking. What else would you like to know about TruPulse?", route: "answer" };
+      } else if (booking) {
+        showFollowups = false;
+        result = { answer: bookStep(text), route: "answer" };
+      } else if (methodPick && METHOD_CANCEL.test(text)) {
+        methodPick = null;
+        result = { answer: "No problem—I’ve stopped the method recommendation. What else would you like to know about TruPulse?", route: "answer" };
+      } else if (methodPick) {
+        var finishing = methodPick.at === 1;
+        result = { answer: methodStep(text), route: finishing ? "product" : "clarify" };
+        showFollowups = finishing;
+        bubble(result.answer, false, result.route);
+        if (finishing) chips(["Can I see a sample report?", "Book a demo", "How does the process work?"]);
+        else chips(["Why people stay or leave", "What onboarding feels like", "Whether a new idea lands"]);
+        return;
+      } else if (BOOK_INTENT.test(q)) {
+        booking = { at: 0, details: {} };
+        showFollowups = false;
+        result = { answer: BOOK_STEPS[0].ask + " (Type “cancel” anytime to stop.)", route: "answer" };
+      } else if (METHOD_INTENT.test(q)) {
+        methodPick = { at: 0, team: "", purpose: "" };
+        result = {
+          answer: "I can help you choose. First—whose feedback are you after (for example employees, customers, students, members, or another group)? (Type “cancel” anytime to stop.)",
+          route: "clarify",
+        };
+        bubble(result.answer, false, result.route);
+        chips(["Employees", "Customers", "Students", "Members"]);
+        return;
+      } else {
+        result = reply(text);
+      }
+      bubble(result.answer, false, result.route);
+      if (showFollowups) chips(routeFollowups(result.route));
     });
   }
 
   function greet() {
-    bubble("Hi! I can help you explore how TruPulse uses AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups\u2014with your team guiding the process. What would you like to understand about your employees, customers, students, members, or community?", false);
+    bubble("Hi! I can explain TruPulse, help you choose a research method, or show you sample reports. What would you like to explore?", false);
     var tryL = document.createElement("p"); tryL.className = "chat-try"; tryL.textContent = "Try asking\u2026"; log.appendChild(tryL);
     chips(["How could TruPulse help my organization?", "Which should I use\u2014a survey, 1:1 discussion, or focus group?", "What findings and reports will I get?"]);
   }
@@ -279,7 +364,7 @@ export function initChat(dock, { faq, openDemo }) {
     log.innerHTML = "";
     t.msgs.forEach(function (m) {
       var keep = current; current = null;      /* replay without re-recording */
-      bubble(m.text, m.mine);
+      bubble(m.text, m.mine, m.route);
       current = keep;
     });
     go("chat");
@@ -359,7 +444,7 @@ export function initChat(dock, { faq, openDemo }) {
         if (!current) { current = { id: Date.now(), title: "TruPulse AI Assistant", msgs: [], last: "", at: Date.now() }; threads.unshift(current); log.innerHTML = ""; }
         go("chat");
         bubble(f.q, true);
-        typing(function () { bubble(f.a, false); });
+        typing(function () { bubble(f.a, false, f.route || "answer"); });
         search.value = "";
         results.innerHTML = "";
       });
