@@ -1,33 +1,32 @@
 // The home page FAQ. The AI assistant answers from the same text, so the two never drift apart.
-// Aligned with Answer Library v2 (C001, C004, C006, C008, C071–C079, C081).
+// Aligned with Public Website Agent WEB catalogue (WEB 001, 003, 008, 078–080, 083, 006/007, 087).
 export const FAQ = [
   ["What is TruPulse?", [
-    "We help organizations create, conduct, and analyze surveys, individual discussions, and focus groups using AI. Your team sets the direction, approves the research, and decides what to do with the findings.",
+    "TruPulse is an AI feedback platform that helps organizations create, conduct, and analyze 1:1 Discussions, Focus Groups, Surveys, and multi-session campaigns.",
   ], "product"],
   ["Who can use TruPulse?", [
-    "We serve organizations that need to understand the people their decisions affect, including employees, customers, adult students, members, volunteers, and communities.",
+    "Teams researching employee experience, customer needs, product ideas, and other topics where understanding people’s experiences and perspectives is useful.",
   ], "use_cases"],
   ["How is TruPulse different from a traditional survey tool?", [
-    "We help you go beyond fixed answers. Our surveys can include follow-up questions, our individual discussions explore each person's experience, and our focus groups explore how people respond to one another. We then prepare findings for your team to review.",
+    "TruPulse’s AI agents help users create the perfect feedback session, conduct feedback sessions so you do not have to, and create detailed reports for your review. This saves your organization time and money and provides better feedback results.",
   ], "product"],
   ["Who sees a participant’s identity?", [
-    "The session creator chooses whether the session is Identified or Anonymous. We tell participants the setting in both their invitation and Session Dashboard before they begin supplying feedback.",
-    "In anonymous sessions, we hide names and direct contact identifiers from organizers and collaborators in outputs. Distinctive words, voice, or circumstances may still reveal identity.",
-    "In identified sessions, individual reports include the participant’s name for the creator, people authorized to view the results, and admins with global viewing access.",
-    "In anonymous focus groups, participants appear as Anonymous in chat. Others can still read their contributions, and distinctive details may reveal who they are.",
+    "Each session has an Anonymous or Identified setting governing how participant identity is presented. Participants are notified in advance whether a session is Identified or Anonymous.",
+    "TruPulse does not list participants’ names in reports or transcripts from an Anonymous session. Participants should still avoid details that could reveal their identity.",
+    "In anonymous focus groups, other participants can see what you share, and details may reveal identity even when a name is hidden.",
   ], "privacy"],
   ["Who can access individual responses?", [
-    "People with access to a session can access its reports and underlying responses, including individual reports, session reports, discussion transcripts, and survey responses, as applicable.",
-    "The session’s Identified or Anonymous setting controls identity visibility. In anonymous sessions, names are hidden; details participants share may still reveal their identity.",
+    "Open and Restricted session access govern which authorized TruPulse users in your organization are allowed to view and edit sessions and results. They are separate from the participant identity setting.",
+    "Organizations can adjust role authorizations and individual authorizations, including permissions such as document downloading.",
   ], "privacy"],
   ["Does privacy work the same way in every session type?", [
-    "No. In our 1:1 Discussions, each participant interacts individually with our AI. Surveys collect individual responses, while focus groups let participants read one another’s shared contributions. Authorized organizational viewers can access the research outputs according to session permissions and the identity setting.",
+    "Identity presentation follows each session’s Anonymous or Identified setting. In 1:1 Discussions and Surveys, feedback is individual. In focus groups, participants can read one another’s contributions, so anonymity does not prevent recognition from shared details.",
   ], "privacy"],
   ["How much control does our team have?", [
-    "Our AI helps prepare session content, conducts individual discussions, moderates groups, asks relevant follow-ups, and prepares reports. Your team defines the purpose and audience, reviews and approves the research, checks the findings, and makes the decisions.",
+    "AI helps your team design sessions, conduct discussions and surveys, generate follow-up questions, analyze feedback, and create reports. Your team reviews and customizes questions and session settings before launch, then reviews findings and recommendations before deciding what to do.",
   ], "workflow"],
   ["Are participant responses used to train AI models?", [
-    "We do not use customer research content to train general-purpose AI models. Our AI service providers are contractually restricted from doing so. We do send relevant research content to those providers to conduct the research and analysis.",
+    "No. Customer research content is not used to train general-purpose AI models.",
   ], "privacy"],
 ];
 

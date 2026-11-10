@@ -1,12 +1,12 @@
 import { APP_HELP, FALLBACK, KNOWLEDGE } from "./knowledge";
 
 /* Replies: intent rules first, then the site FAQ, then the website knowledge base
-   (knowledge.js). Returns { answer, route }. INTEGRATION POINT: swap for an assistant
-   endpoint later. */
+   (knowledge.js — TruPulse Public Website Agent WEB catalogue). Returns { answer, route }.
+   INTEGRATION POINT: swap for an assistant endpoint later. */
 var COMMON = ["does", "have", "much", "what", "with", "your", "that", "this", "from", "about", "same", "work", "when", "every", "used", "trupulse"];
 export function answerFor(text, FAQ) {
   var q = text.toLowerCase().replace(/[’']/g, "'");
-  var intent = sampleReport(q) || memberResearch(q) || methodChoice(q);
+  var intent = sampleReport(q) || employeeLeaving(q) || methodChoice(q);
   if (intent) return intent;
   var hit = FAQ.find(function (f) {
     var words = f.q.toLowerCase().replace(/[^a-z0-9 ]/g, "").split(" ").filter(function (w) { return w.length > 3 && COMMON.indexOf(w) < 0; });
@@ -45,12 +45,12 @@ function sampleReport(q) {
   var types = [survey, discussion, focus, campaign].filter(Boolean).length;
   var sample = SAMPLE.test(q), report = REPORT.test(q), request = REQUEST.test(q);
   if (NOT_SAMPLE.test(q) || !((sample && (report || request || types)) || (report && request))) return null;
-  if (focus && campaign && types === 2) return entry("C115");
+  if (focus && campaign && types === 2) return entry("SITE_SAMPLE_FOCUS");
   if (types === 1) {
-    if (focus) return entry("C050");
-    if (campaign) return entry("C070");
-    if (survey) return entry(individual ? "C114" : "C113");
-    return entry(individual ? "C112" : "C111");
+    if (focus) return entry("SITE_SAMPLE_FOCUS");
+    if (campaign) return entry("SITE_SAMPLE_FOCUS");
+    if (survey) return entry(individual ? "SITE_SAMPLE_SURVEY_RESPONSES" : "SITE_SAMPLE_SURVEY_SESSION");
+    return entry(individual ? "SITE_SAMPLE_DISCUSSION_INDIVIDUAL" : "SITE_SAMPLE_DISCUSSION_SESSION");
   }
   return {
     answer: "Here are our sample reports, built with sample data—open any of them below. Focus Group Session Report and Campaign Report samples are coming soon; we can walk you through those in a demo.",
@@ -58,19 +58,18 @@ function sampleReport(q) {
   };
 }
 
-/* Membership renewal and retention, however it is worded. */
-function memberResearch(q) {
-  var members = /\b(members?|membership|memberships|association|nonprofit|non-profit)\b/.test(q);
-  var renewal = /\b(renew\w*|non-?renew\w*|retention|retain\w*|lapse[ds]?|lapsing|churn\w*|cancel\w*|not coming back)\b/.test(q);
-  return members && renewal ? entry("C094") : null;
+/* Employee stay/leave research (WEB 014), however it is worded. */
+function employeeLeaving(q) {
+  var employees = /\b(employees?|staff|workforce|team members?|people)\b/.test(q);
+  var leaving = /\b(leav(e|ing)|quit|resign|attrition|turnover|retention|stay or leave|considering leaving)\b/.test(q);
+  return employees && leaving ? entry("WEB014") : null;
 }
 
-/* “Which research method should I use?” and similar: do not answer with Campaign
-   definitions via overlap. Prefer clarifying audience and purpose (engine.js also
-   runs a short advisor flow when these phrases are asked in chat). */
+/* “Which research method should I use?” and similar: clarify audience and purpose
+   (engine.js also runs a short advisor flow when these phrases are asked in chat). */
 function methodChoice(q) {
   if (!/\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\brecommend (a |an |the )?(research )?method\b|\b(survey|discussion|focus group).{0,40}\bor\b.{0,40}(survey|discussion|focus)/.test(q)) return null;
-  return entry("C020");
+  return entry("METHOD");
 }
 
 /* Last resort before the fallback: the answer that shares the most meaningful words

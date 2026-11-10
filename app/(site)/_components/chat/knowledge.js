@@ -1,5 +1,5 @@
-// Public website assistant answers (Answer Library v2, C001–C120).
-// Sample responses only — no D-tests, review labels, source IDs, or routing prose.
+// Public website assistant answers (TruPulse Public Website Agent, WEB catalogue updated Nov 5 2026).
+// 151 retained WEB questions plus website-only sample/case/chat helpers.
 // Each entry: keywords (matched against the question), answer, and route key.
 
 export const ROUTES = {
@@ -17,29 +17,26 @@ export const ROUTES = {
   use_cases: { actions: [{ label: "View Use Cases", href: "/#use-cases" }] },
   privacy: { actions: [{ label: "Privacy Policy", href: "/privacy" }] },
   privacy_contact: { actions: [{ label: "Email Privacy@trupulse.ai", href: "mailto:Privacy@trupulse.ai" }] },
-  contact: { actions: [{ label: "Email hello@trupulse.ai", href: "mailto:hello@trupulse.ai" }] },
+  contact: { actions: [{ label: "Email sales@trupulse.ai", href: "mailto:sales@trupulse.ai" }] },
   support: { actions: [
     { label: "Sign in", href: "/login" },
     { label: "Email support@trupulse.ai", href: "mailto:support@trupulse.ai" },
   ] },
   sign_in: { actions: [{ label: "Sign in", href: "/login" }] },
   demo: { actions: [{ label: "Book a Demo", action: "demo" }] },
-  booking_status: { actions: [{ label: "Email hello@trupulse.ai", href: "mailto:hello@trupulse.ai" }] },
-  // Sample PDFs live in public/reports (see home/SampleReports.jsx); they open in a new tab.
+  videos: { actions: [{ label: "Watch a Demo", href: "/videos" }] },
+  booking_status: { actions: [{ label: "Email sales@trupulse.ai", href: "mailto:sales@trupulse.ai" }] },
   sample_discussion_session: { actions: [{ label: "Open 1:1 Discussion Session Report", href: "/reports/1to1-Discussion-Session-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   sample_discussion_individual: { actions: [{ label: "Open 1:1 Discussion Individual Report", href: "/reports/1to1-Discussion-Individual-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   sample_survey_session: { actions: [{ label: "Open Survey Session Report", href: "/reports/Survey-Session-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   sample_survey_responses: { actions: [{ label: "Open Survey Individual Responses Report", href: "/reports/Survey-Individual-Responses-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
-  // No focus-group or campaign sample yet ("Sample coming soon" on the site): offer a demo.
   sample_focus_group: { actions: [{ label: "Book a Demo", action: "demo" }, { label: "All sample reports", href: "/#reports" }] },
   sample_campaign: { actions: [{ label: "Book a Demo", action: "demo" }, { label: "All sample reports", href: "/#reports" }] },
-  member_research: { actions: [
-    { label: "Read the Article", href: "/blogs/blog/understand-changing-nonprofit-member-needs" },
-    { label: "Book a Demo", action: "demo" },
-  ] },
   case_study: { actions: [{ label: "Read the Case Study", href: "/case-study" }] },
-  nonprofit_article: { actions: [{ label: "Read the Article", href: "/blogs/blog/understand-changing-nonprofit-member-needs" }] },
-  pricing: { actions: [{ label: "Email sales@trupulse.ai", href: "mailto:sales@trupulse.ai" }] },
+  pricing: { actions: [
+    { label: "Book a Demo", action: "demo" },
+    { label: "Email sales@trupulse.ai", href: "mailto:sales@trupulse.ai" },
+  ] },
 };
 
 export function routeActions(route) {
@@ -47,32 +44,30 @@ export function routeActions(route) {
   return ROUTES[key].actions || [];
 }
 
-// Quick-reply suggestions after an answer, keyed by the same route used for action links.
 const FOLLOWUPS = {
-  product: ["Which research method should I use?", "Can I see a sample report?", "How does the process work?"],
-  workflow: ["What research methods are available?", "Who reviews the findings?", "How could TruPulse help my organization?"],
-  reports: ["Show me a sample report", "What's in a session report?", "How do Campaign reports work?"],
-  samples: ["What's the difference between session and individual reports?", "Do you have a focus group sample?", "How could TruPulse help my organization?"],
+  product: ["Which research method should I use?", "What editions do you offer?", "Book a demo"],
+  workflow: ["What is a campaign?", "How do participants join?", "Book a demo"],
+  reports: ["What is the Research Assistant?", "What report formats are available?", "Show me a sample report"],
+  samples: ["What's in a Survey Session Report?", "Book a demo", "How could TruPulse help my organization?"],
   sample_discussion_session: ["Show me the individual discussion report", "What findings will I get?", "Book a demo"],
-  sample_discussion_individual: ["Show me the discussion session report", "What findings will I get?", "Book a demo"],
+  sample_discussion_individual: ["Show me the discussion session report", "Book a demo"],
   sample_survey_session: ["Show me survey individual responses", "How do survey follow-ups work?", "Book a demo"],
-  sample_survey_responses: ["Show me the survey session report", "How do survey follow-ups work?", "Book a demo"],
-  sample_focus_group: ["When should I use a focus group?", "Show me other sample reports", "Book a demo"],
-  sample_campaign: ["What is a Campaign?", "Show me other sample reports", "Book a demo"],
-  use_cases: ["Which research method should I use?", "Can I see a sample report?", "Book a demo"],
-  privacy: ["Are responses used to train AI?", "Who can access individual responses?", "How much control does our team have?"],
-  privacy_contact: ["Are responses used to train AI?", "Who sees a participant's identity?"],
-  clarify: ["Employees — why people stay or leave", "Customers — what onboarding feels like", "Show me sample reports"],
-  demo: ["What will a demo cover?", "Can I see a sample report?", "How does the process work?"],
-  booking_status: ["Book a demo", "Email hello@trupulse.ai"],
+  sample_survey_responses: ["Show me the survey session report", "Book a demo"],
+  sample_focus_group: ["What is an AI-moderated Focus Group?", "Book a demo"],
+  sample_campaign: ["What is a campaign?", "Book a demo"],
+  use_cases: ["Can we collect employee engagement feedback?", "Can customer feedback be collected?", "Book a demo"],
+  privacy: ["Is customer research used to train AI models?", "Can sessions be anonymous or identified?", "Where is customer data hosted?"],
+  privacy_contact: ["Is customer research used to train AI models?", "Can sessions be anonymous or identified?"],
+  clarify: ["Employees", "Customers", "Students", "Members"],
+  demo: ["What does the simulated website demo show?", "How much does TruPulse cost?", "Can we run a small live pilot?"],
+  videos: ["What tutorials are available?", "Book a live demo", "How much does TruPulse cost?"],
+  booking_status: ["Book a demo", "Email sales@trupulse.ai"],
   contact: ["Book a demo", "How could TruPulse help my organization?"],
   support: ["How do I sign in?", "Book a demo"],
-  sign_in: ["I forgot my password", "Book a demo"],
-  member_research: ["Which research method should I use?", "Can I see a sample report?", "Book a demo"],
+  sign_in: ["How can an existing customer get support?", "Book a demo"],
   case_study: ["How could TruPulse help my organization?", "Book a demo"],
-  nonprofit_article: ["How could TruPulse help my organization?", "Book a demo"],
-  pricing: ["Book a demo", "How could TruPulse help my organization?"],
-  answer: ["Which research method should I use?", "Can I see a sample report?", "Book a demo"],
+  pricing: ["What editions does TruPulse offer?", "Book a demo", "Is there a free trial?"],
+  answer: ["What is TruPulse?", "Which research method should I use?", "Book a demo"],
 };
 
 export function routeFollowups(route) {
@@ -82,736 +77,1836 @@ export function routeFollowups(route) {
 
 export const KNOWLEDGE = [
   {
-    id: "C001",
-    keywords: ["what is trupulse", "what does trupulse do", "give me an overview", "about trupulse", "tell me about trupulse", "what is this"],
-    answer: "We help organizations create, conduct, and analyze surveys, individual discussions, and focus groups using AI. Your team sets the direction, approves the research, and decides what to do with the findings.",
-    route: "product",
-  },
-  {
-    id: "C002",
-    keywords: ["what problem", "why would we use", "what work does it save", "what does it solve", "why use trupulse"],
-    answer: "We reduce the manual work of preparing questions, conducting discussions, and bringing responses together. We help your team explore the reasons behind feedback and review findings with supporting evidence.",
-    route: "product",
-  },
-  {
-    id: "C003",
-    keywords: ["two sentences", "short version", "describe it briefly", "in brief", "elevator pitch"],
-    answer: "We use AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups. Your team guides the research, approves it before launch, and reviews the findings before deciding what comes next.",
-    route: "product",
-  },
-  {
-    id: "C004",
-    keywords: ["who is trupulse designed for", "who is it for", "would it suit our organization", "who uses trupulse", "who can use"],
-    answer: "We serve organizations that need to understand the people their decisions affect, including employees, customers, adult students, members, volunteers, and communities. What audience do you want to hear from?",
-    route: "clarify",
-  },
-  {
-    id: "C005",
-    keywords: ["only for hr", "hr-only", "hr only", "outside the workplace", "employee research only", "not just hr"],
-    answer: "No. We support customer discovery, adult student support, member needs, community programs, concept testing, and communication research as well as employee research. Participants must be aged 18 or older.",
-    route: "use_cases",
-  },
-  {
-    id: "C006",
-    keywords: ["different from a traditional survey", "different from a survey form", "ordinary questionnaire", "why not use an ordinary", "survey tool", "versus surveymonkey", "compared to qualtrics", "google forms"],
-    answer: "We help you go beyond fixed answers. Our surveys can include follow-up questions, our individual discussions explore each person's experience, and our focus groups explore how people respond to one another. We then prepare findings for your team to review.",
-    route: "product",
-  },
-  {
-    id: "C007",
-    keywords: ["different from hiring a research agency", "replace our agency", "outsourced research", "research agency", "consulting firm"],
-    answer: "We automate parts of research preparation, interviewing, moderation, and analysis. If you need services such as participant recruitment, specialist study design, or strategic consulting, let's clarify those requirements before deciding whether we cover the full scope. Which services do you need?",
-    route: "clarify",
-  },
-  {
-    id: "C008",
-    keywords: ["what does the ai do", "what does our team do", "who does what", "what remains our responsibility", "ai vs team", "human vs ai"],
-    answer: "Our AI helps prepare session content, conducts individual discussions, moderates groups, asks relevant follow-ups, and prepares reports. Your team defines the purpose and audience, reviews and approves the research, checks the findings, and makes the decisions.",
-    route: "workflow",
-  },
-  {
-    id: "C009",
-    keywords: ["research expertise", "need a researcher", "beginners get started", "do we need research", "no research experience"],
-    answer: "You can start with a topic or objective rather than a finished research plan. The creation agent and templates help shape the session. Your team still needs to review whether the questions, participants, and interpretation fit the decision you are trying to make.",
-    route: "workflow",
-  },
-  {
-    id: "C010",
-    keywords: ["process look like", "walk me through", "from setup to results", "first question to the final", "end to end", "how does the process"],
-    answer: "Start by defining what you want to understand. We help prepare the session for your review and approval, send invitations to your selected participants, conduct the research with AI, and prepare findings with supporting evidence. Your team decides what action or further research is appropriate.",
-    route: "workflow",
-  },
-  {
-    id: "C011",
-    keywords: ["what research methods", "which formats are available", "kinds of studies", "methods does trupulse support", "what kinds of studies"],
-    answer: "We support surveys, AI-led 1:1 discussions, and AI-moderated focus groups. You can use each independently or combine related sessions within a Campaign.",
-    route: "product",
-  },
-  {
-    id: "C012",
-    keywords: ["when should i use a survey", "when is a survey the right", "would a questionnaire suit", "survey the right choice"],
-    answer: "A survey is useful when you want structured feedback across an audience or want to compare responses to common questions. Follow-up questions can explore the reasons behind a rating or choice. Who would you survey, and what decision would the answers inform?",
-    route: "clarify",
-  },
-  {
-    id: "C013",
-    keywords: ["when should i use an ai-led", "when should we interview people individually", "when is a 1:1 best", "individual discussion when", "1:1 discussion when"],
-    answer: "Use individual discussions when you need independent accounts of people's experiences, motivations, or needs. The AI can explore each person's answers without requiring your team to conduct every interview. They are useful when participants should not influence one another.",
-    route: "product",
-  },
-  {
-    id: "C014",
-    keywords: ["when should i use a focus group", "when is a group discussion useful", "would a focus group help", "focus group when"],
-    answer: "Use a focus group when interaction matters: people can discuss an idea, react to different perspectives, and build on one another's contributions. Choose individual discussions instead when you need independent accounts or when group disclosure would be inappropriate.",
-    route: "clarify",
-  },
-  {
-    id: "C015",
-    keywords: ["choose between individual", "group or individual interviews", "how do those two methods differ", "discussions and a focus group", "1:1 vs focus", "individual vs group"],
-    answer: "Choose individual discussions for independent depth. Choose a focus group when you want to learn from the exchange between participants. Consider the sensitivity of the topic, whether people know one another, and whether a group setting could affect their answers.",
-    route: "clarify",
-  },
-  {
-    id: "C016",
-    keywords: ["combine surveys", "mix research methods", "one project use all three", "combine methods", "surveys, discussions, and focus"],
-    answer: "Yes. Different methods can address related questions. For example, individual discussions can explore an issue, followed by a survey to investigate themes across a wider audience. A Campaign can bring related sessions and their findings together.",
-    route: "workflow",
-  },
-  {
-    id: "C017",
-    keywords: ["satisfaction scores but not the reasons", "ratings but no explanation", "get beyond the numbers", "scores but not why", "why behind the score"],
-    answer: "If you already have scores, a survey with purposeful follow-ups can explore why people chose them. Individual discussions may help when the reasons are complex. What do you need to understand behind the score, and who would you hear from?",
-    route: "clarify",
-  },
-  {
-    id: "C018",
-    keywords: ["idea to test", "test a concept", "method suits idea testing", "which method would you suggest", "concept testing method"],
-    answer: "Focus groups can reveal how people discuss and improve an idea together. Individual discussions provide independent reactions, while a survey can compare responses to defined options. Is your priority exploring reactions, improving the concept, or comparing alternatives?",
-    route: "clarify",
-  },
-  {
-    id: "C019",
-    keywords: ["why people are leaving", "research departures", "start with attrition", "people are leaving", "why are people leaving"],
-    answer: "I would start by clarifying who is leaving and what you already know. Individual discussions can explore experiences in depth; a survey can investigate emerging themes across a wider audience. Are you able to hear from people who left as well as those who stayed?",
-    route: "clarify",
-  },
-  {
-    id: "C020",
-    keywords: ["what would you need to know before recommending", "what information do you need from us", "help us choose a format", "before recommending a method", "which research method", "which method should i use", "which should i use", "help me choose a method", "recommend a method"],
-    answer: "I can help you choose. First tell me whose feedback you need (employees, customers, students, members, or another group), then what you want to understand or decide. From that I can recommend a survey, 1:1 discussion, focus group, or a mix.",
-    route: "clarify",
-  },
-  {
-    id: "C021",
-    keywords: ["what happens during an ai-led", "participant experience", "describe an ai interview", "during a 1:1 discussion", "what happens in a discussion"],
-    answer: "Our AI agent guides each participant through an individual discussion based on your approved guide. It responds to what they share and asks follow-up questions to explore reasons and examples. Your team can then review the findings and underlying discussion material.",
-    route: "product",
-  },
-  {
-    id: "C022",
-    keywords: ["is a person or an ai", "human interviewer", "who am i talking to in a session", "ai conducting the discussion", "is there a human"],
-    answer: "Our AI conducts the discussion. Your team defines the purpose and approves the guide, and participants are informed that AI is involved. Your team remains responsible for reviewing the findings and deciding how to use them.",
-    route: "product",
-  },
-  {
-    id: "C023",
-    keywords: ["which follow-up question", "how are follow-ups chosen", "next questions adaptive", "decide which follow-up", "how does the ai decide"],
-    answer: "Our AI chooses follow-up questions based on the participant's answers and your research direction. It explores reasons, examples, and differing experiences within the guide and guidance your team reviews before launch.",
-    route: "product",
-  },
-  {
-    id: "C024",
-    keywords: ["everyone receive the same questions", "are interviews identical", "will everyone see the same", "same questions"],
-    answer: "Participants can follow a common approved discussion guide, while follow-ups vary according to their answers. In surveys, Fixed, Conditional, and Adaptive follow-ups behave differently. Are you asking about individual discussions or surveys?",
-    route: "clarify",
-  },
-  {
-    id: "C025",
-    keywords: ["answer by typing or speaking", "speak their answers", "is typing required", "chat or voice", "voice mode", "can people speak"],
-    answer: "Yes. In our 1:1 Discussions, participants can type or speak and switch between chat and voice during the discussion. Arabic is available in text mode only. Our surveys and focus groups use text and do not support voice mode. Voice responses are recorded as session content and follow the session's access and retention arrangements.",
-    route: "product",
-  },
-  {
-    id: "C026",
-    keywords: ["which languages are supported", "is spanish supported", "languages work", "multilingual", "arabic", "supported languages", "language support"],
-    answer: "We support German, English, Spanish, French, Hindi, Indonesian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Ukrainian, Vietnamese, Chinese (Simplified), and Arabic. Arabic is text only. Voice is available for 1:1 Discussions in the other supported languages; surveys and focus groups do not support voice mode.",
-    route: "product",
-  },
-  {
-    id: "C027",
-    keywords: ["schedule a time with an interviewer", "are interviews asynchronous", "interview appointments", "need to schedule", "asynchronous"],
-    answer: "Participants do not need an interview appointment for our 1:1 Discussions. They can respond between the session's opening and closing dates. Our surveys also have an opening and closing date. Focus groups are scheduled for everyone to participate together at the same time.",
-    route: "product",
-  },
-  {
-    id: "C028",
-    keywords: ["how long does a typical discussion", "how much time should participants allow", "are all discussions 30", "discussion take", "discussion duration", "15-20", "45-60"],
-    answer: "You can set a 1:1 Discussion for 15–20, 20–30, 30–45, or 45–60 minutes. These are guidelines rather than exact time limits. Our AI plans how many topics it can reasonably explore within that range, and the actual duration also depends on how long participants take to respond.",
-    route: "product",
-  },
-  {
-    id: "C029",
-    keywords: ["pause and return later", "resume later", "participant is interrupted", "can someone resume", "pause a discussion"],
-    answer: "Yes. Participants can pause a 1:1 Discussion and return to where they left off while the session is still open. Our AI waits if a participant does not answer immediately. Once the session reaches its closing date, it cannot accept further responses.",
-    route: "product",
-  },
-  {
-    id: "C030",
-    keywords: ["what does our team receive after the discussions", "what comes back after interviews", "discussion deliverables", "after the discussions finish"],
-    answer: "We provide individual and session-level reports, supporting quotes, and discussion transcripts. Your team reviews the findings against its research objective and decides what to do next. Visit our Reports section to download an example.",
-    route: "reports",
-  },
-  {
-    id: "C031",
-    keywords: ["surveys different from ordinary", "why use this instead of a form", "what makes the surveys different", "ordinary online forms"],
-    answer: "Our surveys combine common questions with follow-ups that explore the explanation behind an answer. Our AI helps prepare the survey and analyze responses, while your team reviews and approves the research before launch.",
-    route: "product",
-  },
-  {
-    id: "C032",
-    keywords: ["types of survey questions", "which question formats", "existing question types", "text, single choice", "question types can we use"],
-    answer: "Our surveys support Text, Single Choice, Multiple Choice, and Rating questions. You can add follow-up questions to explore the reasons or context behind an answer.",
-    route: "product",
-  },
-  {
-    id: "C033",
-    keywords: ["combine ratings, multiple-choice", "mix question formats", "rating have a written explanation", "ratings and open-text"],
-    answer: "Yes. You can combine Text, Single Choice, Multiple Choice, and Rating questions in a survey. Follow-ups can explore why someone selected an option or gave a particular rating.",
-    route: "product",
-  },
-  {
-    id: "C034",
-    keywords: ["what is a fixed follow-up", "what does fixed mean", "everyone receive the same follow-up", "fixed follow-up"],
-    answer: "A Fixed follow-up uses the same predefined wording for everyone. For example, a common follow-up can ask each participant to explain the reason for their rating.",
-    route: "product",
-  },
-  {
-    id: "C035",
-    keywords: ["what is a conditional follow-up", "what triggers a conditional", "follow-up depend on an answer", "conditional follow-up"],
-    answer: "A Conditional follow-up appears when an answer meets criteria set for the survey. For example, participants choosing a particular response could receive an additional question. Confirm the supported criteria for your intended question type.",
-    route: "product",
-  },
-  {
-    id: "C036",
-    keywords: ["what is an adaptive follow-up", "what does adaptive mean", "ai tailor the next question", "adaptive follow-up"],
-    answer: "An Adaptive follow-up is tailored by AI to a participant's answer and the research intent. It can explore the reason or context behind that answer rather than using identical wording for everyone.",
-    route: "product",
-  },
-  {
-    id: "C037",
-    keywords: ["example of each follow-up", "show the three follow-up types", "follow-up types look in practice", "simple example of each follow-up"],
-    answer: "Illustrative examples: Fixed asks everyone, 'What influenced your rating?' Conditional asks a predefined question after a qualifying answer. Adaptive asks about the specific issue someone mentioned, such as what made a permission request confusing. These examples do not establish every supported configuration.",
-    route: "product",
-  },
-  {
-    id: "C038",
-    keywords: ["purpose of a follow-up", "set the intent", "follow-ups seek examples", "gathering examples", "understanding reasons"],
-    answer: "Yes. You can choose what you want follow-ups to explore, such as reasons, examples, recurring issues, or ideas for improvement. Your team reviews the survey and follow-up approach against the research objective before launch.",
-    route: "product",
-  },
-  {
-    id: "C039",
-    keywords: ["review the survey and follow-up", "approve questions first", "review the follow-up approach", "before launch"],
-    answer: "Yes. Your team reviews and approves the survey before launch, including the base questions and follow-up approach or guidance. Adaptive follow-up wording is generated from participants' answers during the session, so those exact questions are not all available in advance.",
-    route: "workflow",
-  },
-  {
-    id: "C040",
-    keywords: ["follow-up answers included", "where do follow-up answers appear", "are they included in the report", "follow-ups in the survey results"],
-    answer: "In our Survey Session Report, we summarize the answers to a base question's follow-ups in a written paragraph explaining the results. Our Survey Individual Responses Report shows each participant's specific follow-up questions and responses. You can download examples from our Reports section.",
-    route: "reports",
-  },
-  {
-    id: "C041",
-    keywords: ["how does an ai-moderated focus group", "describe the group experience", "what does the ai moderator do", "focus group work"],
-    answer: "Your team sets the objective and approves the guide. Our AI moderates a scheduled live text discussion, explores participants' answers, and checks its understanding with the group. We bring the findings together in a report covering shared themes and differing perspectives.",
-    route: "product",
-  },
-  {
-    id: "C042",
-    keywords: ["take part together at the same time", "is the group live", "must people attend together", "scheduled focus group"],
-    answer: "Yes. Our focus groups are scheduled, and all participants take part at the same time. Our surveys and 1:1 Discussions let participants respond individually between the session's opening and closing dates.",
-    route: "product",
-  },
-  {
-    id: "C043",
-    keywords: ["see and respond to each other", "can members interact", "see each other's answers", "each other's contributions"],
-    answer: "Yes. Participants can read and respond to one another's contributions in our focus-group text discussion. For independent responses that other participants do not see, choose 1:1 Discussions or a survey.",
-    route: "product",
-  },
-  {
-    id: "C044",
-    keywords: ["encourage participation from quieter", "include quieter participants", "moderator encourage participation", "quieter people"],
-    answer: "Our AI moderator invites quieter participants to contribute. We cannot guarantee equal participation or comfort, so your group composition and topic still matter.",
-    route: "product",
-  },
-  {
-    id: "C045",
-    keywords: ["someone dominating", "someone takes over", "dominant voices", "dominating the discussion"],
-    answer: "Our AI moderator manages dominant contributions while encouraging broader participation. Your team should still consider group composition and sensitive topics; moderation cannot remove every effect of group dynamics.",
-    route: "product",
-  },
-  {
-    id: "C046",
-    keywords: ["explore disagreements", "explore disagreement", "minority perspectives", "different perspectives"],
-    answer: "Yes. Our AI asks for examples and explores differing viewpoints. Our reports preserve meaningful differences rather than treating disagreement as consensus.",
-    route: "reports",
-  },
-  {
-    id: "C047",
-    keywords: ["check its understanding", "check its interpretation", "participants correct a summary", "moderator check"],
-    answer: "Yes. Our AI shares summaries during the focus group so participants can clarify or add to its understanding. Your team should still review the final findings and supporting evidence.",
-    route: "product",
-  },
-  {
-    id: "C048",
-    keywords: ["how many people can participate", "what is the group limit", "how large can a focus group", "focus group size", "up to ten"],
-    answer: "We recommend no more than six participants for the best group interaction. Our focus groups allow up to ten participants.",
-    route: "product",
-  },
-  {
-    id: "C049",
-    keywords: ["names are hidden", "other group members see", "hidden names enough", "anonymous in chat"],
-    answer: "In a focus group with names hidden, participants appear as Anonymous in chat. Others can still read their contributions, and distinctive details or wording may reveal who they are. Hiding names does not guarantee that participants cannot recognize one another.",
-    route: "privacy",
-  },
-  {
-    id: "C050",
-    keywords: ["focus-group report include", "what are the group outputs", "see a focus-group report", "focus group session report"],
-    answer: "Our Focus Group Session Report brings together shared themes, differing viewpoints, and insights emerging through the discussion. A downloadable sample is coming soon; we can walk you through one in a demo.",
-    route: "sample_focus_group",
-  },
-  {
-    id: "C051",
-    keywords: ["turn a research objective into a session", "how does the creation agent help", "start with an unfinished idea", "creation agent"],
-    answer: "Start with a topic or objective. Our creation agent asks about your audience, goals, and relevant details, then helps prepare a guide for your review and approval. Your team remains responsible for the research direction.",
-    route: "workflow",
-  },
-  {
-    id: "C052",
-    keywords: ["start with our own topic", "bring our own questions", "must we use your templates", "existing questions"],
-    answer: "Yes. You can start with your own topic, objective, or existing questions. Our creation agent helps turn that starting point into a session for your team to review and approve.",
-    route: "workflow",
-  },
-  {
-    id: "C053",
-    keywords: ["start from a template", "are templates available", "template help us start", "use-case library", "ready-made templates"],
-    answer: "Yes. We provide ready-made templates in our use-case library. Choose one as a starting point, then review and adapt it for your audience and objective.",
-    route: "workflow",
-  },
-  {
-    id: "C054",
-    keywords: ["reuse a previous session", "repeat a session", "save a custom template", "saved custom", "previous session"],
-    answer: "Yes. You can start from a previous session, a saved custom session template, an included template, or a fresh prompt. Review what needs to change for the new audience and objective before launching the next session.",
-    route: "contact",
-  },
-  {
-    id: "C055",
-    keywords: ["review and approve before launch", "what needs our approval", "what happens before launch", "approve before launch"],
-    answer: "Your team reviews the objective, audience, session content, and guidance for AI follow-ups before launch. After the research, your team reviews the findings and evidence before deciding what to do next.",
-    route: "workflow",
-  },
-  {
-    id: "C056",
-    keywords: ["guidelines for the ai", "set research rules", "sensitive topics", "research guidelines", "language and handling"],
-    answer: "Yes. You can set research guidelines for language, questions, and handling sensitive topics. These help direct our AI, but they do not guarantee error-free behavior or make every sensitive topic suitable for research.",
-    route: "workflow",
-  },
-  {
-    id: "C057",
-    keywords: ["how do organizations invite", "how are people invited", "use our participant list", "upload contacts", "hris", "invite participants"],
-    answer: "You can upload contacts, sync them from an HRIS system, or enter them manually. During session creation, choose who to invite and filter contacts by attributes your organization has included. We email participants with the session purpose, response deadline, identity setting, and who requested the feedback. Your organization remains responsible for appropriate contact permissions.",
-    route: "workflow",
-  },
-  {
-    id: "C058",
-    keywords: ["track invitations", "monitor response progress", "who has started", "participation, and completion", "reminders"],
-    answer: "Yes. You can track invitations, participation, and completion in your workspace. We send a reminder the day before the session closes, and session creators can also trigger reminders for participants who have not yet submitted a response.",
-    route: "workflow",
-  },
-  {
-    id: "C059",
-    keywords: ["what is a campaign", "what does campaign mean", "why group sessions together", "why would we use one"],
-    answer: "A Campaign groups related research sessions. We provide a report for each session and a Campaign report that brings insights across those sessions together. You can combine methods to explore a broader research question.",
-    route: "workflow",
-  },
-  {
-    id: "C060",
-    keywords: ["repeat research and compare", "track change over time", "repeated studies be compared", "recurring sessions", "enterprise research assistant"],
-    answer: "Yes. We support recurring sessions and comparisons over time through Campaigns. Our Enterprise Research Assistant can also make custom comparisons. When interpreting change, consider differences in questions, participants, and timing rather than assuming every comparison is like for like.",
-    route: "clarify",
-  },
-  {
-    id: "C061",
-    keywords: ["what findings and reports", "what do we get back", "what does a report contain", "findings will we receive"],
-    answer: "We provide reports with key findings, themes, differences in perspective, supporting evidence, and Suggested Next Steps. Depending on the research format, you can review individual, session, and Campaign outputs. Visit our Reports section to download examples.",
-    route: "reports",
-  },
-  {
-    id: "C062",
-    keywords: ["difference between a session report and an individual", "group report or individual report", "report levels differ", "session report vs individual"],
-    answer: "A session report brings together findings across a session's participants. An individual report focuses on one participant's perspective. Availability and identity display depend on the session type and settings.",
-    route: "reports",
-  },
-  {
-    id: "C063",
-    keywords: ["connect the findings to our original", "how do reports answer our objective", "findings tied to our research question"],
-    answer: "We connect report findings to your research objectives. Your team can review how each finding addresses the question, the evidence behind it, and any limitations or further questions before acting.",
-    route: "reports",
-  },
-  {
-    id: "C064",
-    keywords: ["themes, contrasting perspectives", "patterns and differences", "contrasting views", "question-level findings"],
-    answer: "Yes. Our reports include recurring themes, contrasting perspectives, and question-level findings with context from participants' responses. Interpret differences in light of who took part and what was asked.",
-    route: "reports",
-  },
-  {
-    id: "C065",
-    keywords: ["examine the responses and quotes", "trace a finding to responses", "where is the supporting evidence", "supporting a finding"],
-    answer: "Yes. We include supporting evidence and illustrative quotes in reports, with complete source material available through discussion transcripts and survey responses. Visit our Reports section to download examples of the findings and underlying responses.",
-    route: "reports",
-  },
-  {
-    id: "C066",
-    keywords: ["complete discussion transcripts", "read the source responses", "are full transcripts available", "survey responses access"],
-    answer: "Yes. You can access discussion transcripts and complete survey responses according to your session permissions and identity settings. I cannot retrieve private participant material through this website chat. You can download examples from our Reports section.",
-    route: "reports",
-  },
-  {
-    id: "C067",
-    keywords: ["customize report sections", "tailor reports", "add our comments", "editorial comments"],
-    answer: "Yes. You can add or remove report sections and make editorial comments. We can show you the editing options and how your contributions appear in a demo.",
-    route: "reports",
-  },
-  {
-    id: "C068",
-    keywords: ["report and response-export formats", "download to word or excel", "which export formats", "powerpoint", "csv", "excel"],
-    answer: "We offer Word, PDF, and PowerPoint exports for reports where available, and Excel or CSV for survey response data. Export options depend on the output. Which report and format do you need?",
-    route: "reports",
-  },
-  {
-    id: "C069",
-    keywords: ["difference between an ai analysis report and the underlying", "report or raw responses", "which document contains the actual answers", "analysis vs responses"],
-    answer: "An AI report interprets responses into findings and themes. The underlying survey-response document presents participants' questions and answers, including follow-ups, rather than substituting analysis for their responses. Use the report for synthesis and the response export to examine the source material.",
-    route: "samples",
-  },
-  {
-    id: "C070",
-    keywords: ["campaign report add beyond", "why use a campaign report", "cross-session reporting", "campaign report example"],
-    answer: "Our Campaign report brings together insights across related sessions, including sessions using different methods. When interpreting the findings, consider differences in audiences, questions, and timing. A downloadable Campaign Report sample is coming soon; we can walk you through one in a demo.",
-    route: "sample_campaign",
-  },
-  {
-    id: "C071",
-    keywords: ["what does anonymous mean", "anonymous really mean", "hidden name the same as complete anonymity", "what is anonymous"],
-    answer: "In our anonymous sessions, we hide names and direct contact identifiers from organizers and collaborators in outputs. We may retain identifiers needed to operate the service. Distinctive words, voice, or circumstances may still reveal identity, so anonymity does not mean no identifying information exists anywhere.",
-    route: "privacy",
-  },
-  {
-    id: "C072",
-    keywords: ["what does an identified session mean", "what happens in an identified session", "are names shown with responses", "identified session"],
-    answer: "In an identified session, responses can be associated with the participant's identity, and individual reports include the participant's name for authorized session viewers. We notify participants of the identity setting in their invitation and Session Dashboard before they begin supplying feedback.",
-    route: "privacy",
-  },
-  {
-    id: "C073",
-    keywords: ["who chooses whether a session is anonymous", "who sets the identity option", "can participants choose it themselves", "anonymous or identified"],
-    answer: "The session creator chooses whether the session is Identified or Anonymous. We tell participants the setting in both their invitation and Session Dashboard before they begin supplying feedback.",
-    route: "privacy",
-  },
-  {
-    id: "C074",
-    keywords: ["told the identity setting before", "are people told about anonymity", "will participants know who can see", "identity setting before they begin"],
-    answer: "Yes. We show whether the session is Identified or Anonymous in both the invitation and the participant's Session Dashboard before they begin supplying feedback. Participants should also understand who can access the results and, in a focus group, what other participants can read.",
-    route: "privacy",
-  },
-  {
-    id: "C075",
-    keywords: ["who can see an identified participant", "who sees named reports", "authorized viewers see participant names", "individual report name"],
-    answer: "In an identified session, individual reports include the participant's name and are available to the creator, people authorized to view the results, and admins with global viewing access. I cannot inspect a particular account's permissions through this website chat.",
-    route: "privacy",
-  },
-  {
-    id: "C076",
-    keywords: ["who can access individual responses and transcripts", "who sees transcripts", "who can read individual answers"],
-    answer: "People with access to a session can access its reports and underlying responses, including individual reports, session reports, discussion transcripts, and survey responses, as applicable. The session's Identified or Anonymous setting controls identity visibility.",
-    route: "privacy",
-  },
-  {
-    id: "C077",
-    keywords: ["access to a session include both its reports", "session access include underlying answers", "reports and responses separately restricted"],
-    answer: "Yes. Session access includes the associated Campaign, Session, Individual, and Transcript reports, as applicable, together with the session's underlying responses. The session's Identified or Anonymous setting still applies.",
-    route: "privacy",
-  },
-  {
-    id: "C078",
-    keywords: ["recognize a participant from what they say", "quote identify someone", "recognize an anonymous respondent", "even when names are hidden"],
-    answer: "Yes. A name can be hidden while distinctive experiences, wording, or voice still identify someone. Participants should avoid unnecessary identifying details and understand the session's access arrangements before contributing.",
-    route: "privacy",
-  },
-  {
-    id: "C079",
-    keywords: ["privacy work differently", "privacy identical across formats", "what changes in a group", "surveys, individual discussions, and focus groups privacy"],
-    answer: "Yes. In our 1:1 Discussions, each participant interacts individually with our AI. Surveys collect individual responses, while focus groups let participants read one another's shared contributions. Authorized organizational viewers can access the research outputs according to session permissions and the identity setting.",
-    route: "privacy",
-  },
-  {
-    id: "C080",
-    keywords: ["full explanation of participant privacy", "where is the full privacy", "who can answer a privacy question", "read the privacy policy"],
-    answer: "You can read our Privacy Policy for details about identity, access, AI processing, and retention. For a particular research session, also read the organizer's notice. Questions about how that organization uses responses should go to the organizer; you can reach us about privacy at Privacy@trupulse.ai.",
-    route: "privacy",
-  },
-  {
-    id: "C081",
-    keywords: ["used to train ai models", "train on our responses", "ai providers learn from our research", "training data", "model training", "train general-purpose"],
-    answer: "We do not use customer research content to train general-purpose AI models. Our AI service providers are contractually restricted from doing so. We do send relevant research content to those providers to conduct the research and analysis.",
-    route: "privacy",
-  },
-  {
-    id: "C082",
-    keywords: ["external ai providers process", "does data go to ai vendors", "who processes the ai requests", "subprocessor"],
-    answer: "Yes. We send relevant research content to AI service providers to conduct research and analysis. Those providers are contractually restricted from using that content to train general-purpose AI models. Email Privacy@trupulse.ai if you need our current subprocessor details.",
-    route: "privacy",
-  },
-  {
-    id: "C083",
-    keywords: ["trupulse personnel access", "support staff see responses", "human access completely excluded", "can support see"],
-    answer: "Yes. Authorized members of our team and our service providers may review research content when needed for customer technical support, subject to access controls and confidentiality obligations.",
-    route: "privacy",
-  },
-  {
-    id: "C084",
-    keywords: ["how long is research data retained", "how long do you keep data", "single retention period", "data retention"],
-    answer: "During an active customer relationship, we retain research under your organization's instructions and agreement. Different rules apply to deletion, account closure, business records, and backups. You can find the relevant retention details in section 8 of our Privacy Policy.",
-    route: "privacy",
-  },
-  {
-    id: "C085",
-    keywords: ["when an organization deletes", "what does deletion actually do", "are backups removed at once", "delete research data"],
-    answer: "When you delete a session or Campaign, we remove access immediately and delete the associated research from active systems within 30 days. Protected backups may retain deleted data for up to 90 days after active-system deletion. Linked sessions, exported copies, and legal exceptions need separate consideration.",
-    route: "privacy",
-  },
-  {
-    id: "C086",
-    keywords: ["control access through roles", "can we restrict access", "are permissions available", "roles and permissions", "open and restricted"],
-    answer: "Yes. We support roles and permissions, including Open and Restricted workspace access. A person with access to a session can view its reports and underlying responses. We can help you review the appropriate access arrangement for your organization.",
-    route: "privacy",
-  },
-  {
-    id: "C087",
-    keywords: ["logo and colors", "use our own brand", "invitations carry our logo", "branding", "white label"],
-    answer: "Yes. You can use your organization's identity in invitations, sessions, and reports. We can show you the logo, color, and branding options for each part of the experience in a demo.",
-    route: "contact",
-  },
-  {
-    id: "C088",
-    keywords: ["security information or a data processing", "security pack", "request a dpa", "data processing agreement", "procurement"],
-    answer: "Please contact us for security and procurement materials. For privacy information or a data processing agreement, email Privacy@trupulse.ai. We can direct your request to the appropriate team.",
-    route: "privacy_contact",
-  },
-  {
-    id: "C089",
-    keywords: ["conversations with this website assistant stored", "do you save this chat", "staff review website conversations", "store this chat", "is this chat stored"],
-    answer: "Yes. We store questions and responses from this website chat to help ensure I provide accurate answers. Please avoid sharing sensitive personal or confidential research information here. For questions about access, retention, or deletion, email Privacy@trupulse.ai.",
-    route: "privacy_contact",
-  },
-  {
-    id: "C090",
-    keywords: ["analytics or advertising cookies", "marketing cookies", "change tracking preferences", "cookie controls", "manage my choices"],
-    answer: "You can manage your choices through our cookie controls and read our Privacy Policy for details. If you see conflicting information about analytics or advertising cookies, email Privacy@trupulse.ai so we can confirm the technologies in use.",
-    route: "privacy_contact",
-  },
-  {
-    id: "C091",
-    keywords: ["why employees stay or leave", "help with attrition", "run stay research", "employees stay or leave"],
-    answer: "Yes. We can help you explore why employees stay or leave. Our 1:1 Discussions explore experiences independently, and our surveys can investigate themes across an audience. Are you trying to understand people who left, people considering leaving, or reasons people stay?",
-    route: "clarify",
-  },
-  {
-    id: "C092",
-    keywords: ["customer onboarding", "research onboarding friction", "customers get stuck", "onboarding problems"],
-    answer: "Yes. Individual discussions can explore what happened around an onboarding difficulty, while surveys can gather structured feedback across customers. What stage of onboarding is causing concern, and what do you already know from behavior or support data?",
-    route: "clarify",
-  },
-  {
-    id: "C093",
-    keywords: ["customer satisfaction beyond", "understand satisfaction scores", "why a customer rated", "beyond a numerical score"],
-    answer: "Yes. Our survey follow-ups explore the reasons behind a score, and our 1:1 Discussions can ask multiple questions to understand the experience in depth. You can combine surveys, 1:1 Discussions, and focus groups within a Campaign to investigate what is behind the score. What decision do you want the findings to support?",
-    route: "clarify",
-  },
-  {
-    id: "C094",
-    keywords: ["nonprofit", "member needs and renewal", "nonprofits research renewals", "former members", "understand member"],
-    answer: "Yes. Member needs and renewal decisions are suitable research questions to explore. I would first clarify whose experience matters: renewed members, non-renewers, or both. Independent discussions can uncover reasons; a later survey can investigate the themes more broadly.",
-    route: "member_research",
-  },
-  {
-    id: "C095",
-    keywords: ["volunteers", "volunteers take part", "volunteer engagement", "volunteers' experiences"],
-    answer: "Yes. Volunteer research could explore motivations, support, practical barriers, and reasons for continued involvement. Choose the method around whether you need independent experiences, a wider structured view, or group discussion. Adult-participation requirements still apply.",
-    route: "clarify",
-  },
-  {
-    id: "C096",
-    keywords: ["university", "adult students", "universities use it", "research adult learners", "adult students' experiences"],
-    answer: "Yes. We help universities explore adult students' experiences of services, support, and learning journeys. Participants must be aged 18 or older. What experience do you want to understand?",
-    route: "clarify",
-  },
-  {
-    id: "C097",
-    keywords: ["public agency", "residents' experiences", "councils research", "public service", "community programs"],
-    answer: "Yes. We help public agencies and community programs explore adult residents' experiences of a service. Consider accessible participation routes, missing perspectives, and appropriate notices before choosing a method.",
-    route: "clarify",
-  },
-  {
-    id: "C098",
-    keywords: ["test reactions to a proposed", "test a policy idea", "reactions to a new service", "product, service, policy, or program"],
-    answer: "Yes. We help you test ideas for products, services, policies, and programs. Our individual discussions capture independent reactions, our focus groups explore interaction, and our surveys compare responses to defined options. What do you need to learn before deciding?",
-    route: "clarify",
-  },
-  {
-    id: "C099",
-    keywords: ["before and after an organizational change", "listen before and after", "research change over time", "organizational change"],
-    answer: "Yes. Related sessions can explore expectations before change and experiences afterward. A Campaign can bring the work together. Keep track of changes in audience and questions so differences are not automatically attributed to the organizational change.",
-    route: "clarify",
-  },
-  {
-    id: "C100",
-    keywords: ["understand a message", "test message clarity", "understand our announcement", "communication research"],
-    answer: "Yes. Communication research can explore how people interpret a message, what remains unclear, and what information they need. Individual discussions can capture independent interpretations; surveys with follow-ups can explore understanding across an audience.",
-    route: "clarify",
-  },
-  {
-    id: "C101",
-    keywords: ["how is trupulse priced", "what does it cost", "where are the prices", "pricing", "price", "how much"],
-    answer: "Please email sales@trupulse.ai for pricing.",
-    route: "pricing",
-  },
-  {
-    id: "C102",
-    keywords: ["what determines the cost", "how is cost calculated", "what affects the quote", "cost of using"],
-    answer: "Please email sales@trupulse.ai with your intended research scope for pricing.",
-    route: "pricing",
-  },
-  {
-    id: "C103",
-    keywords: ["limits on participants", "are sessions unlimited", "what usage is included", "plan allowances", "usage limits"],
-    answer: "For plan allowances and usage limits, please email sales@trupulse.ai.",
-    route: "pricing",
-  },
-  {
-    id: "C104",
-    keywords: ["trial or pilot", "try it first", "free trial", "is a trial"],
-    answer: "Please email sales@trupulse.ai to ask about a trial or pilot.",
-    route: "pricing",
-  },
-  {
-    id: "C105",
-    keywords: ["small organization", "suitable for a small team", "minimum organization size", "small business"],
-    answer: "Yes. We can help small organizations explore questions about their customers, employees, members, or communities. What do you want to learn, and from roughly how many people? For plan options and pricing, please email sales@trupulse.ai.",
-    route: "pricing",
-  },
-  {
-    id: "C106",
-    keywords: ["getting started involve", "what support is available", "implementation involve", "onboarding help", "what does implementation"],
-    answer: "Getting started involves defining your objective, selecting an approach, reviewing session content, and choosing participants. We can discuss onboarding, training, and implementation support for your organization. Email sales@trupulse.ai to discuss the arrangements you need.",
-    route: "contact",
-  },
-  {
-    id: "C107",
-    keywords: ["what happens in a demo", "how long is the demo", "what will you show us", "demo take", "demo duration"],
-    answer: "Our demos can be scheduled for 30 minutes to an hour. We show you how to create and launch a session, what participants experience, and how the reports look. We can also use a specific research objective to run a simulated feedback session and provide sample reports.",
-    route: "demo",
-  },
-  {
-    id: "C108",
-    keywords: ["help me book a demo", "help me arrange a demo", "where can i book a call", "book a demo", "schedule a demo"],
-    answer: "Yes. Select Book a Demo to review the form and choose a time. Your meeting is confirmed when you receive confirmation from our scheduling service.",
-    route: "demo",
-  },
-  {
-    id: "C109",
-    keywords: ["demo focus on our audience", "demo cover our use case", "tailor what we see", "demo for our research"],
-    answer: "Yes. Tell us your research objective and audience, and we can run a simulated feedback session and provide sample reports during the demo. Please avoid sharing confidential participant records or unnecessary personal information.",
-    route: "demo",
-  },
-  {
-    id: "C110",
-    keywords: ["question before booking", "speak to someone first", "how do i contact the team", "contact someone", "hello@trupulse"],
-    answer: "You can contact hello@trupulse.ai with a general question. Privacy questions can go to Privacy@trupulse.ai. I can help identify the appropriate route without requiring you to book a demo.",
-    route: "contact",
-  },
-  {
-    id: "C111",
-    keywords: ["sample 1:1 discussion session report", "interview session report", "combined discussion findings", "1:1 discussion session report"],
-    answer: "Here is our sample 1:1 Discussion Session Report—open it below. It shows key findings, shared themes, differences in perspective, and participant quotes using sample data.",
-    route: "sample_discussion_session",
-  },
-  {
-    id: "C112",
-    keywords: ["sample individual discussion report", "single participant report", "individual discussion report look like", "1:1 discussion individual report"],
-    answer: "Here is our sample 1:1 Discussion Individual Report—open it below. It shows how we summarize one participant's perspective, insights, and supporting quotes using a sample participant.",
-    route: "sample_discussion_individual",
-  },
-  {
-    id: "C113",
-    keywords: ["sample survey session report", "sample survey report", "see survey analysis", "survey session report"],
-    answer: "Here is our sample Survey Session Report—open it below. It shows results, response patterns, and follow-up insights across participants using sample data.",
-    route: "sample_survey_session",
-  },
-  {
-    id: "C114",
-    keywords: ["complete survey-response example", "actual survey answers", "responses rather than findings", "survey individual responses", "complete responses rather than"],
-    answer: "Here is our sample Survey Individual Responses Report—open it below. It contains the specific survey questions, follow-up questions, and responses for each participant, rather than only the analysis.",
-    route: "sample_survey_responses",
-  },
-  {
-    id: "C115",
-    keywords: ["focus group or campaign report samples", "campaign sample", "preview a focus-group report", "focus group and campaign"],
-    answer: "Focus Group Session Report and Campaign Report samples are coming soon. We can walk you through both in a demo, and you can open our 1:1 discussion and survey samples now.",
-    route: "sample_focus_group",
-  },
-  {
-    id: "C116",
-    keywords: ["customer case study", "customer evidence", "real project example", "case study"],
-    answer: "Yes. Our case study covers research with 50 top sales performers at a global medical technology company. We explain the research question, approach, findings, and actions informed by the research. You can read it in our Case Study section.",
-    route: "case_study",
-  },
-  {
-    id: "C117",
-    keywords: ["customer accomplish in two weeks", "what did the two leaders do", "delivered in two weeks", "two weeks"],
-    answer: "We completed the research setup, discussions, surveys, and executive report in two weeks. Two customer leaders set the objectives, reviewed and approved the questions, finalized templates, and supplied participants. The findings informed training, job-description changes, and further research plans; the customer leaders made the decisions.",
-    route: "case_study",
-  },
-  {
-    id: "C118",
-    keywords: ["article relevant to nonprofit", "nonprofit research guidance", "read about member needs", "what do members need now", "beyond attendance"],
-    answer: "Read our Resources article What do members need now? Look beyond attendance. It uses a hypothetical nonprofit learning program to explore needs, awareness, access, and value. It offers practical guidance rather than a claim about a particular customer's results.",
-    route: "nonprofit_article",
-  },
-  {
-    id: "C119",
-    keywords: ["already use trupulse", "where do i sign in", "account support", "customer support", "i already have an account", "sign in"],
-    answer: "Select Sign in to access your account. If you need account support, email support@trupulse.ai. I can explain how to find the right resources, but I cannot inspect your workspace or account records through this website chat.",
-    route: "support",
-  },
-  {
-    id: "C120",
-    keywords: ["start a new chat or clear", "reset this chat", "clearing the chat erase", "clear this conversation", "does clearing delete"],
-    answer: "Use the conversation menu to start a new conversation or clear the current one. Clearing the visible history does not confirm that stored server copies have been deleted. To request deletion of stored chat data, email Privacy@trupulse.ai.",
-    route: "privacy_contact",
+    "id": "WEB001",
+    "keywords": [
+      "what is trupulse",
+      "what does trupulse do",
+      "about trupulse",
+      "tell me about trupulse",
+      "overview",
+      "what is this"
+    ],
+    "answer": "TruPulse is an AI feedback platform that helps organizations create, conduct, and analyze 1:1 Discussions, Focus Groups, Surveys, and multi-session campaigns.",
+    "route": "product"
+  },
+  {
+    "id": "WEB002",
+    "keywords": [
+      "what problem does trupulse help solve",
+      "what problem",
+      "why would we use",
+      "what does it solve",
+      "why use trupulse",
+      "what work does it save"
+    ],
+    "answer": "It helps organizations gather structured feedback and the reasons behind it, then turn the feedback into reports and insights for human review and decision-making.",
+    "route": "product"
+  },
+  {
+    "id": "WEB003",
+    "keywords": [
+      "who is trupulse for",
+      "who can use",
+      "who uses",
+      "designed for",
+      "would it suit"
+    ],
+    "answer": "Teams researching employee experience, customer needs, product ideas, and other topics where understanding people’s experiences and perspectives is useful.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB004",
+    "keywords": [
+      "is trupulse only for hr",
+      "only for hr",
+      "hr only",
+      "hr-only",
+      "not just hr",
+      "outside the workplace"
+    ],
+    "answer": "No. Its feedback methods can also support customer research, product research, marketing feedback, and other organizational research objectives.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB005",
+    "keywords": [
+      "what are the main feedback methods",
+      "main feedback methods",
+      "what research methods",
+      "methods does trupulse support",
+      "kinds of studies",
+      "what formats",
+      "session types"
+    ],
+    "answer": "AI-led 1:1 Discussions, AI-moderated Focus Groups, and Adaptive Surveys.",
+    "route": "product"
+  },
+  {
+    "id": "WEB006",
+    "keywords": [
+      "what does ai do in trupulse",
+      "what does the ai do",
+      "what does ai do",
+      "ai vs team",
+      "who does what",
+      "ai help"
+    ],
+    "answer": "AI helps your team design sessions, conduct discussions and surveys, generate follow-up questions, analyze feedback, and create reports.",
+    "route": "product"
+  },
+  {
+    "id": "WEB007",
+    "keywords": [
+      "do people still review the research",
+      "do people still review",
+      "human review",
+      "team review",
+      "who reviews the findings",
+      "still need to review"
+    ],
+    "answer": "Yes. Your team reviews and customizes the questions and session settings before launch. Once the research is complete, your team should review the findings and recommendations before using them to make decisions.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB008",
+    "keywords": [
+      "how is trupulse different from a basic survey tool",
+      "different from a basic survey",
+      "different from a traditional survey",
+      "versus surveymonkey",
+      "compared to qualtrics",
+      "ordinary questionnaire",
+      "survey tool"
+    ],
+    "answer": "TruPulse’s AI agents help users create the perfect feedback session, conduct feedback sessions so you do not have to, and create detailed reports for your review. This saves your organization time and money and provides better feedback results.",
+    "route": "product"
+  },
+  {
+    "id": "WEB009",
+    "keywords": [
+      "can i use several feedback methods for the same objective",
+      "several feedback methods",
+      "combine methods",
+      "mix research methods",
+      "same objective",
+      "use all three"
+    ],
+    "answer": "Yes. A campaign can bring related sessions together around one objective, including different session methods.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB010",
+    "keywords": [
+      "can trupulse make decisions for our organization",
+      "make decisions",
+      "decide for us",
+      "does it decide",
+      "replace our judgment"
+    ],
+    "answer": "It supplies feedback, analysis, and recommendations to support decisions. Your organization remains responsible for reviewing the evidence and deciding what to do.",
+    "route": "product"
+  },
+  {
+    "id": "WEB011",
+    "keywords": [
+      "does trupulse guarantee accurate ai conclusions",
+      "guarantee accurate",
+      "ai conclusions",
+      "ai always right",
+      "accurate ai",
+      "errors in ai"
+    ],
+    "answer": "No. AI-generated outputs can contain errors or interpretations. Review important findings against the underlying evidence before relying on them.",
+    "route": "product"
+  },
+  {
+    "id": "WEB012",
+    "keywords": [
+      "can the public website agent analyze my company s research",
+      "website agent analyze",
+      "analyze my company",
+      "analyze our research",
+      "public chat analyze",
+      "customer data in chat"
+    ],
+    "answer": "The website agent explains TruPulse and helps with product evaluation. Customer-data research belongs in the licensed product’s authorized workflows, including the Enterprise Research Assistant.",
+    "route": "answer"
+  },
+  {
+    "id": "WEB013",
+    "keywords": [
+      "can we collect employee engagement feedback",
+      "employee engagement",
+      "engagement feedback",
+      "employee feedback"
+    ],
+    "answer": "Yes. TruPulse can gather employee feedback through discussions, surveys, and campaigns, with engagement metrics available as part of the research setup.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB014",
+    "keywords": [
+      "can we study why employees consider leaving",
+      "why employees",
+      "consider leaving",
+      "why people are leaving",
+      "attrition",
+      "stay or leave",
+      "retention"
+    ],
+    "answer": "Yes. You can define research around the reasons employees give for staying or considering leaving and explore those reasons through follow-up questions.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB015",
+    "keywords": [
+      "can trupulse help improve onboarding",
+      "improve onboarding",
+      "onboarding feedback",
+      "onboarding experience"
+    ],
+    "answer": "Yes. You can collect feedback at different onboarding stages and compare the concerns, experiences, and suggestions participants report.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB016",
+    "keywords": [
+      "can we run 30-day 60-day and 90-day onboarding check-ins",
+      "30-day",
+      "60-day",
+      "90-day",
+      "onboarding check-ins",
+      "check-ins"
+    ],
+    "answer": "You can organize feedback sessions around those stages as part of a campaign. Participant selection and contact data should match the intended stage.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB017",
+    "keywords": [
+      "can we research leadership communication or manager support",
+      "leadership communication",
+      "manager support",
+      "manager effectiveness"
+    ],
+    "answer": "Yes. Those topics can be explored through a session’s questions, discussion guide, and relevant feedback metrics.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB018",
+    "keywords": [
+      "can we explore workload or burnout concerns",
+      "workload",
+      "burnout",
+      "burnout concerns"
+    ],
+    "answer": "Yes. You can ask about workload experiences and use relevant research metrics. Treat the outputs as feedback indicators, not medical diagnoses.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB019",
+    "keywords": [
+      "can we gather feedback about organizational change",
+      "organizational change",
+      "change readiness",
+      "about a change"
+    ],
+    "answer": "Yes. Sessions can explore understanding, concerns, readiness, and suggestions related to a change.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB020",
+    "keywords": [
+      "can customer feedback be collected in trupulse",
+      "customer feedback",
+      "customer experiences",
+      "customer needs",
+      "customer research"
+    ],
+    "answer": "Yes. You can use the feedback methods to explore customer experiences, needs, pain points, and suggestions.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB021",
+    "keywords": [
+      "can we test a product or marketing concept",
+      "test a product",
+      "marketing concept",
+      "concept testing",
+      "test a concept"
+    ],
+    "answer": "Yes. You can ask an appropriate audience about its understanding and reactions to a concept and explore the reasons behind its feedback.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB022",
+    "keywords": [
+      "can we compare feedback over time",
+      "compare feedback over time",
+      "track change over time",
+      "repeated studies",
+      "recurring research"
+    ],
+    "answer": "Yes. Repeated sessions and campaigns can support comparisons. Consistent questions, scales, and audience definitions make the comparisons more meaningful.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB023",
+    "keywords": [
+      "can we use trupulse for a sensitive employee or customer topic",
+      "sensitive employee",
+      "sensitive customer",
+      "sensitive topic",
+      "sensitive information"
+    ],
+    "answer": "The research purpose, questions, privacy setting, and guardrails need careful review. Check with your legal department before collecting sensitive information or deciding the applicable requirements.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB024",
+    "keywords": [
+      "can feedback prove that a policy change caused an improvement",
+      "prove that a policy",
+      "caused an improvement",
+      "establish causation",
+      "before-and-after"
+    ],
+    "answer": "Not by itself. Before-and-after feedback can reveal reported changes, but it does not automatically establish causation.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB025",
+    "keywords": [
+      "what is an ai-led 1:1 discussion",
+      "what is an ai-led",
+      "1:1 discussion",
+      "one-on-one discussion",
+      "individual discussion",
+      "ai interview"
+    ],
+    "answer": "Each participant has an individual conversation with the AI interviewer, guided by the session objective and planned topics.",
+    "route": "product"
+  },
+  {
+    "id": "WEB026",
+    "keywords": [
+      "what is an ai-moderated focus group",
+      "ai-moderated focus",
+      "what is a focus group",
+      "focus group"
+    ],
+    "answer": "Participants discuss a topic together with an AI moderator guiding the conversation. Group interaction can reveal agreement, disagreement, and different perspectives.",
+    "route": "product"
+  },
+  {
+    "id": "WEB027",
+    "keywords": [
+      "what is an adaptive survey",
+      "adaptive survey",
+      "what is an adaptive",
+      "survey with follow-ups"
+    ],
+    "answer": "It combines base survey questions with follow-ups that may be fixed, conditional, or generated by AI around an intent tied to the research objective.",
+    "route": "product"
+  },
+  {
+    "id": "WEB028",
+    "keywords": [
+      "what is a fixed follow-up",
+      "fixed follow-up",
+      "what is a fixed",
+      "same predefined"
+    ],
+    "answer": "It is a predefined follow-up question with wording set during session design.",
+    "route": "product"
+  },
+  {
+    "id": "WEB029",
+    "keywords": [
+      "what is a conditional follow-up",
+      "conditional follow-up",
+      "what is a conditional",
+      "depend on an answer"
+    ],
+    "answer": "It is a follow-up selected according to the participant’s answer and the configured condition.",
+    "route": "product"
+  },
+  {
+    "id": "WEB030",
+    "keywords": [
+      "what is an ai-adaptive follow-up",
+      "ai-adaptive follow-up",
+      "adaptive follow-up",
+      "ai tailor"
+    ],
+    "answer": "Your team selects the question intent, and the AI Agent decides the best follow-up question to ask based on the participant’s response.",
+    "route": "product"
+  },
+  {
+    "id": "WEB031",
+    "keywords": [
+      "why would different participants receive different questions",
+      "different participants receive",
+      "different questions",
+      "same questions",
+      "will everyone see the same"
+    ],
+    "answer": "Conditional and adaptive follow-ups depend on previous answers, so different responses can lead to different follow-up questions.",
+    "route": "product"
+  },
+  {
+    "id": "WEB032",
+    "keywords": [
+      "what can follow-up questions uncover",
+      "follow-up questions uncover",
+      "purpose of a follow-up",
+      "what do follow-ups"
+    ],
+    "answer": "They can explore drivers, gather examples, distinguish systemic from isolated experiences, and surface recommendations.",
+    "route": "product"
+  },
+  {
+    "id": "WEB033",
+    "keywords": [
+      "can we review ai-proposed questions before launch",
+      "review ai-proposed",
+      "review questions before launch",
+      "verify & customize",
+      "approve questions"
+    ],
+    "answer": "For Surveys, yes. The session-creation workflow includes Verify & Customize, where you review and customize proposed content. For 1:1 Discussions and Focus Groups, you approve the topics the AI Agent will discuss with participants, and the agent selects questions to explore each topic. The agent will always follow the organizational guardrails you set for it.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB034",
+    "keywords": [
+      "can we control the topics an interviewer should cover",
+      "control the topics",
+      "discussion guide",
+      "topics an interviewer",
+      "approve the guide"
+    ],
+    "answer": "Yes. You approve the discussion guide for 1:1 Discussions and Focus Groups, which defines the intended topics and direction for the session.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB035",
+    "keywords": [
+      "can we test the participant experience before launching",
+      "test the participant",
+      "preview as participant",
+      "test session",
+      "before launching"
+    ],
+    "answer": "Yes. Session creation includes Preview as Participant to review the session description, invitation, and participant instructions, and a Test Session mode for trying the session from a participant’s perspective.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB036",
+    "keywords": [
+      "can we change questions once a session is running",
+      "change questions once",
+      "after launch",
+      "questions cannot be changed",
+      "edit running session"
+    ],
+    "answer": "No. Questions cannot be changed after launch. A session can be paused or closed, and a new session can be designed if different questions are needed.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB037",
+    "keywords": [
+      "can a human moderator take over a focus group",
+      "human moderator",
+      "take over a focus",
+      "moderator take over",
+      "join as an observer"
+    ],
+    "answer": "No. Human moderators cannot take over a focus group. A human moderator can join a session as an observer but cannot participate.",
+    "route": "product"
+  },
+  {
+    "id": "WEB038",
+    "keywords": [
+      "what is a campaign",
+      "what does campaign mean",
+      "why group sessions",
+      "campaign report"
+    ],
+    "answer": "A campaign organizes multiple sessions around a shared research objective and can provide a combined Campaign Report in addition to reports on each session.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB039",
+    "keywords": [
+      "what is a linked campaign",
+      "linked campaign",
+      "what is a linked"
+    ],
+    "answer": "It uses data from earlier sessions to inform subsequent sessions, allowing later research to build on earlier findings. Individual sessions have reports, and a Campaign Report combines information from all sessions.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB040",
+    "keywords": [
+      "what is an independent campaign",
+      "independent campaign",
+      "what is an independent"
+    ],
+    "answer": "Its sessions do not share data with one another as Linked Campaign sessions do. The Campaign Report summarizes data from all sessions in the campaign, and each individual session also has a report.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB041",
+    "keywords": [
+      "what is a recurring campaign",
+      "recurring campaign",
+      "what is a recurring",
+      "repeated feedback"
+    ],
+    "answer": "It organizes repeated feedback activities over time for ongoing research or comparison. The Campaign Report summarizes data from all sessions in the campaign, and each individual session also has a report.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB042",
+    "keywords": [
+      "how can we bring participant contacts into trupulse",
+      "bring participant contacts",
+      "upload contacts",
+      "import contacts",
+      "hris",
+      "invite participants"
+    ],
+    "answer": "Contacts can be added manually, imported from a CSV file, or synced from a supported HRIS system. HRIS sync is available in Professional and Enterprise editions.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB043",
+    "keywords": [
+      "what contact information is required for a session participant",
+      "contact information required",
+      "required for a session participant",
+      "name and email"
+    ],
+    "answer": "Name and email address are mandatory. Additional demographic and contact attributes are optional.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB044",
+    "keywords": [
+      "can we organize participants into groups",
+      "organize participants",
+      "participant groups",
+      "static groups",
+      "dynamic groups"
+    ],
+    "answer": "Yes. Static Groups contain manually added participants. Dynamic Groups use attribute conditions to refresh membership.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB045",
+    "keywords": [
+      "what is a dynamic group",
+      "dynamic group"
+    ],
+    "answer": "It is a group defined by conditions, such as a hire-date window, whose membership refreshes from matching contact data rather than staying fixed.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB046",
+    "keywords": [
+      "will a session use updated dynamic group membership",
+      "updated dynamic group",
+      "latest membership",
+      "dynamic group membership"
+    ],
+    "answer": "Yes. A session using a Dynamic Group uses its latest membership when the session begins. The organization must keep the underlying contact database updated or synced.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB047",
+    "keywords": [
+      "can we select participants using department or other attributes",
+      "select participants using",
+      "department or other",
+      "filter contacts",
+      "contact attributes"
+    ],
+    "answer": "Yes. Contacts can be filtered using contact attributes, with AND, OR, and NOT used to combine conditions.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB048",
+    "keywords": [
+      "is there a limit on how many sessions can run simultaneously",
+      "limit on how many sessions",
+      "sessions simultaneously",
+      "how many sessions can run"
+    ],
+    "answer": "There is no limit on the number of sessions that can run simultaneously. For edition usage allowances and pricing, consult the Pricing page on the TruPulse website.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB049",
+    "keywords": [
+      "is there a minimum or maximum open period for sessions or campaigns",
+      "minimum or maximum open",
+      "open period",
+      "how long can a session"
+    ],
+    "answer": "There is no minimum or maximum amount of time a session or campaign can remain open.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB050",
+    "keywords": [
+      "what reports can trupulse produce",
+      "what reports",
+      "what findings and reports",
+      "what do we get back",
+      "what does a report contain"
+    ],
+    "answer": "The default report set includes 1:1 Discussion Session and Individual reports, Survey Session and Individual Responses reports, Focus Group Session reports, and Campaign reports. An AI-led Report Generation feature also lets you custom-design a report from scratch.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB051",
+    "keywords": [
+      "can one session produce reports for different audiences",
+      "reports for different audiences",
+      "several reports",
+      "different audiences"
+    ],
+    "answer": "Yes. Your team can select several reports for a session to provide the right report for each audience.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB052",
+    "keywords": [
+      "can we build our own report template",
+      "build our own report",
+      "report template",
+      "create a new report template"
+    ],
+    "answer": "Yes. During Build Reports, your team can select a template or create a new report template with help from the Report Generation Agent.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB053",
+    "keywords": [
+      "what report formats are available",
+      "report formats",
+      "download formats",
+      "docx",
+      "pptx",
+      "xlsx",
+      "csv",
+      "export"
+    ],
+    "answer": "Supported formats include DOCX, PDF, and PPTX. XLSX or CSV may apply to raw survey data and selected transcripts.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB054",
+    "keywords": [
+      "can we review the source feedback behind a report",
+      "source feedback",
+      "underlying responses",
+      "transcripts behind",
+      "supporting evidence"
+    ],
+    "answer": "Authorized users can access the relevant responses or transcripts through the product, subject to access and identity settings.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB055",
+    "keywords": [
+      "how are survey follow-up question findings reported",
+      "follow-up question findings",
+      "follow-ups in the survey",
+      "survey follow-up"
+    ],
+    "answer": "The Session Report summarizes follow-up question insights beneath the relevant Base Question. The Survey Individual Response Report provides individual follow-up questions and answers.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB056",
+    "keywords": [
+      "can we comment on a generated report",
+      "comment on a generated",
+      "add commentary",
+      "edit report content"
+    ],
+    "answer": "Yes. Add Commentary lets users add a comment under a report section. To edit report content directly, download the report in DOCX format and edit the downloaded file.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB057",
+    "keywords": [
+      "can reports be regenerated",
+      "reports be regenerated",
+      "regenerate",
+      "update a report"
+    ],
+    "answer": "Yes. When viewing a report, an authorized user can select Regenerate to update it.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB058",
+    "keywords": [
+      "what is the research assistant",
+      "research assistant",
+      "enterprise research assistant"
+    ],
+    "answer": "It is the Enterprise capability for asking questions about authorized sessions, campaigns, reports, transcripts, responses, and supported account data without reading every source yourself.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB059",
+    "keywords": [
+      "can it answer a question that the original report did not cover",
+      "question that the original report",
+      "report did not cover",
+      "new question about data"
+    ],
+    "answer": "Yes. It can investigate the underlying transcripts and responses to answer a new question when the needed data is available and authorized.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB060",
+    "keywords": [
+      "can it compare findings across sessions or over time",
+      "compare findings across",
+      "research assistant compare",
+      "across sessions or over time"
+    ],
+    "answer": "Yes. It can research across authorized sources and make comparisons, with scope and data limitations considered.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB061",
+    "keywords": [
+      "can research assistant findings become a report",
+      "research assistant findings become",
+      "save as a report",
+      "export as a report"
+    ],
+    "answer": "Yes. Findings can be saved or exported as a report, without requiring a standard session or campaign report layout.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB062",
+    "keywords": [
+      "does the research assistant respect user permissions",
+      "research assistant respect",
+      "inherits permissions",
+      "research assistant permissions"
+    ],
+    "answer": "Yes. Its research access inherits the user’s permissions. Administrative data also requires the relevant administrative authorization.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB063",
+    "keywords": [
+      "can the research assistant review interview quality",
+      "review interview quality",
+      "interview-quality",
+      "topic fixation"
+    ],
+    "answer": "Yes. It can run interview-quality checks, including reviews of repetition, topic fixation, and discussion-guide coverage where the necessary data is available.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB064",
+    "keywords": [
+      "do participants need to create their own account",
+      "participants need to create",
+      "create their own account",
+      "participant account"
+    ],
+    "answer": "A participant account is generated automatically on the TruPulse Connect participant site.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB065",
+    "keywords": [
+      "how do participants join",
+      "join a session",
+      "email invitation"
+    ],
+    "answer": "They follow a link in the session’s email invitation. Invitations should not be forwarded or shared.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB066",
+    "keywords": [
+      "how long does participation take",
+      "how long does participation",
+      "how long does it take",
+      "session duration"
+    ],
+    "answer": "The session invitation should state its expected duration. Timing depends on the session the organization creates.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB067",
+    "keywords": [
+      "can participants pause and return",
+      "pause and return",
+      "pause and resume",
+      "come back later"
+    ],
+    "answer": "Yes. For Surveys and 1:1 Discussions, participants can pause and return to where they left off.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB068",
+    "keywords": [
+      "can participants skip a question",
+      "skip a question",
+      "skip question"
+    ],
+    "answer": "In a 1:1 Discussion, they can ask to skip or say or type “skip question.” In a Survey, they can use the forward arrow.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB069",
+    "keywords": [
+      "can participants respond by voice",
+      "respond by voice",
+      "voice responses",
+      "voice"
+    ],
+    "answer": "Voice responses are available in 1:1 Discussions in 16 different languages.",
+    "route": "product"
+  },
+  {
+    "id": "WEB070",
+    "keywords": [
+      "are voice responses recorded",
+      "voice responses recorded",
+      "are voice",
+      "voice to text"
+    ],
+    "answer": "No. When voice is used, responses are converted from voice to text, and the text is processed and stored as session content.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB071",
+    "keywords": [
+      "which participant languages are supported",
+      "languages are supported",
+      "which languages",
+      "participant languages",
+      "17 languages"
+    ],
+    "answer": "Arabic (text only), Chinese Simplified, Dutch, English, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Ukrainian, and Vietnamese.",
+    "route": "product"
+  },
+  {
+    "id": "WEB072",
+    "keywords": [
+      "can participants choose their response language",
+      "choose their response language",
+      "select language",
+      "change language"
+    ],
+    "answer": "Yes. Participants select their response language when they log into a session and can change their default language in the Connect participant portal before starting.",
+    "route": "product"
+  },
+  {
+    "id": "WEB073",
+    "keywords": [
+      "are the trupulse session creator interface and reports available in other languages",
+      "creator interface",
+      "reports available in other languages",
+      "english only",
+      "interface languages"
+    ],
+    "answer": "The creator interface and reports are currently in English only. Additional language support is planned for 2027.",
+    "route": "product"
+  },
+  {
+    "id": "WEB074",
+    "keywords": [
+      "can participants change responses after completing a session",
+      "change responses after",
+      "edit after completing",
+      "cannot edit"
+    ],
+    "answer": "No. Once a session has been completed, the participant cannot edit or change a response.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB075",
+    "keywords": [
+      "do participants automatically receive the results",
+      "automatically receive the results",
+      "participants see results",
+      "share results with participants"
+    ],
+    "answer": "Organizational policy determines how and where results are shared with participants.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB076",
+    "keywords": [
+      "are incomplete sessions included in results",
+      "incomplete sessions",
+      "included in results"
+    ],
+    "answer": "No. Incomplete sessions are not included in results.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB077",
+    "keywords": [
+      "what happens if service disconnects during participation",
+      "service disconnects",
+      "connection drops",
+      "progress is saved"
+    ],
+    "answer": "Session progress is saved, and participants can continue providing feedback after service resumes.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB078",
+    "keywords": [
+      "can sessions be anonymous or identified",
+      "anonymous or identified",
+      "identity setting",
+      "who sees a participant",
+      "identified or anonymous"
+    ],
+    "answer": "Yes. Each session has an Anonymous or Identified setting governing how participant identity is presented. Participants are notified in advance whether a session is Identified or Anonymous.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB079",
+    "keywords": [
+      "are participants names shown in anonymous reports",
+      "names shown in anonymous",
+      "anonymous reports",
+      "hide names"
+    ],
+    "answer": "No. TruPulse does not list participants’ names in reports or transcripts from an Anonymous session. Participants should still avoid details that could reveal their identity.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB080",
+    "keywords": [
+      "does anonymous mean other focus group participants cannot recognize me",
+      "other focus group participants",
+      "recognize me",
+      "anonymous focus"
+    ],
+    "answer": "No. Other participants can see what you share, and details may reveal identity even when a name is hidden.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB081",
+    "keywords": [
+      "can the identity setting change after launch",
+      "identity setting change",
+      "change after launch",
+      "identity settings cannot"
+    ],
+    "answer": "No. Once a session is launched, its identity settings cannot be changed.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB082",
+    "keywords": [
+      "does open session access mean public internet access",
+      "open session access",
+      "restricted session access",
+      "public internet access"
+    ],
+    "answer": "No. Open and Restricted session access govern which authorized TruPulse users in your organization are allowed to view and edit sessions and results. They are separate from the participant identity setting.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB083",
+    "keywords": [
+      "can an organization control user permissions",
+      "control user permissions",
+      "roles and permissions",
+      "who can access"
+    ],
+    "answer": "Yes. Organizations can adjust role authorizations and individual authorizations, including permissions such as document downloading.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB084",
+    "keywords": [
+      "are downloads logged",
+      "downloads logged",
+      "download logging",
+      "audit downloads"
+    ],
+    "answer": "Yes. Downloads are logged by user, time, date, and the report or transcript downloaded.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB085",
+    "keywords": [
+      "where is customer data hosted",
+      "where is customer data",
+      "hosted",
+      "data residency",
+      "hosting"
+    ],
+    "answer": "Customer data is hosted in the US.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB086",
+    "keywords": [
+      "is customer data encrypted",
+      "encrypted",
+      "encryption",
+      "in transit",
+      "at rest"
+    ],
+    "answer": "Data is encrypted in transit and at rest for relevant services.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB087",
+    "keywords": [
+      "is customer research used to train general-purpose ai models",
+      "used to train",
+      "train ai models",
+      "train general-purpose",
+      "participant responses used to train"
+    ],
+    "answer": "No. Customer research content is not used to train general-purpose AI models.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB088",
+    "keywords": [
+      "can trupulse support personnel see research content",
+      "support personnel",
+      "see research content",
+      "trupulse staff access"
+    ],
+    "answer": "Support personnel can access research content only when needed to investigate an issue.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB089",
+    "keywords": [
+      "can organizations configure retention",
+      "configure retention",
+      "data retention",
+      "retention policy"
+    ],
+    "answer": "Yes. A user authorized by an organization to configure data retention can adjust its data-retention policy through Data Management.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB090",
+    "keywords": [
+      "can participants submit a data-deletion request",
+      "data-deletion request",
+      "deletion request",
+      "delete my data"
+    ],
+    "answer": "Yes. Participants can initiate a Data Deletion Request in Connect. It is routed to the organization’s named Privacy Officer for follow-up. Check with your legal department about legal requirements and the treatment of a request.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB091",
+    "keywords": [
+      "can an organization s privacy officer delete anonymous as well as identified feedback",
+      "privacy officer delete",
+      "delete anonymous",
+      "delete identified"
+    ],
+    "answer": "Yes. The organization’s designated Privacy Officer can use TruPulse to delete both Anonymous and Identified feedback from an individual. Check with your legal department about the appropriate handling of a request.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB092",
+    "keywords": [
+      "can participants withdraw their authorization to participate",
+      "withdraw their authorization",
+      "rescind authorization",
+      "withdraw consent"
+    ],
+    "answer": "Yes. Participants may rescind authorization through User Settings in the Connect participant site. Check with your legal department about legal consequences and any further steps required.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB093",
+    "keywords": [
+      "does not accepting the consent notice prevent participation",
+      "consent notice",
+      "not accepting",
+      "refuse consent"
+    ],
+    "answer": "Yes. A participant who does not accept cannot continue and is returned to the Connect participant dashboard. They will be prompted again if they restart a session.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB094",
+    "keywords": [
+      "do guardrails control what the ai may ask or report",
+      "guardrails",
+      "research guidelines",
+      "what the ai may ask"
+    ],
+    "answer": "Organizational guardrails define restrictions for conducting and reporting activity. Reviews examine actual agent questions, generated reports, and participant disclosures against applicable historical guardrails.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB095",
+    "keywords": [
+      "who can run a guardrails review",
+      "guardrails review",
+      "who can run a guardrails",
+      "super admin"
+    ],
+    "answer": "Only a Super Admin can run a Guardrails Review in Organization Guardrails. Users with Guardrail Editing access can add or edit guardrails; these are different authorizations.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB096",
+    "keywords": [
+      "does restricted information volunteered by a participant automatically fail the agent during a compliance review",
+      "restricted information volunteered",
+      "participant disclosure",
+      "compliance review"
+    ],
+    "answer": "No. A participant disclosure is flagged as a potential issue. An agent failure occurs when the conducting or reporting agent violates an applicable guardrail.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB097",
+    "keywords": [
+      "can the enterprise research assistant run compliance-oriented checks",
+      "compliance-oriented",
+      "compliance checks",
+      "era compliance"
+    ],
+    "answer": "Yes. It can run compliance and interview-quality checks. Guardrails Reviews are also available through the Guardrails workflow, subject to its authorization requirements.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB098",
+    "keywords": [
+      "does a clean guardrails review establish legal compliance",
+      "legal compliance",
+      "clean guardrails",
+      "establish legal"
+    ],
+    "answer": "No. It reports results for its stated checks and available evidence. Check with your legal department about legal compliance and obligations.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB099",
+    "keywords": [
+      "is trupulse suitable for research subject to gdpr or other privacy laws",
+      "gdpr",
+      "privacy laws",
+      "ccpa",
+      "suitable for research subject"
+    ],
+    "answer": "Check with your legal department about your particular research, legal requirements, and contractual arrangements. Product features do not by themselves establish compliance.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB100",
+    "keywords": [
+      "what editions does trupulse offer",
+      "what editions",
+      "plans",
+      "essentials",
+      "professional",
+      "enterprise edition"
+    ],
+    "answer": "Essentials, Professional, and Enterprise. Visit the Pricing page on the TruPulse website for the current edition comparison and pricing.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB101",
+    "keywords": [
+      "which edition includes the research assistant",
+      "edition includes the research assistant",
+      "research assistant edition"
+    ],
+    "answer": "Enterprise. Visit the Pricing page on the TruPulse website for current edition details and pricing.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB102",
+    "keywords": [
+      "which editions include hris sync",
+      "editions include hris",
+      "hris sync edition"
+    ],
+    "answer": "Professional and Enterprise. Visit the Pricing page on the TruPulse website for the current feature comparison and pricing.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB103",
+    "keywords": [
+      "is in-product help included for every licensed company",
+      "in-product help",
+      "product help",
+      "help included"
+    ],
+    "answer": "Yes. Product Help is available to all companies licensing TruPulse through the AI Assistant’s Product Help feature.",
+    "route": "support"
+  },
+  {
+    "id": "WEB104",
+    "keywords": [
+      "how much does trupulse cost",
+      "how much",
+      "what does it cost",
+      "pricing",
+      "price",
+      "how is trupulse priced"
+    ],
+    "answer": "Please visit the Pricing page on the TruPulse website for current plans and pricing.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB105",
+    "keywords": [
+      "do you offer monthly and annual billing",
+      "monthly and annual",
+      "billing",
+      "annual billing"
+    ],
+    "answer": "Please check the Pricing page on the TruPulse website for current billing options and pricing.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB106",
+    "keywords": [
+      "what are the user participant and usage allowances",
+      "usage allowances",
+      "participant allowances",
+      "plan limits",
+      "how many participants"
+    ],
+    "answer": "Please check the Pricing page on the TruPulse website for current edition allowances. Demo participant counts do not establish paid-plan limits.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB107",
+    "keywords": [
+      "are there extra fees or overage charges",
+      "extra fees",
+      "overage",
+      "additional charges"
+    ],
+    "answer": "Please review the Pricing page on the TruPulse website and the applicable terms for current charges. Do not assume extra usage is included.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB108",
+    "keywords": [
+      "are discounts or nonprofit options available",
+      "discounts",
+      "nonprofit options",
+      "nonprofit pricing"
+    ],
+    "answer": "Please visit the Pricing page on the TruPulse website for current offers and eligibility information.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB109",
+    "keywords": [
+      "how can i see a demonstration",
+      "see a demonstration",
+      "watch a demo",
+      "product walkthrough",
+      "show me a demo video"
+    ],
+    "answer": "Select Watch a Demo on the TruPulse website to see a short demonstration from session creation through the final report, plus tutorials about main features.",
+    "route": "videos"
+  },
+  {
+    "id": "WEB110",
+    "keywords": [
+      "what does the simulated website demo show",
+      "simulated website demo",
+      "what does the demo show",
+      "demo show"
+    ],
+    "answer": "For a research objective you define, it simulates a 1:1 Discussion with 10 participants, a Focus Group with 6 participants, and a Survey with 50 participants, then provides finished reports.",
+    "route": "videos"
+  },
+  {
+    "id": "WEB111",
+    "keywords": [
+      "does the demo show every trupulse capability",
+      "demo show every",
+      "every capability",
+      "demo complete"
+    ],
+    "answer": "No. It demonstrates the basics. Tutorials also explain key features in more detail.",
+    "route": "videos"
+  },
+  {
+    "id": "WEB112",
+    "keywords": [
+      "what tutorials are available",
+      "what tutorials",
+      "tutorials available"
+    ],
+    "answer": "TruPulse Overview, Creating Sessions, Participating in Sessions, Reports and Sharing, and Setup and Administration. More tutorials are continually being added.",
+    "route": "videos"
+  },
+  {
+    "id": "WEB113",
+    "keywords": [
+      "how can an existing customer get support",
+      "existing customer get support",
+      "customer support",
+      "support@trupulse",
+      "technical support"
+    ],
+    "answer": "Customers can log support requests through Support & Troubleshooting in TruPulse or email support@trupulse.ai. Customers with live phone support can find their number in the product’s Support section.",
+    "route": "support"
+  },
+  {
+    "id": "WEB114",
+    "keywords": [
+      "where can we confirm uptime and recovery commitments",
+      "uptime",
+      "recovery commitments",
+      "sla",
+      "service agreement"
+    ],
+    "answer": "Review the applicable Service Agreement. Check with your legal department about contractual commitments.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB115",
+    "keywords": [
+      "who is the ideal customer for trupulse",
+      "ideal customer",
+      "who should buy",
+      "best fit"
+    ],
+    "answer": "TruPulse may suit any organization that wants AI-led conversations and surveys combined with analysis across research activities.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB116",
+    "keywords": [
+      "which industries does trupulse specialize in",
+      "which industries",
+      "specialize in",
+      "industry"
+    ],
+    "answer": "TruPulse supports the research needs of all industries.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB117",
+    "keywords": [
+      "how does trupulse compare with qualtrics surveymonkey or other vendors",
+      "compare with qualtrics",
+      "surveymonkey",
+      "other vendors",
+      "versus",
+      "compared to"
+    ],
+    "answer": "TruPulse combines AI-led discussions, focus groups, adaptive surveys, and related-session reporting. TruPulse uses AI agents to create feedback sessions, so you do not need to be an expert to achieve high-quality research results. TruPulse uses AI to conduct feedback sessions, so your organization does not need to devote expensive human resources to conducting interviews. TruPulse also uses AI to analyze data, providing high-quality and quick analysis of your data.",
+    "route": "product"
+  },
+  {
+    "id": "WEB119",
+    "keywords": [
+      "what engagement metrics can trupulse measure",
+      "engagement metrics",
+      "what metrics",
+      "retention risk",
+      "employee nps"
+    ],
+    "answer": "Metrics include Retention Risk, Trust In Leadership, Workload Balance, Recognition & Appreciation, Career Development & Growth, Employee Morale, Employee NPS, Engagement Level, Psychological Safety, Burnout Risk, Belonging & Inclusion, Manager Effectiveness, Team Cohesion, Communication Clarity, and Change Readiness.",
+    "route": "use_cases"
+  },
+  {
+    "id": "WEB120",
+    "keywords": [
+      "how should we choose among the three editions",
+      "choose among the three editions",
+      "which edition",
+      "which plan",
+      "how should we choose"
+    ],
+    "answer": "Compare editions on the website Pricing page against your integration, analysis, and organizational requirements. Organizations that need multi-language participant support or integrated multi-session Campaigns should consider Professional. Organizations needing HRIS integration for large-volume contact handling or access to the Research Assistant should consider Enterprise.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB121",
+    "keywords": [
+      "can i book a live demo with someone",
+      "book a live demo",
+      "book a demo",
+      "schedule a demo",
+      "talk to someone"
+    ],
+    "answer": "Use Book a Demo on the TruPulse website to discuss your needs with the TruPulse team.",
+    "route": "demo"
+  },
+  {
+    "id": "WEB122",
+    "keywords": [
+      "can we run a small live pilot",
+      "live pilot",
+      "pilot project",
+      "small pilot"
+    ],
+    "answer": "Contact the TruPulse sales team at sales@trupulse.ai for information on running a pilot project.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB123",
+    "keywords": [
+      "is there a free trial",
+      "free trial",
+      "trial"
+    ],
+    "answer": "Use the website’s Book a Demo option to discuss your needs with the TruPulse team.",
+    "route": "demo"
+  },
+  {
+    "id": "WEB124",
+    "keywords": [
+      "how quickly can we launch our first real session",
+      "how quickly",
+      "launch our first",
+      "up and running",
+      "how fast"
+    ],
+    "answer": "You create the session, review its content, select participants and reports, and schedule launch. You can be up and running in a day.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB125",
+    "keywords": [
+      "what onboarding or training help do you provide",
+      "onboarding",
+      "training help",
+      "account setup"
+    ],
+    "answer": "TruPulse will assign an onboarding agent to assist you with account setup and launching your first session.",
+    "route": "demo"
+  },
+  {
+    "id": "WEB126",
+    "keywords": [
+      "can we use trupulse in a global organization",
+      "global organization",
+      "international",
+      "multi-language organization"
+    ],
+    "answer": "Yes. Participant sessions support 17 languages, while the session setup interface and reports are in English.",
+    "route": "product"
+  },
+  {
+    "id": "WEB127",
+    "keywords": [
+      "can we migrate our existing survey or research material",
+      "migrate",
+      "upload existing",
+      "existing survey",
+      "import research"
+    ],
+    "answer": "Survey data and research material can be uploaded into TruPulse.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB128",
+    "keywords": [
+      "can we use our branding in the participant experience",
+      "our branding",
+      "white label",
+      "brand the participant",
+      "custom branding"
+    ],
+    "answer": "Organizations can use their own branding in the participant feedback experience.",
+    "route": "product"
+  },
+  {
+    "id": "WEB129",
+    "keywords": [
+      "is trupulse soc 2 or iso 27001 certified",
+      "soc 2",
+      "iso 27001",
+      "certified",
+      "certification"
+    ],
+    "answer": "Certification is in progress, with expected completion in early 2027.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB130",
+    "keywords": [
+      "what security documents can we review before purchase",
+      "security documents",
+      "security questionnaire",
+      "before purchase",
+      "vendor review"
+    ],
+    "answer": "Book a meeting with TruPulse to review security and privacy compliance and documentation.",
+    "route": "demo"
+  },
+  {
+    "id": "WEB131",
+    "keywords": [
+      "what safeguards make anonymous feedback safer",
+      "safeguards",
+      "anonymous feedback safer",
+      "too few participants"
+    ],
+    "answer": "Participants’ names are omitted from Anonymous reports and transcripts, but feedback details can still reveal identity. Your team is warned if anonymous sessions have too few participants to provide anonymity.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB132",
+    "keywords": [
+      "what retention period applies by default",
+      "retention period",
+      "default retention",
+      "how long is data kept"
+    ],
+    "answer": "By default, organizational data is retained. Organizations can configure their data-retention policy.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB133",
+    "keywords": [
+      "which systems and services process our research data",
+      "systems and services",
+      "subprocessors",
+      "process our research data"
+    ],
+    "answer": "Contact the TruPulse sales team for a current list.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB134",
+    "keywords": [
+      "what happens to our data if we stop using trupulse",
+      "stop using trupulse",
+      "if we leave",
+      "cancel subscription data"
+    ],
+    "answer": "Contact TruPulse to arrange retention or deletion of your organizational data if you plan to stop using TruPulse.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB135",
+    "keywords": [
+      "does trupulse meet accessibility standards",
+      "accessibility",
+      "wcag",
+      "a11y"
+    ],
+    "answer": "Compliance with accessibility standards has not yet been established.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB137",
+    "keywords": [
+      "is there a minimum contract term",
+      "minimum contract",
+      "contract term",
+      "12-month"
+    ],
+    "answer": "TruPulse is licensed for 12-month terms.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB138",
+    "keywords": [
+      "is there a minimum purchase or employee count",
+      "minimum purchase",
+      "employee count",
+      "minimum seats"
+    ],
+    "answer": "No.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB139",
+    "keywords": [
+      "can we pay by invoice bank transfer or purchase order",
+      "pay by invoice",
+      "bank transfer",
+      "purchase order",
+      "payment",
+      "stripe"
+    ],
+    "answer": "Payment processing is done through Stripe, with multiple payment options.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB140",
+    "keywords": [
+      "can we get a custom enterprise quote",
+      "custom enterprise quote",
+      "enterprise quote",
+      "custom quote"
+    ],
+    "answer": "Contact sales@trupulse.ai or use Book a Demo on the TruPulse website to speak directly to a salesperson.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB141",
+    "keywords": [
+      "can we change editions during the contract",
+      "change editions",
+      "upgrade mid",
+      "switch plans"
+    ],
+    "answer": "Organizations can change their licensed edition at any time.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB144",
+    "keywords": [
+      "is pricing based on users participants sessions or ai usage",
+      "pricing based on",
+      "users participants sessions",
+      "ai usage pricing"
+    ],
+    "answer": "Pricing is based on the edition selected and usage. Visit the Pricing page on the TruPulse website for current pricing and allowances.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB145",
+    "keywords": [
+      "does trupulse support sso",
+      "sso",
+      "single sign-on"
+    ],
+    "answer": "No. TruPulse does not support SSO.",
+    "route": "support"
+  },
+  {
+    "id": "WEB146",
+    "keywords": [
+      "is multi-factor authentication available",
+      "multi-factor",
+      "mfa",
+      "2fa",
+      "two-factor"
+    ],
+    "answer": "Yes. Login to the administration and participant portals supports MFA.",
+    "route": "support"
+  },
+  {
+    "id": "WEB147",
+    "keywords": [
+      "which hris systems can we connect",
+      "which hris",
+      "hris systems",
+      "hris integrations"
+    ],
+    "answer": "HRIS sync is available in Professional and Enterprise. Check with the TruPulse sales team for the latest list of integrations.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB149",
+    "keywords": [
+      "can trupulse integrate with our analytics or business intelligence tools",
+      "integrate with our analytics",
+      "business intelligence",
+      "bi tools"
+    ],
+    "answer": "TruPulse offers report and selected data exports.",
+    "route": "reports"
+  },
+  {
+    "id": "WEB150",
+    "keywords": [
+      "can we host trupulse on premises or in our own cloud",
+      "on premises",
+      "on-premises",
+      "own cloud",
+      "self host"
+    ],
+    "answer": "No. TruPulse does not support on-premises deployment or hosting in your own cloud.",
+    "route": "privacy"
+  },
+  {
+    "id": "WEB151",
+    "keywords": [
+      "can we choose a hosting region outside the us",
+      "hosting region",
+      "outside the us",
+      "data residency outside"
+    ],
+    "answer": "Contact TruPulse at sales@trupulse.ai for an updated list of hosting options.",
+    "route": "pricing"
+  },
+  {
+    "id": "WEB153",
+    "keywords": [
+      "how frequently do hris contacts sync",
+      "hris contacts sync",
+      "how frequently",
+      "sync frequency"
+    ],
+    "answer": "HRIS contacts sync monthly by default, with the option to trigger a sync manually.",
+    "route": "workflow"
+  },
+  {
+    "id": "WEB163",
+    "keywords": [
+      "how do i contact sales or request a procurement review",
+      "contact sales",
+      "procurement review",
+      "sales@trupulse"
+    ],
+    "answer": "Book a meeting through the TruPulse website or email sales@trupulse.ai.",
+    "route": "demo"
+  },
+  {
+    "id": "WEB164",
+    "keywords": [
+      "can i get a sandbox with my own real participants",
+      "sandbox",
+      "real participants sandbox"
+    ],
+    "answer": "Not at this time.",
+    "route": "demo"
+  },
+  {
+    "id": "WEB165",
+    "keywords": [
+      "what company sizes and research volumes have you supported",
+      "company sizes",
+      "research volumes",
+      "scale testing",
+      "1000",
+      "1,000 simultaneous"
+    ],
+    "answer": "TruPulse has run scale testing with up to 1,000 simultaneous users.",
+    "route": "product"
+  },
+  {
+    "id": "WEB166",
+    "keywords": [
+      "can you complete our security questionnaire or vendor onboarding process",
+      "security questionnaire",
+      "vendor onboarding",
+      "complete our security"
+    ],
+    "answer": "Yes. Contact sales@trupulse.ai for assistance with security questionnaires.",
+    "route": "demo"
+  },
+  {
+    "id": "METHOD",
+    "keywords": [
+      "which research method should i use",
+      "which research method",
+      "which method should i use",
+      "which should i use",
+      "help me choose a method",
+      "recommend a method",
+      "help us choose a format"
+    ],
+    "answer": "I can help you choose. First tell me whose feedback you need (employees, customers, students, members, or another group), then what you want to understand or decide. From that I can recommend a survey, 1:1 discussion, focus group, or a mix.",
+    "route": "clarify"
+  },
+  {
+    "id": "SITE_SAMPLE_DISCUSSION_SESSION",
+    "keywords": [
+      "show me a sample 1:1 discussion session report",
+      "sample 1:1 discussion session",
+      "sample discussion session report",
+      "1:1 discussion session report"
+    ],
+    "answer": "Here is our sample 1:1 Discussion Session Report—open it below. It uses sample data to show findings across participants.",
+    "route": "sample_discussion_session"
+  },
+  {
+    "id": "SITE_SAMPLE_DISCUSSION_INDIVIDUAL",
+    "keywords": [
+      "show me a sample 1:1 discussion individual report",
+      "sample individual discussion report",
+      "1:1 discussion individual report",
+      "sample discussion individual"
+    ],
+    "answer": "Here is our sample 1:1 Discussion Individual Report—open it below. It shows how we summarize one participant’s perspective using sample data.",
+    "route": "sample_discussion_individual"
+  },
+  {
+    "id": "SITE_SAMPLE_SURVEY_SESSION",
+    "keywords": [
+      "show me a sample survey session report",
+      "sample survey session report",
+      "sample survey report"
+    ],
+    "answer": "Here is our sample Survey Session Report—open it below. It shows results, response patterns, and follow-up insights using sample data.",
+    "route": "sample_survey_session"
+  },
+  {
+    "id": "SITE_SAMPLE_SURVEY_RESPONSES",
+    "keywords": [
+      "show me a sample survey individual responses report",
+      "survey individual responses",
+      "complete survey-response",
+      "actual survey answers"
+    ],
+    "answer": "Here is our sample Survey Individual Responses Report—open it below. It contains specific survey questions, follow-ups, and responses for each participant.",
+    "route": "sample_survey_responses"
+  },
+  {
+    "id": "SITE_SAMPLE_FOCUS",
+    "keywords": [
+      "do you have a focus group sample report",
+      "focus group sample",
+      "campaign sample",
+      "focus group or campaign report"
+    ],
+    "answer": "Focus Group Session Report and Campaign Report samples are coming soon. We can walk you through both in a demo, and you can open our 1:1 discussion and survey samples now.",
+    "route": "sample_focus_group"
+  },
+  {
+    "id": "SITE_CASE",
+    "keywords": [
+      "is there a customer case study",
+      "customer case study",
+      "case study",
+      "real project example"
+    ],
+    "answer": "Yes. Our case study covers research with 50 top sales performers at a global medical technology company. You can read it in our Case Study section.",
+    "route": "case_study"
+  },
+  {
+    "id": "SITE_CHAT",
+    "keywords": [
+      "how do i clear this chat",
+      "clear this chat",
+      "reset this chat",
+      "start a new chat",
+      "clearing the chat"
+    ],
+    "answer": "Use the conversation menu to start a new conversation or clear the current one. Clearing the visible history does not confirm that stored server copies have been deleted. To request deletion of stored chat data, email Privacy@trupulse.ai.",
+    "route": "privacy_contact"
   }
 ];
 
-// Questions about using the signed-in app: no click-paths here, just where to get help.
+// Questions about using the signed-in app: point to product support, not invent click-paths.
 export const APP_HELP = {
   keywords: ["log in", "login", "sign in", "password", "otp", "verification code", "notification", "tutorial", "sidebar", "dashboard", "settings", "my account", "subscription", "upgrade my plan", "error", "bug", "not working", "technical support", "billing dispute", "invoice"],
-  answer: "Select Sign in to access your account. If you need account support, email support@trupulse.ai. I can explain how to find the right resources, but I cannot inspect your workspace or account records through this website chat.",
+  answer: "Select Sign in to access your account. If you need account support, email support@trupulse.ai. I can explain how TruPulse works for evaluation, but I cannot inspect your workspace or account records through this website chat.",
   route: "support",
 };
 
 export const FALLBACK = {
-  answer: "I can help with questions about TruPulse—sessions, surveys, 1:1 discussions, focus groups, reports, and privacy. For anything else, email hello@trupulse.ai and a person will reply.",
+  answer: "I can help with questions about TruPulse—sessions, surveys, 1:1 discussions, focus groups, reports, privacy, editions, and demos. For anything else, book a meeting on the website or email sales@trupulse.ai.",
   route: "contact",
 };
-

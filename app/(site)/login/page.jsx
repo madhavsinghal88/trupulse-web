@@ -26,7 +26,7 @@ export default function LoginPage() {
       <div className="login-skyline" aria-hidden="true" />
       <footer className="login-footer">
         <span>© {new Date().getFullYear()} TruPulse. All rights reserved.</span>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@trupulse.ai" target="_blank" rel="noopener noreferrer">Support</a>
+        <a href="mailto:support@trupulse.ai">Support</a>
         <a href="https://www.linkedin.com/company/trupulse" target="_blank" rel="noreferrer">LinkedIn</a>
       </footer>
     </div>
