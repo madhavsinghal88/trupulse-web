@@ -10,6 +10,7 @@ const NAV = [
   ["#reports", "Reports"],
   ["#use-cases", "Use Cases"],
   ["#resources", "Resources"],
+  ["/pricing", "Pricing"],
 ];
 
 export default function HomeHeader() {
@@ -54,7 +55,11 @@ export default function HomeHeader() {
           <nav className={`main-nav${menuOpen ? " mobile-open" : ""}`} aria-label="Main navigation">
             {NAV.map(([href, label]) => (
               // The menu used to stay open after tapping a link, covering the target section.
-              <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+              href.startsWith("/") ? (
+                <Link key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>
+              ) : (
+                <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+              )
             ))}
             <div className="mobile-actions">
               <Link className="login" href="/login">Sign in</Link>

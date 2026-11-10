@@ -32,8 +32,24 @@ html:has(.tp-home) .tp-autoplay-controls svg{width:20px;height:20px}
 
 /* v119: tp-rep-css */
 .tp-rep-rows>li{opacity:.5;transition:opacity .4s ease;cursor:pointer}.tp-rep-rows>li.is-active{opacity:1}.tp-rep-rows>li:hover{padding-left:24px!important;background:none!important}.tp-rep-rows>li:not(.is-active):hover{opacity:.5}.tp-rep-rows li:hover h3{color:inherit!important}.tp-rep-rows li:hover::before,.tp-rep-rows li:hover h3::before{transform:none!important;box-shadow:none!important}.tp-rep-rows li:hover>div,.tp-rep-rows li:hover>span{transform:none!important}.tp-rep-rows>li:focus-visible{outline:2px solid #EE851B;outline-offset:4px;border-radius:8px}
-/* v119: tp-uc-faq */
-.use-case-explorer{align-items:stretch!important}.use-case-tabs{display:flex!important;flex-direction:column!important;justify-content:space-between!important;gap:10px!important}.use-case-tabs .use-case-tab{flex:1 1 0!important;min-height:0!important}.use-case-panel{height:auto!important;min-height:0!important}.faq-intro>.btn[data-chat-ask],.faq-intro>.tp-faq-demo{display:flex!important;width:100%!important;max-width:300px!important;justify-content:center!important;box-sizing:border-box!important;margin:0!important}.faq-intro>.btn[data-chat-ask]{margin-top:24px!important}#faq .faq-intro h2+p{margin-bottom:0!important}.faq-intro>.btn[data-chat-ask],.faq-intro>.tp-faq-demo{height:50px!important;min-height:50px!important;padding-top:0!important;padding-bottom:0!important;align-items:center!important}.tp-faq-alt{margin:16px 0 16px!important;line-height:1.4!important}.faq-intro{display:flex!important;flex-direction:column!important;align-items:flex-start!important}.tp-faq-alt{margin:16px 0 10px!important;width:max-content!important}.faq-intro>.tp-faq-demo{width:auto!important;max-width:none!important;min-width:0!important;height:40px!important;min-height:40px!important;padding:0 18px!important;font-size:14px!important;align-self:flex-start!important}@media (max-width:980px){.use-case-tabs{flex-direction:row!important;flex-wrap:wrap!important}.use-case-tabs .use-case-tab{flex:1 1 auto!important}}
+/* v119: tp-uc-faq — left tabs fill the panel height (outrank home.css; height set in JS) */
+html:root body .use-case-explorer{align-items:stretch!important;width:100%!important}
+@media (min-width:981px){
+  html:root body .use-case-tabs{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    align-self:stretch!important;justify-content:space-between!important;
+    gap:8px!important;width:100%!important;min-width:0!important;box-sizing:border-box!important;
+  }
+  html:root body .use-case-tabs .use-case-tab{
+    flex:1 1 0!important;align-self:stretch!important;display:flex!important;align-items:center!important;
+    width:100%!important;min-width:0!important;min-height:0!important;box-sizing:border-box!important;
+  }
+  html:root body .use-case-panel{align-self:stretch!important;width:100%!important;min-width:0!important;box-sizing:border-box!important}
+}
+@media (max-width:980px){
+  html:root body .use-case-tabs{height:auto!important;min-height:0!important}
+}
+.faq-intro>.btn[data-chat-ask],.faq-intro>.tp-faq-demo{display:flex!important;width:100%!important;max-width:300px!important;justify-content:center!important;box-sizing:border-box!important;margin:0!important}.faq-intro>.btn[data-chat-ask]{margin-top:24px!important}#faq .faq-intro h2+p{margin-bottom:0!important}.faq-intro>.btn[data-chat-ask],.faq-intro>.tp-faq-demo{height:50px!important;min-height:50px!important;padding-top:0!important;padding-bottom:0!important;align-items:center!important}.tp-faq-alt{margin:16px 0 16px!important;line-height:1.4!important}.faq-intro{display:flex!important;flex-direction:column!important;align-items:flex-start!important}.tp-faq-alt{margin:16px 0 10px!important;width:max-content!important}.faq-intro>.tp-faq-demo{width:auto!important;max-width:none!important;min-width:0!important;height:40px!important;min-height:40px!important;padding:0 18px!important;font-size:14px!important;align-self:flex-start!important}
 /* v119: tp-v13 */
 #product .feature-list li>span{display:block;flex:1 1 auto;min-width:0}#product .feature-list li>span strong{font-weight:800}#product .feature-list li{align-items:flex-start!important}#product .feature-list li>i{flex:0 0 24px!important;width:24px!important;height:24px!important;margin-top:-2px}.human-note{flex-wrap:wrap!important;height:auto!important}.human-note p{white-space:normal!important;min-width:0!important;flex:1 1 360px!important}
 /* v119: tp-spacing */
@@ -62,6 +78,26 @@ form .tp-privnote{margin-top:12px;text-align:center}
 
 /* v122: tp-v122 — inactive report rows stay readable */
 .tp-rep-rows li:not(.is-active){opacity:1!important}.tp-rep-rows li:not(.is-active) h3{color:#4a4777!important}.tp-rep-rows li p{color:#5b589d!important}
+
+/* Demo form validation */
+.tp-form-error{margin:0 0 12px;color:#b42318;font-size:.875rem;line-height:1.4}
+
+/* Pricing page edition cards */
+.tp-price-grid{display:grid;gap:16px;margin:28px 0 32px}
+@media(min-width:760px){.tp-price-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+.tp-price-card{padding:22px 20px;border:1px solid #e3e1f2;border-radius:16px;background:#faf9ff}
+.tp-price-card h2{margin:0 0 10px;font-size:1.25rem;color:#110f35}
+.tp-price-card p{margin:0;color:#5b589d;line-height:1.5}
+.tp-price-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:8px 0 24px}
+
+/* Login text buttons (forgot password / back to sign in) */
+html:has(.tp-login) .login-text-btn{display:inline;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
+
+/* Footer action buttons (Ask AI / Book a Demo / Cookie Settings) match footer links. */
+html:root body .footer-links .footer-action{display:block;width:100%;margin:0;padding:7px 0;border:0;background:none;color:#b0aed3;font:inherit;font-size:.875rem;line-height:1.45;text-align:left;cursor:pointer}
+html:root body .footer-links .footer-action:hover{color:#EE851B}
+html:root body .legal-footer-links .footer-action{display:inline;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
+html:root body .legal-footer-links .footer-action:hover{color:#fff}
 
 /* Chat assistant route actions (Answer Library v2) */
 .chat-actions{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 10px 44px;max-width:calc(100% - 44px)}

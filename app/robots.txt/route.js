@@ -14,8 +14,6 @@ Disallow: /blogs/create/
 Disallow: /blogs/edit/
 Disallow: /blogs/preview/
 Disallow: /api/
-Disallow: /_next/static/
-Disallow: /favicon.ico
 
 # Block common admin paths
 Disallow: /*?edit=*

@@ -15,12 +15,12 @@ export function DemoButton({ mode = "form", useCase, className = "btn primary", 
   );
 }
 
-export function DemoLink({ children, ...rest }) {
+export function DemoLink({ children, className = "footer-action", ...rest }) {
   const { openDemo } = useDemo();
   return (
-    <a href="#" onClick={(event) => { event.preventDefault(); openDemo("form"); }} {...rest}>
+    <button type="button" className={className} onClick={() => openDemo("form")} {...rest}>
       {children}
-    </a>
+    </button>
   );
 }
 
@@ -32,10 +32,23 @@ export function ChatButton({ className, ask, children, ...rest }) {
   );
 }
 
-export function ChatLink({ children, ...rest }) {
+export function ChatLink({ children, className = "footer-action", ...rest }) {
   return (
-    <a href="#" onClick={(event) => { event.preventDefault(); openChat(); }} {...rest}>
+    <button type="button" className={className} onClick={() => openChat()} {...rest}>
       {children}
-    </a>
+    </button>
+  );
+}
+
+export function CookieSettingsLink({ children = "Cookie Settings", className = "footer-action", ...rest }) {
+  return (
+    <button
+      type="button"
+      className={className}
+      onClick={() => window.tpOpenCookieSettings?.()}
+      {...rest}
+    >
+      {children}
+    </button>
   );
 }

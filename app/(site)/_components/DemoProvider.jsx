@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { InlineWidget } from "react-calendly";
 import { CALENDLY_URL } from "@/lib/site";
+import { validateFullName, validateOrganization, validateWorkEmail } from "@/lib/demoValidation";
 
 const DemoContext = createContext({ openDemo: () => {} });
 
@@ -53,6 +54,7 @@ function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
   const exploreRef = useRef(null);
   const [step, setStep] = useState("form");
   const [details, setDetails] = useState(null);
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     if (!open) return;
@@ -97,10 +99,19 @@ function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
   function pickATime(event) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") || "").trim();
+    const email = String(form.get("email") || "").trim();
+    const organization = String(form.get("organization") || "").trim();
+    const problem = validateFullName(name) || validateWorkEmail(email) || validateOrganization(organization);
+    if (problem) {
+      setFormError(problem);
+      return;
+    }
+    setFormError("");
     setDetails({
-      name: form.get("name"),
-      email: form.get("email"),
-      organization: form.get("organization"),
+      name,
+      email,
+      organization,
       explore: form.get("explore"),
     });
     setStep("calendly");
@@ -162,10 +173,11 @@ function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
             <form className="demo-form" data-demo-form="" onSubmit={pickATime}>
               <h3>Tell us what you&rsquo;re interested in.</h3>
               <p>Share a few details so we can tailor the demo to your needs. You don&rsquo;t need a research plan to get started.</p>
-              <label className="field">Full name<input required type="text" name="name" placeholder="Your name" defaultValue={details?.name} /></label>
-              <label className="field">Email address<input required type="email" name="email" placeholder="name@company.com" defaultValue={details?.email} /></label>
-              <label className="field">Organization<input required type="text" name="organization" placeholder="Organization name" defaultValue={details?.organization} /></label>
+              <label className="field">Full name<input required type="text" name="name" placeholder="Your name" minLength={2} defaultValue={details?.name} onChange={() => setFormError("")} /></label>
+              <label className="field">Email address<input required type="email" name="email" placeholder="name@company.com" defaultValue={details?.email} onChange={() => setFormError("")} /></label>
+              <label className="field">Organization<input required type="text" name="organization" placeholder="Organization name" minLength={2} defaultValue={details?.organization} onChange={() => setFormError("")} /></label>
               <label className="field">What would you like to explore?<textarea ref={exploreRef} name="explore" placeholder="Tell us about your audience, intended use or what specifically you want to learn." defaultValue={details?.explore} /></label>
+              {formError ? <p className="tp-form-error" role="alert">{formError}</p> : null}
               <button className="btn primary" type="submit">Pick a Time</button>
               <p className="tp-privnote">We&rsquo;ll use your details to arrange your demo and respond to your inquiry. <Link href="/privacy" onClick={onClose}>Privacy Policy</Link></p>
             </form>

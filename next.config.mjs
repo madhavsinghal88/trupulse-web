@@ -8,7 +8,6 @@ const nextConfig = {
       return [
         { source: '/terms&conditions', destination: '/terms', permanent: true },
         { source: '/privacy-policy', destination: '/privacy', permanent: true },
-        { source: '/pricing', destination: '/', permanent: true },
         { source: '/usecases', destination: '/#use-cases', permanent: true },
         { source: '/company', destination: '/', permanent: true },
         { source: '/support', destination: '/#faq', permanent: true },

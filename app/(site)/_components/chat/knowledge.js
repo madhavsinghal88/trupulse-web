@@ -40,8 +40,13 @@ export const ROUTES = {
   sample_campaign: { actions: [{ label: "Open Campaign Report", href: "/reports/Campaign-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   case_study: { actions: [{ label: "Read the Case Study", href: "/case-study" }] },
   pricing: { actions: [
+    { label: "View Pricing", href: "/pricing" },
     { label: "Book a Demo", action: "demo" },
     { label: "Email sales@trupulse.ai", href: "mailto:sales@trupulse.ai" },
+  ] },
+  human: { actions: [
+    { label: "Email hello@trupulse.ai", href: "mailto:hello@trupulse.ai" },
+    { label: "Book a Demo", action: "demo" },
   ] },
 };
 
@@ -73,6 +78,7 @@ const FOLLOWUPS = {
   sign_in: ["How can an existing customer get support?", "Book a demo"],
   case_study: ["How could TruPulse help my organization?", "Book a demo"],
   pricing: ["What editions does TruPulse offer?", "Book a demo", "Is there a free trial?"],
+  human: ["Book a demo", "What is TruPulse?", "How much does TruPulse cost?"],
   answer: ["What is TruPulse?", "Which research method should I use?", "Book a demo"],
 };
 
@@ -339,7 +345,12 @@ export const KNOWLEDGE = [
       "test a product",
       "marketing concept",
       "concept testing",
-      "test a concept"
+      "test a concept",
+      "market research",
+      "market research on a new product",
+      "new product",
+      "product research",
+      "research on a new product"
     ],
     "answer": "Yes. You can ask an appropriate audience about its understanding and reactions to a concept and explore the reasons behind its feedback.",
     "route": "use_cases"
@@ -1002,11 +1013,25 @@ export const KNOWLEDGE = [
     "id": "WEB080",
     "keywords": [
       "does anonymous mean other focus group participants cannot recognize me",
-      "other focus group participants",
+      "other focus group participants cannot recognize",
       "recognize me",
-      "anonymous focus"
+      "anonymous focus group participants"
     ],
     "answer": "No. Other participants can see what you share, and details may reveal identity even when a name is hidden.",
+    "route": "privacy"
+  },
+  {
+    "id": "SITE_PARTICIPANT_VISIBILITY",
+    "keywords": [
+      "can participants see what others said",
+      "see what others said",
+      "see others responses",
+      "see other participants",
+      "participants see each other",
+      "can participants see each other",
+      "do participants see other answers"
+    ],
+    "answer": "It depends on the session type. In 1:1 Discussions and Surveys, feedback is individual—participants do not see what others said. In focus groups, participants can read one another’s contributions, so anonymity does not prevent recognition from shared details.",
     "route": "privacy"
   },
   {
@@ -1274,6 +1299,9 @@ export const KNOWLEDGE = [
       "what does it cost",
       "pricing",
       "price",
+      "pricng",
+      "prcing",
+      "prices",
       "how is trupulse priced"
     ],
     "answer": "Please visit the Pricing page on the TruPulse website for current plans and pricing.",
@@ -1458,10 +1486,17 @@ export const KNOWLEDGE = [
       "book a live demo",
       "book a demo",
       "schedule a demo",
-      "talk to someone"
+      "talk to someone",
+      "talk to a human",
+      "speak to a human",
+      "speak to someone",
+      "real person",
+      "human support",
+      "hello@trupulse.ai",
+      "contact a person"
     ],
-    "answer": "Use Book a Demo on the TruPulse website to discuss your needs with the TruPulse team.",
-    "route": "demo"
+    "answer": "You can email hello@trupulse.ai or book a demo to talk with the TruPulse team.",
+    "route": "human"
   },
   {
     "id": "WEB122",
@@ -1488,13 +1523,30 @@ export const KNOWLEDGE = [
     "id": "WEB124",
     "keywords": [
       "how quickly can we launch our first real session",
-      "how quickly",
+      "how quickly can we launch",
       "launch our first",
       "up and running",
-      "how fast"
+      "how fast can we launch",
+      "how fast to launch"
     ],
     "answer": "You create the session, review its content, select participants and reports, and schedule launch. You can be up and running in a day.",
     "route": "workflow"
+  },
+  {
+    "id": "SITE_RESULTS_SPEED",
+    "keywords": [
+      "how fast do i get results",
+      "how fast are results",
+      "how quickly do i get results",
+      "how soon do i get results",
+      "when do i get results",
+      "results turnaround",
+      "how soon are reports",
+      "how fast reports",
+      "get results"
+    ],
+    "answer": "Reports are prepared after participants complete their sessions. TruPulse’s AI analyzes the feedback quickly so your team can review findings soon after a session or campaign wraps up—often the same day for smaller sessions. Timing depends on how long you leave a session open for responses.",
+    "route": "reports"
   },
   {
     "id": "WEB125",
@@ -1888,7 +1940,7 @@ export const KNOWLEDGE = [
       "case study",
       "real project example"
     ],
-    "answer": "Yes. Our case study covers research with 50 top sales performers at a global medical technology company. You can read it in our Case Study section.",
+    "answer": "Yes. Our case study covers research with 50 top sales performers at a global medical technology company. You can read it on the Case Study page.",
     "route": "case_study"
   },
   {

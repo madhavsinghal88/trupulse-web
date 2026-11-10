@@ -5,6 +5,7 @@
 
 import { routeActions, routeFollowups } from "./knowledge";
 import { answerFor } from "./answer";
+import { looksLikeQuestion, validateFullName, validateOrganization, validateWorkEmail } from "@/lib/demoValidation";
 
 export const ASK_EVENT = "tp-open-chat";
 
@@ -212,14 +213,19 @@ export function initChat(dock, { faq, openDemo }) {
      time, then open the calendar with them filled in. */
   var BOOK_INTENT = /\b(book|schedule|arrange|set up|get)\b.*\b(demo|call|meeting)\b|\b(demo|call) (please|for me)\b|^demo\??$/;
   var BOOK_STEPS = [
-    { key: "name", ask: "Great, let’s book your demo. What’s your full name?" },
-    { key: "email", ask: "Thanks! What’s your work email address?", check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "That doesn’t look like an email address—could you check it?"; } },
-    { key: "organization", ask: "Which organization are you with?" },
+    { key: "name", ask: "Great, let’s book your demo. What’s your full name?", check: validateFullName },
+    { key: "email", ask: "Thanks! What’s your email address?", check: validateWorkEmail },
+    { key: "organization", ask: "Which organization are you with?", check: validateOrganization },
     { key: "explore", ask: "What would you like to explore in the demo? Tell us about your audience or what you want to learn—or type “skip”." },
   ];
   var booking = null;
   function bookStep(text) {
     var step = BOOK_STEPS[booking.at];
+    // Mid-booking questions: answer them instead of saving the question as a field value.
+    if (step.key !== "explore" && looksLikeQuestion(text) && !METHOD_CANCEL.test(text)) {
+      var aside = reply(text);
+      return aside.answer + "\n\nWhen you’re ready to continue booking: " + step.ask;
+    }
     var problem = step.check && step.check(text);
     if (problem) return problem;
     booking.details[step.key] = step.key === "explore" && /^skip$/i.test(text) ? "" : text;

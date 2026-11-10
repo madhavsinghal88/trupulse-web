@@ -24,8 +24,11 @@ export default function CookieNotice() {
     if (choice) {
       try {
         const saved = JSON.parse(choice);
-        if (saved && typeof saved === "object") setPicked({ analytics: !!saved.analytics, marketing: !!saved.marketing });
-        window.tpCookieChoice = saved;
+        if (saved && typeof saved === "object") {
+          setPicked({ analytics: !!saved.analytics, marketing: !!saved.marketing });
+          window.tpCookieChoice = saved;
+          window.tpApplyAnalyticsConsent?.(saved);
+        } else window.tpCookieChoice = choice;
       } catch { window.tpCookieChoice = choice; }
     } else setShow(true);
     window.tpOpenCookieSettings = openSettings;
@@ -53,6 +56,7 @@ export default function CookieNotice() {
     setPicked({ analytics: choice.analytics, marketing: choice.marketing });
     try { localStorage.setItem(KEY, JSON.stringify(choice)); } catch {}
     window.tpCookieChoice = choice;
+    window.tpApplyAnalyticsConsent?.(choice);
     setShow(false);
     setSettings(false);
   }

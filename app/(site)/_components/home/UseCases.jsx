@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { tabKeyDown, useEqualHeight } from "./tabs";
 
 const USE_CASES = [
@@ -48,15 +48,45 @@ const USE_CASES = [
   },
 ];
 
+// Match the tab list height to the panel so the buttons flex-fill the column.
+function useStretchTabs(tabsRef, panelRef, active) {
+  useEffect(() => {
+    const tabs = tabsRef.current;
+    const panel = panelRef.current;
+    if (!tabs || !panel) return;
+
+    function sync() {
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        tabs.style.height = "";
+        return;
+      }
+      tabs.style.height = `${panel.offsetHeight}px`;
+    }
+
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(panel);
+    window.addEventListener("resize", sync);
+    document.fonts?.ready.then(sync);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", sync);
+      tabs.style.height = "";
+    };
+  }, [tabsRef, panelRef, active]);
+}
+
 export default function UseCases() {
   const [active, setActive] = useState(0);
   const panelRef = useRef(null);
+  const tabsRef = useRef(null);
   useEqualHeight(panelRef, USE_CASES.length, active, setActive);
+  useStretchTabs(tabsRef, panelRef, active);
   const item = USE_CASES[active];
 
   return (
     <div className="use-case-explorer reveal">
-      <div className="use-case-tabs" role="tablist" aria-label="Research needs">
+      <div className="use-case-tabs" role="tablist" aria-label="Research needs" ref={tabsRef}>
         {USE_CASES.map((u, i) => (
           <button
             key={u.kicker}

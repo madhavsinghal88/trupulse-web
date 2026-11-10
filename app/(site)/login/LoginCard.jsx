@@ -67,7 +67,7 @@ export default function LoginCard() {
           </span>
         </label>
         <button className="btn login-submit" type="submit" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
-        <a href="#" onClick={(event) => { event.preventDefault(); showReset(true); }}>Forgot password?</a>
+        <button type="button" className="login-text-btn" onClick={() => showReset(true)}>Forgot password?</button>
         <p className="login-message" role="status">{message}</p>
       </form>
       <div className="login-reset" hidden={!resetting}>
@@ -90,9 +90,9 @@ export default function LoginCard() {
         >
           <label>Email address<input ref={resetEmail} type="email" autoComplete="email" placeholder="Registered email address" required /></label>
           <button className="btn login-submit" type="submit" disabled={busy}>Send reset link</button>
-          <a href="#" onClick={(event) => { event.preventDefault(); showReset(false); }}>
+          <button type="button" className="login-text-btn" onClick={() => showReset(false)}>
             <span className="back-arrow" aria-hidden="true">←</span> Back to sign in
-          </a>
+          </button>
         </form>
         <p className="login-message login-reset-message" role="status" hidden={!resetFor}>
           {resetFor && (

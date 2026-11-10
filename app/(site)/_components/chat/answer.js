@@ -4,9 +4,21 @@ import { APP_HELP, FALLBACK, KNOWLEDGE } from "./knowledge";
    (knowledge.js — TruPulse Public Website Agent WEB catalogue). Returns { answer, route }.
    INTEGRATION POINT: swap for an assistant endpoint later. */
 var COMMON = ["does", "have", "much", "what", "with", "your", "that", "this", "from", "about", "same", "work", "when", "every", "used", "trupulse"];
+
+/* Common misspellings so pricing and similar queries still match. */
+function normalizeQuery(q) {
+  return q
+    .replace(/\bpricng\b/g, "pricing")
+    .replace(/\bprcing\b/g, "pricing")
+    .replace(/\bpriceing\b/g, "pricing")
+    .replace(/\bcostin?g\b/g, "costing")
+    .replace(/\btrupuls\b/g, "trupulse")
+    .replace(/\btrupulsse\b/g, "trupulse");
+}
+
 export function answerFor(text, FAQ) {
-  var q = text.toLowerCase().replace(/[’']/g, "'");
-  var intent = sampleReport(q) || employeeLeaving(q) || methodChoice(q);
+  var q = normalizeQuery(text.toLowerCase().replace(/[’']/g, "'"));
+  var intent = sampleReport(q) || marketResearch(q) || participantVisibility(q) || resultsSpeed(q) || talkToHuman(q) || employeeLeaving(q) || methodChoice(q);
   if (intent) return intent;
   var hit = FAQ.find(function (f) {
     var words = f.q.toLowerCase().replace(/[^a-z0-9 ]/g, "").split(" ").filter(function (w) { return w.length > 3 && COMMON.indexOf(w) < 0; });
@@ -56,6 +68,30 @@ function sampleReport(q) {
     answer: "Here are our sample reports, built with sample data—open any of them below.",
     route: "samples",
   };
+}
+
+/* Market / product research questions were landing on the “not only for HR” answer via word overlap. */
+function marketResearch(q) {
+  if (!/\b(market research|product research|new product|concept test|test (a |the )?product|marketing (concept|idea))\b/.test(q)) return null;
+  return entry("WEB021");
+}
+
+function participantVisibility(q) {
+  if (!/\b(participants?|others?)\b/.test(q)) return null;
+  if (!/\b(see what others|see others|see each other|see (other )?(responses|answers|replies)|what others said)\b/.test(q)) return null;
+  return entry("SITE_PARTICIPANT_VISIBILITY");
+}
+
+function resultsSpeed(q) {
+  if (!/\b(results?|reports?|findings?|insights?)\b/.test(q)) return null;
+  if (!/\b(how fast|how quickly|how soon|when do i get|turnaround|get results)\b/.test(q)) return null;
+  if (/\blaunch|up and running|first (real )?session\b/.test(q)) return null;
+  return entry("SITE_RESULTS_SPEED");
+}
+
+function talkToHuman(q) {
+  if (!/\b(talk to (a )?human|speak to (a )?(human|person|someone)|real person|human (please|support)|hello@trupulse\.ai)\b/.test(q)) return null;
+  return entry("WEB121");
 }
 
 /* Employee stay/leave research (WEB 014), however it is worded. */

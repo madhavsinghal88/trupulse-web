@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChatLink, DemoLink } from "./actions";
+import { ChatLink, CookieSettingsLink, DemoLink } from "./actions";
 
 const EXPLORE = [
   ["how-it-works", "How TruPulse Works"],
@@ -28,6 +28,7 @@ export default function SiteFooter({ home = false }) {
               {EXPLORE.map(([id, label]) =>
                 home ? <a key={id} href={`#${id}`}>{label}</a> : <Link key={id} href={`/#${id}`}>{label}</Link>
               )}
+              <Link href="/pricing">Pricing</Link>
             </div>
             <div>
               <strong>Resources &amp; Help</strong>
@@ -47,7 +48,7 @@ export default function SiteFooter({ home = false }) {
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} TruPulse. All rights reserved.</span>
         <span className="legal-footer-links">
-          <Link href="/privacy">Privacy Policy</Link><span>·</span><Link href="/terms">Terms and Conditions</Link>
+          <Link href="/privacy">Privacy Policy</Link><span>·</span><Link href="/terms">Terms and Conditions</Link><span>·</span><CookieSettingsLink />
         </span>
       </div>
     </footer>
