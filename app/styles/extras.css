@@ -60,6 +60,9 @@ html:has(.tp-home) .tp-autoplay-controls svg{width:20px;height:20px}
 .chat-view[data-view="chat"] .tp-privnote{margin:6px 14px 10px;padding:0}
 form .tp-privnote{margin-top:12px;text-align:center}
 
+/* v122: tp-v122 — inactive report rows stay readable */
+.tp-rep-rows li:not(.is-active){opacity:1!important}.tp-rep-rows li:not(.is-active) h3{color:#4a4777!important}.tp-rep-rows li p{color:#5b589d!important}
+
 /* Chat assistant route actions (Answer Library v2) */
 .chat-actions{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 10px 44px;max-width:calc(100% - 44px)}
 .chat-actions a,.chat-actions button{display:inline-flex;align-items:center;padding:7px 12px;border:1px solid rgba(103,95,252,.28);border-radius:999px;background:#fff;color:var(--violet,#433EB1);font:inherit;font-size:.75rem;font-weight:700;line-height:1.3;text-decoration:none;cursor:pointer;box-shadow:0 2px 8px rgba(45,40,154,.06);transition:background .15s ease,color .15s ease,border-color .15s ease,transform .15s ease}

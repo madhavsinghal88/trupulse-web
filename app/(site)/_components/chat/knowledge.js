@@ -13,6 +13,8 @@ export const ROUTES = {
     { label: "1:1 Discussion Individual Report", href: "/reports/1to1-Discussion-Individual-Report.pdf", newTab: true },
     { label: "Survey Session Report", href: "/reports/Survey-Session-Report.pdf", newTab: true },
     { label: "Survey Individual Responses Report", href: "/reports/Survey-Individual-Responses-Report.pdf", newTab: true },
+    { label: "Focus Group Session Report", href: "/reports/Focus-Group-Session-Report.pdf", newTab: true },
+    { label: "Campaign Report", href: "/reports/Campaign-Report.pdf", newTab: true },
   ] },
   use_cases: { actions: [{ label: "View Use Cases", href: "/#use-cases" }] },
   privacy: { actions: [{ label: "Privacy Policy", href: "/privacy" }] },
@@ -30,8 +32,12 @@ export const ROUTES = {
   sample_discussion_individual: { actions: [{ label: "Open 1:1 Discussion Individual Report", href: "/reports/1to1-Discussion-Individual-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   sample_survey_session: { actions: [{ label: "Open Survey Session Report", href: "/reports/Survey-Session-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   sample_survey_responses: { actions: [{ label: "Open Survey Individual Responses Report", href: "/reports/Survey-Individual-Responses-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
-  sample_focus_group: { actions: [{ label: "Book a Demo", action: "demo" }, { label: "All sample reports", href: "/#reports" }] },
-  sample_campaign: { actions: [{ label: "Book a Demo", action: "demo" }, { label: "All sample reports", href: "/#reports" }] },
+  sample_focus_group: { actions: [
+    { label: "Open Focus Group Session Report", href: "/reports/Focus-Group-Session-Report.pdf", newTab: true },
+    { label: "Open Campaign Report", href: "/reports/Campaign-Report.pdf", newTab: true },
+    { label: "All sample reports", href: "/#reports" },
+  ] },
+  sample_campaign: { actions: [{ label: "Open Campaign Report", href: "/reports/Campaign-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   case_study: { actions: [{ label: "Read the Case Study", href: "/case-study" }] },
   pricing: { actions: [
     { label: "Book a Demo", action: "demo" },
@@ -1871,7 +1877,7 @@ export const KNOWLEDGE = [
       "campaign sample",
       "focus group or campaign report"
     ],
-    "answer": "Focus Group Session Report and Campaign Report samples are coming soon. We can walk you through both in a demo, and you can open our 1:1 discussion and survey samples now.",
+    "answer": "Here are our Focus Group Session Report and Campaign Report samples—open either below. Both use sample data only.",
     "route": "sample_focus_group"
   },
   {

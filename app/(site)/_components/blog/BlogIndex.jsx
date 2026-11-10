@@ -10,7 +10,7 @@ export default function BlogIndex({ articles, categories }) {
   const q = query.trim().toLowerCase();
   const visible = articles.map((a) => {
     const okCat = category === "All" || a.category === category;
-    const haystack = [a.title, ...a.tags].join(" ").toLowerCase();
+    const haystack = [a.title, a.excerpt, ...a.tags].join(" ").toLowerCase();
     const okText = !q || haystack.includes(q) || a.category.toLowerCase().includes(q);
     return okCat && okText;
   });

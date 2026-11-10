@@ -9,8 +9,8 @@ const REPORTS = [
   { file: "1to1-Discussion-Individual-Report", name: "1∶1 Discussion Individual Report", title: "1:1 Discussion Individual Report", note: "See how a participant’s perspective, key insights, and supporting quotes are summarized in their own individual report." },
   { file: "Survey-Session-Report", name: "Survey Session Report", title: "Survey Session Report", note: "See survey results, response patterns, and insights from follow-up questions across all participants." },
   { file: "Survey-Individual-Responses-Report", name: "Survey Individual Responses Report", title: "Survey Individual Responses Report", note: "Review every participant’s complete survey answers, including follow-up responses, together in one document." },
-  { title: "Focus Group Session Report", note: "Explore the group’s shared themes, differing viewpoints, and insights that emerged through discussion." },
-  { title: "Campaign Report", note: "Bring findings from multiple sessions together to reveal broader patterns, changes, and connected insights." },
+  { file: "Focus-Group-Session-Report", name: "Focus Group Session Report", title: "Focus Group Session Report", note: "Explore the group’s shared themes, differing viewpoints, and insights that emerged through discussion." },
+  { file: "Campaign-Report", name: "Campaign Report", title: "Campaign Report", note: "Bring findings from multiple sessions together to reveal broader patterns, changes, and connected insights." },
 ];
 
 function download(file, name) {

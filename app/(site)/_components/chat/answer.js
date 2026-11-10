@@ -48,12 +48,12 @@ function sampleReport(q) {
   if (focus && campaign && types === 2) return entry("SITE_SAMPLE_FOCUS");
   if (types === 1) {
     if (focus) return entry("SITE_SAMPLE_FOCUS");
-    if (campaign) return entry("SITE_SAMPLE_FOCUS");
+    if (campaign) return { answer: "Here is our sample Campaign Report—open it below. It uses sample data only.", route: "sample_campaign" };
     if (survey) return entry(individual ? "SITE_SAMPLE_SURVEY_RESPONSES" : "SITE_SAMPLE_SURVEY_SESSION");
     return entry(individual ? "SITE_SAMPLE_DISCUSSION_INDIVIDUAL" : "SITE_SAMPLE_DISCUSSION_SESSION");
   }
   return {
-    answer: "Here are our sample reports, built with sample data—open any of them below. Focus Group Session Report and Campaign Report samples are coming soon; we can walk you through those in a demo.",
+    answer: "Here are our sample reports, built with sample data—open any of them below.",
     route: "samples",
   };
 }
