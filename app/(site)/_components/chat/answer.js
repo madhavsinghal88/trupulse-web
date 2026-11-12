@@ -59,7 +59,7 @@ export function answerFor(text, FAQ, context) {
     hindiAsk(q) ||
     languageAsk(q) ||
     excelExport(q) ||
-    useCaseAsk(q) ||
+    suitabilityAsk(q) ||
     howSurveysWork(q) ||
     editCompleted(q) ||
     incompleteSessions(q) ||
@@ -362,7 +362,7 @@ function excelExport(q) {
   return entry("WEB053");
 }
 
-function useCaseAsk(q) {
+function suitabilityAsk(q) {
   if (/\b(exit interview|exit interviews)\b/.test(q)) {
     return {
       answer: "Yes. You can research why people leave or stay through 1:1 discussions, surveys, and campaigns—so you hear the reasons behind attrition, not only a score.",
