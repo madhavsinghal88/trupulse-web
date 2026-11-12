@@ -23,14 +23,14 @@ function Dock() {
 
   return (
     <div className="chat-dock" ref={dockRef}>
-        <div className="chat-panel" data-chat-panel hidden role="dialog" aria-label="TruPulse AI Assistant">
+        <div className="chat-panel" data-chat-panel hidden role="dialog" aria-label="TruPulse Assistant">
           <header className="chat-head">
             <button className="chat-icon chat-back" type="button" aria-label="Your conversations" data-chat-back><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
             <span className="chat-avatar" data-chat-avatar aria-hidden="true"><svg className="ico-bubble" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
     <path d="M16 4c7.2 0 13 4.6 13 10.3S23.2 24.6 16 24.6c-1.2 0-2.4-.1-3.5-.4l-6 3a.7.7 0 0 1-1-.8l1.2-4A9.6 9.6 0 0 1 3 14.3C3 8.6 8.8 4 16 4Z" fill="currentColor" />
     <circle cx="10.6" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)" /><circle cx="16" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)" /><circle cx="21.4" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)" />
     </svg></span>
-            <span className="chat-id"><strong data-chat-title>TruPulse AI Assistant</strong><small data-chat-sub><i className="chat-dot"></i>AI assistant</small></span>
+            <span className="chat-id"><strong data-chat-title>TruPulse Assistant</strong><small data-chat-sub><i className="chat-dot"></i>AI assistant</small></span>
             <span className="chat-head-actions">
               <button className="chat-icon" type="button" aria-label="Conversation menu" aria-expanded="false" data-chat-menu><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" /></svg></button>
               <button className="chat-icon" type="button" aria-label="Close chat" title="Close chat" data-chat-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg></button>

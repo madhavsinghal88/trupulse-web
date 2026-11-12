@@ -41,17 +41,30 @@ export function answerFor(text, FAQ, context) {
 
   var intent =
     sampleReport(q) ||
+    pricingAsk(q) ||
+    trialAsk(q) ||
+    contactAsk(q) ||
+    securityIssue(q) ||
     dataSecure(q) ||
+    gdprAsk(q) ||
     trainAi(q) ||
+    anonymityAsk(q) ||
     whoSeesResponses(q) ||
     dataStored(q) ||
     dataRetention(q) ||
     phoneNumber(q) ||
     under18(q) ||
+    durationAsk(q) ||
+    groupSizeAsk(q) ||
+    hindiAsk(q) ||
+    languageAsk(q) ||
+    excelExport(q) ||
+    useCaseAsk(q) ||
     howSurveysWork(q) ||
     editCompleted(q) ||
     incompleteSessions(q) ||
     participantRegister(q) ||
+    voiceByChannel(q) ||
     voiceAudio(q) ||
     arabicVoice(q) ||
     reportsLanguage(q) ||
@@ -161,8 +174,8 @@ function multiPart(q) {
   }
 
   var voiceStored = /\b(voice|audio).{0,40}(record|recorded|recording|save|saved|store|stored|retain)|(?:record|save|store).{0,40}(voice|audio)/.test(q);
-  var arabicVoice = /\barabic\b/.test(q) && /\b(voice|out loud|spoken|speak)\b/.test(q);
-  if (voiceStored && arabicVoice) {
+  var arabicVoiceAsk = /\barabic\b/.test(q) && /\b(voice|out loud|spoken|speak)\b/.test(q);
+  if (voiceStored && arabicVoiceAsk) {
     return combine([
       "Voice responses are converted to text, and the text is processed and stored as session content.",
       "Arabic supports text responses only; voice responses are available in the other 16 supported languages for 1:1 Discussions.",
@@ -189,14 +202,81 @@ function multiPart(q) {
     };
   }
 
+  var costPart = /\b(cost|price|pricing|how much|what would it cost|budget)\b/.test(q);
+  var timePart = /\b(how long|how soon|timeline|how (fast|quickly)|turnaround|take to (set|get|launch|run))\b/.test(q);
+  var orgPart = /\b(nonprofit|non-profit|employees?|customers?|students?|members?|\d[\d,]*)\b/.test(q);
+  if (costPart && timePart && (orgPart || q.length > 60)) {
+    return combine([
+      "Please book a demo or email sales@trupulse.ai for current plans and pricing for your organization.",
+      "You can create a session, review content, select participants and reports, and be up and running in a day—timing after that depends on how long you leave sessions open for responses.",
+    ], "pricing");
+  }
+
+  var methodPart = /\b(interview|survey|1:1|discussion|focus group|which method|or survey)\b/.test(q);
+  var anonPart = /\b(anonymous|anonymity|stay anonymous|who said what|managers? know)\b/.test(q);
+  var leavePart = /\b(leav(e|ing)|quit|resign|attrition|turnover|sales performers?)\b/.test(q);
+  if (methodPart && anonPart && (leavePart || /\b(why|research|feedback)\b/.test(q))) {
+    return combine([
+      "For sensitive stay-or-leave research, AI-led 1:1 discussions are often a strong start when you need independent depth; a survey can reach more people if you want comparable answers at scale.",
+      "Each session has an Anonymous or Identified setting—participants are told in advance. In Anonymous sessions, TruPulse does not list participant names in reports.",
+    ], "clarify");
+  }
+
   return null;
 }
 
 /* ---------- high-priority intents ---------- */
+function pricingAsk(q) {
+  if (/\b(how much time|how long|duration|minutes?|hours?)\b/.test(q) && !/\b(cost|price|pricing|plan|edition|bill)\b/.test(q)) return null;
+  if (/\b(limit on participants|how many (can|people|participants)|group size|focus group)\b/.test(q) && !/\b(cost|price|pricing|plan|edition|bill|allowance)\b/.test(q)) return null;
+  if (/\bpricing page\b|\bprice page\b|\bwhere (can|do) i (see|find) (pricing|prices|plans)\b|\bdo you have (a )?pricing\b/.test(q)) {
+    return {
+      answer: "We don’t publish a public pricing page right now. Book a demo or email sales@trupulse.ai for current plans and a quote tailored to your organization. TruPulse is available in Essentials, Professional, and Enterprise editions.",
+      route: "pricing",
+      id: "SITE_PRICING_PAGE",
+    };
+  }
+  if (!/\b(cost|price|pricing|priced|plans?|editions?|per user|per seat|how much (does|is|would)|what (does|do) (it|trupulse|you) cost|what are your plans)\b/.test(q)) return null;
+  if (/\b(trial|demo account|free to try)\b/.test(q) && !/\b(cost|price|pricing)\b/.test(q)) return null;
+  return {
+    answer: "Please book a demo or email sales@trupulse.ai for current plans and pricing.",
+    route: "pricing",
+    id: "SITE_PRICING",
+  };
+}
+
+function trialAsk(q) {
+  if (!/\b(free trial|try (it |trupulse )?for free|demo account|trial account|try before)\b/.test(q) && !(/\btrial\b/.test(q) && /\b(free|offer|available|is there)\b/.test(q))) return null;
+  return {
+    answer: "Use the website’s Book a Demo option to discuss your needs with the TruPulse team—including whether a pilot or trial path fits your organization.",
+    route: "demo",
+    id: "SITE_TRIAL",
+  };
+}
+
+function contactAsk(q) {
+  if (!/\b(how (do|can) i contact|how (do|can) we contact|contact you|contact trupulse|get in touch|reach (you|trupulse|sales|support))\b/.test(q)) return null;
+  if (/\bsecurity issue|vulnerability|breach\b/.test(q)) return null;
+  return {
+    answer: "Email hello@trupulse.ai, book a demo on the website, or email sales@trupulse.ai for commercial questions. Existing customers can email support@trupulse.ai.",
+    route: "human",
+    id: "SITE_CONTACT",
+  };
+}
+
+function securityIssue(q) {
+  if (!/\b(report (a )?security|security (issue|incident|vulnerability|concern)|data breach|vulnerability)\b/.test(q)) return null;
+  return {
+    answer: "Email Privacy@trupulse.ai for privacy or security concerns. For product support questions, existing customers can also use support@trupulse.ai.",
+    route: "privacy_contact",
+    id: "SITE_SECURITY_REPORT",
+  };
+}
+
 function dataSecure(q) {
-  if (!/\b(secure|security|safe|encrypt|encryption|protected)\b/.test(q)) return null;
-  if (!/\b(data|information|responses?|privacy)\b/.test(q) && !/\bis (it|trupulse|this) secure\b/.test(q)) return null;
-  if (/\btrain\b|\bcookie|\bcertif|\bsoc\b|\biso\b/.test(q)) return null;
+  if (!/\b(secure|security|safe|encrypt|encryption|encrypted|protected|protect (our|my|the)? ?data)\b/.test(q)) return null;
+  if (!/\b(data|information|responses?|privacy)\b/.test(q) && !/\bis (it|trupulse|this) (secure|encrypted|safe)\b/.test(q) && !/\bencrypt/.test(q)) return null;
+  if (/\btrain\b|\bcookie|\bcertif|\bsoc\b|\biso\b|\breport (a )?security|security issue\b/.test(q)) return null;
   return {
     answer: "Customer data is hosted in the US and encrypted in transit and at rest for relevant services. Certification is in progress, with expected completion in early 2027.",
     route: "privacy",
@@ -204,11 +284,116 @@ function dataSecure(q) {
   };
 }
 
+function gdprAsk(q) {
+  if (!/\bgdpr\b|\bccpa\b|\bprivacy laws?\b|\bcompliant with privacy\b|\bcomply with (gdpr|privacy)\b/.test(q)) return null;
+  return entry("WEB099");
+}
+
 function trainAi(q) {
-  if (!/\btrain\b/.test(q)) return null;
-  if (!/\b(ai|model|models|llm)\b/.test(q) && !/\b(our|customer|participant|research)\b.{0,20}\bdata\b/.test(q)) return null;
-  if (!/\b(data|research|responses?|content|feedback)\b/.test(q) && !/\btrain (ai|models?)\b/.test(q)) return null;
+  var training = /\btrain(ing|ed)?\b|\bused for ai\b|\bfor (ai|model) training\b|\bai training\b/.test(q);
+  if (!training) return null;
+  if (!/\b(ai|model|models|llm|data|research|responses?|feedback|content)\b/.test(q)) return null;
+  if (/\b(how (do|does) (the )?ai (get )?train|train the interviewer|training materials for)\b/.test(q) && !/\b(our|my|customer|participant|research) (data|responses?|content|feedback)\b/.test(q)) return null;
   return entry("WEB087");
+}
+
+function anonymityAsk(q) {
+  if (/\b(managers?|leaders?|boss|supervisor).{0,30}(know who|see who|tell who|who said)|who said what\b/.test(q)) {
+    return {
+      answer: "Each session is set to Anonymous or Identified, and participants are told which before they start. In Anonymous sessions, TruPulse does not list participant names in reports or transcripts—though people should still avoid details that could identify them.",
+      route: "privacy",
+      id: "SITE_MANAGER_ANON",
+    };
+  }
+  if (!/\b(anonymous|anonymity|anonymi[sz]ed)\b/.test(q)) return null;
+  if (/\bother focus group|recognize me\b/.test(q)) return entry("WEB080");
+  return entry("WEB078");
+}
+
+function durationAsk(q) {
+  if (!/\b(how long|how much time|how many minutes|duration|time (does|do|will) (a |an |the )?(participant|discussion|session|survey|focus)|participant need)\b/.test(q)) return null;
+  if (/\b(keep data|retention|hosted|stored|open period|simultaneously)\b/.test(q)) return null;
+  if (/\b(cost|price|pricing|plan)\b/.test(q)) return null;
+  return {
+    answer: "Timing depends on the session your organization creates—the invitation should state the expected duration. There is no single fixed length for every 1:1 discussion, survey, or focus group.",
+    route: "workflow",
+    id: "SITE_DURATION",
+  };
+}
+
+function groupSizeAsk(q) {
+  if (/\b(5000|5,000|thousands? of)\b/.test(q) && /\b(survey|employees?|participants?|people|users?)\b/.test(q)) {
+    return {
+      answer: "Large participant volumes are supported through contacts, groups, and edition usage allowances. Book a demo or email sales@trupulse.ai for current allowances for a survey of that scale.",
+      route: "pricing",
+      id: "SITE_SURVEY_SCALE",
+    };
+  }
+  if (!/\b(how many|limit on|maximum|max |group size|can join|participants? (per|in)|people (can|per))\b/.test(q)) return null;
+  if (!/\b(focus group|participants?|people|join|session)\b/.test(q)) return null;
+  if (/\b(sessions? (can )?run|simultaneously|at once|concurrent)\b/.test(q)) return entry("WEB048");
+  if (/\bfocus group\b/.test(q) || /\b(join|people|participants?)\b/.test(q)) {
+    return {
+      answer: "Focus group and survey participant counts depend on how you set up the session and on your edition’s usage allowances. Book a demo or email sales@trupulse.ai for current plan limits—demo sample sizes (for example a 6-person focus group in the website simulation) do not establish paid-plan limits.",
+      route: "pricing",
+      id: "SITE_GROUP_SIZE",
+    };
+  }
+  return null;
+}
+
+function hindiAsk(q) {
+  if (!/\bhindi\b/.test(q)) return null;
+  return {
+    answer: "Yes. Hindi is one of the supported participant languages. Voice responses are available in 1:1 Discussions in Hindi; the creator interface and reports are currently in English only.",
+    route: "product",
+    id: "SITE_HINDI",
+  };
+}
+
+function languageAsk(q) {
+  if (!/\b(what languages|which languages|languages (do you|supported)|support(ed)? languages|language support)\b/.test(q)) return null;
+  return entry("WEB071");
+}
+
+function excelExport(q) {
+  if (!/\b(excel|xlsx|spreadsheet|csv)\b/.test(q)) return null;
+  if (!/\b(export|download|save|get|format|formats)\b/.test(q) && !/\bexcel\b/.test(q)) return null;
+  return entry("WEB053");
+}
+
+function useCaseAsk(q) {
+  if (/\b(exit interview|exit interviews)\b/.test(q)) {
+    return {
+      answer: "Yes. You can research why people leave or stay through 1:1 discussions, surveys, and campaigns—so you hear the reasons behind attrition, not only a score.",
+      route: "use_cases",
+      id: "SITE_EXIT_INTERVIEW",
+    };
+  }
+  if (/\b(universit(y|ies)|higher education|college|students?)\b/.test(q) && /\b(good for|use|feedback|research|hear|listen|suitable|work for)\b/.test(q)) {
+    return {
+      answer: "Yes. TruPulse is used to research student and campus experiences through surveys, 1:1 discussions, and focus groups. Tell me whose feedback you need and what you want to decide.",
+      route: "use_cases",
+      id: "SITE_UNIVERSITY",
+    };
+  }
+  if (/\b(healthcare|hospital|patient|clinical)\b/.test(q) && /\b(good for|use|feedback|research|suitable|work for)\b/.test(q)) {
+    return {
+      answer: "TruPulse supports research needs across industries, including healthcare organizations gathering employee or patient-experience feedback where appropriate. Check with your legal department about any sector-specific requirements. Tell me whose feedback you need and what you want to learn.",
+      route: "use_cases",
+      id: "SITE_HEALTHCARE",
+    };
+  }
+  if (/\b(good for|suitable for|use (it )?for)\b.{0,40}\bcustomer (feedback|research|experience)\b|\bcustomer feedback\b/.test(q)) {
+    return entry("WEB020");
+  }
+  return null;
+}
+
+function voiceByChannel(q) {
+  if (!/\b(by voice|with voice|voice (mode|option|response|responses)|done by voice|answer by voice|speak (their|the) answers?|respond by voice)\b/.test(q)) return null;
+  if (/\barabic\b/.test(q)) return null;
+  return entry("WEB069");
 }
 
 function whoSeesResponses(q) {
@@ -487,9 +672,11 @@ function seeTranscripts(q) {
 }
 
 function joinMobile(q) {
-  if (!/\b(mobile|phone|smartphone|tablet|ipad|android|ios)\b/.test(q)) return null;
-  if (!/\b(join|participate|participant|session|survey|discussion)\b/.test(q)) return null;
   if (/\bphone number\b/.test(q)) return null;
+  var device = /\b(mobile|phone|phones|smartphone|tablet|ipad|android|ios|browser)\b/.test(q);
+  var app = /\b(download (an? )?app|app download|need(s)? (an? )?app|install (an? )?app)\b/.test(q);
+  var join = /\b(join|participate|participant|session|survey|discussion|work on|from a browser)\b/.test(q);
+  if (!(app || (device && join) || /\bwork on phones\b|\bjoin from a browser\b/.test(q))) return null;
   return {
     answer: "Participants join through a web link in their invitation—no app download is required. Sessions work in a mobile browser.",
     route: "workflow",
@@ -516,7 +703,7 @@ function namedCustomers(q) {
 }
 
 function competitorCompare(q) {
-  if (!/\b(qualtrics|surveymonkey|survey monkey|better than|vs\.? |versus)\b/.test(q)) return null;
+  if (!/\b(qualtrics|surveymonkey|survey monkey)\b/.test(q)) return null;
   return entry("WEB117");
 }
 
@@ -576,7 +763,7 @@ function resultsSpeed(q) {
 }
 
 function talkToHuman(q) {
-  if (!/\b(talk to (a )?human|speak to (a )?(human|person|someone)|real person|human (please|support)|hello@trupulse\.ai)\b/.test(q)) return null;
+  if (!/\b(talk to (a )?human|speak to (a )?(human|person|someone)|real person|human (please|support)|contact sales|hello@trupulse\.ai|talk with (the )?team)\b/.test(q)) return null;
   return entry("WEB121");
 }
 
@@ -590,7 +777,7 @@ function employeeLeaving(q) {
 /* “Which research method should I use?” and similar: clarify audience and purpose
    (engine.js also runs a short advisor flow when these phrases are asked in chat). */
 function methodChoice(q) {
-  if (!/\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\brecommend (a |an |the )?(research )?method\b|\b(survey|discussion|focus group).{0,40}\bor\b.{0,40}(survey|discussion|focus)/.test(q)) return null;
+  if (!/\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\brecommend (a |an |the )?(research )?method\b|\b(survey|discussion|interview|focus group).{0,40}\bor\b.{0,40}(survey|discussion|interview|focus)|\b(survey|discussion|interview|focus group).{0,40}\bwhich is better\b|\bwhich is better.{0,40}\b(survey|discussion|interview|focus)/.test(q)) return null;
   return entry("METHOD");
 }
 
@@ -615,6 +802,25 @@ function contextFollowup(q, topic) {
       };
     }
   }
+  if (topic === "focus_group") {
+    if (/\b(how many|limit|people|join|participants?)\b/.test(q) && q.length < 90) return groupSizeAsk("how many people can join a focus group");
+    if (/\b(anonymous|anonymity|stay anonymous|who said)\b/.test(q)) return anonymityAsk(q.indexOf("anonymous") > -1 ? q : "can they stay anonymous");
+    if (/\b(how long|how much time|duration)\b/.test(q)) return durationAsk("how long does a focus group take");
+  }
+  if (topic === "discussion") {
+    if (/\b(voice|by voice|speak|spoken|out loud)\b/.test(q)) return voiceByChannel("can it be done by voice") || entry("WEB069");
+    if (/\b(language|languages|hindi|spanish|which languages)\b/.test(q)) {
+      if (/\bhindi\b/.test(q)) return hindiAsk("do you support hindi");
+      return entry("WEB071");
+    }
+    if (/\b(how long|how much time|duration)\b/.test(q)) return durationAsk("how long is a 1:1 discussion");
+    if (/\b(anonymous|anonymity|stay anonymous)\b/.test(q)) return anonymityAsk("can they stay anonymous");
+  }
+  if (topic === "survey") {
+    if (/\b(how long|how much time|duration)\b/.test(q)) return durationAsk("how long does a survey take");
+    if (/\b(anonymous|anonymity|stay anonymous)\b/.test(q)) return anonymityAsk("are responses anonymous");
+    if (/\b(excel|export|csv|download)\b/.test(q)) return excelExport("can i export data to excel");
+  }
   if (topic === "clarify" || topic === "METHOD" || topic === "SITE_HELP_ORG") {
     if (/\bwhat about (for )?students\b|\band how many\b|\btell me more\b/.test(q)) {
       return {
@@ -634,8 +840,11 @@ function keywordOverlap(q) {
   if (words.length < 2) return null;
   var best = null, bestHits = 1;
   KNOWLEDGE.forEach(function (k) {
-    var blob = (k.keywords || []).join(" ").toLowerCase();
-    var hits = words.filter(function (w) { return blob.indexOf(w.replace(/s$/, "")) > -1; }).length;
+    var tokens = (k.keywords || []).join(" ").toLowerCase().replace(/[^a-z0-9: ]/g, " ").split(/\s+/);
+    var hits = words.filter(function (w) {
+      var stem = w.replace(/s$/, "");
+      return tokens.some(function (t) { return t === w || t === stem || t.replace(/s$/, "") === stem; });
+    }).length;
     if (hits > bestHits) { best = k; bestHits = hits; }
   });
   return best && bestHits >= 2 ? pack(best) : null;
@@ -660,8 +869,12 @@ function score(q, keywords) {
 export function topicFromResult(result) {
   if (!result) return null;
   var id = result.id || "";
-  if (/HRIS|WEB102|WEB147|WEB153|SITE_EDITIONS_COMBO|SITE_HRIS_FREQ/i.test(id) || /\bhris\b/i.test(result.answer || "")) return "hris";
-  if (/WEB038|WEB039|WEB040|SITE_CAMPAIGN_COMPARE/i.test(id) || (result.route === "workflow" && /\bcampaign\b/i.test(result.answer || ""))) return "campaign";
+  var answer = result.answer || "";
+  if (/HRIS|WEB102|WEB147|WEB153|SITE_EDITIONS_COMBO|SITE_HRIS_FREQ/i.test(id) || /\bhris\b/i.test(answer)) return "hris";
+  if (/WEB038|WEB039|WEB040|SITE_CAMPAIGN_COMPARE/i.test(id) || (result.route === "workflow" && /\bcampaign\b/i.test(answer) && !/\bfocus group\b/i.test(answer))) return "campaign";
+  if (/WEB026|SITE_SAMPLE_FOCUS|focus_group|SITE_GROUP_SIZE/i.test(id) || (/\bfocus groups?\b/i.test(answer) && /\b(ai moderator|moderated|discuss a topic together)\b/i.test(answer))) return "focus_group";
+  if (/WEB025|WEB069|SITE_SAMPLE_DISCUSSION/i.test(id) || (/\b1:1 discussions?\b/i.test(answer) && /\b(individual conversation|ai interviewer)\b/i.test(answer))) return "discussion";
+  if (/WEB027|SITE_SAMPLE_SURVEY|SITE_SURVEY/i.test(id) || /\badaptive surveys?\b/i.test(answer)) return "survey";
   if (id) return id;
   return result.route || null;
 }

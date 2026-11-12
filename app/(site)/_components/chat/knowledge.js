@@ -717,6 +717,9 @@ export const KNOWLEDGE = [
       "what report formats are available",
       "report formats",
       "download formats",
+      "export to excel",
+      "export data to excel",
+      "excel",
       "docx",
       "pptx",
       "xlsx",
@@ -867,6 +870,10 @@ export const KNOWLEDGE = [
       "how long does participation take",
       "how long does participation",
       "how long does it take",
+      "how long is a 1:1",
+      "how long is a discussion",
+      "how much time does a participant need",
+      "participant need",
       "session duration"
     ],
     "answer": "The session invitation should state its expected duration. Timing depends on the session the organization creates.",
@@ -929,6 +936,8 @@ export const KNOWLEDGE = [
       "participant languages",
       "17 languages",
       "arabic",
+      "hindi",
+      "do you support hindi",
       "supported languages"
     ],
     "answer": "Arabic (text only), Chinese Simplified, Dutch, English, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Ukrainian, and Vietnamese. Voice responses are available in 1:1 Discussions in the other 16 languages; Arabic is text only.",
@@ -1013,6 +1022,9 @@ export const KNOWLEDGE = [
     "keywords": [
       "can sessions be anonymous or identified",
       "anonymous or identified",
+      "are responses anonymous",
+      "can participants stay anonymous",
+      "stay anonymous",
       "identity setting",
       "who sees a participant",
       "identified or anonymous"
@@ -1136,6 +1148,9 @@ export const KNOWLEDGE = [
       "used to train",
       "train ai models",
       "train ai",
+      "ai training",
+      "used for ai training",
+      "is my data used for ai",
       "train general-purpose",
       "use our data to train",
       "use data to train",
@@ -1328,14 +1343,13 @@ export const KNOWLEDGE = [
     "id": "WEB104",
     "keywords": [
       "how much does trupulse cost",
-      "how much",
       "what does it cost",
-      "pricing",
-      "price",
-      "pricng",
-      "prcing",
-      "prices",
-      "how is trupulse priced"
+      "how is trupulse priced",
+      "trupulse cost",
+      "trupulse pricing",
+      "what is the price",
+      "cost per user",
+      "what are your plans",
     ],
     "answer": "Please book a demo or email sales@trupulse.ai for current plans and pricing.",
     "route": "pricing"
@@ -1357,8 +1371,9 @@ export const KNOWLEDGE = [
       "what are the user participant and usage allowances",
       "usage allowances",
       "participant allowances",
-      "plan limits",
-      "how many participants"
+      "edition allowances",
+      "plan usage limits",
+      "paid plan limits"
     ],
     "answer": "Please book a demo or email sales@trupulse.ai for current edition allowances. Demo participant counts do not establish paid-plan limits.",
     "route": "pricing"
@@ -1484,9 +1499,9 @@ export const KNOWLEDGE = [
       "qualtrics",
       "surveymonkey",
       "survey monkey",
-      "other vendors",
-      "versus",
-      "compared to"
+      "compared to qualtrics",
+      "versus qualtrics",
+      "versus surveymonkey"
     ],
     "answer": "TruPulse combines AI-led discussions, focus groups, adaptive surveys, and related-session reporting. TruPulse uses AI agents to create feedback sessions, so you do not need to be an expert to achieve high-quality research results. TruPulse uses AI to conduct feedback sessions, so your organization does not need to devote expensive human resources to conducting interviews. TruPulse also uses AI to analyze data, providing high-quality and quick analysis of your data.",
     "route": "product"
@@ -1550,6 +1565,10 @@ export const KNOWLEDGE = [
     "keywords": [
       "is there a free trial",
       "free trial",
+      "try it for free",
+      "try for free",
+      "demo account",
+      "trial account",
       "trial"
     ],
     "answer": "Use the website’s Book a Demo option to discuss your needs with the TruPulse team.",

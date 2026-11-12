@@ -72,7 +72,7 @@ export function initChat(dock, { faq, openDemo }) {
     picker.hidden = true;
     closeMenu();
     if (next === "chat") {
-      titleEl.textContent = "TruPulse AI Assistant";
+      titleEl.textContent = "TruPulse Assistant";
       subEl.innerHTML = '<i class="chat-dot"></i>AI assistant';
       setTimeout(function () { input.focus(); }, 60);
     } else if (next === "messages") {
@@ -80,7 +80,7 @@ export function initChat(dock, { faq, openDemo }) {
       subEl.innerHTML = '<i class="chat-dot"></i>Your conversations with us';
       renderThreads();
     } else {
-      titleEl.textContent = "TruPulse AI Assistant";
+      titleEl.textContent = "TruPulse Assistant";
       subEl.innerHTML = '<i class="chat-dot"></i>AI assistant';
     }
   }
@@ -269,7 +269,7 @@ export function initChat(dock, { faq, openDemo }) {
   /* Method advisor: collect audience (team) and purpose, then recommend session types.
      Without this, “Which research method should I use?” falls through to a Campaign
      answer via word overlap. */
-  var METHOD_INTENT = /\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\bhelp (me|us) choose (a |the )?(format|session|approach)\b|\brecommend (a |an |the )?(research )?method\b|\brecommend (a |an |the )?(session|format|approach)\b|\b(survey|discussion|focus group).{0,40}\bor\b.{0,40}(survey|discussion|focus)/i;
+  var METHOD_INTENT = /\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\bhelp (me|us) choose (a |the )?(format|session|approach)\b|\brecommend (a |an |the )?(research )?method\b|\brecommend (a |an |the )?(session|format|approach)\b|\b(survey|discussion|interview|focus group).{0,40}\bor\b.{0,40}(survey|discussion|interview|focus)|\b(survey|discussion|interview|focus group).{0,40}\bwhich is better\b/i;
   var METHOD_CANCEL = /^(cancel|stop|never ?mind)$/i;
   var methodPick = null;
   function recommendSessions(team, purpose) {
@@ -407,7 +407,7 @@ export function initChat(dock, { faq, openDemo }) {
     chips(["How could TruPulse help my organization?", "Which should I use\u2014a survey, 1:1 discussion, or focus group?", "What findings and reports will I get?"]);
   }
   function startConversation() {
-    current = { id: Date.now(), title: "TruPulse AI Assistant", msgs: [], last: "", at: Date.now() };
+    current = { id: Date.now(), title: "TruPulse Assistant", msgs: [], last: "", at: Date.now() };
     threads.unshift(current);
     lastTopic = null;
     booking = null;
@@ -529,7 +529,7 @@ export function initChat(dock, { faq, openDemo }) {
       b.innerHTML = '<span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       b.querySelector("span").textContent = f.q;
       listen(b, "click", function () {
-        if (!current) { current = { id: Date.now(), title: "TruPulse AI Assistant", msgs: [], last: "", at: Date.now() }; threads.unshift(current); log.innerHTML = ""; }
+        if (!current) { current = { id: Date.now(), title: "TruPulse Assistant", msgs: [], last: "", at: Date.now() }; threads.unshift(current); log.innerHTML = ""; }
         go("chat");
         bubble(f.q, true);
         typing(function () { bubble(f.a, false, f.route || "answer"); });

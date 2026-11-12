@@ -108,10 +108,10 @@ html:root body .legal-footer-links .footer-action:hover{color:#fff}
 .chat-actions a:focus-visible,.chat-actions button:focus-visible{outline:2px solid var(--violet,#433EB1);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.chat-actions a,.chat-actions button{transition:none}.chat-actions a:hover,.chat-actions button:hover{transform:none}}
 
-/* Narrow chat: keep the assistant title on one line and leave room for answers. */
+/* Narrow chat: shorter title fits; keep chips readable. */
 @media (max-width:480px){
   .chat-id{min-width:0;flex:1 1 auto}
-  .chat-id strong[data-chat-title],.chat-id strong{display:block;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:.8125rem;letter-spacing:-.02em}
+  .chat-id strong[data-chat-title],.chat-id strong{display:block;max-width:100%;overflow:visible;white-space:nowrap;font-size:.8125rem;letter-spacing:-.02em}
   .chat-chips{gap:6px}
   .chat-chips button{padding:7px 10px;font-size:.72rem;line-height:1.25;max-width:100%}
   .chat-try{margin-bottom:4px}
