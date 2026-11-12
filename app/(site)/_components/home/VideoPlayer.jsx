@@ -5,10 +5,10 @@ import { createPortal } from "react-dom";
 
 // Video files go here once uploaded: key = the key passed to openVideo().
 const SOURCES = {
-  hero: "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse_ai_website_final.mp4",
-  "1:1 discussion product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/1-1Discussions_Website_final.mp4",
-  "Employee Survey product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse_survey_final_audiomp4.mp4",
-  "Focus Group product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Focusgroup_website_final.mp4",
+  hero: "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Captions_1_fadeout_audio.mp4",
+  "1:1 discussion product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse.ai_website_1-1.mp4",
+  "Employee Survey product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse.ai_website.mp4",
+  "Focus Group product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse.ai_website_focusgroups.mp4",
 };
 
 const EVENT = "tp-open-video";

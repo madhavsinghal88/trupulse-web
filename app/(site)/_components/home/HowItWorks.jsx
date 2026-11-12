@@ -25,7 +25,7 @@ const STEPS = [
     title: "Review the findings and decide what’s next",
     body: "TruPulse analyzes responses and prepares reports with key findings, themes, and supporting evidence. Your team reviews the results and decides how to act.",
     img: "/assets/home/hiw-4-findings.webp",
-    alt: "Key finding with supporting quote and suggested next steps",
+    alt: "Key finding: unclear career progression, with supporting quote and suggested next steps",
   },
 ];
 

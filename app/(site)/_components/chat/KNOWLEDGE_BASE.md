@@ -10,7 +10,7 @@ Provide answers to general questions prospective customers may ask on the TruPul
 ## Public response guidance
 
 - Use “you” or “your team” where appropriate.
-- For pricing questions, refer visitors to the Pricing page (and Book a Demo / `sales@trupulse.ai` while evaluation continues).
+- For pricing questions, refer visitors to Book a Demo / `sales@trupulse.ai` (do not invent amounts).
 - For legal questions, privacy-law requirements, rights, or contractual interpretation, tell visitors to check with their legal department.
 - Use the supplied wording for confirmed capabilities. Do not invent contract exceptions, customer references, payment methods, response-time promises, or implementation details.
 - Preserve the distinction between testing evidence and production customer experience.
@@ -43,3 +43,4 @@ Book a meeting through the TruPulse website or email `sales@trupulse.ai`.
 - Answers live in `knowledge.js` as `WEB###` entries plus website-only helpers (`SITE_*`, `METHOD`).
 - Home FAQ text in `faq.js` stays aligned with the matching WEB answers.
 - Sample-report downloads, case study links, and the method-advisor flow are website helpers layered on top of the WEB catalogue.
+- Unmatched questions can be answered by **GPT Luna** (`lib/chatLlm.js` + `POST /api/chat`) when `OPENAI_API_KEY` is set. Luna is grounded on this catalogue and must not invent capabilities.

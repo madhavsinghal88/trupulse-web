@@ -24,6 +24,7 @@ Disallow: /*?admin=*
 Allow: /blogs/blog/
 Allow: /static/
 Allow: /images/
+Allow: /_next/static/
 
 # Sitemap location
 Sitemap: https://www.trupulse.ai/sitemap.xml

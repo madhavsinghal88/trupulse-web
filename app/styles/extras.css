@@ -30,8 +30,18 @@ html:has(.tp-home) .tp-autoplay-controls svg{width:20px;height:20px}
 }
 
 
-/* v119: tp-rep-css */
-.tp-rep-rows>li{opacity:.5;transition:opacity .4s ease;cursor:pointer}.tp-rep-rows>li.is-active{opacity:1}.tp-rep-rows>li:hover{padding-left:24px!important;background:none!important}.tp-rep-rows>li:not(.is-active):hover{opacity:.5}.tp-rep-rows li:hover h3{color:inherit!important}.tp-rep-rows li:hover::before,.tp-rep-rows li:hover h3::before{transform:none!important;box-shadow:none!important}.tp-rep-rows li:hover>div,.tp-rep-rows li:hover>span{transform:none!important}.tp-rep-rows>li:focus-visible{outline:2px solid #EE851B;outline-offset:4px;border-radius:8px}
+/* v119/v123: tp-rep-css — same interaction model as .tp-brand-rows */
+html:has(.tp-home) .tp-rep-rows>li{opacity:.5;transition:opacity .4s ease;cursor:pointer}
+html:has(.tp-home) .tp-rep-rows>li.is-active{opacity:1}
+html:has(.tp-home) .tp-rep-rows>li:hover{padding-left:24px!important;background:none!important}
+html:has(.tp-home) .tp-rep-rows>li:not(.is-active):hover{opacity:.5}
+html:has(.tp-home) .tp-rep-rows li:hover h3{color:inherit!important}
+html:has(.tp-home) .tp-rep-rows li:hover::before,html:has(.tp-home) .tp-rep-rows li:hover h3::before{transform:none!important;box-shadow:none!important}
+html:has(.tp-home) .tp-rep-rows li:hover>div,html:has(.tp-home) .tp-rep-rows li:hover>span{transform:none!important}
+html:has(.tp-home) .tp-rep-rows>li:focus-visible{outline:2px solid #EE851B;outline-offset:4px;border-radius:8px}
+html:has(.tp-home) .tp-rep-rows>li.is-active h3{color:var(--ink,#110f35)}
+html:has(.tp-home) .tp-rep-rows>li.is-active::before{background:var(--coral,#EE851B)}
+@media (prefers-reduced-motion:reduce){html:has(.tp-home) .tp-rep-stage img,html:has(.tp-home) .tp-rep-rows>li{transition:none}}
 /* v119: tp-uc-faq — left tabs fill the panel height (outrank home.css; height set in JS) */
 html:root body .use-case-explorer{align-items:stretch!important;width:100%!important}
 @media (min-width:981px){
@@ -76,19 +86,11 @@ html:root body .use-case-explorer{align-items:stretch!important;width:100%!impor
 .chat-view[data-view="chat"] .tp-privnote{margin:6px 14px 10px;padding:0}
 form .tp-privnote{margin-top:12px;text-align:center}
 
-/* v122: tp-v122 — inactive report rows stay readable */
-.tp-rep-rows li:not(.is-active){opacity:1!important}.tp-rep-rows li:not(.is-active) h3{color:#4a4777!important}.tp-rep-rows li p{color:#5b589d!important}
+/* v123: Reports rows match “Your brand” — selected at full opacity, others at 50%.
+   (An earlier v122 patch forced all rows fully visible; that is intentionally removed.) */
 
 /* Demo form validation */
 .tp-form-error{margin:0 0 12px;color:#b42318;font-size:.875rem;line-height:1.4}
-
-/* Pricing page edition cards */
-.tp-price-grid{display:grid;gap:16px;margin:28px 0 32px}
-@media(min-width:760px){.tp-price-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
-.tp-price-card{padding:22px 20px;border:1px solid #e3e1f2;border-radius:16px;background:#faf9ff}
-.tp-price-card h2{margin:0 0 10px;font-size:1.25rem;color:#110f35}
-.tp-price-card p{margin:0;color:#5b589d;line-height:1.5}
-.tp-price-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:8px 0 24px}
 
 /* Login text buttons (forgot password / back to sign in) */
 html:has(.tp-login) .login-text-btn{display:inline;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
@@ -105,3 +107,12 @@ html:root body .legal-footer-links .footer-action:hover{color:#fff}
 .chat-actions a:hover,.chat-actions button:hover{background:var(--violet,#433EB1);border-color:var(--violet,#433EB1);color:#fff;transform:translateY(-1px)}
 .chat-actions a:focus-visible,.chat-actions button:focus-visible{outline:2px solid var(--violet,#433EB1);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.chat-actions a,.chat-actions button{transition:none}.chat-actions a:hover,.chat-actions button:hover{transform:none}}
+
+/* Narrow chat: keep the assistant title on one line and leave room for answers. */
+@media (max-width:480px){
+  .chat-id{min-width:0;flex:1 1 auto}
+  .chat-id strong[data-chat-title],.chat-id strong{display:block;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:.8125rem;letter-spacing:-.02em}
+  .chat-chips{gap:6px}
+  .chat-chips button{padding:7px 10px;font-size:.72rem;line-height:1.25;max-width:100%}
+  .chat-try{margin-bottom:4px}
+}

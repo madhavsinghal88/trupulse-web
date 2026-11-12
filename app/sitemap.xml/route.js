@@ -27,7 +27,6 @@ const staticPages = () => [
   { url: SITE, lastModified: new Date(), changeFrequency: 'weekly', priority: 1.0 },
   { url: `${SITE}/blogs`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
   { url: `${SITE}/case-study`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${SITE}/pricing`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
   { url: `${SITE}/privacy`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.4 },
   { url: `${SITE}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.4 },
 ];

@@ -28,7 +28,6 @@ export default function SiteFooter({ home = false }) {
               {EXPLORE.map(([id, label]) =>
                 home ? <a key={id} href={`#${id}`}>{label}</a> : <Link key={id} href={`/#${id}`}>{label}</Link>
               )}
-              <Link href="/pricing">Pricing</Link>
             </div>
             <div>
               <strong>Resources &amp; Help</strong>

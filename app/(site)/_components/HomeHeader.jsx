@@ -10,7 +10,6 @@ const NAV = [
   ["#reports", "Reports"],
   ["#use-cases", "Use Cases"],
   ["#resources", "Resources"],
-  ["/pricing", "Pricing"],
 ];
 
 export default function HomeHeader() {

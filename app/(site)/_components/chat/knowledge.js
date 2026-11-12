@@ -40,7 +40,6 @@ export const ROUTES = {
   sample_campaign: { actions: [{ label: "Open Campaign Report", href: "/reports/Campaign-Report.pdf", newTab: true }, { label: "All sample reports", href: "/#reports" }] },
   case_study: { actions: [{ label: "Read the Case Study", href: "/case-study" }] },
   pricing: { actions: [
-    { label: "View Pricing", href: "/pricing" },
     { label: "Book a Demo", action: "demo" },
     { label: "Email sales@trupulse.ai", href: "mailto:sales@trupulse.ai" },
   ] },
@@ -548,7 +547,9 @@ export const KNOWLEDGE = [
       "what is a campaign",
       "what does campaign mean",
       "why group sessions",
-      "campaign report"
+      "campaign report",
+      "define a campaign",
+      "explain campaigns"
     ],
     "answer": "A campaign organizes multiple sessions around a shared research objective and can provide a combined Campaign Report in addition to reports on each session.",
     "route": "workflow"
@@ -558,7 +559,8 @@ export const KNOWLEDGE = [
     "keywords": [
       "what is a linked campaign",
       "linked campaign",
-      "what is a linked"
+      "what is a linked",
+      "difference between a linked"
     ],
     "answer": "It uses data from earlier sessions to inform subsequent sessions, allowing later research to build on earlier findings. Individual sessions have reports, and a Campaign Report combines information from all sessions.",
     "route": "workflow"
@@ -568,7 +570,8 @@ export const KNOWLEDGE = [
     "keywords": [
       "what is an independent campaign",
       "independent campaign",
-      "what is an independent"
+      "what is an independent",
+      "difference between an independent"
     ],
     "answer": "Its sessions do not share data with one another as Linked Campaign sessions do. The Campaign Report summarizes data from all sessions in the campaign, and each individual session also has a report.",
     "route": "workflow"
@@ -660,7 +663,7 @@ export const KNOWLEDGE = [
       "sessions simultaneously",
       "how many sessions can run"
     ],
-    "answer": "There is no limit on the number of sessions that can run simultaneously. For edition usage allowances and pricing, consult the Pricing page on the TruPulse website.",
+    "answer": "There is no limit on the number of sessions that can run simultaneously. For edition usage allowances and pricing, book a demo or email sales@trupulse.ai.",
     "route": "pricing"
   },
   {
@@ -839,7 +842,9 @@ export const KNOWLEDGE = [
       "do participants need to create their own account",
       "participants need to create",
       "create their own account",
-      "participant account"
+      "participant account",
+      "register before joining",
+      "do i have to register"
     ],
     "answer": "A participant account is generated automatically on the TruPulse Connect participant site.",
     "route": "workflow"
@@ -849,7 +854,9 @@ export const KNOWLEDGE = [
     "keywords": [
       "how do participants join",
       "join a session",
-      "email invitation"
+      "email invitation",
+      "joining an interview",
+      "session invitation email"
     ],
     "answer": "They follow a link in the session’s email invitation. Invitations should not be forwarded or shared.",
     "route": "workflow"
@@ -892,9 +899,11 @@ export const KNOWLEDGE = [
       "can participants respond by voice",
       "respond by voice",
       "voice responses",
+      "answer out loud",
+      "spoken responses",
       "voice"
     ],
-    "answer": "Voice responses are available in 1:1 Discussions in 16 different languages.",
+    "answer": "Voice responses are available in 1:1 Discussions in 16 different languages. Arabic is supported for text responses only.",
     "route": "product"
   },
   {
@@ -902,10 +911,13 @@ export const KNOWLEDGE = [
     "keywords": [
       "are voice responses recorded",
       "voice responses recorded",
-      "are voice",
-      "voice to text"
+      "save the audio",
+      "audio of my interview",
+      "retain a voice recording",
+      "voice to text",
+      "just the transcript"
     ],
-    "answer": "No. When voice is used, responses are converted from voice to text, and the text is processed and stored as session content.",
+    "answer": "When you use voice, your responses are converted to text. We process and store the text as session content, rather than retaining a voice recording.",
     "route": "privacy"
   },
   {
@@ -915,9 +927,11 @@ export const KNOWLEDGE = [
       "languages are supported",
       "which languages",
       "participant languages",
-      "17 languages"
+      "17 languages",
+      "arabic",
+      "supported languages"
     ],
-    "answer": "Arabic (text only), Chinese Simplified, Dutch, English, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Ukrainian, and Vietnamese.",
+    "answer": "Arabic (text only), Chinese Simplified, Dutch, English, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Spanish, Ukrainian, and Vietnamese. Voice responses are available in 1:1 Discussions in the other 16 languages; Arabic is text only.",
     "route": "product"
   },
   {
@@ -949,7 +963,11 @@ export const KNOWLEDGE = [
       "can participants change responses after completing a session",
       "change responses after",
       "edit after completing",
-      "cannot edit"
+      "cannot edit",
+      "go back and edit",
+      "edit an answer",
+      "change a response after",
+      "submitted my survey"
     ],
     "answer": "No. Once a session has been completed, the participant cannot edit or change a response.",
     "route": "workflow"
@@ -970,7 +988,11 @@ export const KNOWLEDGE = [
     "keywords": [
       "are incomplete sessions included in results",
       "incomplete sessions",
-      "included in results"
+      "included in results",
+      "half finished",
+      "half-finished questionnaires",
+      "unfinished questionnaires",
+      "counted in the findings"
     ],
     "answer": "No. Incomplete sessions are not included in results.",
     "route": "reports"
@@ -1083,6 +1105,9 @@ export const KNOWLEDGE = [
     "keywords": [
       "where is customer data hosted",
       "where is customer data",
+      "where is data stored",
+      "where is data hosted",
+      "data stored",
       "hosted",
       "data residency",
       "hosting"
@@ -1094,6 +1119,8 @@ export const KNOWLEDGE = [
     "id": "WEB086",
     "keywords": [
       "is customer data encrypted",
+      "is my data secure",
+      "data secure",
       "encrypted",
       "encryption",
       "in transit",
@@ -1108,7 +1135,10 @@ export const KNOWLEDGE = [
       "is customer research used to train general-purpose ai models",
       "used to train",
       "train ai models",
+      "train ai",
       "train general-purpose",
+      "use our data to train",
+      "use data to train",
       "participant responses used to train"
     ],
     "answer": "No. Customer research content is not used to train general-purpose AI models.",
@@ -1131,7 +1161,10 @@ export const KNOWLEDGE = [
       "can organizations configure retention",
       "configure retention",
       "data retention",
-      "retention policy"
+      "retention policy",
+      "how long do you keep data",
+      "how long is data kept",
+      "keep data"
     ],
     "answer": "Yes. A user authorized by an organization to configure data retention can adjust its data-retention policy through Data Management.",
     "route": "privacy"
@@ -1257,7 +1290,7 @@ export const KNOWLEDGE = [
       "professional",
       "enterprise edition"
     ],
-    "answer": "Essentials, Professional, and Enterprise. Visit the Pricing page on the TruPulse website for the current edition comparison and pricing.",
+    "answer": "Essentials, Professional, and Enterprise. Book a demo or email sales@trupulse.ai for the current edition comparison and pricing.",
     "route": "pricing"
   },
   {
@@ -1267,7 +1300,7 @@ export const KNOWLEDGE = [
       "edition includes the research assistant",
       "research assistant edition"
     ],
-    "answer": "Enterprise. Visit the Pricing page on the TruPulse website for current edition details and pricing.",
+    "answer": "Enterprise. Book a demo or email sales@trupulse.ai for current edition details and pricing.",
     "route": "pricing"
   },
   {
@@ -1277,7 +1310,7 @@ export const KNOWLEDGE = [
       "editions include hris",
       "hris sync edition"
     ],
-    "answer": "Professional and Enterprise. Visit the Pricing page on the TruPulse website for the current feature comparison and pricing.",
+    "answer": "Professional and Enterprise. Book a demo or email sales@trupulse.ai for the current feature comparison and pricing.",
     "route": "pricing"
   },
   {
@@ -1304,7 +1337,7 @@ export const KNOWLEDGE = [
       "prices",
       "how is trupulse priced"
     ],
-    "answer": "Please visit the Pricing page on the TruPulse website for current plans and pricing.",
+    "answer": "Please book a demo or email sales@trupulse.ai for current plans and pricing.",
     "route": "pricing"
   },
   {
@@ -1315,7 +1348,7 @@ export const KNOWLEDGE = [
       "billing",
       "annual billing"
     ],
-    "answer": "Please check the Pricing page on the TruPulse website for current billing options and pricing.",
+    "answer": "Please book a demo or email sales@trupulse.ai for current billing options and pricing.",
     "route": "pricing"
   },
   {
@@ -1327,7 +1360,7 @@ export const KNOWLEDGE = [
       "plan limits",
       "how many participants"
     ],
-    "answer": "Please check the Pricing page on the TruPulse website for current edition allowances. Demo participant counts do not establish paid-plan limits.",
+    "answer": "Please book a demo or email sales@trupulse.ai for current edition allowances. Demo participant counts do not establish paid-plan limits.",
     "route": "pricing"
   },
   {
@@ -1338,7 +1371,7 @@ export const KNOWLEDGE = [
       "overage",
       "additional charges"
     ],
-    "answer": "Please review the Pricing page on the TruPulse website and the applicable terms for current charges. Do not assume extra usage is included.",
+    "answer": "Please book a demo or email sales@trupulse.ai, and review the applicable terms, for current charges. Do not assume extra usage is included.",
     "route": "pricing"
   },
   {
@@ -1349,7 +1382,7 @@ export const KNOWLEDGE = [
       "nonprofit options",
       "nonprofit pricing"
     ],
-    "answer": "Please visit the Pricing page on the TruPulse website for current offers and eligibility information.",
+    "answer": "Please book a demo or email sales@trupulse.ai for current offers and eligibility information.",
     "route": "pricing"
   },
   {
@@ -1447,7 +1480,10 @@ export const KNOWLEDGE = [
     "keywords": [
       "how does trupulse compare with qualtrics surveymonkey or other vendors",
       "compare with qualtrics",
+      "better than qualtrics",
+      "qualtrics",
       "surveymonkey",
+      "survey monkey",
       "other vendors",
       "versus",
       "compared to"
@@ -1476,7 +1512,7 @@ export const KNOWLEDGE = [
       "which plan",
       "how should we choose"
     ],
-    "answer": "Compare editions on the website Pricing page against your integration, analysis, and organizational requirements. Organizations that need multi-language participant support or integrated multi-session Campaigns should consider Professional. Organizations needing HRIS integration for large-volume contact handling or access to the Research Assistant should consider Enterprise.",
+    "answer": "Compare editions with our team against your integration, analysis, and organizational requirements—book a demo or email sales@trupulse.ai. Organizations that need multi-language participant support or integrated multi-session Campaigns should consider Professional. Organizations needing HRIS integration for large-volume contact handling or access to the Research Assistant should consider Enterprise.",
     "route": "pricing"
   },
   {
@@ -1738,7 +1774,7 @@ export const KNOWLEDGE = [
       "users participants sessions",
       "ai usage pricing"
     ],
-    "answer": "Pricing is based on the edition selected and usage. Visit the Pricing page on the TruPulse website for current pricing and allowances.",
+    "answer": "Pricing is based on the edition selected and usage. Book a demo or email sales@trupulse.ai for current pricing and allowances.",
     "route": "pricing"
   },
   {
@@ -1746,7 +1782,10 @@ export const KNOWLEDGE = [
     "keywords": [
       "does trupulse support sso",
       "sso",
-      "single sign-on"
+      "single sign-on",
+      "okta",
+      "microsoft entra",
+      "entra"
     ],
     "answer": "No. TruPulse does not support SSO.",
     "route": "support"
@@ -1792,9 +1831,11 @@ export const KNOWLEDGE = [
       "on premises",
       "on-premises",
       "own cloud",
-      "self host"
+      "own servers",
+      "self host",
+      "install this on our own"
     ],
-    "answer": "No. TruPulse does not support on-premises deployment or hosting in your own cloud.",
+    "answer": "No. We do not support on-premises deployment or hosting TruPulse in your own cloud.",
     "route": "privacy"
   },
   {
@@ -1814,9 +1855,12 @@ export const KNOWLEDGE = [
       "how frequently do hris contacts sync",
       "hris contacts sync",
       "how frequently",
-      "sync frequency"
+      "sync frequency",
+      "how often does it sync",
+      "how often will new employees",
+      "hr system appear"
     ],
-    "answer": "HRIS contacts sync monthly by default, with the option to trigger a sync manually.",
+    "answer": "HRIS contacts sync monthly by default, and you can trigger a sync manually.",
     "route": "workflow"
   },
   {
@@ -1950,21 +1994,34 @@ export const KNOWLEDGE = [
       "clear this chat",
       "reset this chat",
       "start a new chat",
-      "clearing the chat"
+      "clearing the chat",
+      "clear chat history"
     ],
     "answer": "Use the conversation menu to start a new conversation or clear the current one. Clearing the visible history does not confirm that stored server copies have been deleted. To request deletion of stored chat data, email Privacy@trupulse.ai.",
     "route": "privacy_contact"
+  },
+  {
+    "id": "SITE_FINDINGS_REPORTS",
+    "keywords": [
+      "what findings and reports will i get",
+      "what findings will i get",
+      "what reports will i get",
+      "findings and reports"
+    ],
+    "answer": "We provide 1:1 Discussion Session and Individual reports, Survey Session and Individual Responses reports, Focus Group Session reports, and Campaign reports. You can also custom-design reports with our AI-led Report Generation feature.",
+    "route": "reports"
   }
 ];
 
 // Questions about using the signed-in app: point to product support, not invent click-paths.
 export const APP_HELP = {
-  keywords: ["log in", "login", "sign in", "password", "otp", "verification code", "notification", "tutorial", "sidebar", "dashboard", "settings", "my account", "subscription", "upgrade my plan", "error", "bug", "not working", "technical support", "billing dispute", "invoice"],
+  keywords: ["log in", "login", "sign in", "password", "otp", "verification code", "notification", "tutorial", "sidebar", "my account", "subscription", "upgrade my plan", "error", "bug", "not working", "technical support", "billing dispute", "invoice"],
   answer: "Select Sign in to access your account. If you need account support, email support@trupulse.ai. I can explain how TruPulse works for evaluation, but I cannot inspect your workspace or account records through this website chat.",
   route: "support",
 };
 
 export const FALLBACK = {
+  id: "FALLBACK",
   answer: "I can help with questions about TruPulse—sessions, surveys, 1:1 discussions, focus groups, reports, privacy, editions, and demos. For anything else, book a meeting on the website or email sales@trupulse.ai.",
   route: "contact",
 };

@@ -4,7 +4,7 @@
 // Replies come from answerFor() in answer.js: intent rules, the site FAQ, then knowledge.js.
 
 import { routeActions, routeFollowups } from "./knowledge";
-import { answerFor } from "./answer";
+import { answerFor, shouldAskLlm, topicFromResult } from "./answer";
 import { looksLikeQuestion, validateFullName, validateOrganization, validateWorkEmail } from "@/lib/demoValidation";
 
 export const ASK_EVENT = "tp-open-chat";
@@ -32,6 +32,7 @@ export function initChat(dock, { faq, openDemo }) {
   var view = "chat";
   var threads = [];
   var current = null;
+  var lastTopic = null;
 
   /* ---------- the help centre is the site FAQ (same text as the home page) ---------- */
   var FAQ = faq;
@@ -101,7 +102,7 @@ export function initChat(dock, { faq, openDemo }) {
     listen(b, "click", function () {
       closeMenu();
       if (b.dataset.chatAction === "new") startConversation();
-      else if (b.dataset.chatAction === "clear") { if (current) { current.msgs = []; } log.innerHTML = ""; greet(); }
+      else if (b.dataset.chatAction === "clear") { if (current) { current.msgs = []; } lastTopic = null; booking = null; methodPick = null; log.innerHTML = ""; greet(); }
       else { setOpen(false); openDemo(null); }
     });
   });
@@ -206,8 +207,41 @@ export function initChat(dock, { faq, openDemo }) {
     setTimeout(function () { row.remove(); then(); }, 850);
   }
 
-  /* Replies come from answer.js (intent rules, the site FAQ, then knowledge.js). */
-  function reply(text) { return answerFor(text, FAQ); }
+  /* Replies come from answer.js (intent rules, the site FAQ, then knowledge.js).
+     Unmatched questions fall through to GPT Luna via /api/chat when OPENAI_API_KEY is set. */
+  function reply(text) {
+    var result = answerFor(text, FAQ, { topic: lastTopic });
+    if (!shouldAskLlm(result)) lastTopic = topicFromResult(result) || lastTopic;
+    return result;
+  }
+  function historyPayload() {
+    if (!current || !current.msgs) return [];
+    return current.msgs.slice(-8).map(function (m) {
+      return { text: m.text, mine: !!m.mine };
+    });
+  }
+  function askLuna(text) {
+    return fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text, history: historyPayload() }),
+    })
+      .then(function (res) { return res.json().catch(function () { return null; }); })
+      .then(function (data) {
+        if (!data || !data.answer) {
+          return { answer: "I can help with questions about TruPulse—sessions, surveys, 1:1 discussions, focus groups, reports, privacy, editions, and demos. For anything else, book a meeting on the website or email sales@trupulse.ai.", route: "contact", id: "FALLBACK" };
+        }
+        return { answer: data.answer, route: data.route || "answer", id: data.id || "GPT_LUNA" };
+      })
+      .catch(function () {
+        return { answer: "I can help with questions about TruPulse—sessions, surveys, 1:1 discussions, focus groups, reports, privacy, editions, and demos. For anything else, book a meeting on the website or email sales@trupulse.ai.", route: "contact", id: "FALLBACK" };
+      });
+  }
+  function deliver(result, showFollowups) {
+    lastTopic = topicFromResult(result) || lastTopic;
+    bubble(result.answer, false, result.route);
+    if (showFollowups) chips(routeFollowups(result.route));
+  }
 
   /* Booking a demo in the chat: ask for the same details as the demo form, one at a
      time, then open the calendar with them filled in. */
@@ -221,11 +255,6 @@ export function initChat(dock, { faq, openDemo }) {
   var booking = null;
   function bookStep(text) {
     var step = BOOK_STEPS[booking.at];
-    // Mid-booking questions: answer them instead of saving the question as a field value.
-    if (step.key !== "explore" && looksLikeQuestion(text) && !METHOD_CANCEL.test(text)) {
-      var aside = reply(text);
-      return aside.answer + "\n\nWhen you’re ready to continue booking: " + step.ask;
-    }
     var problem = step.check && step.check(text);
     if (problem) return problem;
     booking.details[step.key] = step.key === "explore" && /^skip$/i.test(text) ? "" : text;
@@ -244,7 +273,9 @@ export function initChat(dock, { faq, openDemo }) {
   var METHOD_CANCEL = /^(cancel|stop|never ?mind)$/i;
   var methodPick = null;
   function recommendSessions(team, purpose) {
-    var blob = (team + " " + purpose).toLowerCase();
+    var audience = String(team || "").trim() || "your audience";
+    var goal = String(purpose || "").trim() || "your research goal";
+    var blob = (audience + " " + goal).toLowerCase();
     var survey = /\b(survey|questionnaire|scale|score|rating|compare|many people|large (group|audience)|quant|across|percentage|trend|benchmark)\b/.test(blob);
     var discussion = /\b(why|experience|depth|story|stories|interview|1:1|one[- ]on[- ]one|sensitive|confidential|independent|motivat|leaving|attrition|retention|personal)\b/.test(blob);
     var focus = /\b(focus group|discuss(ion)? together|react|concept|idea|workshop|brainstorm|group (chat|conversation|feedback)|one another)\b/.test(blob);
@@ -259,11 +290,18 @@ export function initChat(dock, { faq, openDemo }) {
         "AI-moderated focus groups — if hearing people discuss together would help",
       ];
     }
-    var lead = "Based on hearing from " + team.trim() + " to understand “" + purpose.trim() + "”, I’d start with:";
+    var lead = "Based on hearing from " + audience + " to understand “" + goal + "”, I’d start with:";
     var more = picks.length === 1
       ? "You can add another session type later in a Campaign if you want to go wider or deeper."
       : "You can run these as related sessions in a Campaign if more than one fits.";
     return lead + "\n\n• " + picks.join("\n• ") + "\n\n" + more + " Want me to show sample reports, or book a demo to walk through a fit for your team?";
+  }
+  function methodResumePrompt() {
+    if (!methodPick) return "";
+    if (methodPick.at === 0) {
+      return "Would you like to continue choosing a method? Whose feedback do you want to gather?";
+    }
+    return "Would you like to continue choosing a method? What do you want to understand or decide from hearing them?";
   }
   function methodStep(text) {
     if (methodPick.at === 0) {
@@ -277,6 +315,11 @@ export function initChat(dock, { faq, openDemo }) {
     methodPick = null;
     return recommendSessions(team, purpose);
   }
+  function methodAsideChips() {
+    if (!methodPick) return;
+    if (methodPick.at === 0) chips(["Employees", "Customers", "Students", "Members"]);
+    else chips(["Why people stay or leave", "What onboarding feels like", "Whether a new idea lands"]);
+  }
   function say(text) {
     clearChips();
     bubble(text, true);
@@ -289,17 +332,50 @@ export function initChat(dock, { faq, openDemo }) {
         result = { answer: "No problem—I’ve stopped the booking. What else would you like to know about TruPulse?", route: "answer" };
       } else if (booking) {
         showFollowups = false;
+        var bookStepDef = BOOK_STEPS[booking.at];
+        if (bookStepDef.key !== "explore" && looksLikeQuestion(text) && !METHOD_CANCEL.test(text)) {
+          var bookAside = reply(text);
+          var bookResume = "When you’re ready to continue booking: " + bookStepDef.ask;
+          function finishBookAside(a) {
+            deliver({ answer: a.answer + "\n\n" + bookResume, route: a.route || "answer", id: a.id }, false);
+          }
+          if (shouldAskLlm(bookAside)) {
+            askLuna(text).then(finishBookAside);
+            return;
+          }
+          finishBookAside(bookAside);
+          return;
+        }
         result = { answer: bookStep(text), route: "answer" };
       } else if (methodPick && METHOD_CANCEL.test(text)) {
         methodPick = null;
         result = { answer: "No problem—I’ve stopped the method recommendation. What else would you like to know about TruPulse?", route: "answer" };
       } else if (methodPick) {
-        var finishing = methodPick.at === 1;
-        result = { answer: methodStep(text), route: finishing ? "product" : "clarify" };
-        showFollowups = finishing;
-        bubble(result.answer, false, result.route);
-        if (finishing) chips(["Can I see a sample report?", "Book a demo", "How does the process work?"]);
-        else chips(["Why people stay or leave", "What onboarding feels like", "Whether a new idea lands"]);
+        var interrupted = looksLikeQuestion(text) && !METHOD_CANCEL.test(text);
+        if (interrupted) {
+          var aside = reply(text);
+          var resume = methodResumePrompt();
+          function finishAside(a) {
+            deliver({
+              answer: a.answer + "\n\n" + resume,
+              route: a.route || "clarify",
+              id: a.id,
+            }, false);
+            methodAsideChips();
+          }
+          if (shouldAskLlm(aside)) {
+            askLuna(text).then(finishAside);
+            return;
+          }
+          finishAside(aside);
+          return;
+        }
+        var wasFinishing = methodPick.at === 1;
+        result = { answer: methodStep(text), route: wasFinishing ? "product" : "clarify" };
+        showFollowups = wasFinishing;
+        deliver(result, false);
+        if (wasFinishing) chips(["Can I see a sample report?", "Book a demo", "How does the process work?"]);
+        else methodAsideChips();
         return;
       } else if (BOOK_INTENT.test(q)) {
         booking = { at: 0, details: {} };
@@ -316,9 +392,12 @@ export function initChat(dock, { faq, openDemo }) {
         return;
       } else {
         result = reply(text);
+        if (shouldAskLlm(result)) {
+          askLuna(text).then(function (llm) { deliver(llm, showFollowups); });
+          return;
+        }
       }
-      bubble(result.answer, false, result.route);
-      if (showFollowups) chips(routeFollowups(result.route));
+      deliver(result, showFollowups);
     });
   }
 
@@ -330,6 +409,9 @@ export function initChat(dock, { faq, openDemo }) {
   function startConversation() {
     current = { id: Date.now(), title: "TruPulse AI Assistant", msgs: [], last: "", at: Date.now() };
     threads.unshift(current);
+    lastTopic = null;
+    booking = null;
+    methodPick = null;
     log.innerHTML = "";
     greet();
     go("chat");
