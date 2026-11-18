@@ -92,8 +92,9 @@ form .tp-privnote{margin-top:12px;text-align:center}
 /* Demo form validation */
 .tp-form-error{margin:0 0 12px;color:#b42318;font-size:.875rem;line-height:1.4}
 
-/* v124: sample-report grid + required/optional field markers */
-@media (min-width:600px) and (max-width:1000px){.tp-sr-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* v124/v125: sample-report grid + required/optional field markers
+   v125: 2-col from 600px up (no 1000px cap) so desktop stays 2-col after hiding two reports */
+@media (min-width:600px){.tp-sr-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media (max-width:599px){.tp-sr-grid{grid-template-columns:minmax(0,1fr)!important}}
 .tp-sr-grid>li{min-width:0}
 .tp-opt-pill{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:#efeeff;color:#433eb1;font-size:11px;font-weight:600;letter-spacing:.02em;vertical-align:middle}

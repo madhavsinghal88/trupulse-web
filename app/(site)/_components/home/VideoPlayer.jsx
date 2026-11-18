@@ -11,6 +11,10 @@ const SOURCES = {
   "Focus Group product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/focusgroups_fadeputaudio.mp4",
 };
 
+const POSTERS = {
+  hero: "/assets/hero-video-poster.jpg",
+};
+
 const EVENT = "tp-open-video";
 export const CLOSED_EVENT = "tp-video-closed";
 
@@ -90,7 +94,7 @@ export default function VideoPlayer() {
           </div>
         </div>
         <div className="tp-vp-frame" ref={frameRef}>
-          <video ref={videoRef} src={src || undefined} hidden={!src} controls playsInline preload="metadata" />
+          <video ref={videoRef} src={src || undefined} poster={POSTERS[video.key] || undefined} hidden={!src} controls playsInline preload="metadata" />
           <div className="tp-vp-empty" hidden={Boolean(src)}>
             <span>Video coming soon</span>The video will play here once it is uploaded.
           </div>

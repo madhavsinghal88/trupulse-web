@@ -9,7 +9,7 @@ const SCRUB_SECONDS = 10;
 // controls (play/pause, stop, scrub) plus mute and expand at the bottom. Expand opens
 // it in the video pop-up from the same point. Renders nothing if the file fails to load,
 // so the slot's placeholder shows through.
-export default function AutoplayVideo({ videoKey, label }) {
+export default function AutoplayVideo({ videoKey, label, poster }) {
   const src = videoSource(videoKey);
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(true);
@@ -77,7 +77,7 @@ export default function AutoplayVideo({ videoKey, label }) {
 
   return (
     <>
-      <video ref={videoRef} className="tp-autoplay-video" src={src} autoPlay muted loop playsInline preload="auto" aria-label={label} onError={() => setFailed(true)} />
+      <video ref={videoRef} className="tp-autoplay-video" src={src} poster={poster || undefined} autoPlay muted loop playsInline preload="auto" aria-label={label} onError={() => setFailed(true)} />
       <div className="tp-autoplay-controls" role="group" aria-label={`${label} controls`}>
         <div className="tp-autoplay-transport">
           <button type="button" onClick={() => scrub(-SCRUB_SECONDS)} aria-label={`Rewind ${SCRUB_SECONDS} seconds`} title={`Rewind ${SCRUB_SECONDS}s`}>

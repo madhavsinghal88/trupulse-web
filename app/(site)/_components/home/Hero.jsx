@@ -68,7 +68,7 @@ export default function Hero() {
         </div>
         <div className="signal-stage reveal in delay-1" aria-label="TruPulse walkthrough video preview">
           <div className="developer-video-slot hero-video-frame tp-autoplay">
-            <AutoplayVideo videoKey="hero" label="TruPulse product walkthrough" />
+            <AutoplayVideo videoKey="hero" label="TruPulse product walkthrough" poster="/assets/hero-video-poster.jpg" />
           </div>
         </div>
       </div>
