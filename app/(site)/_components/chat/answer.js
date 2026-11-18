@@ -793,7 +793,10 @@ function sampleReport(q) {
   if (focus && campaign && types === 2) return entry("SITE_SAMPLE_FOCUS");
   if (types === 1) {
     if (focus) return entry("SITE_SAMPLE_FOCUS");
-    if (campaign) return { answer: "Here is our sample Campaign Report—open it below. It uses sample data only.", route: "sample_campaign" };
+    if (campaign) return {
+      answer: "A Campaign sample report isn’t available to open here yet. You can preview our 1:1 Discussion and Survey sample reports below—or book a demo to see Campaign reports.",
+      route: "sample_campaign",
+    };
     if (survey) return entry(individual ? "SITE_SAMPLE_SURVEY_RESPONSES" : "SITE_SAMPLE_SURVEY_SESSION");
     return entry(individual ? "SITE_SAMPLE_DISCUSSION_INDIVIDUAL" : "SITE_SAMPLE_DISCUSSION_SESSION");
   }
