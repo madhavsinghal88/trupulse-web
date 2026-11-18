@@ -173,10 +173,11 @@ function DemoModal({ open, mode, step: startStep, useCase, prefill, onClose }) {
             <form className="demo-form" data-demo-form="" onSubmit={pickATime}>
               <h3>Tell us what you&rsquo;re interested in.</h3>
               <p>Share a few details so we can tailor the demo to your needs. You don&rsquo;t need a research plan to get started.</p>
-              <label className="field">Full name<input required type="text" name="name" placeholder="Your name" minLength={2} defaultValue={details?.name} onChange={() => setFormError("")} /></label>
-              <label className="field">Email address<input required type="email" name="email" placeholder="name@company.com" defaultValue={details?.email} onChange={() => setFormError("")} /></label>
-              <label className="field">Organization<input required type="text" name="organization" placeholder="Organization name" minLength={2} defaultValue={details?.organization} onChange={() => setFormError("")} /></label>
-              <label className="field">What would you like to explore?<textarea ref={exploreRef} name="explore" placeholder="Tell us about your audience, intended use or what specifically you want to learn." defaultValue={details?.explore} /></label>
+              <p className="tp-req-legend">Fields marked <b>*</b> are required.</p>
+              <label className="field"><span>Full name<span className="tp-req" aria-label="required"> *</span></span><input required type="text" name="name" placeholder="Your name" minLength={2} defaultValue={details?.name} onChange={() => setFormError("")} /></label>
+              <label className="field"><span>Email address<span className="tp-req" aria-label="required"> *</span></span><input required type="email" name="email" placeholder="name@company.com" defaultValue={details?.email} onChange={() => setFormError("")} /></label>
+              <label className="field"><span>Organization<span className="tp-req" aria-label="required"> *</span></span><input required type="text" name="organization" placeholder="Organization name" minLength={2} defaultValue={details?.organization} onChange={() => setFormError("")} /></label>
+              <label className="field"><span>What would you like to explore?<span className="tp-opt tp-opt-pill">Optional</span></span><textarea ref={exploreRef} name="explore" placeholder="Tell us about your audience, intended use or what specifically you want to learn." defaultValue={details?.explore} /></label>
               {formError ? <p className="tp-form-error" role="alert">{formError}</p> : null}
               <button className="btn primary" type="submit">Pick a Time</button>
               <p className="tp-privnote">We&rsquo;ll use your details to arrange your demo and respond to your inquiry. <Link href="/privacy" onClick={onClose}>Privacy Policy</Link></p>

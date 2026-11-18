@@ -4,13 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 // Sample PDFs live in public/reports. A report without a file shows "coming soon".
+// v124 hides Focus Group Session Report and Campaign Report from this picker.
 const REPORTS = [
   { file: "1to1-Discussion-Session-Report", name: "1∶1 Discussion Session Report", title: "1:1 Discussion Session Report", note: "Explore key findings, shared themes, and differences across individual discussions, supported by participant quotes." },
   { file: "1to1-Discussion-Individual-Report", name: "1∶1 Discussion Individual Report", title: "1:1 Discussion Individual Report", note: "See how a participant’s perspective, key insights, and supporting quotes are summarized in their own individual report." },
   { file: "Survey-Session-Report", name: "Survey Session Report", title: "Survey Session Report", note: "See survey results, response patterns, and insights from follow-up questions across all participants." },
   { file: "Survey-Individual-Responses-Report", name: "Survey Individual Responses Report", title: "Survey Individual Responses Report", note: "Review every participant’s complete survey answers, including follow-up responses, together in one document." },
-  { file: "Focus-Group-Session-Report", name: "Focus Group Session Report", title: "Focus Group Session Report", note: "Explore the group’s shared themes, differing viewpoints, and insights that emerged through discussion." },
-  { file: "Campaign-Report", name: "Campaign Report", title: "Campaign Report", note: "Bring findings from multiple sessions together to reveal broader patterns, changes, and connected insights." },
 ];
 
 function download(file, name) {

@@ -8,7 +8,7 @@ const SOURCES = {
   hero: "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Captions_1_fadeout_audio.mp4",
   "1:1 discussion product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse.ai_website_1-1.mp4",
   "Employee Survey product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse.ai_website.mp4",
-  "Focus Group product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/Trupulse.ai_website_focusgroups.mp4",
+  "Focus Group product walkthrough": "https://trupulse-ai.s3.us-east-1.amazonaws.com/Trupulse+website/focusgroups_fadeputaudio.mp4",
 };
 
 const EVENT = "tp-open-video";

@@ -20,8 +20,11 @@ function normalizeQuery(q) {
     .replace(/\bfocusgrup\b/g, "focus group")
     .replace(/\bquestionaires?\b/g, "questionnaires")
     .replace(/\bhalf[- ]finished\b/g, "half finished")
+    .replace(/\bhalf[- ]way\b/g, "halfway")
     .replace(/\bon[- ]prem(ises)?\b/g, "on premises")
     .replace(/\bown servers?\b/g, "own servers")
+    .replace(/\bself[- ]host(ing)?\b/g, "self host")
+    .replace(/\bprivate cloud\b/g, "private cloud")
     .replace(/\banswer out loud\b/g, "answer out loud")
     .replace(/\bmicrosoft entra\b/g, "microsoft entra")
     .replace(/\benra\b/g, "entra");
@@ -41,6 +44,7 @@ export function answerFor(text, FAQ, context) {
 
   var intent =
     sampleReport(q) ||
+    editionsAsk(q) ||
     pricingAsk(q) ||
     trialAsk(q) ||
     contactAsk(q) ||
@@ -111,7 +115,7 @@ export function answerFor(text, FAQ, context) {
 
   var best = null, bestScore = 0;
   KNOWLEDGE.forEach(function (k) {
-    var sc = score(q, k.keywords);
+    var sc = scoreEntry(q, k);
     if (sc > bestScore) { best = k; bestScore = sc; }
   });
   if (best && bestScore >= MIN_SCORE) return pack(best);
@@ -196,7 +200,7 @@ function multiPart(q) {
   var assistant = /\bresearch assistant\b/.test(q);
   if (hris && assistant && /\b(which|what|plan|edition|include)\b/.test(q)) {
     return {
-      answer: "HRIS sync is available in Professional and Enterprise. The Research Assistant is available in Enterprise. Book a demo or email sales@trupulse.ai for the current edition comparison and pricing.",
+      answer: "HRIS sync is available in Professional and Enterprise. The Research Assistant is available in Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
       route: "pricing",
       id: "SITE_EDITIONS_COMBO",
     };
@@ -226,9 +230,57 @@ function multiPart(q) {
 }
 
 /* ---------- high-priority intents ---------- */
+/* Edition and feature eligibility — answer before generic pricing referrals. */
+function editionsAsk(q) {
+  var hris = /\bhris\b|\bhr system\b|\bhr sync\b|\bhris sync(ing)?\b/.test(q);
+  var assistant = /\bresearch assistant\b/.test(q);
+  var editionCue = /\b(edition|editions|plan|plans|professional|enterprise|essentials)\b/.test(q);
+  var whichCue = /\b(which|what|include|includes|included|available|need|support|supports|offer|offers|difference|different)\b/.test(q);
+
+  if (hris && assistant && whichCue) {
+    return {
+      answer: "HRIS sync is available in Professional and Enterprise. The Research Assistant is available in Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
+      route: "pricing",
+      id: "SITE_EDITIONS_COMBO",
+    };
+  }
+  if (hris && (editionCue || whichCue) && /\b(often|frequen|how often|monthly|manual)\b/.test(q)) {
+    return {
+      answer: "HRIS sync is available in Professional and Enterprise. Contacts sync monthly by default, and you can trigger a sync manually. For current pricing, book a demo or email sales@trupulse.ai.",
+      route: "pricing",
+      id: "SITE_HRIS_EDITION_FREQ",
+    };
+  }
+  if (hris && (editionCue || whichCue) && !/\b(often|frequen|monthly|manual|appear|new employees)\b/.test(q)) {
+    return {
+      answer: "HRIS sync is available in Professional and Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
+      route: "pricing",
+      id: "WEB102",
+    };
+  }
+  if (assistant && (editionCue || whichCue) && !/\b(what is|what's|explain|does the research assistant)\b/.test(q)) {
+    return {
+      answer: "The Research Assistant is available in Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
+      route: "pricing",
+      id: "WEB101",
+    };
+  }
+  if (/\bwhat editions\b|\beditions does trupulse offer\b|\bwhat (plans|editions) (do you|does (trupulse|it) )?offer\b|\bdifference between (your |the )?editions\b|\bhow (do|should) (we|i) choose among .{0,20}editions\b/.test(q)) {
+    return {
+      answer: "We offer Essentials, Professional, and Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
+      route: "pricing",
+      id: "WEB100",
+    };
+  }
+  return null;
+}
+
 function pricingAsk(q) {
   if (/\b(how much time|how long|duration|minutes?|hours?)\b/.test(q) && !/\b(cost|price|pricing|plan|edition|bill)\b/.test(q)) return null;
   if (/\b(limit on participants|how many (can|people|participants)|group size|focus group)\b/.test(q) && !/\b(cost|price|pricing|plan|edition|bill|allowance)\b/.test(q)) return null;
+  /* Feature/edition eligibility is handled by editionsAsk — do not replace with a pricing referral. */
+  if (/\b(hris|research assistant)\b/.test(q) && /\b(edition|plan|include|which|what)\b/.test(q) && !/\b(cost|price|pricing|how much)\b/.test(q)) return null;
+  if (/\bwhat editions\b|\beditions does trupulse\b|\bdifference between .{0,20}editions\b/.test(q) && !/\b(cost|price|pricing|how much)\b/.test(q)) return null;
   if (/\bpricing page\b|\bprice page\b|\bwhere (can|do) i (see|find) (pricing|prices|plans)\b|\bdo you have (a )?pricing\b/.test(q)) {
     return {
       answer: "We don’t publish a public pricing page right now. Book a demo or email sales@trupulse.ai for current plans and a quote tailored to your organization. TruPulse is available in Essentials, Professional, and Enterprise editions.",
@@ -236,7 +288,9 @@ function pricingAsk(q) {
       id: "SITE_PRICING_PAGE",
     };
   }
-  if (!/\b(cost|price|pricing|priced|plans?|editions?|per user|per seat|how much (does|is|would)|what (does|do) (it|trupulse|you) cost|what are your plans)\b/.test(q)) return null;
+  if (!/\b(cost|price|pricing|priced|per user|per seat|how much (does|is|would)|what (does|do) (it|trupulse|you) cost)\b/.test(q)
+    && !(/\b(plans?|editions?)\b/.test(q) && /\b(cost|price|pricing|how much|priced)\b/.test(q))
+    && !/\bwhat are your plans\b/.test(q)) return null;
   if (/\b(trial|demo account|free to try)\b/.test(q) && !/\b(cost|price|pricing)\b/.test(q)) return null;
   return {
     answer: "Please book a demo or email sales@trupulse.ai for current plans and pricing.",
@@ -456,8 +510,10 @@ function editCompleted(q) {
 }
 
 function incompleteSessions(q) {
-  if (!/\b(incomplete|half finished|half-finished|partially (finished|complete)|unfinished)\b/.test(q)) return null;
-  if (!/\b(session|survey|questionnaire|responses?|findings?|results?|counted|included)\b/.test(q)) return null;
+  var incomplete = /\b(incomplete|half finished|half-finished|half[- ]?way|halfway through|partially (finished|complete[d]?)|unfinished|abandon(s|ed|ing)?|quit halfway|dropped out|did not finish|didn't finish)\b/.test(q);
+  if (!incomplete) return null;
+  if (!/\b(session|survey|questionnaire|interview|responses?|findings?|results?|counted|included|report)\b/.test(q)) return null;
+  /* “Quit halfway through a survey” is incomplete participation, not employee attrition. */
   return entry("WEB076");
 }
 
@@ -493,19 +549,23 @@ function arabicVoice(q) {
 }
 
 function reportsLanguage(q) {
-  if (!/\b(reports?|session creator|interface)\b/.test(q)) return null;
-  if (!/\b(spanish|french|german|language|languages|translated|translation)\b/.test(q)) return null;
-  if (/\bparticipant\b/.test(q) && !/\breports?\b/.test(q)) return null;
+  var reportSide = /\b(reports?|session creator|interface|findings?|translations?|download .{0,20}findings)\b/.test(q);
+  var lang = /\b(spanish|french|german|language|languages|translated|translation|english only|same languages)\b/.test(q);
+  if (!reportSide || !lang) return null;
+  /* Participant-only language questions without report/findings wording stay on WEB071. */
+  if (/\bparticipant\b/.test(q) && !/\b(reports?|findings?|interface|session creator|team reads|same languages)\b/.test(q)) return null;
   return {
-    answer: "Our reports and session creator interface are currently in English only. Additional language support is planned for 2027. Participants can provide feedback in the supported participant languages, including Spanish.",
+    answer: "Our reports and session creator interface are currently in English only. Participants can provide feedback in supported participant languages, including Spanish. Additional interface and report language support is planned for 2027.",
     route: "product",
     id: "SITE_REPORT_LANG",
   };
 }
 
 function humanModerator(q) {
-  if (!/\b(moderat|take over|step in|human (join|observer))\b/.test(q)) return null;
-  if (!/\b(focus group|ai focus|stuck)\b/.test(q) && !/\bhuman moderator\b/.test(q)) return null;
+  var takeover = /\b(moderat|facilitat|take over|step in|replace the ai|ask questions during|observe without|human (join|observer|moderator|observe)|staff member|researcher take)\b/.test(q);
+  var group = /\b(focus group|ai focus|stuck|group conversation|during the group|ai-moderated|ai moderated|the group)\b/.test(q);
+  if (!takeover) return null;
+  if (!group && !/\bhuman (moderator|observe)\b/.test(q) && !/\bobserve without\b/.test(q)) return null;
   return {
     answer: "No. A human moderator cannot take over or participate in a focus group. A human moderator can join as an observer.",
     route: "product",
@@ -521,7 +581,7 @@ function editAfterLaunch(q) {
 }
 
 function onPrem(q) {
-  if (!/\b(on premises|on-premises|own servers?|own cloud|self[- ]host|install .{0,20}(servers?|cloud|ourselves))\b/.test(q)) return null;
+  if (!/\b(on premises|on-premises|own servers?|own cloud|private cloud|self[- ]host|self host|install .{0,20}(servers?|cloud|ourselves)|deploy .{0,40}(own|our|private|azure|aws|gcp)|run .{0,40}(private (aws|azure|cloud)|own (aws|azure|cloud|account))|private (aws|azure|gcp) account|our (own )?(aws|azure|gcp))\b/.test(q)) return null;
   return {
     answer: "No. We do not support on-premises deployment or hosting TruPulse in your own cloud.",
     route: "privacy",
@@ -556,7 +616,7 @@ function editionsCombo(q) {
   if (!/\bhris\b/.test(q) || !/\bresearch assistant\b/.test(q)) return null;
   if (!/\b(which|what|plan|edition|include)\b/.test(q)) return null;
   return {
-    answer: "HRIS sync is available in Professional and Enterprise. The Research Assistant is available in Enterprise. Book a demo or email sales@trupulse.ai for the current edition comparison and pricing.",
+    answer: "HRIS sync is available in Professional and Enterprise. The Research Assistant is available in Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
     route: "pricing",
     id: "SITE_EDITIONS_COMBO",
   };
@@ -769,6 +829,8 @@ function talkToHuman(q) {
 
 /* Employee stay/leave research (WEB 014), however it is worded. */
 function employeeLeaving(q) {
+  /* Incomplete participation (“quit halfway through”) is WEB076, not attrition research. */
+  if (/\b(halfway|half[- ]way|incomplete|unfinished|partially|abandon|questionnaire|survey responses? from)\b/.test(q)) return null;
   var employees = /\b(employees?|staff|workforce|team members?|people)\b/.test(q);
   var leaving = /\b(leav(e|ing)|quit|resign|attrition|turnover|retention|stay or leave|considering leaving)\b/.test(q);
   return employees && leaving ? entry("WEB014") : null;
@@ -836,10 +898,13 @@ function contextFollowup(q, topic) {
 /* Match against knowledge keywords (not answer text) so paraphrases still land, without
    unrelated answer-word collisions. */
 function keywordOverlap(q) {
+  /* Customer/member churn research must not collide with “cancel TruPulse subscription” data FAQs. */
+  if (/\b(customers?|members?|subscribers?)\b/.test(q) && /\b(cancel|churn|stop buying|leave|leaving)\b/.test(q) && !/\btrupulse\b/.test(q)) return null;
   var words = q.replace(/[^a-z0-9: ]/g, " ").split(/\s+/).filter(function (w) { return w.length > 3 && COMMON.indexOf(w) < 0 && STOP.indexOf(w) < 0; });
   if (words.length < 2) return null;
   var best = null, bestHits = 1;
   KNOWLEDGE.forEach(function (k) {
+    if (k.id === "WEB134" && /\b(customers?|members?)\b/.test(q) && !/\btrupulse\b/.test(q)) return;
     var tokens = (k.keywords || []).join(" ").toLowerCase().replace(/[^a-z0-9: ]/g, " ").split(/\s+/);
     var hits = words.filter(function (w) {
       var stem = w.replace(/s$/, "");
@@ -863,6 +928,12 @@ function score(q, keywords) {
     if (k.indexOf(" ") >= 0) weight *= 2;
     return sum + weight;
   }, 0);
+}
+
+/* Prefer phrase matches; block weak WEB134 hits on customer/member churn wording. */
+function scoreEntry(q, k) {
+  if (k.id === "WEB134" && /\b(customers?|members?|subscribers?)\b/.test(q) && !/\btrupulse\b/.test(q)) return 0;
+  return score(q, k.keywords);
 }
 
 /* Exported for engine.js so guided-flow interruptions and follow-ups can reuse intents. */

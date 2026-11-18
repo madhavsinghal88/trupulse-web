@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TruPulse</title>
+  <meta name="description" content="AI-led research to understand the people who matter to your organization. Create, conduct, and analyze surveys, 1:1 discussions, and focus groups—with your team guiding the process.">
+  <link rel="canonical" href="https://www.trupulse.ai/">
+  <link rel="icon" href="[BASE64_ASSET]">
+  <style>html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fffaf6}iframe{display:block;width:100%;height:100%;border:0;transition:opacity .35s ease}</style>
+</head>
+<body>
+  <iframe id="trupulse-site" title="TruPulse website"></iframe>
+  <script type="application/json" id="tp-pdfs">{"1to1-Discussion-Session-Report": "[LONG_B64]", "1to1-Discussion-Individual-Report": "[LONG_B64]", "Survey-Session-Report": "[LONG_B64]", "Survey-Individual-Responses-Report": "[LONG_B64]", "Focus-Group-Session-Report": "[LONG_B64]", "Campaign-Report": "[LONG_B64]"}</script>
+  <script>
+  /* Each image is stored once here and injected at route time. Previously every page
+     carried its own base64 copy, so the three article banners shipped six times over. */
+  const assets = ["[BASE64_ASSET]","[BASE64_ASSET]","[BASE64_ASSET]","[BASE64_ASSET]","[BASE64_ASSET]","[BASE64_ASSET]","[BASE64_ASSET]","[BASE64_ASSET]"];
+  

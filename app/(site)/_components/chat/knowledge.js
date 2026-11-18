@@ -536,9 +536,16 @@ export const KNOWLEDGE = [
       "human moderator",
       "take over a focus",
       "moderator take over",
-      "join as an observer"
+      "join as an observer",
+      "replace the ai as facilitator",
+      "staff member replace the ai",
+      "facilitator during the group",
+      "researcher take over the group",
+      "person ask questions during",
+      "observe without participating",
+      "human observe"
     ],
-    "answer": "No. Human moderators cannot take over a focus group. A human moderator can join a session as an observer but cannot participate.",
+    "answer": "No. A human moderator cannot take over or participate in a focus group. A human moderator can join as an observer.",
     "route": "product"
   },
   {
@@ -961,9 +968,15 @@ export const KNOWLEDGE = [
       "creator interface",
       "reports available in other languages",
       "english only",
-      "interface languages"
+      "interface languages",
+      "spanish translations of the findings",
+      "findings in spanish",
+      "download our findings in spanish",
+      "reports in spanish",
+      "participant sessions and reports",
+      "same languages"
     ],
-    "answer": "The creator interface and reports are currently in English only. Additional language support is planned for 2027.",
+    "answer": "Our reports and session creator interface are currently in English only. Participants can provide feedback in supported participant languages, including Spanish. Additional interface and report language support is planned for 2027.",
     "route": "product"
   },
   {
@@ -1001,9 +1014,15 @@ export const KNOWLEDGE = [
       "half finished",
       "half-finished questionnaires",
       "unfinished questionnaires",
-      "counted in the findings"
+      "counted in the findings",
+      "quit halfway through",
+      "halfway through",
+      "partially completed surveys",
+      "abandons the questionnaire",
+      "unfinished interviews",
+      "people who quit halfway"
     ],
-    "answer": "No. Incomplete sessions are not included in results.",
+    "answer": "Incomplete sessions are not included in results.",
     "route": "reports"
   },
   {
@@ -1303,9 +1322,11 @@ export const KNOWLEDGE = [
       "plans",
       "essentials",
       "professional",
-      "enterprise edition"
+      "enterprise edition",
+      "difference between your editions",
+      "difference between the editions"
     ],
-    "answer": "Essentials, Professional, and Enterprise. Book a demo or email sales@trupulse.ai for the current edition comparison and pricing.",
+    "answer": "We offer Essentials, Professional, and Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
     "route": "pricing"
   },
   {
@@ -1313,9 +1334,11 @@ export const KNOWLEDGE = [
     "keywords": [
       "which edition includes the research assistant",
       "edition includes the research assistant",
-      "research assistant edition"
+      "research assistant edition",
+      "need enterprise to use the research assistant",
+      "research assistant available"
     ],
-    "answer": "Enterprise. Book a demo or email sales@trupulse.ai for current edition details and pricing.",
+    "answer": "The Research Assistant is available in Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
     "route": "pricing"
   },
   {
@@ -1323,9 +1346,12 @@ export const KNOWLEDGE = [
     "keywords": [
       "which editions include hris sync",
       "editions include hris",
-      "hris sync edition"
+      "hris sync edition",
+      "hris syncing included in professional",
+      "hris sync available",
+      "which edition supports hris"
     ],
-    "answer": "Professional and Enterprise. Book a demo or email sales@trupulse.ai for the current feature comparison and pricing.",
+    "answer": "HRIS sync is available in Professional and Enterprise. For current pricing, book a demo or email sales@trupulse.ai.",
     "route": "pricing"
   },
   {
@@ -1711,8 +1737,10 @@ export const KNOWLEDGE = [
     "keywords": [
       "what happens to our data if we stop using trupulse",
       "stop using trupulse",
-      "if we leave",
-      "cancel subscription data"
+      "if we leave trupulse",
+      "cancel our trupulse subscription",
+      "organizational data if you plan to stop",
+      "data if we cancel trupulse"
     ],
     "answer": "Contact TruPulse to arrange retention or deletion of your organizational data if you plan to stop using TruPulse.",
     "route": "privacy"
@@ -1852,7 +1880,14 @@ export const KNOWLEDGE = [
       "own cloud",
       "own servers",
       "self host",
-      "install this on our own"
+      "self-host",
+      "install this on our own",
+      "private aws account",
+      "private azure",
+      "private cloud",
+      "deploy trupulse in our own",
+      "run trupulse in our private",
+      "organization self-host"
     ],
     "answer": "No. We do not support on-premises deployment or hosting TruPulse in your own cloud.",
     "route": "privacy"
@@ -2034,7 +2069,7 @@ export const KNOWLEDGE = [
 
 // Questions about using the signed-in app: point to product support, not invent click-paths.
 export const APP_HELP = {
-  keywords: ["log in", "login", "sign in", "password", "otp", "verification code", "notification", "tutorial", "sidebar", "my account", "subscription", "upgrade my plan", "error", "bug", "not working", "technical support", "billing dispute", "invoice"],
+  keywords: ["log in", "login", "sign in", "password", "otp", "verification code", "notification", "tutorial", "sidebar", "my account", "upgrade my plan", "error", "bug", "not working", "technical support", "billing dispute", "invoice"],
   answer: "Select Sign in to access your account. If you need account support, email support@trupulse.ai. I can explain how TruPulse works for evaluation, but I cannot inspect your workspace or account records through this website chat.",
   route: "support",
 };

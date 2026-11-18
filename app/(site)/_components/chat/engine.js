@@ -245,7 +245,7 @@ export function initChat(dock, { faq, openDemo }) {
 
   /* Booking a demo in the chat: ask for the same details as the demo form, one at a
      time, then open the calendar with them filled in. */
-  var BOOK_INTENT = /\b(book|schedule|arrange|set up|get)\b.*\b(demo|call|meeting)\b|\b(demo|call) (please|for me)\b|^demo\??$/;
+  var BOOK_INTENT = /\b(book|schedule|arrange|set up|get)\b.*\b(demo|call|meeting)\b|\b(demo|call) (please|for me)\b|\bspeak with sales\b|\btalk (to|with) sales\b|\brather book a demo\b|\barrange a demo\b|^demo\??$/i;
   var BOOK_STEPS = [
     { key: "name", ask: "Great, let’s book your demo. What’s your full name?", check: validateFullName },
     { key: "email", ask: "Thanks! What’s your email address?", check: validateWorkEmail },
@@ -272,12 +272,31 @@ export function initChat(dock, { faq, openDemo }) {
   var METHOD_INTENT = /\bwhich (research )?method\b|\bwhich (one|format|session|approach) should (i|we) use\b|\bwhich should (i|we) use\b|\bhelp (me|us) choose (a |the )?(research )?method\b|\bhelp (me|us) choose (a |the )?(format|session|approach)\b|\brecommend (a |an |the )?(research )?method\b|\brecommend (a |an |the )?(session|format|approach)\b|\b(survey|discussion|interview|focus group).{0,40}\bor\b.{0,40}(survey|discussion|interview|focus)|\b(survey|discussion|interview|focus group).{0,40}\bwhich is better\b/i;
   var METHOD_CANCEL = /^(cancel|stop|never ?mind)$/i;
   var methodPick = null;
+  /* Research objectives often look like questions (“Why customers cancel…”). Keep them in the
+     method flow instead of treating them as product-FAQ interruptions. */
+  function looksLikeResearchGoal(text) {
+    var t = String(text || "").trim().toLowerCase();
+    if (!t) return false;
+    if (BOOK_INTENT.test(t)) return false;
+    if (/\b(how much|pricing|cost|sample report|which edition|hris|sign in|password|sso|mfa|book a demo|speak with sales)\b/.test(t)) return false;
+    if (/\b(why|understand|we want|looking to|need to (know|understand)|explore|churn|stop buying|purchasing|cancel (their )?(subscriptions?|memberships?)|leave after|members? cancel|customers? (leave|cancel|churn|stop)|onboarding|new idea|concept|feel like|lands?|whether)\b/.test(t)) return true;
+    if (!looksLikeQuestion(text) && t.length >= 6) return true;
+    return false;
+  }
+  function startBooking() {
+    methodPick = null;
+    booking = { at: 0, details: {} };
+    return {
+      answer: "Sure—let’s arrange a demo. What’s your full name? You can type “cancel” at any time to stop.",
+      route: "answer",
+    };
+  }
   function recommendSessions(team, purpose) {
     var audience = String(team || "").trim() || "your audience";
     var goal = String(purpose || "").trim() || "your research goal";
     var blob = (audience + " " + goal).toLowerCase();
-    var survey = /\b(survey|questionnaire|scale|score|rating|compare|many people|large (group|audience)|quant|across|percentage|trend|benchmark)\b/.test(blob);
-    var discussion = /\b(why|experience|depth|story|stories|interview|1:1|one[- ]on[- ]one|sensitive|confidential|independent|motivat|leaving|attrition|retention|personal)\b/.test(blob);
+    var survey = /\b(survey|questionnaire|scale|score|rating|compare|many people|large (group|audience)|quant|across|percentage|trend|benchmark|patterns?)\b/.test(blob);
+    var discussion = /\b(why|experience|depth|story|stories|interview|1:1|one[- ]on[- ]one|sensitive|confidential|independent|motivat|leaving|leave|attrition|retention|personal|cancel|churn|stop buying|purchasing)\b/.test(blob);
     var focus = /\b(focus group|discuss(ion)? together|react|concept|idea|workshop|brainstorm|group (chat|conversation|feedback)|one another)\b/.test(blob);
     var picks = [];
     if (discussion) picks.push("AI-led 1:1 discussions — useful when you need independent depth and people should not influence one another");
@@ -291,10 +310,16 @@ export function initChat(dock, { faq, openDemo }) {
       ];
     }
     var lead = "Based on hearing from " + audience + " to understand “" + goal + "”, I’d start with:";
+    if (/\bcustomers?\b/.test(blob) && /\b(cancel|churn|stop buying|subscriptions?|leave)\b/.test(blob) && discussion) {
+      lead = "To understand “" + goal + "” from " + audience + ", I would start with:";
+      if (picks.length === 1) {
+        picks.push("Surveys — useful to explore the patterns across a wider audience");
+      }
+    }
     var more = picks.length === 1
       ? "You can add another session type later in a Campaign if you want to go wider or deeper."
       : "You can run these as related sessions in a Campaign if more than one fits.";
-    return lead + "\n\n• " + picks.join("\n• ") + "\n\n" + more + " Want me to show sample reports, or book a demo to walk through a fit for your team?";
+    return lead + "\n\n• " + picks.join("\n• ") + "\n\n" + more + " Would you like to see a sample report?";
   }
   function methodResumePrompt() {
     if (!methodPick) return "";
@@ -350,8 +375,11 @@ export function initChat(dock, { faq, openDemo }) {
       } else if (methodPick && METHOD_CANCEL.test(text)) {
         methodPick = null;
         result = { answer: "No problem—I’ve stopped the method recommendation. What else would you like to know about TruPulse?", route: "answer" };
+      } else if (methodPick && BOOK_INTENT.test(q)) {
+        showFollowups = false;
+        result = startBooking();
       } else if (methodPick) {
-        var interrupted = looksLikeQuestion(text) && !METHOD_CANCEL.test(text);
+        var interrupted = looksLikeQuestion(text) && !METHOD_CANCEL.test(text) && !looksLikeResearchGoal(text);
         if (interrupted) {
           var aside = reply(text);
           var resume = methodResumePrompt();
@@ -378,9 +406,8 @@ export function initChat(dock, { faq, openDemo }) {
         else methodAsideChips();
         return;
       } else if (BOOK_INTENT.test(q)) {
-        booking = { at: 0, details: {} };
         showFollowups = false;
-        result = { answer: BOOK_STEPS[0].ask + " (Type “cancel” anytime to stop.)", route: "answer" };
+        result = startBooking();
       } else if (METHOD_INTENT.test(q)) {
         methodPick = { at: 0, team: "", purpose: "" };
         result = {
