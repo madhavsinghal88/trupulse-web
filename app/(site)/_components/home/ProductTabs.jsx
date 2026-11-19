@@ -10,7 +10,7 @@ const PRODUCTS = [
     tab: "AI-led 1:1 discussions",
     title: "Go deeper, without spending hours conducting interviews.",
     body: "Set the direction and approve the discussion guide. AI conducts each discussion, so your team can gather in-depth feedback without spending time scheduling or running interviews.",
-    benefits: ["Flexible timing—participants take part whenever it suits them", "Chat or voice responses in any of 17 languages", "AI follow-up questions that explore the “why”"],
+    benefits: ["Flexible timing—participants take part whenever it suits them", "Respond in 17 languages via text, 16 via voice", "AI follow-up questions that explore the “why”"],
     best: "Stay interviews · Customer discovery · Member feedback",
     video: "1:1 discussion product walkthrough",
     note: "See a 1:1 session end to end",

@@ -1,0 +1,1943 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+document.addEventListener("click", function (event) {
+  if (!event.target.closest) return;
+  var link = event.target.closest("[data-single-route]");
+  if (link && window.parent !== window) {
+    event.preventDefault();
+    parent.postMessage({ type: "trupulse-route", route: link.dataset.singleRoute,
+      fragment: link.dataset.fragment || "", article: link.dataset.article || "" }, "*");
+    return;
+  }
+  /* In an about:srcdoc document a bare "#section" link has no base URL to
+     resolve against, so the browser resolves it against the PARENT url and
+     navigates the frame away from the site. Handle in-page anchors here too,
+     in the same capture-phase listener. */
+  var a = event.target.closest('a[href^="#"]');
+  if (!a) return;
+  event.preventDefault();
+  var id = a.getAttribute("href").slice(1);
+  if (!id || id === "top") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+  var target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (target.hasAttribute("tabindex") || /^(a|button|input|h[1-6])$/i.test(target.tagName)) target.focus({ preventScroll: true });
+  }
+}, true);
+</script>
+<title data-title>__ART_TITLE__</title><meta name="description" content="__ART_DESC__"><link rel="canonical" href="__ART_URL__"><meta property="og:type" content="article"><meta property="og:site_name" content="TruPulse"><meta property="og:url" content="__ART_URL__"><meta property="og:title" content="__ART_OG_TITLE__"><meta property="og:description" content="__ART_DESC__"><meta property="og:image" content="https://www.trupulse.ai/og/share.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="TruPulse — AI-powered research. Human insight."><meta name="twitter:image" content="https://www.trupulse.ai/og/share.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="__ART_OG_TITLE__"><meta name="twitter:description" content="__ART_DESC__"><link rel="icon" href="__ASSET0__"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"><style>
+:root{
+  --ink:#110f35;--ink-2:#252259;--paper:#fffaf6;--white:#fff;--muted:#5b589d;
+  --line:#e0dfec;--coral:#EE851B;--coral-2:#EE851B;--violet:#433EB1;
+  --mint:#c9f5e9;--teal:#078b7c;--lilac:#ecebff;--sun:#ffd870;
+  --display:"Plus Jakarta Sans","Inter",ui-sans-serif,system-ui,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 28px 80px rgba(17, 15, 53,.12);--radius:28px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+body.modal-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+button{color:inherit}
+img{display:block;max-width:100%}
+.shell{width:min(1280px,calc(100% - 40px));margin:auto}
+.article-hero h1{margin:0;font-family:var(--display);font-size:clamp(2.25rem,5vw,3rem);line-height:1.03;letter-spacing:-.055em}
+.btn{display:inline-flex;min-height:52px;padding:0 24px;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:999px;font-size:.875rem;font-weight:800;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--coral);color:#fff;box-shadow:0 12px 24px rgba(238,133,27,.22)}
+.btn.primary:hover{background:#EE851B}
+/* Header */
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:1rem;font-weight:900}
+/* Hero */
+/* Product */
+/* Workflow + report */
+/* Use cases */
+/* Proof + trust */
+/* Blogs */
+/* FAQ + CTA */
+
+
+/* Footer */
+.site-footer{padding:65px 0 28px;background:#0c0b2a;color:#fff}
+.footer-bottom{display:flex;margin-top:52px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);justify-content:space-between;color:#6e6bac;font-size:.75rem}
+/* Modal */
+
+
+/* Articles */
+.article-page{background:#fff}
+.article-header{position:relative;padding:28px 0;background:var(--paper)}
+.article-nav{display:flex;justify-content:space-between;align-items:center}
+.back-link{font-size:.75rem;font-weight:800}
+.article-hero{padding:90px 0 70px;background:var(--paper)}
+.article-hero-grid{display:grid;grid-template-columns:.94fr 1.06fr;gap:64px;align-items:center}
+.article-meta{color:var(--coral);font-size:.75rem;font-weight:850;letter-spacing:.11em;text-transform:uppercase}
+.article-hero h1{margin:18px 0 22px;font-size:clamp(2.25rem,5vw,3rem)}
+.article-deck{color:var(--muted);font-size:1rem}
+.article-banner{overflow:hidden;border-radius:30px;box-shadow:var(--shadow);aspect-ratio:16/9}
+.article-banner img{width:100%;height:100%;object-fit:cover}
+.article-layout{display:grid;grid-template-columns:240px minmax(0,700px);gap:90px;padding:80px 0 110px;justify-content:center}
+.article-aside{position:sticky;top:110px;align-self:start;padding:22px;border-left:2px solid var(--coral);font-size:.75rem}
+.article-aside strong{display:block;margin-bottom:8px}
+.article-aside a{display:block;margin:8px 0;color:var(--muted)}
+.article-body h2{margin:54px 0 14px;font-family:var(--display);font-size:2.25rem;line-height:1.12;letter-spacing:-.035em}
+.article-body h2:first-child{margin-top:0}
+.article-body p{margin:0 0 20px;color:#3f3c78;font-size:1rem;line-height:1.85}
+.article-quote{margin:38px 0;padding:28px;border-radius:20px;background:var(--lilac);font-family:var(--display);font-size:1.125rem;font-weight:750}
+.article-cta{margin-top:58px;padding:34px;border-radius:24px;background:var(--ink);color:#fff}
+.article-cta p{color:#c8c7e0}
+.article-cta .btn{margin-top:7px}
+
+
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-9px)}}
+@keyframes progress{0%{width:0}65%{width:88%}100%{width:100%}}
+@keyframes story{0%,18%{transform:translateX(0);opacity:1}42%,100%{transform:translateX(18px);opacity:.32}}
+@keyframes metric{from{transform:scaleX(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+@media(max-width:980px){.article-hero-grid{grid-template-columns:1fr}
+.article-layout{grid-template-columns:1fr;gap:35px}
+.article-aside{position:static}
+.article-aside a{display:inline;margin-right:12px}}
+
+@media(max-width:680px){.shell{width:min(100% - 26px,1280px)}
+.footer-bottom{gap:10px;flex-direction:column}
+.article-header{padding:18px 0}
+.article-nav .btn{display:none}
+.article-hero{padding:55px 0}
+.article-hero-grid{gap:32px}
+.article-layout{padding-top:55px}
+.article-body h2{font-size:1.5rem}}
+/* Consistent content hierarchy and corrected walkthrough control */
+
+@media(min-width:681px){.article-hero h1{font-size:clamp(2.25rem,5vw,3rem)}}
+
+@media(max-width:680px){.article-hero h1{font-size:clamp(2.25rem,9vw,3rem)}}
+
+/* ---- Reduce Motion: remove movement, keep the interface responsive ----
+   The old rule was transition:none on everything, which also removed the
+   colour and shadow feedback on buttons, tabs and links. Anyone with the
+   system setting on got a page where nothing answered them at all, and
+   hover transforms snapped instead of easing, which is worse than no
+   movement. Now: nothing travels, but colour, border, shadow and opacity
+   still respond. */
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;animation:none!important}
+  *{transition:color .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease,opacity .18s ease!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .back-link:hover,.back-link:hover .back-arrow,
+  .blog-card:hover,.blog-card:hover img,
+  .blog-tile:hover,.blog-tile:hover .bc-action em,.blog-tile:hover .bc-media img,
+  .btn:hover,.case-study-link:hover span,
+  .chat-card-btn:hover,.chat-card-btn:hover i,.chat-chips button:hover,
+  .chat-launch:hover,.chat-send:not(:disabled):hover,.chat-threads button:hover,
+  [data-chat-close]:hover,
+  .faq-prompts button:hover,
+  .feature-rows li:hover>span,.feature-rows li:hover>div,
+  .flow-card:hover,.legal-back:hover,.login-back:hover,.login:hover,
+  .login-reset [data-reset-back]:hover .back-arrow,
+  .use-case-tab:hover,.video-slot-play:hover{transform:none!important}
+
+
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:4px}}
+/* Final content interactions */
+
+
+/* Requested structural update */
+.brand-logo{display:flex;width:142px;height:45px;align-items:center}
+
+.brand-logo img{width:100%;height:100%;object-fit:contain;object-position:left center}
+
+@keyframes tab-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+.article-banner img{filter:none}
+
+@media(max-width:680px){.brand-logo{width:116px;height:37px}}
+
+.article-hero-grid{grid-template-columns:1fr;gap:42px}
+
+.article-hero-grid>.article-banner{grid-row:1}
+
+.article-hero-grid>div{grid-row:2;max-width:900px}
+
+.article-banner{width:100%;aspect-ratio:3/1;border-radius:28px}
+
+.article-hero h1{max-width:950px}
+
+@media(max-width:680px){.article-banner{aspect-ratio:16/9}
+.article-hero-grid{gap:28px}}
+
+
+/* Final typography, static media and hover system */
+.article-meta{font-family:var(--body)}
+
+h1,h2,h3,h4,.logo{font-family:var(--display)}
+
+.article-banner{background:#f0effa}
+/* Login route */
+/* Anonymous customer proof directly below the hero */
+/* Final alignment and motion refinements */
+
+.brand-logo{align-self:center}
+.brand-logo img{max-height:42px}
+
+@keyframes faq-answer-in{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+/* ---- Corrections ---- */
+/* Keyboard focus was invisible everywhere on the site. */
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:4px}
+
+/* ---- Page gutter ----
+   Single source of truth for the side margin. Every horizontal container on every
+   page resolves against this token, so home, articles, login, terms and privacy all
+   align on the same edge. Change it here and the whole site follows. */
+:root{--page-gutter:80px}
+.shell{width:min(1280px,calc(100% - (var(--page-gutter) * 2)));margin-inline:auto}
+/* 80px each side leaves too little room on a phone, so the gutter steps down only
+   below 680px. Tablets and up keep the full 80px. */
+@media(max-width:680px){:root{--page-gutter:24px}}
+
+/* The hero banner is a <figure>, and the browser's default figure margin
+   (1em 40px) was never reset: with width:100% it sat 40px off-centre and
+   overflowed its container by 40px on every article. */
+figure{margin:0}
+.article-layout{justify-content:start}
+@media(min-width:981px) and (max-width:1180px){.article-layout{grid-template-columns:220px minmax(0,660px);gap:56px}}
+
+/* ================= Article hero ================= */
+/* Banner, then eyebrow, heading and deck - the opening screen in reading order. */
+.article-hero{padding:34px 0 46px}
+.article-hero-grid{display:grid;grid-template-columns:1fr;gap:30px}
+.article-hero-grid>.article-banner{grid-row:auto;order:0}
+.article-hero-copy{order:1;max-width:none}
+.article-banner{width:100%;aspect-ratio:2.55/1;max-height:min(520px,46vh);border-radius:28px;margin:0}
+.article-banner img{width:100%;height:100%;object-fit:cover}
+/* The heading runs the full measure between the page gutters. */
+.article-hero h1{max-width:none;margin:14px 0 18px;font-size:clamp(2.25rem,5vw,3rem);line-height:1.06;letter-spacing:-.035em}
+.article-deck{max-width:900px;font-size:1rem}
+.article-meta{font-size:.75rem}
+
+/* ================= Sticky contents list ================= */
+.article-layout{padding-top:26px}
+.article-aside{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 130px);overflow:auto;
+  padding:4px 0 4px 20px;border-left:2px solid var(--line);font-size:.75rem}
+.article-aside strong{display:block;margin-bottom:12px;color:var(--ink);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+.article-aside a{position:relative;display:block;margin:0;padding:9px 0;color:var(--muted);line-height:1.35;
+  transition:color .22s ease,transform .22s ease}
+.article-aside a::before{position:absolute;left:-22px;top:50%;width:2px;height:0;background:var(--coral);
+  content:"";transform:translateY(-50%);transition:height .25s ease}
+.article-aside a:hover{color:var(--ink)}
+.article-aside a.active{color:var(--ink);font-weight:800;transform:translateX(3px)}
+.article-aside a.active::before{height:74%}
+
+@media(max-width:980px){
+  .article-hero{padding:24px 0 34px}
+  .article-banner{aspect-ratio:2/1;max-height:none}
+  .article-aside{position:static;max-height:none;display:flex;gap:8px;flex-wrap:wrap;
+    padding:14px 16px;border-left:0;border-radius:14px;background:#f5f4ff}
+  .article-aside strong{width:100%;margin-bottom:6px}
+  .article-aside a{padding:6px 10px;border-radius:99px;background:#fff}
+  .article-aside a::before{display:none}
+  .article-aside a.active{transform:none;background:var(--violet);color:#fff}
+}
+@media(max-width:680px){.article-banner{aspect-ratio:16/10}.article-hero h1{font-size:clamp(1.5rem,7.5vw,2.25rem)}}
+
+/* ---- Type scale, matched to the home page ---- */
+h1,h2,h3,h4,.logo{font-family:var(--display)}
+body,p,li{font-family:var(--body)}
+.article-meta,.blog-card-body small{font-family:var(--body)}
+.article-hero h1{font-size:clamp(2.25rem,5vw,3rem);line-height:1.1;letter-spacing:-.032em}
+.article-deck{font-size:1rem;line-height:1.6}
+.article-body h2{font-size:clamp(1.5rem,2.5vw,1.5rem);line-height:1.2;letter-spacing:-.024em;margin:44px 0 12px}
+.article-body p{font-size:1rem;line-height:1.78;margin:0 0 18px}
+.article-quote{font-size:1rem;line-height:1.5;padding:24px;margin:32px 0}
+.article-cta{padding:28px}
+.article-cta h2{font-size:1.5rem;margin:0 0 8px}
+.article-cta p{font-size:.875rem}
+.article-meta{font-size:.75rem;font-weight:700;letter-spacing:.14em}
+
+/* ---- Article hero: heading and deck run the full banner width ---- */
+/* The hero copy sat in a 900px wrapper while the banner ran the full 1280px
+   gutter width, so the heading stopped short of the image above it. */
+.article-hero-grid>div,.article-hero-copy{max-width:none;width:100%}
+.article-hero h1,.article-deck{max-width:none;width:100%}
+.article-banner{aspect-ratio:2.55/1;max-height:min(536px,48vh)}   /* +16px of height */
+.article-hero h1{font-size:clamp(2.25rem,5vw,3rem);margin:16px 0 16px}
+.article-deck{font-size:1rem;line-height:1.62;max-width:none}
+
+
+/* ---- Explore other blogs ---- */
+.more-blogs{padding:64px 0 76px;background:var(--paper);border-top:1px solid var(--line)}
+.more-head{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;margin-bottom:26px}
+.more-head h2{margin:0;font-family:var(--display);font-size:clamp(1.5rem,3.7vw,2.25rem);letter-spacing:-.025em}
+.more-head a{margin-left:auto;font-size:.875rem;font-weight:800;color:var(--violet)}
+.more-head a:hover{color:var(--coral)}
+.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:980px){.more-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.more-grid{grid-template-columns:1fr}}
+
+/* ================= The blog card ================= */
+.blog-tile{
+  display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--line);border-radius:22px;background:#fff;color:inherit;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.blog-tile:hover{transform:translateY(-5px);border-color:rgba(103, 95, 252,.32);box-shadow:0 18px 44px rgba(17, 15, 53,.1)}
+.bc-media{display:block;aspect-ratio:16/9;overflow:hidden;background:#f0effa}
+/* contain, not cover: the whole illustration stays visible and uncropped. */
+.bc-media img{display:block;width:100%;height:100%;object-fit:contain;background:#f6f5ff;transition:transform .4s ease}
+.blog-tile:hover .bc-media img{transform:scale(1.02)}
+.bc-body{display:flex;flex:1;flex-direction:column;padding:22px}
+.bc-eyebrow{
+  display:flex;gap:8px;align-items:center;color:var(--coral);
+  font-family:var(--body);font-size:.75rem;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;
+}
+.bc-eyebrow i{font-style:normal;opacity:.55}
+.bc-title{
+  margin:13px 0 10px;font-family:var(--display);font-size:1rem;font-weight:700;
+  line-height:1.32;letter-spacing:-.01em;color:var(--ink);
+}
+.bc-desc{
+  flex:1;color:var(--muted);font-size:.875rem;line-height:1.55;
+  /* Live decks vary from one line to six; four keeps every card readable and
+     the grid even without truncating anything that matters. */
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;
+}
+.bc-action{
+  display:inline-flex;gap:8px;margin-top:18px;align-items:center;
+  color:var(--violet);font-size:.75rem;font-weight:800;
+}
+.bc-action em{font-style:normal;transition:transform .22s ease}
+.blog-tile:hover .bc-action{color:var(--coral)}
+.blog-tile:hover .bc-action em{transform:translateX(4px)}
+.blog-tile[hidden]{display:none}
+/* three across wherever the card is used */
+.blog-grid,.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:980px){.blog-grid,.more-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.blog-grid,.more-grid{grid-template-columns:1fr}}
+
+/* ---- The contents rail is back, alongside the body ---- */
+.article-aside{display:block}
+.article-layout{
+  display:grid;grid-template-columns:236px minmax(0,760px);gap:70px;
+  justify-content:start;padding-top:14px;
+}
+@media(min-width:981px) and (max-width:1180px){.article-layout{grid-template-columns:210px minmax(0,640px);gap:48px}}
+@media(max-width:980px){.article-layout{grid-template-columns:1fr;gap:26px}}
+
+/* ---- explore-other-blogs uses the same card, three across ---- */
+.more-blogs{padding:60px 0 74px;background:var(--paper);border-top:1px solid var(--line)}
+.more-head{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;margin-bottom:26px}
+.more-head h2{margin:0;font-family:var(--display);font-size:clamp(1.5rem,3.7vw,2.25rem);letter-spacing:-.025em}
+.more-head a{margin-left:auto;font-size:.875rem;font-weight:800;color:var(--violet)}
+.more-head a:hover{color:var(--coral)}
+
+/* .sr-only lived only in the home stylesheet, so hidden labels were showing. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.footer-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px}
+.footer-about p{max-width:500px;color:#b0aed3;font-size:.75rem}
+.footer-links{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+.footer-links strong{display:block;margin-bottom:13px;color:#fff;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-family:var(--body)}
+.footer-links a{display:block;margin:8px 0;color:#b0aed3;font-size:.75rem}
+.footer-links a:hover{color:var(--coral)}
+.footer-brand-logo{display:inline-flex;width:auto;height:46px;align-items:center;filter:none}
+.footer-brand-logo img{height:38px;width:auto;max-height:none;transform:translateY(4px)}
+@media(max-width:980px){.footer-grid{grid-template-columns:1fr;gap:36px}}
+@media(max-width:680px){.footer-links{grid-template-columns:1fr;gap:18px}.footer-bottom{gap:10px;flex-direction:column;align-items:flex-start}}
+
+.article-banner{
+  /* 78vh of width is 44vh of height at 16:9, so the height cap is expressed
+     as a width and the box never has to letterbox to obey it. */
+  width:min(100%,760px,78vh);margin-inline:auto;
+  aspect-ratio:16/9;
+  border-radius:22px;overflow:hidden;
+}
+.article-hero-grid>.article-banner{margin-bottom:6px}
+@media(max-width:980px){.article-banner{width:100%}}
+
+/* ================= Back navigation: one button, one place ================= */
+.back-link{
+  display:inline-flex;gap:8px;align-items:center;
+  min-height:42px;padding:0 18px;
+  border:1px solid var(--line);border-radius:999px;background:#fff;
+  /* Stated explicitly: this button was inheriting white from the legal header
+     and only appeared on hover. It is always visible now. */
+  color:var(--ink);opacity:1;visibility:visible;
+  font-family:var(--body);font-size:.75rem;font-weight:750;letter-spacing:0;
+  text-decoration:none;white-space:nowrap;
+  transition:border-color .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.back-link .back-arrow{font-size:1em;line-height:1;transition:transform .2s ease}
+.back-link:hover,.back-link:focus-visible{
+  border-color:var(--violet);color:var(--violet);
+  transform:translateY(-1px);box-shadow:0 6px 18px rgba(103, 95, 252,.13);
+}
+.back-link:hover .back-arrow{transform:translateX(-3px)}
+.back-link:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+/* Kill the older per-page overrides by name so nothing re-colours it. */
+.legal-nav .back-link,.article-nav .back-link,.login-nav .back-link,
+.legal-nav .legal-back,.login-back{color:var(--ink);font-size:.75rem;min-height:42px;padding:0 18px}
+@media(max-width:680px){.back-link{min-height:38px;padding:0 14px;font-size:.75rem}}
+
+/* Headings-only rail: room for a real heading to wrap without becoming a wall
+   of text, and no snippet styling to tempt anything else in. */
+.article-aside a{display:block;line-height:1.4;font-size:.75rem}
+.article-aside a br,.article-aside p,.article-aside small{display:none}
+
+/* ===== Book a Demo dialog, so it opens over this page ===== */
+body.modal-open{overflow:hidden}
+.icon-btn{display:grid;width:42px;height:42px;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff;cursor:pointer}
+.modal{position:fixed;z-index:200;inset:0;display:none;padding:30px;place-items:center;background:rgba(8, 6, 30,.78);backdrop-filter:blur(10px)}
+.modal.open{display:grid;animation:fade .2s ease}
+.modal-panel{position:relative;width:min(1120px,100%);max-height:calc(100vh - 50px);padding:28px;overflow:auto;border-radius:28px;background:var(--paper);box-shadow:0 35px 120px rgba(0,0,0,.34)}
+.modal-close{position:absolute;z-index:2;right:18px;top:18px}
+.modal-title{padding:8px 55px 24px 4px}
+.modal-title h2{margin:6px 0 0;font-family:var(--display);font-size:2.25rem;letter-spacing:-.04em}
+.modal-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:26px}
+.modal-video{display:grid;min-height:470px;padding:28px;place-items:center;border-radius:23px;background:var(--ink);color:#fff}
+.demo-form{padding:26px}
+.demo-form h3{margin:0;font-family:var(--display);font-size:1.5rem}
+.demo-form>p{color:var(--muted);font-size:.75rem}
+.field{display:grid;gap:5px;margin-top:12px;color:var(--ink);font-size:.75rem;font-weight:800}
+.field input,.field textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:#fff;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(103, 95, 252,.12)}
+.field textarea{min-height:84px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.demo-form .btn{width:100%;margin-top:16px}
+.form-note{display:block;margin-top:9px;color:var(--muted);font-size:.75rem}
+.modal-grid{grid-template-columns:1fr}
+.modal-video{min-height:390px}}
+.modal{padding:8px}
+.modal-panel{padding:18px}
+.modal-title h2{font-size:1.5rem}
+.modal-video{min-height:330px;padding:16px}
+.demo-form{padding:20px 4px}
+.form-row{grid-template-columns:1fr}}
+.developer-video-slot{position:relative;z-index:1;display:flex;width:100%;min-height:370px;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;border-radius:24px;background-color:#14123d;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:36px 36px;color:#fff;text-align:center}
+.developer-video-slot::after{position:absolute;width:210px;height:210px;right:-68px;bottom:-72px;border:25px solid rgba(238,133,27,.11);border-radius:50%;content:""}
+.developer-video-slot strong{position:relative;z-index:1;margin-top:22px;font-size:.875rem}
+.developer-video-slot small{position:relative;z-index:1;margin-top:7px;color:#c7c6dc;font-size:.75rem}
+.video-slot-play{position:relative;z-index:2;display:grid;width:62px;height:62px;place-items:center;border:0;border-radius:50%;background:linear-gradient(90deg,var(--coral),var(--violet),var(--teal));color:#fff;box-shadow:0 0 0 12px rgba(103, 95, 252,.12);cursor:pointer;transition:transform .22s ease,box-shadow .22s ease}
+.video-slot-play:hover{transform:scale(1.08);box-shadow:0 0 0 17px rgba(103, 95, 252,.1)}
+.modal-title h2{font-size:1.5rem;letter-spacing:-.025em}
+.demo-form h3{font-size:1.125rem}
+.modal-video{min-height:380px}
+.modal{padding:24px}
+.modal-panel{max-height:calc(100vh - 48px);padding:22px}
+.modal-title{padding:4px 48px 16px 2px}
+.modal-title h2{font-size:1.125rem;margin-top:4px}
+.modal-grid{gap:20px;align-items:stretch}
+.modal-video{min-height:0;padding:18px}
+.modal-video .developer-video-slot{min-height:0;height:100%}
+.demo-form{display:flex;flex-direction:column;justify-content:center;padding:4px 2px}
+.demo-form h3{font-size:1.125rem;margin-bottom:2px}
+.demo-form>p{font-size:.75rem;margin:4px 0 2px}
+.field{margin-top:9px;font-size:.75rem}
+.field input{padding:9px 12px;border-radius:9px}
+.field textarea{min-height:60px;padding:9px 12px;border-radius:9px}
+.demo-form .btn{min-height:46px;margin-top:12px}
+.form-note{margin-top:7px;font-size:.75rem}
+.modal-panel{padding:28px}
+.modal-title{padding:2px 48px 20px 2px}
+.modal-title h2{font-size:1.5rem;margin-top:6px}
+.modal-grid{gap:38px}
+.modal-video{padding:24px;border-radius:20px}
+.demo-form{padding:2px 4px 2px 6px}
+.demo-form h3{font-size:1.125rem}
+.field{margin-top:11px}
+.modal .demo-form .btn.primary{min-height:52px;font-size:.875rem}
+
+/* ================= Icons centre in their own backgrounds ================= */
+/* A glyph in a round background was being positioned by its text baseline, so
+   most of them sat a pixel or two low. Applied once, for every such control on
+   every page, rather than nudged case by case. */
+.icon-btn,.faq-list summary::after,.chat-icon,.chat-send,.chat-card-btn i,
+.chat-avatar,.chat-launch,.video-slot-play,.modal-close,.chat-face,
+.trust-rows li>span,.feature-rows li>span,.flow-card::before,.bc-media-tile{
+  display:grid;place-items:center;place-content:center;
+  line-height:1;text-align:center;
+}
+.icon-btn>svg,.chat-icon>svg,.chat-send>svg,.chat-card-btn i>svg,.modal-close>svg{display:block}
+.faq-list summary::after{line-height:1;padding-bottom:1px}
+
+/* ================= Phones ================= */
+@media(max-width:680px){
+  /* 24px down both edges, on every page, for every block that uses the shell */
+  :root{--page-gutter:24px}
+  .shell,.article-banner-text,.legal-body,.login-card{
+    width:min(1280px,calc(100% - (var(--page-gutter) * 2)));
+    margin-inline:auto;
+  }
+
+  /* one rhythm between sections instead of desktop's tall breathing room */
+  .section,.trust-section,.workspace-section,.reports-section{padding:24px 0}
+  .hero{min-height:0;padding:96px 0 24px}
+  .final-cta{padding:28px 0}
+  .trust-strip{padding:12px 0}
+  .section-head{margin-bottom:18px}
+  .section-cta{margin-top:20px}
+
+  /* type and controls, scaled for the hand */
+  :root{
+    --step-hero:clamp(2.25rem,8.6vw,2.25rem);
+    --step-h2:clamp(1.125rem,5.6vw,1.5rem);
+    --step-h3:clamp(1.125rem,4.6vw,1.125rem);
+    --step-lead:.875rem;
+    --step-body:.875rem;
+    --step-small:.75rem;
+  }
+  h2{font-size:var(--step-h2);line-height:1.2}
+  .section-head>p,.hero .lead{font-size:var(--step-lead);line-height:1.55}
+  .btn{min-height:46px;padding:0 18px;font-size:.875rem}
+  .btn.primary,.btn.outline,.btn.light{width:100%;justify-content:center}
+  .button-row{display:grid;gap:10px}
+
+  /* header: mark left, menu right, and a dark blur behind the dropdown */
+  .site-header{padding-top:8px}
+  /* no padding of its own: the shell's 24px gutter is the header's margin too */
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
+  .brand-logo{margin-right:auto}
+  /* The hamburger lives inside .nav-actions, so the group stays laid out and
+     only its other children (Book a demo, Log in) step aside on a phone. */
+  .nav-actions{display:flex;gap:0;margin-left:auto}
+  .nav-actions>*:not(.menu-toggle){display:none!important}
+  .nav-wrap .menu-toggle{display:grid;width:40px;height:40px;border-radius:50%;padding:0}
+  .menu-toggle svg{width:19px;height:19px}
+  .main-nav{top:70px;padding:16px;border-radius:16px}
+  .nav-scrim{
+    position:fixed;z-index:90;inset:0;
+    background:rgba(9, 8, 31,.55);
+    backdrop-filter:blur(7px) saturate(120%);-webkit-backdrop-filter:blur(7px) saturate(120%);
+    animation:scrim-in .2s ease both;
+  }
+  .nav-scrim[hidden]{display:none!important}
+  @keyframes scrim-in{from{opacity:0}to{opacity:1}}
+  .site-header{z-index:120}
+  body.nav-open{overflow:hidden}
+
+  /* hero: three fixed lines, so a longer word cannot reflow the block */
+  .hero-grid{padding-top:0;gap:20px}
+  .h1-line{display:block}
+  .hero h1{font-size:var(--step-hero);line-height:1.14}
+  .audience-rotator{display:inline-block}
+  .hero-keyline{margin-top:14px}
+  .signal-stage{margin-top:4px}
+
+  /* product: the tabs stack instead of sliding sideways */
+  .product-tabs{
+    display:grid;grid-template-columns:1fr;overflow:visible;
+    border-bottom:1px solid var(--line);
+  }
+  .product-tab{
+    min-width:0;width:100%;padding:12px 14px;text-align:left;
+    border-right:0;border-bottom:1px solid var(--line);
+  }
+  .product-tab:last-child{border-bottom:0}
+  .product-tab strong{font-size:.875rem;text-align:left}
+  .product-tab.active::after{right:auto;left:0;width:3px;height:100%;top:0;transform-origin:top;transform:scaleY(var(--p,0))}
+  .product-panel{grid-template-columns:1fr;min-height:0}
+  .product-copy{padding:20px}
+  .product-copy h3{font-size:var(--step-h3)}
+  .walkthrough{min-height:210px;padding:18px}
+  .feature-list li{font-size:.75rem}
+
+  /* how it works: the three cards sit close together */
+  .flow{gap:10px}
+  .flow-card{min-height:0;padding:18px}
+  .flow-card h3{font-size:1rem;margin:10px 0 8px}
+  .flow-card p{font-size:.875rem}
+  .flow-card::before{width:34px;height:34px;font-size:.75rem}
+  .human-note{margin-top:14px;padding:16px}
+
+  /* workspace and reports rows */
+  .split-feature{gap:16px}
+  .dashboard-placeholder{min-height:190px;padding:18px}
+  .feature-rows li{padding:11px 0}
+  .feature-rows li>span{width:30px;height:30px;font-size:.75rem}
+  .feature-rows h3{font-size:.875rem}
+  .feature-rows li p,.reports-section .feature-rows li p{font-size:.75rem;max-width:none;min-height:0}
+
+  /* use cases: the questions wrap instead of running off the edge */
+  .use-case-explorer{gap:12px}
+  .use-case-tabs{display:grid;grid-template-columns:1fr;gap:8px;overflow:visible}
+  .use-case-tab{
+    width:100%;min-width:0;padding:11px 14px;
+    font-size:.75rem;line-height:1.35;white-space:normal;overflow:visible;text-overflow:clip;
+  }
+  .use-case-panel{padding:20px}
+  .use-case-panel h3{font-size:var(--step-h3)}
+  .use-case-panel>p:not(.section-label){font-size:.875rem}
+  .use-case-tags{padding-top:16px}
+  .use-case-tags span{font-size:.75rem}
+
+  /* trust: the dark card on top, the list beneath it, both readable */
+  .trust-layout{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+  .trust-hero-card{height:auto;min-height:0;padding:20px;order:1}
+  .trust-hero-card h3{font-size:1.125rem;line-height:1.24}
+  .trust-hero-card p{font-size:.875rem;color:rgba(255,255,255,.86)}
+  .trust-rows{display:block;height:auto;order:2}
+  .trust-rows li{height:auto;padding:11px 0}
+  .trust-rows li>div{display:block}
+  .trust-rows h3{font-size:.875rem}
+  .trust-rows p{font-size:.75rem;margin-top:3px}
+
+  /* the closing CTA: the ring centred behind the words, and less air */
+  .cta-layout{gap:16px}
+  .final-cta h2{font-size:var(--step-h2)}
+  .final-cta p{font-size:.875rem}
+  .cta-ring,.cta-orbit{left:50%;top:44%;width:min(300px,72vw)}
+  .cta-signal{padding:18px}
+  .cta-steps span{font-size:.75rem;padding:8px 12px}
+
+  /* resources and FAQ */
+  .blog-grid,.more-grid{gap:12px}
+  .faq-layout{gap:14px}
+  .faq-list summary{padding:14px 0;font-size:.875rem;gap:14px}
+  .faq-list summary::after{width:26px;height:26px;font-size:.875rem}
+  .faq-list details p{font-size:.875rem}
+
+  /* footer: the columns close up */
+  .site-footer{padding:26px 0 20px}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:20px}
+  .footer-links{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .footer-about p{font-size:.875rem;margin-top:8px}
+  .footer-bottom{margin-top:18px;padding-top:14px;gap:8px;font-size:.75rem}
+
+  /* the assistant keeps a margin off both edges, ring included */
+  /* The launcher sits 28px in from both edges, and its ring is drawn 14px
+     proud of the button rather than 19px, so the whole ring clears the screen.
+     The panel is inset by the same 28px on both sides, so opening it does not
+     shift the widget against the edge it was resting on. */
+  .chat-dock{right:28px;bottom:28px}
+  .chat-ring{inset:-14px;width:calc(100% + 28px);height:calc(100% + 28px)}
+  .chat-panel{width:calc(100vw - 56px);height:min(78vh,560px)}
+
+  /* the demo dialog reads at phone size */
+  .modal{padding:14px}
+  .modal-panel{padding:18px;border-radius:20px}
+  .modal-title{padding:0 40px 12px 0}
+  .modal-title h2{font-size:1.125rem;line-height:1.2}
+  .modal-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .modal-video{padding:12px;border-radius:14px}
+  /* The still was shorter than the play button plus its two lines of caption,
+     so the button was pinned to the top edge and the caption spilled out the
+     bottom. The slot sizes to its own content again and the group centres. */
+  .developer-video-slot,.modal-video-slot{height:auto;min-height:176px;padding:16px 14px}
+  .developer-video-slot strong{margin-top:14px}
+  .developer-video-slot strong{font-size:.875rem}
+  .developer-video-slot small{font-size:.75rem}
+  .video-slot-play{width:46px;height:46px;font-size:.875rem}
+  .demo-form h3{font-size:1rem}
+  .demo-form p{font-size:.75rem}
+  .field{font-size:.75rem}
+  .field input,.field textarea{min-height:42px;font-size:.875rem}
+  .form-row{display:grid;grid-template-columns:1fr;gap:0}
+  .form-note{font-size:.75rem}
+
+  /* login: even margins, centred column, phone-sized type */
+  .login-nav{padding:0;justify-content:space-between}
+  .login-main{padding-inline:0}
+  .login-card{max-width:none;padding:24px 20px;border-radius:20px;text-align:center}
+  .login-pane h1,.login-card h1{font-size:1.5rem;line-height:1.18}
+  .login-card>p{font-size:.875rem}
+  .login-form{margin-top:20px}
+  .login-form>label{font-size:.75rem}
+  .login-form input{min-height:48px;font-size:.875rem}
+  .login-submit{min-height:50px;font-size:.875rem}
+  .login-footer{flex-wrap:wrap;gap:8px;font-size:.75rem;padding-bottom:18px}
+
+  /* legal and article pages */
+  .legal-nav,.article-nav{gap:10px}
+  .article-body h2{font-size:1.125rem}
+  .article-body p,.article-body li{font-size:.875rem}
+  .more-head h2{font-size:1.125rem}
+}
+
+/* ================= Blog cards, two across on a phone ================= */
+@media(max-width:680px){
+  .blog-grid,.more-grid,.blogs-grid,.idx-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .bc-body{padding:12px}
+  .bc-eyebrow{font-size:.75rem;letter-spacing:.09em}
+  .bc-title{font-size:.875rem;margin:8px 0 6px;line-height:1.28}
+  .bc-desc{font-size:.75rem;line-height:1.45;-webkit-line-clamp:3}
+  .bc-action{font-size:.75rem;margin-top:12px}
+  /* the whole picture, never a crop, whatever the card width */
+  .bc-media{aspect-ratio:16/9;background:#f0efff}
+  .bc-media img{object-fit:contain}
+}
+
+/* ================= The article's contents rail ================= */
+/* Each heading sat in a filled white pill, which fought the page for attention
+   and turned a quiet list into a row of buttons. On a phone it is plain text,
+   and the heading you are reading is marked by weight and colour alone. */
+@media(max-width:680px){
+  .article-aside a{
+    padding:5px 0;border-radius:0;background:none;
+    color:var(--muted);font-size:.75rem;line-height:1.4;
+  }
+  .article-aside a.active{background:none;color:var(--ink);font-weight:800}
+  .article-aside{padding:16px 0 16px 14px}
+}
+
+/* ================= The hero heading, at every width ================= */
+/* Three lines that hold their shape while the rotating word changes, sized
+   from the viewport itself so the block fills the column at any width rather
+   than jumping between fixed sizes. */
+.hero h1 .h1-line{display:inline}
+@media(max-width:680px){
+  .hero h1{font-size:var(--step-hero);line-height:1.08;letter-spacing:-.035em}
+  .hero h1 .h1-line{display:block}
+  .hero h1 .h1-rot{min-height:1.08em}
+}
+/* On the narrowest phones still in use the longest line would touch the gutter,
+   so the floor comes down with the screen rather than letting it overflow. */
+@media(max-width:360px){
+  :root{--step-hero:clamp(2.25rem,9.4vw,2.25rem)}
+}
+
+@media(max-width:680px){
+  /* --- the cards go back to full width --------------------------------
+     Two across left each card too narrow to read: four-word lines, a title
+     broken over six rows, a picture too small to see. One per row is the
+     layout the site had, and it is the layout it keeps. */
+  .blog-grid,.more-grid,.blogs-grid,.idx-grid{grid-template-columns:1fr;gap:16px}
+  .bc-body{padding:18px}
+  .bc-eyebrow{font-size:.75rem;letter-spacing:.11em}
+  .bc-title{font-size:1rem;margin:10px 0 8px;line-height:1.22}
+  .bc-desc{font-size:.875rem;line-height:1.55;-webkit-line-clamp:3}
+  .bc-action{font-size:.75rem;margin-top:14px}
+  .bc-media{aspect-ratio:16/9;background:#f0efff}
+  .bc-media img{object-fit:contain}
+
+  /* --- the header, off the edge ---------------------------------------
+     The mark and the menu were flush against the 24px content gutter, which
+     read as pinned to the screen. The bar keeps its own inset on top of the
+     gutter, and enough height that neither sits tight to the rule beneath. */
+  .site-header{padding-top:10px}
+  .nav-wrap{padding:12px 8px;min-height:60px}
+  .brand-logo img,.brand-logo svg{height:26px}
+  .nav-wrap .menu-toggle{width:42px;height:42px}
+  .main-nav{top:82px}
+}
+
+@media(max-width:680px){
+  .site-header{padding:10px 0 0}
+  /* Two measurements, and they are separate things. The bar is a plate that
+     floats 24px in from each edge of the screen, the same gutter every other
+     block on the page uses. Inside that plate, 16px of padding on all four
+     sides holds the mark and the menu.
+     (An earlier pass pinned the bar to a fixed 62px, which with border-box
+     sizing squeezed its padding box to 28px and let the 40px button hang out
+     of it; the bar is sized by what it holds again.) */
+  .site-header .shell.nav-wrap{
+    width:calc(100% - 48px);max-width:none;margin-inline:auto;
+    padding:16px;height:auto;min-height:0;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  /* The row is as tall as its tallest child, so the 40px menu button fits
+     inside the padding box instead of overflowing it — otherwise the gap
+     above and below the button measures 11px while the padding says 16. */
+  .brand-logo{display:flex;height:40px;align-items:center}
+  .brand-logo img,.brand-logo svg{height:26px;display:block}
+  .nav-wrap .menu-toggle{width:40px;height:40px;margin:0;flex:0 0 auto}
+  /* the dropdown hangs eight pixels below the bar and lines up with its edges,
+     whatever the bar measures at that moment */
+  .main-nav{top:calc(100% + 8px);left:0;right:0}
+  .login-header .login-nav{padding:16px;min-height:0}
+  .legal-nav,.article-nav,.blogs-nav{padding:16px}
+
+  /* --- and it holds that size all the way down the page ------------------
+     The bar does not contract on scroll. The padding stays at 16, the mark
+     stays at 26 and the menu button stays at 40, at the top of the page and
+     everywhere below it — a bar that shrinks as you read makes the mark and
+     the menu move under the thumb that is reaching for them. What does change
+     on scroll is the plate behind them: transparent over the hero, glass once
+     there is content passing underneath. */
+  .site-header .shell.nav-wrap{
+    transition:background .35s ease,backdrop-filter .35s ease,
+               box-shadow .35s ease,border-color .35s ease;
+  }
+  .site-header.scrolled .shell.nav-wrap{padding:16px}
+  .site-header.scrolled .brand-logo{height:40px}
+  .site-header.scrolled .brand-logo img,.site-header.scrolled .brand-logo svg{height:26px}
+  .site-header.scrolled .nav-wrap .menu-toggle{width:40px;height:40px}
+  .site-header.scrolled .nav-wrap .menu-toggle svg{width:19px;height:19px}
+}
+
+@media(max-width:680px){
+  .product-shell{border-radius:20px;box-shadow:0 12px 32px rgba(17, 15, 53,.07)}
+
+  /* --- the three options ------------------------------------------------ */
+  .product-tabs{
+    display:grid;grid-template-columns:1fr;gap:8px;
+    padding:12px;border-bottom:1px solid var(--line);background:#fafaff;
+  }
+  .product-tab{
+    position:relative;display:flex;align-items:center;gap:10px;
+    padding:13px 14px;border:1px solid var(--line);border-right:1px solid var(--line);
+    border-radius:13px;background:#fff;overflow:hidden;
+    transition:border-color .2s ease,background .2s ease;
+  }
+  .product-tab strong{margin:0;font-size:.875rem;font-weight:750;line-height:1.25}
+  .product-tab span{display:none}
+  /* a ring on the left says which one you are on, the way a radio would */
+  .product-tab::before{
+    content:"";flex:0 0 auto;width:15px;height:15px;border-radius:50%;
+    border:2px solid #d4d3ea;background:#fff;transition:border-color .2s ease,box-shadow .2s ease;
+  }
+  .product-tab.active{border-color:rgba(103, 95, 252,.45);background:#f3f2ff}
+  .product-tab.active strong{font-weight:850}
+  .product-tab.active::before{border-color:var(--violet);box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 9px var(--violet)}
+  /* The fifteen-second line runs along the bottom of the option you are on —
+     and only that one. Painting every ::after left a violet bar under the
+     options you were not reading. */
+  .product-tab::after{
+    right:0;bottom:0;left:0;height:3px;border-radius:0;
+    background:transparent;transform:scaleX(0);transform-origin:left;
+  }
+  .product-tab.active::after{background:var(--violet);transform:scaleX(var(--p,0))}
+
+  /* --- the panel, in parts ---------------------------------------------- */
+  .product-panel{display:block;min-height:0}
+  .product-copy{padding:20px 16px 4px}
+  .product-copy .kicker{font-size:.75rem;letter-spacing:.12em}
+  .product-copy h3{max-width:none;margin:9px 0 10px;font-size:1.125rem;line-height:1.16;letter-spacing:-.025em}
+  .product-copy>p{margin:0;font-size:.875rem;line-height:1.6}
+
+  /* what it gives you: each capability on its own tinted row */
+  .feature-list{gap:7px;margin:16px 0 0}
+  .feature-list li{
+    align-items:flex-start;gap:9px;padding:10px 12px;
+    border-radius:11px;background:#f6f6fd;
+    font-size:.75rem;font-weight:700;line-height:1.42;
+  }
+  .feature-list i{flex:0 0 auto;width:19px;height:19px;margin-top:1px;font-size:.75rem}
+
+  /* who it suits: the run-on line becomes the tags it always was */
+  .best-for{margin-top:16px;padding-top:14px}
+  .best-for small{font-size:.75rem;letter-spacing:.12em}
+  .best-for strong{display:block;margin-top:9px;font-size:.75rem}
+  /* once the tags are built the sentence steps aside — display:block above
+     would otherwise beat the browser's own rule for a hidden element */
+  .best-for strong[hidden]{display:none!important}
+  .best-for-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .best-for-tags b{
+    padding:6px 11px;border:1px solid rgba(103, 95, 252,.22);border-radius:999px;
+    background:#f5f4ff;color:#3a3596;font-size:.75rem;font-weight:750;
+  }
+
+  /* what it looks like: framed inside the card, not bleeding off it */
+  .walkthrough{min-height:0;padding:16px;background:transparent}
+  .walkthrough::before{display:none}
+  .walkthrough .developer-video-slot{
+    width:100%;min-height:172px;border-radius:16px;padding:16px 14px;
+  }
+  .walkthrough .developer-video-slot strong{margin-top:13px;font-size:.875rem;line-height:1.3}
+  .walkthrough .developer-video-slot small{font-size:.75rem}
+}
+
+.footer-sub{margin:10px 0 0;font-size:.75rem;opacity:.72}
+
+/* ================= Article banner ================= */
+/* The picture's box is exactly the artwork's own proportion, so cover fills
+   the band edge to edge and crops nothing — full size, nothing cut. The title
+   panel is layered over it rather than sitting inside it, which is what kept
+   forcing the box taller than the picture and cropping it. */
+.article-hero{position:relative;padding:0;background:#ebeaff}
+.article-banner{
+  position:relative;display:block;width:100%;max-width:none;margin:0;
+  /* aspect-ratio is set per article from the picture itself */
+  max-height:min(86vh,820px);
+  border:0;border-radius:0;overflow:hidden;
+  background:#ebeaff center/cover no-repeat;
+}
+/* contain, with the box already at the picture's proportion: it fills the band
+   edge to edge with nothing cropped, and if the height cap ever binds it backs
+   off rather than cutting into the image. */
+.article-banner>img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;object-position:center;
+}
+/* a soft rise so the panel is not a hard band across the picture */
+.article-hero::after{
+  position:absolute;z-index:1;right:0;bottom:0;left:0;height:52%;content:"";
+  background:linear-gradient(to bottom,rgba(17, 15, 53,0) 0%,rgba(17, 15, 53,.06) 32%,rgba(17, 15, 53,.24) 68%,rgba(17, 15, 53,.4) 100%);
+  pointer-events:none;
+}
+.article-banner-text{
+  position:absolute;z-index:2;right:0;bottom:0;left:0;
+  width:min(1280px,calc(100% - (var(--page-gutter) * 2)));
+  margin:0 auto;padding:26px 30px 30px;
+  border-radius:20px 20px 0 0;
+  background:rgba(17, 15, 53,.34);
+  backdrop-filter:blur(14px) saturate(125%);
+  -webkit-backdrop-filter:blur(14px) saturate(125%);
+  color:#fff;
+  text-shadow:0 1px 14px rgba(9, 8, 31,.55);
+}
+@supports not (backdrop-filter:blur(1px)){.article-banner-text{background:rgba(17, 15, 53,.56)}}
+/* The eyebrow gets a backing of its own so it reads over any part of the art. */
+.article-banner-text .article-meta{
+  display:inline-block;margin:0 0 12px;padding:5px 11px;border-radius:999px;
+  background:rgba(9, 8, 31,.5);color:#ffd7c6;
+  text-shadow:0 1px 8px rgba(9, 8, 31,.9);
+}
+.article-banner-text h1{margin:0;color:#fff;font-size:clamp(1.5rem,3.7vw,2.25rem);line-height:1.12;letter-spacing:-.03em}
+.article-banner-text .article-deck{margin:14px 0 0;color:rgba(255,255,255,.88);font-size:1rem;line-height:1.6;max-width:74ch}
+/* On a narrow screen the band is too short to hold the title over the picture,
+   so the title moves below it — the picture still shows in full. */
+@media(max-width:980px){
+  .article-hero::after{display:none}
+  .article-banner-text{
+    position:static;width:100%;padding:22px var(--page-gutter) 26px;border-radius:0;
+    background:var(--ink);backdrop-filter:none;-webkit-backdrop-filter:none;text-shadow:none;
+  }
+  .article-banner-text .article-deck{font-size:.875rem}
+}
+.article-hero-grid,.article-hero-copy{display:contents}
+
+/* ===================== footer ===================== */
+.site-footer{padding:76px 0 30px}
+.footer-grid{grid-template-columns:minmax(260px,1fr) minmax(0,1.35fr);gap:56px 72px;align-items:start}
+.footer-about p{max-width:42ch;font-size:.875rem;line-height:1.65}
+.footer-sub{margin:12px 0 0;font-size:.75rem;line-height:1.6;opacity:.68}
+
+/* three columns that never squeeze below a readable width */
+.footer-links{grid-template-columns:repeat(3,minmax(150px,1fr));gap:40px 48px}
+.footer-links strong{margin-bottom:18px;font-size:.75rem;letter-spacing:.1em}
+.footer-links a{margin:0;padding:7px 0;font-size:.875rem;line-height:1.45}
+
+.footer-bottom{margin-top:60px;padding-top:24px;font-size:.75rem;align-items:center}
+.legal-footer-links{display:flex;gap:10px;align-items:center}
+
+/* below 1040px the brand sits above the links, which get the full width */
+@media(max-width:1040px){
+  .footer-grid{grid-template-columns:1fr;gap:44px}
+  .footer-about p{max-width:60ch}
+  .footer-links{grid-template-columns:repeat(3,minmax(160px,1fr));gap:36px 40px}
+}
+/* two columns before anything has to wrap awkwardly */
+@media(max-width:720px){
+  .site-footer{padding:52px 0 26px}
+  .footer-links{grid-template-columns:repeat(2,minmax(140px,1fr));gap:32px 28px}
+  .footer-bottom{margin-top:38px}
+}
+/* one column on a phone, with the rows far enough apart to tap */
+@media(max-width:520px){
+  .site-footer{padding:34px 0 24px}
+  .footer-links{grid-template-columns:1fr;gap:28px}
+  .footer-links strong{margin-bottom:12px}
+  .footer-links a{padding:9px 0}
+  .footer-bottom{margin-top:30px;gap:12px;flex-direction:column;align-items:flex-start}
+}
+
+/* ============ readability (not animation) ============ */
+.report-formats p,.human-note p,.use-case-ways p,.section-head>p,.hero .lead,
+.vid-deck,.cs-deck,.uc-outro p,.trust-strip-note span,.faq-intro p,
+.use-case-panel>p,.product-copy p,.legal-copy p,.article-body p,.cs-body p,
+.idx-hero p,.vid-lead-copy p,.chat-greet-sub,.modal-deck,.demo-form>p{max-width:68ch}
+.trust-strip-head h2{max-width:26ch}
+.plain-rows li p,.step-rows li p{max-width:60ch}
+@media(max-width:680px){
+  .use-case-tags span,.bc-eyebrow,.trust-metric span,.cs-figure span{font-size:.75rem}
+}
+
+/* ============ the four steps stay fully visible ============ */
+/* asked for earlier: no step is dimmed; the current one is marked by colour */
+.step-rows li{opacity:1}
+.step-rows li.active h3{color:var(--violet)}
+
+/* ===== v3 §13 · contrast and readable labels ===== */
+:root{--coral-ink:#EE851B}
+.eyebrow,.section-label,.bc-eyebrow,.cs-cta-eyebrow,.vid-cta-eyebrow,.uc-chip-label,.use-case-ways small,.cs-aside strong,.product-copy .kicker,.idx-pill.active,.chat-ring text,.trust-strip-head .trust-strip-label,.best-for small,.panel-label,.kicker{color:var(--coral-ink)}
+/* footer headings keep the brand coral, at the readable tone */
+.footer-links strong{color:var(--coral-ink)}
+.btn.primary{background:var(--coral);box-shadow:0 12px 24px rgba(238,133,27,.26)}
+.btn.primary:hover{background:#EE851B}
+/* Link hovers are interactive text, not labels, so they keep a readable
+   orange chosen for the background they sit on: the darker tone on the
+   light pages, the brand orange in the dark footer where it is the
+   stronger of the two. */
+.text-link:hover,.main-nav a:hover{color:#EE851B}
+.footer-links a:hover{color:#EE851B}
+.eyebrow,.section-label{font-size:.75rem}
+.form-note,.bc-eyebrow,.trust-metric span,.cs-figure span,.use-case-tags span,.uc-chip-label,.use-case-ways small,.cs-aside a{font-size:.75rem}
+.footer-links strong{font-size:.75rem}
+@media(max-width:680px){
+  .eyebrow,.section-label{font-size:.75rem;letter-spacing:.1em}
+  .form-note,.bc-eyebrow,.trust-metric span,.cs-figure span,.use-case-tags span,.uc-chip-label,.use-case-ways small{font-size:.75rem}
+  .demo-form .field{font-size:.875rem}
+  .login-form>label{font-size:.75rem}
+}
+
+/* ---- proof strip: eyebrow alignment and summary row ----
+   The eyebrow used to be the first cell inside the metric card and still
+   carried that cell's min-height:112px and padding:22px 26px. Out of the
+   card those became a 26px indent and a ~70px void above the headline.
+   .trust-metric keeps the original rule; only the label is corrected. */
+.trust-strip-head .trust-strip-label{display:block;min-height:0;padding:0;margin:0 0 14px}
+/* The old cell padding was also what held the eyebrow clear of the hero
+   above it. Put that breathing room back on the band itself. */
+@media(max-width:520px){.trust-strip{padding-top:20px}}
+@media(min-width:521px){.trust-strip{padding-top:28px}}
+@media(min-width:981px){.trust-strip{padding-top:48px}}
+
+/* The summary line runs the full width of the metric card above it, with
+   the link on its own line underneath. One line from 1440px up; below
+   that it wraps naturally. */
+.trust-strip-note{display:block}
+
+/* ---- How It Works: all four steps visible, one explained ----
+   Every step keeps its number, its heading and full opacity — nothing is
+   dimmed. Only the selected step shows its paragraph, which is what the
+   picture beside it is already wired to follow. Four paragraphs at once
+   was 179 words against an empty frame; this is the same component doing
+   what it was built to do. */
+.step-rows li>button>div>p{display:none}
+.step-rows li.active>button>div>p{display:block}
+.step-rows li{opacity:1}
+.step-rows li>button{cursor:pointer}
+
+/* ---- Reports and Trust: the static lists go two across ----
+   These lists have no selected state to collapse, so the only way to stop
+   them towering over the picture is to let them run in two columns. Four
+   items become 2x2, five become 3+2, and the column height drops by
+   roughly half. */
+@media(min-width:1180px){
+  .reports-section .feature-rows{
+    display:grid;grid-template-columns:1fr 1fr;column-gap:34px;align-content:start;
+  }
+  /* the marker is absolutely positioned at left:2px, so the row keeps
+     left padding to clear it */
+  .reports-section .feature-rows>li{border-top:0;padding:0 0 24px 24px}
+}
+.step-rows li:not(.active) h3{color:var(--ink)}
+.step-rows li.active h3{color:var(--violet)}
+
+/* ---- picture and text, in proportion ----
+   The picture was 705px of mostly-empty frame against a 521px column of
+   dense text: the widest thing on the row carried the least, and the
+   narrowest carried the most. Reversed. The picture is now 560px in all
+   three sections (Trust already used 560, so the three finally match),
+   and the text column takes the rest — which also widens the paragraphs
+   so they wrap to fewer lines and stop reading as a wall. */
+@media(min-width:981px){
+  .split-feature,
+  .reports-section .split-feature{grid-template-columns:560px minmax(0,1fr)}
+  .split-feature>.feature-rows p,
+  .plain-rows li p,.step-rows li p{max-width:72ch}
+}
+
+/* ---- two defects ----
+   1. .use-case-panel .uc-chip-label{margin:26px 0 0} was written to give
+      the Example use cases label room, but .use-case-panel>p:not(.section-label)
+      {margin:0} outranks it (the :not() argument adds a point of
+      specificity), so the label sat flush against the paragraph above it.
+      Restated here at a specificity that holds.
+   2. The two closing cards carried different label treatments: one
+      uppercase with tracking, one sentence case. Both now render the
+      words as they are written in the markup, styled as labels by weight
+      and colour instead of by transforming the text. */
+.use-case-panel>p.uc-chip-label{margin:26px 0 0}
+.human-note strong,.report-formats strong{
+  color:var(--coral);font-size:.75rem;font-weight:800;
+  letter-spacing:0;text-transform:none;
+}
+
+/* ---- type scale: hold the headings on a step below desktop too ----
+   Fluid headings are mid-climb at phone and tablet widths, which puts
+   them between steps (25.35px, 28.42px, 38.4px). Pinned to the scale. */
+@media(max-width:980px){
+  .hero-copy h1{font-size:2.25rem}
+  .section-head h2,.trust-strip-head h2,.faq-layout h2,.cta-layout h2,
+  .use-case-panel h3,.product-copy h3{font-size:1.5rem}
+}
+
+/* ---- final CTA joins the section rhythm ----
+   It had its own padding at every width: 28 where sections used 24, 80
+   where they used 60, 80 where they used 76, and 80 where they used 96 —
+   so above 1800px it was the tightest band on the page instead of the
+   most generous. Matched to .section at each breakpoint. */
+@media(max-width:680px){.final-cta{padding:24px 0}}
+@media(min-width:681px){.final-cta{padding:60px 0}}
+@media(min-width:981px){.final-cta{padding:76px 0}}
+@media(min-width:1800px){.final-cta{padding:96px 0}}
+
+/* ---- product walkthrough video ----
+   The slot was width:100% with a fixed min-height:370px, so its shape
+   drifted from 1.48 to 2.30 across screen sizes and never matched the
+   16:9 of real footage. Lock the ratio and let the height follow the
+   width. The dark panel keeps its own height and centres the video. */
+#product .developer-video-slot{aspect-ratio:16/9;min-height:0;height:auto}
+
+/* ---- screenshot placeholders ----
+   Same problem as the video, worse: these had no ratio and no fixed
+   height either, so their height came from whatever column sat beside
+   them. They ranged from 0.37 to 4.26. Locked to 16:9, matching the
+   walkthrough video, so every media box on the site is one shape.
+   .split-feature>.dashboard-placeholder carried height:100%, which fed
+   the row height back into the ratio and blew the picture across the
+   text column — that is why height is reset here too. */
+.dashboard-placeholder{aspect-ratio:16/9;min-height:0;height:auto;align-self:center}
+.split-feature>.dashboard-placeholder{height:auto;min-height:0;min-width:0}
+
+/* ---- section balance ----
+   1. The picture sits in a row whose height comes from the list beside it,
+      and it was centred in that row — so with the list 118-163px taller the
+      picture floated ~80px below the list's first line and nothing lined
+      up. Top-aligned, the two columns start together.
+   2. .report-formats had no styling at all beyond a margin and a colour,
+      so 'Your findings, your format' read as an orphan with ~700px of
+      empty space beside it. It now uses the same card as .human-note in
+      How It Works, so the two sections close the same way.
+   3. Both of those closing blocks sat 18px and 26px under their row,
+      against 54px gaps elsewhere in the same sections. Now 40px. */
+@media(min-width:981px){
+  .split-feature>.dashboard-placeholder,
+  .trust-layout>.dashboard-placeholder{align-self:start}
+}
+.human-note{margin-top:40px}
+.report-formats{
+  display:grid;grid-template-columns:.34fr 1fr;gap:30px;
+  margin:40px 0 0;padding:24px 28px;border-radius:20px;
+  background:var(--ink);color:#fff;font-size:.75rem;
+}
+/* Sentence case kept: uppercasing would change the words on screen and
+   strand the full stop. Styled as a label by colour and weight instead. */
+.report-formats strong{color:var(--coral);font-size:.75rem;font-weight:800;letter-spacing:0}
+.report-formats p{margin:0;max-width:none;color:#d5d4ea;font-size:.75rem}
+@media(min-width:981px){
+  .report-formats{min-height:78px;grid-template-columns:280px minmax(0,1fr);align-items:center}
+  .report-formats strong{white-space:nowrap}
+}
+@media(max-width:980px){
+  .human-note,.report-formats{margin-top:28px}
+  .report-formats{grid-template-columns:1fr;gap:8px;padding:20px 26px}
+}
+@media(max-width:680px){
+  .human-note,.report-formats{margin-top:20px;padding:16px}
+}
+@media(max-width:360px){
+  /* the smallest phones: trim the inside so the caption still clears
+     the edges without breaking the ratio */
+  .dashboard-placeholder{padding:14px}
+  .dashboard-placeholder .placeholder-mark{width:46px;height:46px}
+  .dashboard-placeholder strong{margin-top:10px;font-size:.875rem}
+  .dashboard-placeholder small{margin-top:5px}
+}
+.trust-strip-note span{display:block;max-width:none}
+.trust-strip-note .case-study-link{display:inline-flex;margin-top:12px}
+
+/* ============================================================
+   LARGE SCREENS — 1560px and up
+   Nothing in here applies below 1560px, so every existing
+   breakpoint (1180 / 1040 / 980 / 720 / 680 / 520 / 360) keeps
+   behaving exactly as before.
+   Rule of the house: the page may fill the monitor, but no line
+   of body copy gets longer than it already is at 1440px.
+   ============================================================ */
+@media(min-width:1560px){
+  .shell{width:min(1440px,calc(100% - 192px))}
+  .hero-grid{width:min(1440px,calc(100% - 192px))}
+  .section-head{max-width:880px}
+  /* Terms and Privacy are pure reading pages — hold them at the
+     1280px column so the lines do not get any longer. */
+  .legal-page .shell{width:min(1280px,calc(100% - 192px))}
+  .hero-copy>p.lead{max-width:56ch}
+  .hero-cta-support{text-wrap:balance}
+  .product-copy p{max-width:60ch}
+  .use-case-panel>p:not(.section-label){max-width:74ch}
+  .trust-rows li p,.plain-rows li p{max-width:72ch}
+  .feature-rows li p{max-width:72ch}
+  .faq-intro p{max-width:46ch}
+  .footer-about p{max-width:52ch}
+}
+@media(min-width:1800px){
+  .shell{width:min(1560px,calc(100% - 240px))}
+  .hero-grid{width:min(1560px,calc(100% - 240px))}
+  .section{padding:96px 0}
+  .section-head{margin-bottom:64px}
+  /* Four across only where there are enough cards to fill the row.
+     The homepage shows three, so it stays a three-up grid. */
+  .blog-grid:has(>:nth-child(5)),
+  .idx-grid:has(>:nth-child(5)){grid-template-columns:repeat(4,1fr)}
+}
+@media(min-width:2200px){
+  .shell{width:min(1680px,calc(100% - 300px))}
+  .hero-grid{width:min(1680px,calc(100% - 300px))}
+}
+
+/* ---- section eyebrows: one dash, one size, on every page ----
+   .section-label::before and .eyebrow::before lived in only 2 of the
+   site's 12 stylesheets, so the same class lost its dash on the case
+   study and video-library pages. Defined here in every block, at one
+   size (28px rule, 12px gap — the two old sizes were 28/12 and 26/10).
+   Three section eyebrows that never had it are included.
+   Labels inside cards (.kicker) and blog card meta (.bc-eyebrow) are
+   deliberately left plain. */
+.eyebrow{display:inline-flex;gap:12px;align-items:center}
+.section-label,
+.trust-strip-head .trust-strip-label,
+.cs-cta-eyebrow,.vid-cta-eyebrow{
+  /* the proof-strip label still carries flex-direction:column from its
+     old life as a metric cell — force the row back */
+  display:flex;flex-direction:row;justify-content:flex-start;
+  gap:12px;align-items:center
+}
+.section-label::before,.eyebrow::before,
+.trust-strip-head .trust-strip-label::before,
+.cs-cta-eyebrow::before,.vid-cta-eyebrow::before{
+  flex:none;width:28px;height:2px;background:currentColor;content:""
+}
+</style><style id=tp-chat>@media(prefers-reduced-motion:reduce){.back-link:hover,.back-link:hover .back-arrow,
+  .blog-card:hover,.blog-card:hover img,
+  .blog-tile:hover,.blog-tile:hover .bc-action em,.blog-tile:hover .bc-media img,
+  .btn:hover,.case-study-link:hover span,
+  .chat-card-btn:hover,.chat-card-btn:hover i,.chat-chips button:hover,
+  .chat-launch:hover,.chat-send:not(:disabled):hover,.chat-threads button:hover,
+  [data-chat-close]:hover,
+  .faq-prompts button:hover,
+  .feature-rows li:hover>span,.feature-rows li:hover>div,
+  .flow-card:hover,.legal-back:hover,.login-back:hover,.login:hover,
+  .login-reset [data-reset-back]:hover .back-arrow,
+  .use-case-tab:hover,.video-slot-play:hover{transform:none!important}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.chat-dock{
+  position:fixed;z-index:150;right:28px;bottom:28px;
+  display:flex;flex-direction:column;align-items:flex-end;gap:14px;
+  font-family:var(--body);
+}.chat-launch{
+  --bubble-dot:#fff;
+  position:relative;display:grid;width:62px;height:62px;place-items:center;
+  border:0;border-radius:50%;cursor:pointer;color:#fff;
+  background:linear-gradient(140deg,#7f78ff 0%,#675ffc 48%,#4b43e7 100%);
+  box-shadow:0 14px 34px rgba(75, 67, 231,.42);
+  transition:transform .22s cubic-bezier(.3,1.3,.5,1),box-shadow .22s ease;
+}.chat-launch:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 20px 44px rgba(75, 67, 231,.5)}.chat-launch:focus-visible{outline:3px solid rgba(103, 95, 252,.5);outline-offset:3px}.chat-launch .ico-bubble{width:30px;height:30px;display:block}.chat-launch-face,.chat-launch-down{grid-area:1/1;display:grid;place-items:center;transition:opacity .2s ease,transform .3s cubic-bezier(.3,1.3,.5,1)}.chat-launch-down svg{width:26px;height:26px;display:block}.chat-launch-down{opacity:0;transform:rotate(-90deg) scale(.6)}.chat-launch[aria-expanded="true"] .chat-launch-face{opacity:0;transform:rotate(90deg) scale(.6)}.chat-launch[aria-expanded="true"] .chat-launch-down{opacity:1;transform:none}.chat-launch[aria-expanded="true"] .chat-ring,
+.chat-launch[aria-expanded="true"] .chat-launch-hand{opacity:0;transform:scale(.6);animation:none}.chat-launch-hand{
+  position:absolute;top:-7px;left:-11px;
+  font-size:1.125rem;line-height:1;pointer-events:none;
+  transform-origin:75% 85%;
+  opacity:0;
+  animation:chat-hand 60s ease-in-out infinite;
+  transition:opacity .2s ease,transform .3s ease;
+}.chat-ring{
+  position:absolute;inset:-19px;width:calc(100% + 38px);height:calc(100% + 38px);
+  pointer-events:none;animation:chat-spin 18s linear infinite;
+  transition:opacity .2s ease,transform .3s ease;
+}.chat-ring text{
+  fill:var(--violet);font-family:var(--body);font-size:.75rem;font-weight:700;
+  text-transform:uppercase;
+}@media(prefers-reduced-motion:reduce){.chat-ring,.chat-launch-hand{animation:none}}.chat-panel{
+  display:flex;width:min(376px,calc(100vw - 40px));height:min(596px,calc(100vh - 132px));
+  flex-direction:column;overflow:hidden;
+  border:1px solid rgba(103, 95, 252,.2);border-radius:24px;background:#fff;
+  box-shadow:0 34px 90px rgba(29, 24, 122,.28);
+  animation:chat-in .3s cubic-bezier(.2,1,.3,1) both;
+}.chat-panel[hidden]{display:none!important}@media(prefers-reduced-motion:reduce){.chat-panel{animation:none}}.chat-head{
+  position:relative;display:flex;gap:11px;align-items:center;padding:15px 14px;
+  background:linear-gradient(122deg,#4b43e7 0%,#675ffc 58%,#7f78ff 100%);color:#fff;
+}.chat-avatar{
+  --bubble-dot:#675ffc;
+  display:grid;width:36px;height:36px;flex:0 0 auto;place-items:center;
+  border-radius:12px;background:#fff;color:#675ffc;box-shadow:0 6px 16px rgba(29, 24, 122,.26);
+}.chat-avatar .ico-bubble{width:23px;height:23px;display:block}.chat-id{display:flex;min-width:0;flex-direction:column;line-height:1.3}.chat-id strong{font-family:var(--display);font-size:.875rem;letter-spacing:-.01em}.chat-id small{display:flex;gap:6px;align-items:center;color:rgba(255,255,255,.84);font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-dot{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#4ade9b;box-shadow:0 0 0 3px rgba(74,222,155,.24)}.chat-head-actions{display:flex;gap:4px;margin-left:auto}.chat-icon{
+  display:grid;width:32px;height:32px;flex:0 0 auto;place-items:center;padding:0;
+  border:1px solid rgba(255,255,255,.3);border-radius:50%;
+  background:rgba(255,255,255,.14);color:#fff;cursor:pointer;
+  transition:background .18s ease,transform .18s ease,border-color .18s ease;
+}.chat-icon svg{width:17px;height:17px;display:block}.chat-icon[hidden]{display:none!important}.chat-icon:hover{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.58)}.chat-icon:focus-visible{outline:2px solid #fff;outline-offset:2px}.chat-back{margin-right:-3px}[data-chat-close]:hover{transform:rotate(90deg)}.chat-menu{
+  position:absolute;z-index:3;top:56px;right:12px;
+  display:grid;min-width:210px;padding:6px;
+  border:1px solid var(--line);border-radius:14px;background:#fff;
+  box-shadow:0 18px 40px rgba(17, 15, 53,.18);
+}.chat-menu[hidden]{display:none!important}.chat-menu button{
+  padding:9px 11px;border:0;border-radius:9px;background:none;
+  color:var(--ink);font:inherit;font-size:.75rem;text-align:left;cursor:pointer;
+}.chat-menu button:hover{background:var(--lilac);color:var(--violet)}.chat-body{position:relative;flex:1;min-height:0;background:linear-gradient(180deg,#f5f4ff 0%,#ebeaff 100%)}.chat-view{
+  position:absolute;inset:0;display:none;flex-direction:column;
+  padding:16px;overflow-y:auto;
+}.chat-view.is-on{display:flex;animation:chat-view-in .26s ease both}.chat-view[data-view="chat"]{padding:0}@media(prefers-reduced-motion:reduce){.chat-view.is-on{animation:none}}.chat-greet{padding:6px 4px 14px}.chat-hi{margin:0;font-family:var(--display);font-size:1.5rem;font-weight:800;letter-spacing:-.028em;color:var(--ink)}.chat-wave{display:inline-block;transform-origin:70% 80%;animation:chat-wave 3.4s ease-in-out infinite}.chat-greet-sub{margin:8px 0 0;color:var(--muted);font-size:.875rem;line-height:1.5}.chat-card{
+  display:block;width:100%;margin-bottom:12px;padding:14px;
+  border:1px solid rgba(103, 95, 252,.2);border-radius:16px;background:#fff;
+  box-shadow:0 6px 18px rgba(29, 24, 122,.06);text-align:left;
+}.chat-card>strong{display:block;margin-bottom:10px;font-family:var(--display);font-size:.875rem;color:var(--ink)}.chat-card-btn{
+  display:flex;gap:12px;align-items:center;cursor:pointer;font:inherit;
+  transition:transform .2s cubic-bezier(.3,1.2,.5,1),box-shadow .2s ease,border-color .2s ease;
+}.chat-card-btn span{display:flex;flex-direction:column;gap:3px}.chat-card-btn strong{font-family:var(--display);font-size:.875rem;color:var(--ink)}.chat-card-btn small{color:var(--muted);font-size:.75rem}.chat-card-btn i{
+  display:grid;width:34px;height:34px;flex:0 0 auto;place-items:center;margin-left:auto;
+  border-radius:50%;background:var(--lilac);color:var(--violet);
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}.chat-card-btn i svg{width:17px;height:17px}.chat-card-btn:hover{transform:translateY(-2px);border-color:rgba(103, 95, 252,.45);box-shadow:0 14px 30px rgba(29, 24, 122,.12)}.chat-card-btn:hover i{background:var(--violet);color:#fff;transform:translateX(2px)}.chat-search{position:relative;display:flex;align-items:center}.chat-search svg{position:absolute;left:11px;width:16px;height:16px;color:var(--muted);pointer-events:none}.chat-search input{
+  width:100%;min-height:40px;padding:0 12px 0 34px;
+  border:1px solid rgba(103, 95, 252,.24);border-radius:10px;background:#fafaff;
+  font:inherit;font-size:.75rem;color:var(--ink);outline:0;
+}.chat-search input:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(103, 95, 252,.14)}.chat-results{margin:0;padding:0;list-style:none}.chat-results:not(:empty){margin-top:10px;border-top:1px solid rgba(103, 95, 252,.14);padding-top:8px}.chat-results button{
+  display:flex;gap:8px;width:100%;align-items:center;padding:8px 6px;
+  border:0;border-radius:9px;background:none;color:var(--ink-2);
+  font:inherit;font-size:.75rem;line-height:1.4;text-align:left;cursor:pointer;
+}.chat-results button:hover{background:var(--lilac);color:var(--violet)}.chat-results button svg{width:15px;height:15px;flex:0 0 auto;margin-left:auto;opacity:.5}.chat-no-hit{padding:10px 6px;color:var(--muted);font-size:.75rem}.chat-log{display:flex;flex:1;flex-direction:column;gap:11px;padding:16px;overflow-y:auto}.chat-who{margin:2px 0 -6px 40px;color:var(--muted);font-size:.75rem;font-weight:700}.chat-row{display:flex;gap:8px;align-items:flex-end}.chat-row .chat-face{
+  --bubble-dot:#fff;
+  display:grid;width:30px;height:30px;flex:0 0 auto;place-items:center;
+  border-radius:10px;background:linear-gradient(140deg,#7f78ff,#4b43e7);color:#fff;
+}.chat-row .chat-face svg{width:18px;height:18px}.chat-msg{max-width:80%;margin:0;padding:11px 14px;border-radius:15px;font-size:.875rem;line-height:1.5}.chat-msg.bot{border-bottom-left-radius:5px;background:#fff;border:1px solid rgba(103, 95, 252,.18);color:var(--ink-2);box-shadow:0 4px 14px rgba(45, 40, 154,.06)}.chat-msg.me{align-self:flex-end;border-bottom-right-radius:5px;background:linear-gradient(135deg,#675ffc,#4b43e7);color:#fff;box-shadow:0 6px 18px rgba(75, 67, 231,.3)}.chat-msg{animation:chat-pop .3s cubic-bezier(.2,1.3,.4,1) both}@media(prefers-reduced-motion:reduce){.chat-msg{animation:none}}.chat-chips{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;margin-left:auto}.chat-chips button{
+  padding:8px 13px;border:1px solid rgba(103, 95, 252,.34);border-radius:999px;background:#fff;
+  color:var(--violet);font:inherit;font-size:.75rem;font-weight:700;cursor:pointer;
+  transition:background .18s ease,color .18s ease,transform .18s ease;
+}.chat-chips button:hover{background:var(--violet);color:#fff;transform:translateY(-1px)}.chat-typing{display:flex;gap:5px;align-items:center;width:auto;max-width:none;align-self:flex-start;padding:13px 15px}.chat-typing i{width:7px;height:7px;border-radius:50%;background:#7f78ff;animation:chat-bounce 1.1s infinite ease-in-out}.chat-typing i:nth-child(2){animation-delay:.16s}.chat-typing i:nth-child(3){animation-delay:.32s}@media(prefers-reduced-motion:reduce){.chat-typing i{animation:none}}.chat-form{display:flex;gap:6px;align-items:center;padding:11px;border-top:1px solid rgba(103, 95, 252,.16);background:#fafaff}.chat-form input{
+  flex:1;min-width:0;min-height:42px;padding:0 14px;
+  border:1px solid rgba(103, 95, 252,.24);border-radius:999px;background:#fff;
+  font:inherit;font-size:.875rem;outline:0;
+}.chat-form input:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(103, 95, 252,.13)}.chat-form .chat-icon{border-color:rgba(103, 95, 252,.24);background:#fff;color:var(--muted);width:38px;height:38px}.chat-form .chat-icon:hover{background:var(--lilac);color:var(--violet);border-color:rgba(103, 95, 252,.4)}.chat-send{
+  display:grid;width:42px;height:42px;flex:0 0 auto;place-items:center;
+  border:0;border-radius:50%;background:linear-gradient(140deg,#675ffc,#4b43e7);color:#fff;cursor:pointer;
+  transition:opacity .18s ease,transform .18s ease;
+}.chat-send svg{width:18px;height:18px}.chat-send:disabled{opacity:.35;cursor:default}.chat-send:not(:disabled):hover{transform:translateX(2px) scale(1.05)}.chat-picker{
+  position:absolute;z-index:2;right:11px;bottom:66px;left:11px;
+  padding:10px;border:1px solid rgba(103, 95, 252,.2);border-radius:16px;background:#fff;
+  box-shadow:0 20px 44px rgba(29, 24, 122,.2);
+}.chat-picker[hidden]{display:none!important}.chat-emoji-grid{display:grid;max-height:150px;grid-template-columns:repeat(8,1fr);gap:2px;margin-top:8px;overflow-y:auto}.chat-emoji-grid button{
+  padding:5px 0;border:0;border-radius:8px;background:none;font-size:1.125rem;line-height:1.4;cursor:pointer;
+}.chat-emoji-grid button:hover{background:var(--lilac)}.chat-section-title{margin:6px 4px 10px;font-family:var(--display);font-size:.875rem;font-weight:800;color:var(--ink)}.chat-threads{margin:0;padding:0;list-style:none}.chat-threads button{
+  display:flex;gap:10px;width:100%;align-items:center;margin-bottom:8px;padding:12px 13px;
+  border:1px solid rgba(103, 95, 252,.18);border-radius:14px;background:#fff;
+  font:inherit;text-align:left;cursor:pointer;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}.chat-threads button:hover{transform:translateY(-2px);border-color:rgba(103, 95, 252,.42);box-shadow:0 12px 26px rgba(29, 24, 122,.1)}.chat-threads span{display:flex;min-width:0;flex-direction:column;gap:3px}.chat-threads strong{font-family:var(--display);font-size:.75rem;color:var(--ink)}.chat-threads small{color:var(--muted);font-size:.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chat-threads em{margin-left:auto;color:var(--muted);font-size:.75rem;font-style:normal;white-space:nowrap}.chat-threads svg{width:15px;height:15px;flex:0 0 auto;color:var(--violet);opacity:.6}.chat-empty{margin:0 4px;color:var(--muted);font-size:.75rem}.chat-empty[hidden]{display:none!important}.chat-tabs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(103, 95, 252,.16);background:#fff}.chat-tabs button{
+  display:flex;flex-direction:column;gap:3px;align-items:center;padding:9px 0 10px;
+  border:0;border-top:2px solid transparent;background:none;
+  color:var(--muted);font:inherit;font-family:var(--body);font-size:.75rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  transition:color .18s ease,border-color .18s ease;
+}.chat-tabs button svg{width:19px;height:19px}.chat-tabs button:hover{color:var(--violet)}.chat-tabs button.is-on{color:var(--violet);border-top-color:var(--violet)}.chat-msg.chat-media{max-width:88%;padding:6px;background:#fff;border:1px solid rgba(103, 95, 252,.18)}.chat-media img,.chat-media video{
+  display:block;width:100%;height:auto;max-height:210px;object-fit:contain;
+  border-radius:10px;background:#f4f3ff;
+}.chat-media .chat-media-caption{display:block;padding:8px 8px 4px;color:var(--muted);font-size:.75rem;line-height:1.45}@media(max-width:680px){.chat-dock{right:16px;bottom:16px}.chat-launch{width:56px;height:56px}.chat-panel{width:calc(100vw - 32px);height:min(560px,calc(100vh - 116px))}}.icon-btn,.faq-list summary::after,.chat-icon,.chat-send,.chat-card-btn i,
+.chat-avatar,.chat-launch,.video-slot-play,.modal-close,.chat-face,
+.trust-rows li>span,.feature-rows li>span,.flow-card::before,.bc-media-tile{
+  display:grid;place-items:center;place-content:center;
+  line-height:1;text-align:center;
+}.icon-btn>svg,.chat-icon>svg,.chat-send>svg,.chat-card-btn i>svg,.modal-close>svg{display:block}@media(max-width:680px){.chat-dock{right:28px;bottom:28px}.chat-ring{inset:-14px;width:calc(100% + 28px);height:calc(100% + 28px)}.chat-panel{width:calc(100vw - 56px);height:min(78vh,560px)}}.report-formats p,.human-note p,.use-case-ways p,.section-head>p,.hero .lead,
+.vid-deck,.cs-deck,.uc-outro p,.trust-strip-note span,.faq-intro p,
+.use-case-panel>p,.product-copy p,.legal-copy p,.article-body p,.cs-body p,
+.idx-hero p,.vid-lead-copy p,.chat-greet-sub,.modal-deck,.demo-form>p{max-width:68ch}.eyebrow,.section-label,.bc-eyebrow,.cs-cta-eyebrow,.vid-cta-eyebrow,.uc-chip-label,.use-case-ways small,.cs-aside strong,.product-copy .kicker,.idx-pill.active,.chat-ring text,.trust-strip-head .trust-strip-label,.best-for small,.panel-label,.kicker{color:var(--coral-ink)}@keyframes chat-hand{
+  0%,100%{opacity:0;transform:translate(15px,15px) scale(.2) rotate(0deg)}
+  1.6%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}
+  2.6%{opacity:1;transform:translate(0,0) scale(1) rotate(20deg)}
+  3.4%{opacity:1;transform:translate(0,0) scale(1) rotate(-14deg)}
+  4.2%{opacity:1;transform:translate(0,0) scale(1) rotate(17deg)}
+  5%{opacity:1;transform:translate(0,0) scale(1) rotate(-9deg)}
+  5.8%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}
+  7.4%{opacity:0;transform:translate(15px,15px) scale(.2) rotate(0deg)}
+}@keyframes chat-wave{0%,72%,100%{transform:rotate(0)}78%{transform:rotate(16deg)}84%{transform:rotate(-10deg)}90%{transform:rotate(12deg)}}@keyframes chat-spin{to{transform:rotate(360deg)}}@keyframes chat-in{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}@keyframes chat-view-in{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}@keyframes chat-pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}@keyframes chat-bounce{0%,80%,100%{transform:translateY(0);opacity:.45}40%{transform:translateY(-5px);opacity:1}}</style><style id=ux-fixes>.menu-toggle svg,.nav-wrap .menu-toggle svg{width:20px!important;height:20px!important;min-width:20px;flex:0 0 auto} @media(max-width:980px){.nav-wrap{grid-template-columns:1fr auto!important}.nav-wrap .nav-actions{grid-column:2;justify-self:end}} @media(min-width:981px){.nav-wrap{grid-template-columns:auto 1fr auto!important}.main-nav{justify-content:center;gap:clamp(12px,1.7vw,29px)!important}.main-nav>a{white-space:nowrap}} @media(max-width:980px){.trust-layout{grid-template-columns:minmax(0,1fr)!important;gap:20px!important}.trust-rows{width:100%}} @media(min-width:981px) and (max-width:1180px){.trust-layout{grid-template-columns:minmax(0,380px) minmax(0,1fr)!important;gap:40px!important}} .hero-keyline strong{margin-right:.2em;word-spacing:normal} @media(min-width:681px) and (max-width:980px){.product-tab{display:flex;align-items:center;justify-content:center;text-align:center;min-height:84px} .blog-grid>.blog-tile:nth-child(3){grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr} .blog-tile:nth-child(3) .bc-media{position:relative;aspect-ratio:auto;height:100%;min-height:240px} .blog-tile:nth-child(3) .bc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover} .blog-tile:nth-child(3) .bc-body{align-self:center}} @media(max-width:680px){.chat-launch{width:48px!important;height:48px!important}.chat-launch .chat-ring{display:none!important}.chat-launch .chat-launch-face{width:48px!important;height:48px!important}.chat-dock{right:12px!important;bottom:12px!important}} a:focus-visible,button:focus-visible,summary:focus-visible,[role=tab]:focus-visible{outline:3px solid #433EB1;outline-offset:3px} .final-cta :focus-visible,.site-footer :focus-visible,.human-note :focus-visible,.report-formats :focus-visible{outline-color:#fff} @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}} .tp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap} .tp-od{display:inline-flex;align-items:flex-start;height:var(--lh);line-height:var(--lh);white-space:pre;font-variant-numeric:tabular-nums} .tp-d{display:inline-block;height:var(--lh);overflow:hidden} .tp-r{display:block;will-change:transform} .tp-r i{display:block;height:var(--lh);font-style:normal} .tp-t{display:inline-block;height:var(--lh);white-space:pre} .step-rows li:hover{padding-left:0!important;background:none!important} .step-rows li>button>span,.step-rows li:hover>button>span,.step-rows li:hover>button>div{transform:none!important} .step-rows li>button{align-items:center!important} .step-rows li.active>button{align-items:start!important} .step-rows li>button h3{display:flex;align-items:center;min-height:38px;margin:0} .step-rows li.active>button p{margin-top:2px} .tp-measure,.tp-measure *{transition:none!important} @media(min-width:981px){#how-it-works .split-feature{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:48px!important;align-items:stretch!important} #how-it-works .split-feature>.dashboard-placeholder{aspect-ratio:auto!important;height:auto!important;min-height:0!important;align-self:stretch!important} #how-it-works .step-rows{display:flex;flex-direction:column} #how-it-works .step-rows>li{flex:1 1 auto;display:flex;align-items:center;padding:14px 0} #how-it-works .step-rows>li>button{width:100%} #how-it-works .step-rows h3{white-space:nowrap} .human-note{display:flex!important;align-items:center;gap:28px!important;min-height:0!important;padding:16px 28px!important;margin-top:28px!important} .human-note strong{white-space:nowrap;flex:none;font-size:.875rem!important} .human-note p{max-width:none!important;width:auto!important;flex:1 1 auto;font-size:.875rem!important;white-space:nowrap}} @media(min-width:981px) and (max-width:1160px){.human-note p{white-space:normal}} @media(max-width:980px){.human-note{padding:20px 18px!important}} @media(min-width:981px){.reports-section .split-feature{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:48px!important;align-items:stretch!important} .reports-section .split-feature>.dashboard-placeholder{aspect-ratio:auto!important;height:auto!important;min-height:0!important;align-self:stretch!important;order:1} .reports-section .split-feature>.feature-rows{order:2;display:flex!important;flex-direction:column;justify-content:space-between;grid-template-columns:none!important} .reports-section .feature-rows>li{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;padding:14px 0 14px 24px!important;border-top:0} .reports-section .feature-rows>li::before{top:calc(50% - 4px)} .reports-section .feature-rows li p{min-height:0!important;max-width:none!important} .reports-section .feature-rows h3{margin-bottom:0}} .report-formats{display:flex!important;align-items:center;gap:18px!important;min-height:0!important;padding:16px 24px!important;margin-top:28px!important} .report-formats strong{white-space:nowrap;flex:none;font-size:.875rem!important} .report-formats p{max-width:none!important;flex:1 1 auto;font-size:.8125rem!important;line-height:1.5} @media(max-width:980px){.report-formats{display:grid!important;gap:6px!important;padding:14px 18px!important}} .feature-rows:not(.step-rows) li{transition:background .2s ease} .feature-rows:not(.step-rows) li:hover{padding-left:24px!important;background:none!important} .feature-rows:not(.step-rows) li:hover>div,.feature-rows:not(.step-rows) li:hover>span{transform:none!important} .plain-rows li::before{transition:transform .22s ease,box-shadow .22s ease} .plain-rows li h3{transition:color .2s ease} .plain-rows li:hover h3{color:#433EB1} .plain-rows li:hover::before{transform:scale(1.35);box-shadow:0 0 0 4px rgba(238,133,27,.14)} .plain-rows li:nth-child(2n):hover::before{box-shadow:0 0 0 4px rgba(67,62,177,.14)} .use-case-explorer{gap:28px!important;align-items:stretch!important} .use-case-panel{min-height:0!important;padding:32px 36px!important;display:flex!important;flex-direction:column} .use-case-panel>*{position:relative;z-index:1} .use-case-panel::after{z-index:0!important;pointer-events:none;width:130px!important;height:130px!important;right:-40px!important;bottom:-40px!important} .use-case-panel>.section-label{margin-bottom:12px!important} .use-case-panel h3{font-size:clamp(1.375rem,2.2vw,1.75rem)!important;line-height:1.18!important;margin:0 0 12px!important;letter-spacing:-.03em!important} .use-case-panel>p:not(.section-label){font-size:.9375rem!important;line-height:1.6!important;margin:0!important} .use-case-panel>p.uc-chip-label,.use-case-panel .uc-chip-label{margin:20px 0 0!important;font-size:.6875rem!important;letter-spacing:.12em} .use-case-panel .use-case-tags{margin:8px 0 0!important;padding-top:0!important;gap:7px} .use-case-panel .use-case-tags span{padding:6px 12px!important;font-size:.75rem!important} .use-case-panel .use-case-ways{margin-top:18px!important;padding-top:14px!important} .use-case-panel .use-case-ways small{font-size:.6875rem!important} .use-case-panel .use-case-ways p{font-size:.8125rem!important;margin:6px 0 0!important;line-height:1.55} .use-case-panel .uc-demo{position:relative;z-index:2;align-self:flex-start;width:auto!important;margin-top:18px!important;padding:12px 22px!important;min-height:0!important;font-size:.875rem!important} @media(min-width:981px){.use-case-explorer{grid-template-columns:330px minmax(0,1fr)!important} .use-case-tabs{display:grid!important;grid-auto-rows:1fr;gap:8px!important;align-content:stretch} .use-case-tab{display:flex;align-items:center;padding:0 20px!important;font-size:.875rem!important;min-height:0;white-space:normal!important}} @media(min-width:981px){.trust-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:48px!important;align-items:stretch!important} .trust-layout>.dashboard-placeholder{aspect-ratio:auto!important;height:auto!important;min-height:0!important;align-self:stretch!important} .trust-rows li{padding:14px 0 14px 24px!important} .trust-rows li::before{top:calc(14px + .5em + 2px)} .trust-rows h3{font-size:.9375rem!important;line-height:1.35} .trust-rows p{font-size:.8125rem!important;line-height:1.5;margin-top:4px}} .final-cta{background:linear-gradient(135deg,#17153f 0%,#25216a 55%,#312c91 100%)!important;color:#fff} .final-cta .cta-aurora{background:radial-gradient(46% 70% at 88% 8%,rgba(238,133,27,.26),transparent 66%),radial-gradient(40% 60% at 6% 100%,rgba(103,95,252,.34),transparent 70%)!important;animation:none!important;opacity:1} .final-cta .cta-ring,.final-cta .cta-orbit{display:none} .final-cta::before,.final-cta::after{display:none!important} .final-cta .eyebrow{color:#EE851B!important} .final-cta h2{color:#fff} .final-cta .cta-layout p{color:rgba(255,255,255,.8)} .final-cta .btn.light{background:#EE851B;color:#fff;box-shadow:0 12px 30px rgba(238,133,27,.35)} .final-cta .btn.light:hover{background:#f39a3d;color:#fff} .final-cta .cta-alt{color:rgba(255,255,255,.7)} .final-cta .cta-signal{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.16)!important;backdrop-filter:none} .final-cta .cta-signal small{color:rgba(255,255,255,.7)} .final-cta .cta-signal strong{color:#fff} .site-footer>.footer-bottom,.footer-bottom{box-sizing:border-box} .site-footer>.footer-bottom{padding-left:max(var(--page-gutter,24px),calc((100% - 1280px)/2))!important;padding-right:max(var(--page-gutter,24px),calc((100% - 1280px)/2))!important} .legal-page .site-footer>.footer-bottom{padding-left:max(var(--page-gutter,24px),calc((100% - 1280px)/2))!important;padding-right:max(var(--page-gutter,24px),calc((100% - 1280px)/2))!important} @media(max-width:680px){.site-footer>.footer-bottom{padding-left:24px!important;padding-right:24px!important}} .legal-page .shell{width:min(1280px,calc(100% - (var(--page-gutter,40px) * 2)))} .legal-header{background:transparent!important;border-bottom:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:10px 0 0} .legal-header .legal-nav{box-sizing:border-box;min-height:72px;padding:8px 12px 8px 22px;border:1px solid rgba(17,15,53,.08);border-radius:18px;background:rgba(255,251,248,.95);box-shadow:0 8px 30px rgba(17,15,53,.09)} .legal-main{padding:48px 0 80px} .legal-copy{max-width:none!important;width:100%;box-sizing:border-box;padding:clamp(1.5rem,4vw,3.5rem)!important} .legal-copy p,.legal-copy li,.legal-copy ul,.legal-copy ol{max-width:none!important} .legal-copy h1{font-size:clamp(1.75rem,3.4vw,2.5rem)!important;line-height:1.12!important;letter-spacing:-.035em!important;text-align:left!important;margin:0 0 10px!important} .legal-copy .legal-updated{margin:0 0 32px!important} .legal-copy h2{font-size:clamp(1.0625rem,1.8vw,1.25rem)!important;line-height:1.3!important;letter-spacing:-.015em!important;margin:36px 0 12px!important;text-align:left} .legal-copy p,.legal-copy li{font-size:.9375rem!important;line-height:1.75!important;color:#484484} .legal-copy p{margin:0 0 12px!important} .legal-copy ul,.legal-copy ol{margin:8px 0 18px!important;padding-left:24px!important;list-style-position:outside!important} .legal-copy ul{list-style-type:disc} .legal-copy ul ul{list-style-type:circle;margin:6px 0!important} .legal-copy li{margin:6px 0!important;padding-left:2px} .legal-copy [class*=ml-]{margin-left:0!important} .legal-copy .font-medium{font-weight:700;color:#110f35} .legal-copy section{margin:0!important} @media(max-width:680px){.legal-copy p,.legal-copy li{font-size:.875rem!important}.legal-header .legal-nav{padding:8px 10px 8px 16px}} .vid-card{cursor:pointer;transition:transform .25s ease} .vid-card:hover{transform:translateY(-3px)} .vid-card .developer-video-slot,.vid-card-lead .developer-video-slot{aspect-ratio:16/9;min-height:0!important;height:auto!important;width:100%} .vid-card:focus-visible{outline:3px solid #433EB1;outline-offset:4px;border-radius:20px} .vid-lead{align-items:center} .vid-cta{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px 56px!important;padding:40px 48px!important} .vid-cta-copy{max-width:56ch!important} .vid-cta-eyebrow,.cs-cta-eyebrow{margin:0 0 16px!important} .vid-cta h3,.cs-cta h3{font-size:clamp(1.5rem,2.4vw,1.875rem)!important} .vid-cta-row,.cs-cta-row{flex-direction:column;align-items:flex-start;gap:14px!important} .vid-cta .btn,.cs-cta .btn{background:#EE851B;color:#fff;box-shadow:0 12px 30px rgba(238,133,27,.3)} .vid-cta .btn:hover,.cs-cta .btn:hover{background:#f39a3d} @media(max-width:820px){.vid-cta,.cs-cta{grid-template-columns:1fr!important;padding:28px 22px!important}.vid-cta .btn,.cs-cta .btn{width:100%;justify-content:center}} .tp-lb{position:fixed;inset:0;z-index:400;display:grid;place-items:center;padding:24px;background:rgba(10,8,34,.6);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;transition:opacity .25s ease} .tp-lb.open{opacity:1} .tp-lb-box{position:relative;width:min(1080px,100%,calc((100vh - 120px) * 16 / 9));aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#110f35;box-shadow:0 40px 100px rgba(0,0,0,.45);transform:scale(.96);transition:transform .25s ease} .tp-lb.open .tp-lb-box{transform:scale(1)} .tp-lb-box>.developer-video-slot,.tp-lb-box>video,.tp-lb-box>iframe{position:absolute;inset:0;width:100%!important;height:100%!important;min-height:0!important;border:0;border-radius:0!important;margin:0} .tp-lb-box>video{object-fit:contain;background:#000} .tp-x{position:absolute;top:14px;right:14px;z-index:5;display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid rgba(17,15,53,.12);border-radius:50%;background:#fff;font-size:0;color:#110f35;cursor:pointer;transition:background .2s ease,transform .2s ease} .tp-x::before,.tp-x::after{content:'';position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:currentColor} .tp-x::before{transform:rotate(45deg)}.tp-x::after{transform:rotate(-45deg)} .tp-x:hover{background:#ecebff;transform:rotate(90deg)} .tp-lb-box>.tp-x{background:rgba(255,255,255,.92)} .modal-panel{position:relative} .modal-close.icon-btn,.modal-close{position:absolute!important;top:18px;right:18px;z-index:5;display:grid!important;place-items:center;width:40px!important;height:40px!important;min-width:0;padding:0!important;border:1px solid rgba(17,15,53,.12)!important;border-radius:50%!important;background:#fff!important;font-size:0!important;color:#110f35;line-height:0} .modal-close::before,.modal-close::after{content:'';position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:currentColor} .modal-close::before{transform:rotate(45deg)}.modal-close::after{transform:rotate(-45deg)} .modal-close:hover{background:#ecebff!important} .modal-title{padding-right:56px} .modal-grid{align-items:start!important} .modal-video{display:flex!important;flex-direction:column;gap:20px;min-height:0!important;padding:20px!important;place-items:initial!important;align-self:start} .modal-video .developer-video-slot,.modal-video-slot{width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:16/9;border-radius:16px!important;overflow:hidden;flex:none} .modal-video-slot video{width:100%;height:100%;object-fit:cover;display:block} .modal-video-note{padding:0 4px 4px} .cs-cta-wrap{margin-top:64px;margin-bottom:24px} .cs-cta-wrap .cs-cta{margin-top:0!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px 56px!important;padding:40px 48px!important} .cs-cta-wrap .cs-cta-copy{max-width:56ch} .trust-metric strong .tp-od,.trust-metric strong .tp-od *{font:inherit!important;color:inherit!important;letter-spacing:inherit!important;margin:0!important;padding:0!important;text-transform:none!important} .trust-metric strong .tp-od{display:inline-flex!important} .trust-metric strong .tp-d,.trust-metric strong .tp-t{display:inline-block!important} .trust-metric strong .tp-r,.trust-metric strong .tp-r i{display:block!important} .human-note{margin-top:36px!important} .plain-rows li::before{display:none!important} .plain-rows li h3{position:relative} .plain-rows li h3::before{content:'';position:absolute;left:-22px;top:calc(.675em - 4px);width:9px;height:9px;border-radius:50%;background:#EE851B;transition:transform .22s ease,box-shadow .22s ease} .plain-rows li:nth-child(2n) h3::before{background:#433EB1} .plain-rows li:hover h3::before{transform:scale(1.35);box-shadow:0 0 0 4px rgba(238,133,27,.14)} .plain-rows li:nth-child(2n):hover h3::before{box-shadow:0 0 0 4px rgba(67,62,177,.14)} .legal-header .legal-nav{background:rgba(255,251,248,.97)!important;-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%)} .vid-cta-copy,.cs-cta-wrap .cs-cta-copy{max-width:72ch!important} .vid-cta h3,.cs-cta h3{max-width:none!important} .legal-copy,.legal-copy *{overflow-wrap:anywhere} .legal-copy table,.legal-copy th,.legal-copy td{overflow-wrap:normal} .step-rows li>button p{display:block!important;max-height:0;opacity:0;margin-top:0!important;overflow:hidden;transform:translateY(-6px);transition:max-height .7s cubic-bezier(.4,0,.2,1),opacity .35s ease,margin-top .7s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)} .step-rows li.active>button p{max-height:var(--h,200px);opacity:1;margin-top:2px!important;transform:none;transition:max-height .7s cubic-bezier(.4,0,.2,1),opacity .6s ease .3s,margin-top .7s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1) .15s} .step-rows li{transition:flex-grow .7s cubic-bezier(.4,0,.2,1)} .step-rows li>button h3,.step-rows li>button>span{transition:color .45s ease,background .45s ease} .tp-in{animation:tpin .6s cubic-bezier(.2,.7,.2,1)} @keyframes tpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}} @media(prefers-reduced-motion:reduce){.step-rows li>button p,.step-rows li.active>button p{transition:none}} .btn.primary,.btn.primary span,.btn.primary svg,.final-cta .btn.light,.vid-cta .btn,.cs-cta .btn,.nav-actions .btn,.demo-form .btn.primary,.uc-demo{color:#110f35!important} .btn.primary:hover,.final-cta .btn.light:hover,.vid-cta .btn:hover,.cs-cta .btn:hover{color:#110f35!important} .modal[data-mode=form] .modal-video{display:none!important} .modal[data-mode=form] .modal-grid{grid-template-columns:minmax(0,1fr)!important} .modal[data-mode=form] .modal-panel{width:min(640px,100%)!important} .modal[data-mode=video] .demo-form{display:none!important} .modal[data-mode=video] .modal-grid{grid-template-columns:minmax(0,1fr)!important} .modal[data-mode=video] .modal-panel{width:min(880px,100%)!important} .modal[data-mode=video] .modal-video{padding:24px!important} .modal-video-note strong{color:#fff} .modal-video-note p,.modal-video-note li{color:#e6e5f8!important;font-size:.9375rem!important;line-height:1.55} .modal-video-note li::marker{color:#EE851B} @media(min-width:981px){.hero{min-height:max(100vh,720px)!important}} .eyebrow,.section-label,.bc-eyebrow,.uc-chip-label,.use-case-ways small,.cs-aside strong,.product-copy .kicker,.trust-strip-head .trust-strip-label,.best-for small,.panel-label,.kicker,.hero-keyline strong,.back-link{color:#A3580C} .final-cta .eyebrow,.cs-cta-eyebrow,.vid-cta-eyebrow,.site-footer .eyebrow,.site-footer .kicker{color:inherit} .final-cta .eyebrow{color:#EE851B!important} .cs-cta-eyebrow,.vid-cta-eyebrow{color:#FFCF9E!important} .cs-client .eyebrow,.cs-hero .eyebrow,.vid-hero .eyebrow,.cs-hero p.eyebrow,.vid-hero p.eyebrow,.cs-client p,.legal-copy .eyebrow{color:#A3580C!important} .cs-hero .section-label,.cs-hero .cs-eyebrow{color:#A3580C!important} .feature-rows li:nth-child(2)>span,.step-rows li:nth-child(2)>button>span{color:#A3580C!important} .idx-pill.active{color:#FFCF9E!important} .play,.video-slot-play{font-size:0!important;line-height:0!important;padding:0!important} .play::before,.video-slot-play::before{content:'';display:block;width:0;height:0;border-style:solid;border-color:transparent transparent transparent currentColor;border-width:4.5px 0 4.5px 7px;margin-left:2px} .video-slot-play::before{border-width:10px 0 10px 16px;margin-left:4px} .developer-video-slot .video-slot-play::before{} .hero-keyline strong{color:var(--ink)!important} .play::before{border-width:5px 0 5px 8px;margin-left:1px} .play::before{position:relative;top:2px} .play::before{top:3px;left:1px} .play::before{top:4px} .modal-panel{scrollbar-gutter:auto} .modal-panel::-webkit-scrollbar{width:14px} .modal-panel::-webkit-scrollbar-track{margin:28px 0;background:transparent} .modal-panel::-webkit-scrollbar-thumb{background:rgba(17,15,53,.28);border-radius:8px;border:4px solid transparent;background-clip:padding-box} .modal-panel::-webkit-scrollbar-thumb:hover{background:rgba(17,15,53,.45);background-clip:padding-box;border:4px solid transparent} @supports not selector(::-webkit-scrollbar){.modal-panel{scrollbar-width:thin;scrollbar-color:rgba(17,15,53,.3) transparent}} .faq-intro .eyebrow{color:#A3580C!important} @media(min-width:981px){.site-header .main-nav>a{font-size:14px!important} .site-header .nav-actions{gap:0!important} .site-header .nav-actions .login{margin-right:calc(clamp(12px,1.7vw,29px) - 16px)}} @media(min-width:981px) and (max-width:1099px){.site-header .main-nav{gap:10px!important} .site-header .nav-actions .login{margin-right:-6px}} @media(min-width:1100px) and (max-width:1199px){.site-header .main-nav{gap:12px!important} .site-header .nav-actions .login{margin-right:-4px}} @media(min-width:1200px){.site-header .nav-wrap{grid-template-columns:1fr auto 1fr!important} .site-header .nav-wrap>.brand-logo{justify-self:start} .site-header .nav-wrap>.main-nav{justify-self:center} .site-header .nav-wrap>.nav-actions{grid-column:3;justify-self:end}} .site-header{--logo-h:clamp(32px,26px + 1.1vw,48px);--hdr-px:0px} .site-header.scrolled{--hdr-px:16px} @media(min-width:1100px){.site-header.scrolled{--hdr-px:22px}} .site-header .nav-wrap{padding:8px var(--hdr-px)!important;min-height:72px!important;box-sizing:border-box;align-items:center;transition:padding .3s ease} .site-header .brand-logo{display:flex!important;align-items:center;align-self:center;height:auto!important} .site-header .brand-logo img,.site-header.scrolled .brand-logo img{display:block!important;height:var(--logo-h)!important;max-height:none!important;width:auto!important;transform:translateY(calc(var(--logo-h) * .16))!important} .site-header .nav-wrap .menu-toggle,.site-header.scrolled .nav-wrap .menu-toggle{width:42px!important;height:42px!important} @media(max-width:980px){.site-header .nav-wrap{display:flex!important;justify-content:space-between}} html.tp-dm-lock,html.tp-dm-lock body{overflow:hidden!important} .tp-dm{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(17,15,53,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .25s ease} .tp-dm.open{display:flex;opacity:1} .tp-dm *{box-sizing:border-box} .tp-dm-panel{position:relative;width:min(640px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:36px 34px 34px;border-radius:28px;background:var(--paper,#fffaf6);color:#110f35;font-family:var(--body,Inter,system-ui,sans-serif);box-shadow:0 35px 120px rgba(0,0,0,.34);outline:0;animation:tpDmIn .3s cubic-bezier(.2,.8,.2,1)} @keyframes tpDmIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}} @media(prefers-reduced-motion:reduce){.tp-dm-panel{animation:none}.tp-dm{transition:none}} .tp-dm-panel::-webkit-scrollbar{width:14px} .tp-dm-panel::-webkit-scrollbar-track{margin:28px 0;background:transparent} .tp-dm-panel::-webkit-scrollbar-thumb{background:rgba(17,15,53,.28);border-radius:8px;border:4px solid transparent;background-clip:padding-box} @supports not selector(::-webkit-scrollbar){.tp-dm-panel{scrollbar-width:thin;scrollbar-color:rgba(17,15,53,.3) transparent}} .tp-dm-x{position:absolute;top:18px;right:18px;z-index:3;width:40px;height:40px;padding:0;border:1px solid rgba(17,15,53,.12);border-radius:50%;background:#fff;color:#110f35;cursor:pointer;transition:background .2s ease} .tp-dm-x:hover{background:#ecebff} .tp-dm-x::before,.tp-dm-x::after{content:'';position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:currentColor} .tp-dm-x::before{transform:rotate(45deg)}.tp-dm-x::after{transform:rotate(-45deg)} .tp-dm-head{padding-right:48px} .tp-dm-eyebrow{display:flex;align-items:center;gap:12px;margin:0 0 12px;color:#A3580C;font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase} .tp-dm-eyebrow::before{content:'';width:28px;height:2px;background:#A3580C} .tp-dm-panel h2{margin:0;color:#110f35;font-family:var(--display,'Plus Jakarta Sans',Inter,system-ui,sans-serif);font-size:clamp(1.5rem,4.2vw,1.875rem);font-weight:800;line-height:1.2;letter-spacing:-.02em;outline:0} .tp-dm-deck{margin:12px 0 0;color:#5b589d;font-size:1rem;line-height:1.65} .tp-dm-form{margin-top:26px} .tp-dm-form h3{margin:0;color:#110f35;font-family:var(--display,'Plus Jakarta Sans',Inter,system-ui,sans-serif);font-size:1.25rem;font-weight:800;line-height:1.3} .tp-dm-sub{margin:8px 0 18px;color:#5b589d;font-size:.9375rem;line-height:1.6} .tp-f{display:block;margin:0 0 14px;color:#110f35;font-size:.875rem;font-weight:700} .tp-f input,.tp-f textarea{display:block;width:100%;margin-top:7px;padding:13px 15px;border:1px solid #d9d7ec;border-radius:14px;background:#fff;color:#110f35;font:500 .9375rem/1.4 var(--body,Inter,system-ui,sans-serif);transition:border-color .2s ease,box-shadow .2s ease} .tp-f input{min-height:48px} .tp-f textarea{min-height:104px;resize:vertical} .tp-f input::placeholder,.tp-f textarea::placeholder{color:#767399;font-weight:500} .tp-f input:focus,.tp-f textarea:focus{outline:0;border-color:#433EB1;box-shadow:0 0 0 3px rgba(67,62,177,.18)} .tp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border:1px solid transparent;border-radius:999px;background:#EE851B;color:#110f35;font:800 .9375rem/1 var(--body,Inter,system-ui,sans-serif);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,opacity .2s ease} .tp-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 12px 28px rgba(238,133,27,.34)} .tp-btn:focus-visible,.tp-slot:focus-visible,.tp-cal-d:focus-visible,.tp-cal-b:focus-visible,.tp-dm-x:focus-visible{outline:3px solid #433EB1;outline-offset:2px} .tp-btn:disabled{opacity:.45;cursor:not-allowed} .tp-dm-form .tp-btn{width:100%;margin-top:6px} .tp-btn-ghost{background:transparent;border-color:#d9d7ec;color:#110f35} .tp-btn-ghost:hover:not(:disabled){background:#ecebff;box-shadow:none} .tp-pick{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:22px;margin-top:24px} .tp-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px} .tp-cal-m{color:#110f35;font-size:1rem;font-weight:800} .tp-cal-b{width:36px;height:36px;padding:0;border:1px solid #d9d7ec;border-radius:50%;background:#fff;color:#110f35;font-size:1.25rem;line-height:1;cursor:pointer} .tp-cal-b:hover:not(:disabled){background:#ecebff} .tp-cal-b:disabled{opacity:.35;cursor:not-allowed} .tp-cal-dow,.tp-cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px} .tp-cal-dow span{padding:6px 0;color:#767399;font-size:.75rem;font-weight:700;text-align:center} .tp-cal-d{aspect-ratio:1;width:100%;min-width:0;padding:0;border:0;border-radius:50%;background:transparent;color:#110f35;font:700 .875rem/1 var(--body,Inter,system-ui,sans-serif);cursor:pointer;transition:background .15s ease,color .15s ease} .tp-cal-d:hover:not(:disabled):not(.on){background:#ecebff} .tp-cal-d:disabled{color:#a9a7c4;font-weight:500;cursor:not-allowed} .tp-cal-d.on{background:#433EB1;color:#fff} .tp-slots{min-width:0} .tp-slots-h{margin:0 0 10px;color:#110f35;font-size:.875rem;font-weight:700;line-height:1.45} .tp-slots-g{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-height:300px;overflow:auto;padding:2px 4px 2px 2px} .tp-slot{min-height:42px;padding:0 8px;border:1px solid #d9d7ec;border-radius:12px;background:#fff;color:#110f35;font:700 .875rem/1 var(--body,Inter,system-ui,sans-serif);cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease} .tp-slot:hover:not(.on){border-color:#433EB1;background:#ecebff} .tp-slot.on{border-color:#433EB1;background:#433EB1;color:#fff} .tp-tz{margin:16px 0 0;color:#5b589d;font-size:.8125rem} .tp-tz:empty{display:none} .tp-actions{display:flex;gap:12px;margin-top:22px} .tp-actions .tp-btn{flex:1} .tp-done{text-align:center;padding:12px 0 4px} .tp-tick{display:block;position:relative;width:64px;height:64px;margin:0 auto 20px;border-radius:50%;background:#EE851B} .tp-tick::after{content:'';position:absolute;left:23px;top:15px;width:14px;height:26px;border:solid #110f35;border-width:0 4px 4px 0;transform:rotate(45deg)} .tp-done .tp-dm-deck{margin-top:8px} .tp-when{display:grid;gap:10px;margin:24px 0 26px;padding:18px 20px;border-radius:18px;background:#fff;border:1px solid #e0dfec;text-align:left} .tp-when div{display:flex;justify-content:space-between;gap:16px} .tp-when dt{color:#5b589d;font-size:.875rem;font-weight:700} .tp-when dd{margin:0;color:#110f35;font-size:.9375rem;font-weight:800;text-align:right} .tp-done .tp-btn{min-width:160px} @media(max-width:620px){.tp-dm{padding:12px;align-items:flex-end} .tp-dm-panel{padding:28px 20px 22px;border-radius:24px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px)} .tp-pick{grid-template-columns:1fr;gap:18px} .tp-slots-g{max-height:none;grid-template-columns:repeat(3,1fr)} .tp-dm-x{top:14px;right:14px}} .tp-req{color:#B3261E;font-weight:800} .tp-opt{color:#5b589d;font-weight:500} .cs-body h3{margin:26px 0 8px;font-family:var(--display);font-size:1.25rem;line-height:1.25;letter-spacing:-.02em} .cs-body .cs-cta h3{margin:0} .product-tab{opacity:.5;transition:opacity .35s ease} .product-tab.active,.product-tab[aria-selected=true]{opacity:1} .login-footer,.login-footer span,.login-footer a{color:#252259;font-size:.875rem;font-weight:600;text-shadow:0 0 6px #fff,0 0 12px #fff,0 0 18px #fff} .login-footer a:hover{color:#433EB1} .chat-try{margin:6px 0 2px;color:var(--muted);font-size:.75rem;font-weight:600} .tp-sr-link{margin-top:14px;padding:0;border:0;background:none;color:var(--violet);font-weight:700;font-size:.875rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px} .tp-srd{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:16px;background:rgba(17,15,53,.55)} .tp-srd[hidden]{display:none} .tp-sr-panel{position:relative;width:min(860px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:32px;border-radius:24px;background:var(--paper);box-shadow:var(--shadow)} .tp-sr-panel h2{margin:8px 0 6px;font-family:var(--display);font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.03em} .tp-sr-deck{margin:0 0 20px;color:var(--muted);font-size:.875rem} .tp-sr-x{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:#fff;font-size:1.3rem;line-height:1;cursor:pointer} .tp-sr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0;padding:0;list-style:none} .tp-sr-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid var(--line);border-radius:18px;background:#fff} .tp-sr-card strong{font-family:var(--display);font-size:1rem} .tp-sr-q{margin:0;color:var(--muted);font-size:.8125rem} .tp-sr-actions{display:flex;gap:8px;margin-top:auto} .tp-sr-btn{padding:8px 14px;border-radius:999px;background:var(--coral);color:var(--ink);font-size:.8125rem;font-weight:700;cursor:pointer} .tp-sr-btn.ghost{background:transparent;border:1px solid var(--line)} .tp-sr-btn[aria-disabled=true]{opacity:.45;cursor:not-allowed} .tp-sr-soon{color:var(--muted);font-size:.75rem} @media(max-width:640px){.tp-sr-grid{grid-template-columns:1fr}.tp-sr-panel{padding:24px 18px}} .report-formats .tp-sr-link{color:#fff;white-space:nowrap;align-self:center} .tp-sr-note{margin:18px 0 0;padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--muted);font-size:.8125rem;line-height:1.55} .tp-sr-note strong{color:var(--ink)} .tp-sr-card .tp-sr-q{line-height:1.5} button.tp-sr-btn{border:0;font:inherit;font-size:.8125rem;font-weight:700} button.tp-sr-btn.ghost{border:1px solid var(--line)} .tp-sr-panel{width:min(1120px,100%);scrollbar-width:thin;scrollbar-color:rgba(67,62,177,.28) transparent} .tp-sr-grid{grid-template-columns:repeat(3,1fr)} .tp-sr-panel::-webkit-scrollbar{width:8px} .tp-sr-panel::-webkit-scrollbar-track{background:transparent;margin:22px 0} .tp-sr-panel::-webkit-scrollbar-thumb{background:rgba(67,62,177,.22);border-radius:8px;border:2px solid var(--paper)} .tp-sr-panel::-webkit-scrollbar-thumb:hover{background:rgba(67,62,177,.4)} @media(max-width:900px){.tp-sr-grid{grid-template-columns:repeat(3,1fr)}} @media(max-width:640px){.tp-sr-grid{grid-template-columns:1fr}} .login-skyline{display:none!important} .site-header{transition:padding .25s ease} .site-header:not(.scrolled){padding-top:5px!important;padding-bottom:5px!important} .login-header .brand-logo img{transform:translateY(21%)} .developer-video-slot,.developer-video-slot.hero-video-frame,.modal-video-slot{aspect-ratio:16/9!important;height:auto!important;min-height:0!important;max-height:none!important} .dashboard-placeholder{height:auto!important;min-height:0!important;max-height:none!important;align-self:center!important} .split-feature>.dashboard-placeholder[data-step-visual]{aspect-ratio:16/9!important} .dashboard-placeholder.report-placeholder{aspect-ratio:5/3!important} .dashboard-placeholder.brand-preview{aspect-ratio:4/3!important} #how-it-works .split-feature>.dashboard-placeholder{aspect-ratio:16/9!important;height:auto!important;align-self:center!important} .reports-section .split-feature>.dashboard-placeholder.report-placeholder{aspect-ratio:5/3!important;height:auto!important;align-self:center!important} .trust-layout>.dashboard-placeholder.brand-preview{aspect-ratio:4/3!important;height:auto!important;align-self:center!important} .hero .signal-stage>.hero-video-frame,.hero .signal-stage>.developer-video-slot.hero-video-frame{aspect-ratio:16/9!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;bottom:auto!important} .hero .signal-stage>.hero-video-frame{align-self:center!important} .hero .signal-stage{height:auto!important;min-height:0!important} .tp-sr-x{display:grid;place-items:center;padding:0;font-size:0!important;line-height:0;color:#110f35} .tp-sr-x::before,.tp-sr-x::after{content:'';position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;border-radius:2px;background:currentColor} .tp-sr-x::before{transform:rotate(45deg)}.tp-sr-x::after{transform:rotate(-45deg)} .tp-sr-x:hover{background:#ecebff} .dashboard-placeholder.has-shot{padding:0!important;background:#fff!important;place-items:stretch} .dashboard-placeholder.has-shot::after,.dashboard-placeholder.has-shot>.placeholder-mark,.dashboard-placeholder.has-shot>strong,.dashboard-placeholder.has-shot>small{display:none!important} .dashboard-placeholder .tp-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit} .legal-copy .legal-h3{font-size:1.05rem;font-weight:600;color:#110f35;margin:18px 0 8px} .legal-table-wrap{overflow-x:auto;margin:10px 0 18px;border:1px solid #e5e7eb;border-radius:12px} .legal-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:620px} .legal-table th{background:#f6f5ff;color:#110f35;text-align:left;font-weight:600;padding:10px 12px;border-bottom:1px solid #e5e7eb} .legal-table td{padding:10px 12px;border-bottom:1px solid #eef0f4;vertical-align:top;color:#374151;line-height:1.5} .legal-table tr:last-child td{border-bottom:0} .legal-copy .legal-table-wrap{padding:0!important}.legal-copy .legal-table{margin:0!important;border:0!important} .article-tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0} .article-tags span{font-size:.78rem;font-weight:600;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)} html body .btn.primary,html body a.btn.primary,html body button.btn.primary{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;height:50px!important;min-height:0!important;max-height:none!important;padding:2px 22px 0!important;line-height:16px!important} .article-hero:has(.article-banner[style*='2400/930'])::after{display:none} [data-hero]:has(.article-banner[style*='2400/930']) .article-banner-text{position:static;width:100%;margin:0;padding:24px max(var(--page-gutter),calc((100% - 1280px)/2)) 28px;border-radius:0;background:var(--ink);backdrop-filter:none;-webkit-backdrop-filter:none;text-shadow:none}</style><script>(function(){var RS=String.fromCharCode(8217),MD=String.fromCharCode(8212),LA=String.fromCharCode(8249),RA=String.fromCharCode(8250),BK=String.fromCharCode(8592);var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];var DOWS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];var SLOTS=[];for(var hh=10;hh<=17;hh++){SLOTS.push([hh,0]);SLOTS.push([hh,30])}var root=null,panel=null,steps={},lastFocus=null,booked=false;var st={y:0,m:0,date:null,slot:null,name:'',email:''};function h(t,a,k){var e=document.createElement(t);if(a)for(var n in a){if(n==='text')e.textContent=a[n];else if(n==='cls')e.className=a[n];else e.setAttribute(n,a[n])}(k||[]).forEach(function(c){if(c)e.appendChild(typeof c==='string'?document.createTextNode(c):c)});return e}function startOfDay(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}var PT='America/Los_Angeles';function ptToday(){try{var p={};new Intl.DateTimeFormat('en-US',{timeZone:PT,year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date()).forEach(function(x){p[x.type]=+x.value});return new Date(p.year,p.month-1,p.day)}catch(x){return startOfDay(new Date())}}function ptInstant(y,m,d,hh,mm){var u=Date.UTC(y,m,d,hh,mm);try{var f=new Intl.DateTimeFormat('en-US',{timeZone:PT,hourCycle:'h23',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric'});for(var i=0;i<2;i++){var p={};f.formatToParts(new Date(u)).forEach(function(x){p[x.type]=+x.value});var seen=Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute);u+=Date.UTC(y,m,d,hh,mm)-seen}}catch(e){}return new Date(u)}function ptAbbr(inst){try{var a=new Intl.DateTimeFormat('en-US',{timeZone:PT,timeZoneName:'short'}).formatToParts(inst).filter(function(x){return x.type==='timeZoneName'})[0];return a?a.value:'PT'}catch(e){return 'PT'}}function minDate(){var d=ptToday();d.setDate(d.getDate()+1);return d}function maxDate(){var d=ptToday();d.setDate(d.getDate()+60);return d}function fmtDate(d){return d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}function fmtTime(d,zone){var h=d.getHours(),m=d.getMinutes(),t=(h%12||12)+':'+('0'+m).slice(-2)+' '+(h<12?'AM':'PM');return zone?t+' '+ptAbbr(ptInstant(d.getFullYear(),d.getMonth(),d.getDate(),h,m)):t}function slotDate(s){return new Date(st.date.getFullYear(),st.date.getMonth(),st.date.getDate(),s[0],s[1])}function tz(){return PT}function field(label,input,optional){var m=optional?h('span',{cls:'tp-opt tp-opt-pill',text:'Optional'}):h('span',{cls:'tp-req',text:' *','aria-label':'required'});return h('label',{cls:'tp-f'},[label,m,input])}function build(){root=h('div',{cls:'tp-dm','aria-hidden':'true'});panel=h('section',{cls:'tp-dm-panel',role:'dialog','aria-modal':'true','aria-labelledby':'tp-dm-t1',tabindex:'-1'});var x=h('button',{cls:'tp-dm-x',type:'button','aria-label':'Close demo dialog'});x.addEventListener('click',close);panel.appendChild(x);var s1=h('div',{'data-step':'1'});s1.appendChild(h('header',{cls:'tp-dm-head'},[h('p',{cls:'tp-dm-eyebrow',text:'See TruPulse in action'}),h('h2',{id:'tp-dm-t1',tabindex:'-1',text:'See what TruPulse could do for your organization.'}),h('p',{cls:'tp-dm-deck',text:'In a 20-minute demo tailored to your audience and research goals, see how TruPulse creates sessions, gathers feedback, and turns responses into findings'+MD+'with your team guiding the process.'})]));var f=h('form',{cls:'tp-dm-form'});f.appendChild(h('h3',{text:'Tell us what you'+RS+'re interested in.'}));f.appendChild(h('p',{cls:'tp-dm-sub',text:'Share a few details so we can tailor the demo to your needs. You don'+RS+'t need a research plan to get started.'}));f.appendChild(field('Full name',h('input',{required:'',type:'text',name:'name',placeholder:'Your name',autocomplete:'name'})));f.appendChild(field('Email address',h('input',{required:'',type:'email',name:'email',placeholder:'name@company.com',autocomplete:'email'})));f.appendChild(field('Organization',h('input',{required:'',type:'text',name:'org',placeholder:'Organization name',autocomplete:'organization'})));f.appendChild(field('What would you like to explore?',h('textarea',{name:'explore',placeholder:'Tell us about your audience, intended use or what specifically you want to learn.'}),true));f.appendChild(h('button',{cls:'tp-btn',type:'submit','data-pick-a-time':'',text:'Pick a Time'}));f.addEventListener('submit',function(e){e.preventDefault();st.name=f.elements.name.value.trim();st.email=f.elements.email.value.trim();show(2)});s1.appendChild(f);var s2=h('div',{'data-step':'2',hidden:''});s2.appendChild(h('header',{cls:'tp-dm-head'},[h('p',{cls:'tp-dm-eyebrow',text:'Schedule your demo'}),h('h2',{id:'tp-dm-t2',tabindex:'-1',text:'Pick a date and time'}),h('p',{cls:'tp-dm-deck',text:'Choose a day, then a time that suits you.'})]));var cal=h('div',{cls:'tp-cal'});var nav=h('div',{cls:'tp-cal-nav'});var prev=h('button',{cls:'tp-cal-b',type:'button','aria-label':'Previous month',text:LA});var next=h('button',{cls:'tp-cal-b',type:'button','aria-label':'Next month',text:RA});var mt=h('strong',{cls:'tp-cal-m','aria-live':'polite'});nav.appendChild(prev);nav.appendChild(mt);nav.appendChild(next);cal.appendChild(nav);var dow=h('div',{cls:'tp-cal-dow','aria-hidden':'true'});DOWS.forEach(function(d){dow.appendChild(h('span',{text:d}))});cal.appendChild(dow);var grid=h('div',{cls:'tp-cal-g',role:'group','aria-label':'Choose a date'});cal.appendChild(grid);var slotsBox=h('div',{cls:'tp-slots'});var slotsHead=h('p',{cls:'tp-slots-h'});var slotsGrid=h('div',{cls:'tp-slots-g',role:'group','aria-label':'Choose a time'});slotsBox.appendChild(slotsHead);slotsBox.appendChild(slotsGrid);var pick=h('div',{cls:'tp-pick'},[cal,slotsBox]);s2.appendChild(pick);s2.appendChild(h('p',{cls:'tp-tz',text:tz()?('Times are shown in your time zone ('+tz().replace('_',' ')+').'):''}));var back=h('button',{cls:'tp-btn tp-btn-ghost',type:'button',text:BK+' Back'});var ok=h('button',{cls:'tp-btn',type:'button',disabled:'',text:'Confirm'});s2.appendChild(h('div',{cls:'tp-actions'},[back,ok]));back.addEventListener('click',function(){show(1)});prev.addEventListener('click',function(){st.m--;if(st.m<0){st.m=11;st.y--}drawCal()});next.addEventListener('click',function(){st.m++;if(st.m>11){st.m=0;st.y++}drawCal()});function drawCal(){mt.textContent=MONTHS[st.m]+' '+st.y;var lo=minDate(),hi=maxDate();prev.disabled=(st.y===lo.getFullYear()&&st.m<=lo.getMonth())||st.y<lo.getFullYear();next.disabled=(st.y===hi.getFullYear()&&st.m>=hi.getMonth())||st.y>hi.getFullYear();grid.textContent='';var first=new Date(st.y,st.m,1),lead=(first.getDay()+6)%7,days=new Date(st.y,st.m+1,0).getDate();for(var i=0;i<lead;i++)grid.appendChild(h('span',{cls:'tp-cal-e','aria-hidden':'true'}));for(var d=1;d<=days;d++){(function(d){var dt=new Date(st.y,st.m,d),wk=dt.getDay(),off=dt<lo||dt>hi||wk===0||wk===6;var sel=st.date&&dt.getTime()===st.date.getTime();var b=h('button',{cls:'tp-cal-d'+(sel?' on':''),type:'button','aria-pressed':sel?'true':'false','aria-label':fmtDate(dt),text:String(d)});if(off)b.disabled=true;b.addEventListener('click',function(){st.date=dt;st.slot=null;drawCal();drawSlots();sync()});grid.appendChild(b)})(d)}}function drawSlots(){slotsGrid.textContent='';if(!st.date){slotsHead.textContent='Select a date to see available times.';return}slotsHead.textContent=fmtDate(st.date)+' - times in Pacific Time (San Francisco)';SLOTS.forEach(function(s){var on=st.slot&&st.slot[0]===s[0]&&st.slot[1]===s[1];var b=h('button',{cls:'tp-slot'+(on?' on':''),type:'button','aria-pressed':on?'true':'false',text:fmtTime(slotDate(s))});b.addEventListener('click',function(){st.slot=s;drawSlots();sync()});slotsGrid.appendChild(b)})}function sync(){ok.disabled=!(st.date&&st.slot)}s2._init=function(){var lo=minDate();if(!st.date){st.y=lo.getFullYear();st.m=lo.getMonth()}drawCal();drawSlots();sync()};var s3=h('div',{'data-step':'3',hidden:'',cls:'tp-done'});var tick=h('span',{cls:'tp-tick','aria-hidden':'true'});var t3=h('h2',{id:'tp-dm-t3',tabindex:'-1'});var l3=h('p',{cls:'tp-dm-deck',text:'Your demo is scheduled.'});var dd=h('dd'),tt=h('dd');var dl=h('dl',{cls:'tp-when'},[h('div',null,[h('dt',{text:'Date'}),dd]),h('div',null,[h('dt',{text:'Time'}),tt])]);var done=h('button',{cls:'tp-btn',type:'button',text:'Done'});done.addEventListener('click',close);s3.appendChild(tick);s3.appendChild(t3);s3.appendChild(l3);s3.appendChild(dl);s3.appendChild(done);s3._fill=function(){var first=(st.name||'').split(' ')[0];t3.textContent='Thank you'+(first?', '+first:'')+'!';dd.textContent=fmtDate(st.date);tt.textContent=fmtTime(slotDate(st.slot),true)};ok.addEventListener('click',function(){var detail={name:st.name,email:st.email,organization:f.elements.org.value.trim(),interest:f.elements.explore.value.trim(),date:st.date.getFullYear()+'-'+('0'+(st.date.getMonth()+1)).slice(-2)+'-'+('0'+st.date.getDate()).slice(-2),time:('0'+st.slot[0]).slice(-2)+':'+('0'+st.slot[1]).slice(-2),timezone:tz(),start:ptInstant(st.date.getFullYear(),st.date.getMonth(),st.date.getDate(),st.slot[0],st.slot[1]).toISOString()};try{document.dispatchEvent(new CustomEvent('trupulse-demo-booked',{detail:detail}))}catch(x){}booked=true;s3._fill();show(3)});panel.appendChild(s1);panel.appendChild(s2);panel.appendChild(s3);steps={1:s1,2:s2,3:s3,form:f};root.appendChild(panel);root.addEventListener('mousedown',function(e){if(e.target===root)close()});document.body.appendChild(root);}function show(n){for(var k=1;k<=3;k++){if(k===n)steps[k].removeAttribute('hidden');else steps[k].setAttribute('hidden','')}if(n===2)steps[2]._init();panel.scrollTop=0;var t=document.getElementById('tp-dm-t'+n);if(t)t.focus({preventScroll:true});}function open(){if(!root)build();if(booked){steps.form.reset();st.date=null;st.slot=null;booked=false}lastFocus=document.activeElement;show(1);root.setAttribute('aria-hidden','false');root.classList.add('open');document.documentElement.classList.add('tp-dm-lock');var first=steps.form.elements.name;if(first)setTimeout(function(){first.focus({preventScroll:true})},60);document.addEventListener('keydown',key,true);}function close(){if(!root)return;root.classList.remove('open');root.setAttribute('aria-hidden','true');document.documentElement.classList.remove('tp-dm-lock');document.removeEventListener('keydown',key,true);if(lastFocus&&lastFocus.focus)try{lastFocus.focus({preventScroll:true})}catch(x){}}function key(e){if(e.key==='Escape'){e.preventDefault();close();return}if(e.key!=='Tab')return;var f=[].slice.call(panel.querySelectorAll('button,input,textarea')).filter(function(n){return !n.disabled&&n.offsetParent!==null});if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&(document.activeElement===a||document.activeElement===panel)){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-open-demo]');if(!b||b.getAttribute('data-open-demo')==='video')return;e.preventDefault();e.stopImmediatePropagation();open();},true);window.__tpOpenDemoDialog=open;})();(function(){var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;function ready(f){if(document.readyState!=='loading')f();else document.addEventListener('DOMContentLoaded',f)}ready(function(){var els=[].slice.call(document.querySelectorAll('.trust-metric strong'));if(!els.length||reduce)return;var jobs=[];els.forEach(function(el,idx){var txt=el.textContent;var cs=getComputedStyle(el);var lh=parseFloat(cs.lineHeight);if(isNaN(lh))lh=parseFloat(cs.fontSize)*1.2;var vis=document.createElement('span');vis.className='tp-od';vis.setAttribute('aria-hidden','true');vis.style.setProperty('--lh',lh+'px');var sr=document.createElement('span');sr.className='tp-sr';sr.textContent=txt;var run='';var reels=[];function flush(){if(run){var t=document.createElement('span');t.className='tp-t';t.textContent=run;vis.appendChild(t);run=''}}for(var i=0;i<txt.length;i++){var ch=txt.charAt(i);if(ch>='0'&&ch<='9'){flush();var d=document.createElement('span');d.className='tp-d';var r=document.createElement('span');r.className='tp-r';for(var k=0;k<20;k++){var n=document.createElement('i');n.textContent=String(k%10);r.appendChild(n)}d.appendChild(r);vis.appendChild(d);reels.push({r:r,v:+ch})}else run+=ch}flush();el.textContent='';el.appendChild(sr);el.appendChild(vis);jobs.push({reels:reels,idx:idx})});var fired=false;function go(){if(fired)return;fired=true;var c=0;jobs.forEach(function(j){j.reels.forEach(function(x){var delay=c*130;c++;setTimeout(function(){x.r.style.transition='transform 1.8s cubic-bezier(.16,.84,.3,1)';x.r.style.transform='translateY(calc(var(--lh) * -'+(10+x.v)+'))'},delay)})})}var host=document.querySelector('.trust-strip-grid')||els[0];if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){go();io.disconnect()}},{threshold:.4});io.observe(host)}else go();});ready(function(){var list=document.querySelector('[data-step-rows]');if(!list)return;var btns=[].slice.call(list.querySelectorAll('[data-step]'));if(btns.length<2)return;var lis=[].slice.call(list.children);function measure(){lis.forEach(function(l){var p=l.querySelector('p');if(p)p.style.setProperty('--h',(p.scrollHeight+4)+'px')});if(window.innerWidth<981){list.style.minHeight='';return}var cur=lis.map(function(l){return l.classList.contains('active')});list.style.minHeight='0px';document.documentElement.classList.add('tp-measure');var max=0;lis.forEach(function(l,i){lis.forEach(function(x){x.classList.remove('active')});l.classList.add('active');var h=list.getBoundingClientRect().height;if(h>max)max=h});lis.forEach(function(l,i){l.classList.toggle('active',cur[i])});document.documentElement.classList.remove('tp-measure');list.style.minHeight=Math.ceil(max)+'px'}var t;function sched(){clearTimeout(t);t=setTimeout(measure,120)}window.addEventListener('resize',sched);window.addEventListener('load',sched);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sched);measure();var scope=list.closest('.split-feature')||list;var timer=null,visible=false;function cur(){var a=list.querySelector('li.active [data-step]');var i=a?btns.indexOf(a):0;return i<0?0:i}function tick(){if(!visible||document.hidden)return;btns[(cur()+1)%btns.length].click()}function stop(){if(timer){clearInterval(timer);timer=null}}function start(){stop()}list.addEventListener('click',function(e){if(e.isTrusted)start();var v=document.querySelector('[data-step-visual]');if(v){var n=v.querySelectorAll('[data-step-title],[data-step-note],.placeholder-mark');n.forEach(function(x){x.classList.remove('tp-in');void x.offsetWidth;x.classList.add('tp-in')})}});if('IntersectionObserver' in window){new IntersectionObserver(function(en){visible=en[0].isIntersecting;if(visible)start();else stop()},{threshold:.2}).observe(scope)}else{visible=true;start()}});ready(function(){var c=document.querySelector('.cs-body .cs-cta'),l=document.querySelector('.cs-layout');if(c&&l){var w=document.createElement('div');w.className='shell cs-cta-wrap';w.appendChild(c);l.parentNode.insertBefore(w,l.nextSibling)}});ready(function(){var cards=[].slice.call(document.querySelectorAll('.vid-card'));if(!cards.length)return;var lb=null,last=null;function close(){if(!lb)return;var n=lb;lb=null;n.classList.remove('open');document.removeEventListener('keydown',key);setTimeout(function(){if(n.parentNode)n.parentNode.removeChild(n)},260);if(last&&last.focus)last.focus()}function key(e){if(e.key==='Escape')close()}function open(card){last=card;var slot=card.querySelector('.developer-video-slot');var box=document.createElement('div');box.className='tp-lb-box';var vid=card.querySelector('video'),ifr=card.querySelector('iframe'),src=card.getAttribute('data-video-src')||(slot&&slot.getAttribute('data-video-src'));if(ifr){var f=document.createElement('iframe');f.src=ifr.src;f.allow='autoplay; fullscreen';f.setAttribute('allowfullscreen','');box.appendChild(f)}else if(vid||src){var v=document.createElement('video');v.src=src||vid.currentSrc||vid.src;v.controls=true;v.autoplay=true;v.playsInline=true;box.appendChild(v)}else if(slot){box.appendChild(slot.cloneNode(true))}var x=document.createElement('button');x.type='button';x.className='tp-x';x.setAttribute('aria-label','Close video');box.appendChild(x);var o=document.createElement('div');o.className='tp-lb';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-label',(slot&&slot.getAttribute('aria-label'))||'Video');o.appendChild(box);document.body.appendChild(o);lb=o;o.addEventListener('click',function(e){if(e.target===o)close()});x.addEventListener('click',close);document.addEventListener('keydown',key);requestAnimationFrame(function(){o.classList.add('open');x.focus()})}cards.forEach(function(c){c.setAttribute('tabindex','0');c.setAttribute('role','button');var s=c.querySelector('.developer-video-slot');if(s)c.setAttribute('aria-label','Play: '+(s.getAttribute('aria-label')||'video').replace(' video placeholder',''));c.addEventListener('click',function(){open(c)});c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(c)}})});});ready(function(){var m=document.querySelector('.modal[data-demo-modal]');if(!m)return;function vids(){var s=m.querySelector('.modal-video-slot');if(!s)return[];var v=s.querySelector('video');var src=s.getAttribute('data-video-src');if(!v&&src){v=document.createElement('video');v.src=src;v.loop=true;v.playsInline=true;s.innerHTML='';s.appendChild(v)}return v?[v]:[]}function sync(){var open=m.classList.contains('open');vids().forEach(function(v){if(open){v.muted=true;v.setAttribute('playsinline','');var p=v.play();if(p&&p.catch)p.catch(function(){})}else{v.pause();try{v.currentTime=0}catch(e){}}})}new MutationObserver(sync).observe(m,{attributes:true,attributeFilter:['class']});});document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-open-demo]');if(!b)return;var m=document.querySelector('.modal[data-demo-modal]');if(m)m.setAttribute('data-mode',b.getAttribute('data-open-demo')==='video'?'video':'form')},true);document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-open-demo]');if(!b||document.querySelector('.modal[data-demo-modal]'))return;e.preventDefault();try{parent.postMessage({type:'trupulse-route',route:'home',fragment:'demo',article:''},'*')}catch(x){}},true);document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest('[data-chat-ask]');if(c&&!document.querySelector('.chat-launch')){e.preventDefault();try{parent.postMessage({type:'trupulse-route',route:'home',fragment:'chat',article:''},'*')}catch(x){}return}var a=e.target.closest&&e.target.closest('a[href^=http]');if(a){var h=a.getAttribute('href')||'';if(/^https?:[/][/]([a-z0-9-]+[.])*trupulse[.]ai/i.test(h)){e.preventDefault();try{parent.postMessage({type:'trupulse-route',route:'home',fragment:'',article:''},'*')}catch(x){}}}},true);ready(function(){[].forEach.call(document.querySelectorAll('a[href^=http]'),function(a){if(!/^https?:[/][/]([a-z0-9-]+[.])*trupulse[.]ai/i.test(a.getAttribute('href')||'')){a.setAttribute('target','_blank');a.setAttribute('rel','noopener noreferrer')}});});document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=(a.getAttribute('href')||'').toLowerCase();if(!/^(https?:|mailto:|tel:|[/][/])/.test(h))return;if(h.indexOf('https://www.linkedin.com/company/trupulse')===0||h==='mailto:hello@trupulse.ai'||h.indexOf('https://mail.google.com/mail/?view=cm')===0)return;e.preventDefault();e.stopPropagation();if(/^mailto:/.test(h)){var m=document.querySelector('.modal[data-demo-modal]');if(m){var b=document.querySelector('[data-open-demo=form]');if(b)b.click()}else{try{parent.postMessage({type:'trupulse-route',route:'home',fragment:'demo',article:''},'*')}catch(x){}}}},true);ready(function(){var n=document.querySelector('.site-header .main-nav');if(!n)return;var u=null,r=null;[].forEach.call(n.children,function(a){var h=a.getAttribute('href');if(h==='#use-cases')u=a;if(h==='#reports')r=a});if(u&&r&&u.nextElementSibling===r)n.insertBefore(r,u)});})();window.addEventListener('message',function(e){var d=e.data;if(!d)return;if(d.type==='trupulse-open-chat'){setTimeout(function(){var c=document.querySelector('.chat-launch');if(c)c.click()},350)}if(d.type==='trupulse-scroll'){var t=document.getElementById(d.id);if(t)t.scrollIntoView()}});</script><style id="tp-skip-style">.tp-skip{position:absolute;left:-10000px;top:12px;z-index:10000;padding:10px 16px;border-radius:10px;background:#110f35;color:#fff;font:600 15px/1.2 Inter,system-ui,sans-serif;text-decoration:none}.tp-skip:focus{left:16px}#main-content:focus{outline:none}</style>
+__ART_JSONLD__
+<style id="tp-mobile-nav">@media (max-width:640px){.article-nav{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:nowrap!important}.article-nav .brand-logo{flex:0 0 auto!important;margin-right:auto!important}.article-nav .brand-logo img{width:104px!important;min-width:104px!important;max-width:104px!important;height:auto!important}.article-nav .back-link{flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;padding:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;gap:0!important}.article-nav .back-link .back-arrow{font-size:18px!important;line-height:1!important}.article-nav .btn.primary{flex:0 0 auto!important;white-space:nowrap!important;width:auto!important;padding:0 16px!important;height:44px!important;font-size:14px!important}.article-nav .btn.primary span{display:none!important}}@media (max-width:380px){.article-nav{padding-left:16px!important;padding-right:16px!important;gap:6px!important}.article-nav .brand-logo img{width:88px!important;min-width:88px!important;max-width:88px!important}.article-nav .btn.primary{padding:0 12px!important;font-size:13px!important}}@media (max-width:380px){header .shell.article-nav{padding-left:16px!important;padding-right:16px!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}.article-nav .brand-logo{width:auto!important;min-width:0!important;padding:0!important}}</style><style id="tp-card-ratio">.bc-media{aspect-ratio:2400/930!important;height:auto!important}.bc-media>img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}.bc-desc{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:4!important;line-clamp:4!important;overflow:hidden!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;max-height:calc(4 * 1.55em)!important}.blog-tile .bc-action{margin-top:auto!important;padding-top:18px!important}</style><style id="tp-hero-slim">.article-banner-text h1,.article-banner-text .article-meta{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}.article-banner-text .article-deck{display:none!important}.article-banner-text{padding-top:18px!important;padding-bottom:18px!important}.article-banner-text .article-tags{margin:0!important}</style><style id="tp-card-v2">.tp-sro{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}.bc-title{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;min-height:calc(2 * 1.32em)!important}.bc-desc{-webkit-line-clamp:2!important;line-clamp:2!important;max-height:calc(2 * 1.55em)!important;min-height:calc(2 * 1.55em)!important}</style><style id="tp-heur">
+.tp-err{display:block;margin:6px 0 0;color:#c2410c;font:600 12.5px/1.35 Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none}
+.tp-invalid{border-color:#c2410c!important;box-shadow:0 0 0 3px rgba(194,65,12,.14)!important}
+.tp-crumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;font:600 13px/1.3 Inter,system-ui,sans-serif;color:rgba(255,255,255,.72)}
+.tp-crumb a{color:#ffd7c6;text-decoration:none}.tp-crumb a:hover{text-decoration:underline}
+.tp-crumb span[aria-hidden]{opacity:.55}
+.developer-video-slot{position:relative}
+.tp-soon{position:absolute;z-index:3;top:14px;left:14px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.92);color:#110f35;font:700 11px/1.2 Inter,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+</style><style id="tp-card-v3">
+.blog-tile .bc-body{padding-top:20px!important;padding-bottom:22px!important}
+.bc-eyebrow{color:#6b6a8a!important;font-size:11px!important;font-weight:600!important;letter-spacing:.08em!important}
+.bc-title{min-height:0!important;margin:8px 0 8px!important}@media (min-width:981px){.bc-title{min-height:calc(2 * 1.32em)!important}}.article-aside,[data-toc]{overflow-x:hidden!important}@media (min-width:1280px) and (max-width:1439px){.bc-title{font-size:15px!important}}.article-aside a,[data-toc] a{overflow-wrap:anywhere}
+.bc-desc{min-height:0!important}
+.blog-tile .bc-action{margin-top:auto!important;padding-top:14px!important}
+</style><style id="tp-chat-pre">.chat-msg{white-space:pre-line}</style></head>
+<body class="article-page"><a class="tp-skip" href="#main-content">Skip to main content</a><header class="article-header"><div class="shell article-nav"><a class="logo brand-logo" href="/" data-single-route="home"><img src="__ASSET1__" alt="TruPulse" width="384" height="121"></a><a class="back-link" href="__BACK_HREF__" data-single-route="__BACK_ROUTE__" aria-label="Back to __BACK_LABEL__"><span class="back-arrow" aria-hidden="true">←</span> Back to __BACK_LABEL__</a><button class="btn primary" type="button" data-open-demo="form">Book a Demo</button></div></header>
+<main id="main-content" tabindex="-1"><section class="article-hero" data-hero>__ART_HERO__</section>
+<div class="shell article-layout"><nav class="article-aside" aria-label="On this page" data-toc>__ART_TOC__</nav><article class="article-body" data-body>__ART_BODY__</article></div>
+<section class="more-blogs"><div class="shell"><div class="more-head"><h2>Explore other blogs</h2><a href="/blogs" data-single-route="blogs">View all articles →</a></div><div class="more-grid" data-more>__ART_MORE__</div></div></section><footer class="site-footer"><div class="shell"><div class="footer-grid"><div class="footer-about"><a class="logo brand-logo footer-brand-logo" href="/" data-single-route="home"><img src="__ASSET5__" alt="TruPulse" width="384" height="121"></a><p>AI-led research to understand the people who matter to your organization. Create, conduct, and analyze surveys, 1:1 discussions, and focus groups&mdash;with your team guiding the process.</p></div><div class="footer-links"><div><strong>Explore</strong><a href="/#how-it-works" data-single-route="home" data-fragment="how-it-works">How TruPulse Works</a><a href="/#product" data-single-route="home" data-fragment="product">Session Types</a><a href="/#reports" data-single-route="home" data-fragment="reports">Reports</a><a href="/#use-cases" data-single-route="home" data-fragment="use-cases">Use Cases</a></div><div><strong>Resources &amp; Help</strong><a href="/blogs" data-single-route="blogs">Articles</a><a href="#" data-chat-ask>Ask Our AI Assistant</a><a href="mailto:hello@trupulse.ai">Contact Us</a></div><div><strong>Connect</strong><a href="#" data-open-demo="form">Book a Demo</a><a href="https://www.linkedin.com/company/trupulse" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:hello@trupulse.ai">hello@trupulse.ai</a></div></div></div></div><div class="footer-bottom"><span>© <span data-year>2025</span> TruPulse. All rights reserved.</span><span class="legal-footer-links"><a href="/privacy" data-single-route="privacy">Privacy Policy</a><span>·</span><a href="/terms" data-single-route="terms">Terms and Conditions</a></span></div></div></footer><script>
+/* The copyright year is fixed editorial content, not the visitor clock. */
+
+/* In an about:srcdoc document a bare "#section" link has no base URL to resolve
+   against, so the browser resolves it against the PARENT url and navigates the frame
+   away from the site entirely - every nav link blanked the page. Handle in-page
+   anchors ourselves instead. */
+document.addEventListener("click",function(event){
+  var a=event.target.closest('a[href^="#"]');
+  if(!a||a.hasAttribute("data-single-route"))return;
+  event.preventDefault();
+  var id=a.getAttribute("href").slice(1);
+  if(!id||id==="top"){window.scrollTo({top:0,behavior:"smooth"});return;}
+  var target=document.getElementById(id);
+  if(target){target.scrollIntoView({behavior:"smooth",block:"start"});
+    if(target.hasAttribute("tabindex")||/^(a|button|input|h[1-6])$/i.test(target.tagName)){target.focus({preventScroll:true});}}
+});
+/* Highlight the entry for whichever section is currently being read, and keep the
+   sidebar list scrolled to it when the list is taller than the sticky area. */
+(function(){
+  var toc=document.querySelector("[data-toc]"); if(!toc) return;
+  var links=[].slice.call(toc.querySelectorAll("a[href^='#']"));
+  var targets=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});
+  function setActive(i){
+    links.forEach(function(a,n){
+      a.classList.toggle("active",n===i);
+      if(n===i) a.setAttribute("aria-current","true"); else a.removeAttribute("aria-current");
+    });
+  }
+  function onScroll(){
+    var line=window.innerHeight*0.3, best=0;
+    targets.forEach(function(t,i){ if(t && t.getBoundingClientRect().top<=line) best=i; });
+    setActive(best);
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});
+  window.addEventListener("resize",onScroll);
+  onScroll();
+})();
+
+/* Route clicks are handled by the capture-phase listener in <head>. */
+</script><div class="modal" data-demo-modal aria-hidden="true">
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="demo-title"><button class="icon-btn modal-close" type="button" aria-label="Close demo dialog">×</button><header class="modal-title"><p class="section-label">See TruPulse in action</p><h2 id="demo-title">Watch the workflow. Bring your question.</h2></header><div class="modal-grid"><div class="modal-video"><div class="developer-video-slot modal-video-slot" aria-label="TruPulse product walkthrough video placeholder"><span class="video-slot-play" aria-hidden="true">▶</span><strong>TruPulse product walkthrough</strong><small>See how a question becomes a report</small></div></div><form class="demo-form" data-demo-form><h3>Tell us what you&rsquo;re interested in.</h3><p>Tell us what you want to understand. We will show the most relevant TruPulse research workflow.</p><label class="field">Full name<input required type="text" placeholder="Your name"></label><label class="field">Email address<input required type="email" placeholder="name@company.com"></label><label class="field">Organization<input required type="text" placeholder="Organization name"></label><label class="field">What would you like to explore?<textarea placeholder="Tell us about your audience, intended use or what specifically you want to learn."></textarea></label><button class="btn primary" type="submit">Book a Demo</button>
+              <!-- INTEGRATION POINT: wire this form to your CRM / scheduling endpoint. --></form></div></section>
+  </div>
+
+<script>
+/* This article, verbatim from the live TruPulse article of the same name. */
+var ARTICLE = __ARTICLE__;
+var MORE = __MORE__;
+(function () {
+  var a = ARTICLE;
+  if (!a || document.querySelector("[data-body]").children.length) return;
+  var esc = function (t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); };
+
+  document.querySelector("[data-title]").textContent = a.t + " | TruPulse";
+
+  /* --- banner: picture behind, title on a solid panel inside it --- */
+  document.querySelector("[data-hero]").innerHTML =
+    '<figure class="article-banner" style="aspect-ratio:' + a.ar + ';background-image:url(&quot;' + a.bg + '&quot;)">' +
+      '<img src="' + a.img + '" alt="' + esc(a.t) + '" decoding="async"></figure>' +
+    '<div class="article-banner-text">' +
+      '<p class="article-meta">' + esc(a.c) + ' &middot; ' + esc(a.r) + ' read &middot; TruPulse Research Team</p>' +
+      '<h1>' + esc(a.t) + '</h1>' +
+      (a.d ? '<p class="article-deck">' + esc(a.d) + '</p>' : '') + (a.g && a.g.length ? '<p class="article-tags">' + a.g.map(function(t){return '<span>' + esc(t) + '</span>';}).join('') + '</p>' : '') +
+    '</div>';
+
+  /* --- contents rail: the article's own headings, nothing else --- */
+  document.querySelector("[data-toc]").innerHTML =
+    "<strong>In this article</strong>" +
+    a.h.map(function (h) { return '<a href="#' + h.id + '">' + esc(h.t) + "</a>"; }).join("");
+
+  /* --- body: the blocks in their original order and wording --- */
+  document.querySelector("[data-body]").innerHTML = a.b.map(function (b) {
+    if (b.k === "h2") return '<h2 id="' + b.id + '">' + esc(b.t) + "</h2>";
+    if (b.k === "h3") return "<h3>" + esc(b.t) + "</h3>";
+    if (b.k === "ul" || b.k === "ol") return "<" + b.k + ">" + b.items.map(function (i) { return "<li>" + esc(i) + "</li>"; }).join("") + "</" + b.k + ">";
+    return "<p>" + esc(b.t) + "</p>";
+  }).join("");
+
+  /* --- explore: three other articles, same card as everywhere else --- */
+  document.querySelector("[data-more]").innerHTML = MORE.map(function (x) {
+    return '<a class="blog-tile" href="/blogs/blog/' + x.s + '" data-single-route="article" data-article="' + x.s + '">' +
+      '<span class="bc-media"><img src="' + x.img + '" alt="' + esc(x.t) + '" loading="lazy" decoding="async"></span>' +
+      '<span class="bc-body"><span class="bc-eyebrow">' + "<span class=\"tp-sro\">" + esc(x.c) + " &middot; </span>" + esc(x.r) + " read</span>" +
+      '<span class="bc-title">' + esc(x.t) + "</span>" +
+      '<span class="bc-desc">' + esc(x.d) + "</span>" +
+      '<span class="bc-action">Read Article <em>&rarr;</em></span></span></a>';
+  }).join("");
+})();
+</script>
+<script>
+const modal = document.querySelector("[data-demo-modal]");
+const FOCUSABLE = 'a[href],button:not([disabled]),input,textarea,select,[tabindex]:not([tabindex="-1"])';
+let lastFocused = null;
+function openModal(focus) {
+  lastFocused = document.activeElement;
+  modal.classList.add("open");
+  document.body.classList.add("modal-open");
+  modal.setAttribute("aria-hidden", "false");
+  if (focus === "form") setTimeout(() => modal.querySelector("input")?.focus(), 120);
+  else setTimeout(() => modal.querySelector(".modal-close")?.focus(), 120);
+}
+function closeModal() {
+  if (!modal.classList.contains("open")) return;
+  modal.classList.remove("open");
+  document.body.classList.remove("modal-open");
+  modal.setAttribute("aria-hidden", "true");
+  // Return focus to whatever opened the dialog.
+  lastFocused?.focus?.();
+}
+// Keep Tab inside the dialog while it is open.
+modal.addEventListener("keydown", (event) => {
+  if (event.key !== "Tab") return;
+  const items = [...modal.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+function bindDemoButtons() {
+  document.querySelectorAll("[data-open-demo]").forEach((button) => {
+    button.onclick = () => openModal(button.dataset.openDemo || "form");
+  });
+}
+modal.querySelector(".modal-close").addEventListener("click", closeModal);
+modal.addEventListener("mousedown", (event) => { if (event.target === modal) closeModal(); });
+document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeModal(); });
+bindDemoButtons();
+</script>
+<script>document.querySelectorAll("[data-year]").forEach(function(el){el.textContent=new Date().getFullYear();});</script>
+<div class="tp-chat-faq" hidden><details><summary>What is TruPulse?</summary><p>TruPulse is an AI-led research platform that creates, conducts, and analyzes surveys, 1:1 discussions, and focus groups. Your team sets the direction, approves the questions, and reviews the findings.</p></details><details><summary>Who sees a participant&rsquo;s identity?</summary><p>The Creator chooses whether a session is anonymous or identified. Participants are told which setting applies before they take part.</p><p>In anonymous sessions, participant names are hidden from individual responses and reports. Details participants share in their responses may still reveal their identity.</p><p>In identified sessions, individual reports include the participant&rsquo;s name. These reports are available to the Creator, people the Creator has authorized to view the results, and admins with global viewing access.</p><p>In anonymous focus groups, all participants appear as &ldquo;Anonymous&rdquo; in the chat. Details shared during the discussion may still reveal their identity to other participants.</p></details><details><summary>Who can access individual responses?</summary><p>Anyone with access to a session&mdash;the creator, people the creator has shared access with, and admins with global viewing access&mdash;can access all reports and responses for that session, including group reports, individual reports, discussion transcripts, and survey responses.</p><p>In anonymous sessions, participant names are hidden in all reports and transcripts. Details participants share in their responses may still reveal their identity. In identified sessions, individual reports include the participant&rsquo;s name.</p></details><details><summary>Does privacy work the same way in every session type?</summary><p>No. A survey can be answered without anyone else present; a 1:1 discussion is between the participant and the AI; a focus group is held with multiple participants in the session. Participants are always notified if a session is anonymous or identified.</p></details><details><summary>How much control does our team have?</summary><p>Your team defines the research objectives, reviews and approves the session details before launch, and chooses participants. TruPulse conducts the research and prepares findings for your team to review. You decide what happens next.</p></details><details><summary>Are participant responses used to train AI models?</summary><p>No. TruPulse does not use participant responses&mdash;including survey answers, 1:1 discussions, and focus-group conversations&mdash;to train AI models. Responses are used to conduct your research and generate findings and reports for your organization.</p></details></div>
+<div class="chat-dock">
+    <div class="chat-panel" data-chat-panel hidden role="dialog" aria-label="TruPulse AI Assistant">
+      <header class="chat-head">
+        <button class="chat-icon chat-back" type="button" aria-label="Back" data-chat-back hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="chat-avatar" data-chat-avatar aria-hidden="true"><svg class="ico-bubble" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+<path d="M16 4c7.2 0 13 4.6 13 10.3S23.2 24.6 16 24.6c-1.2 0-2.4-.1-3.5-.4l-6 3a.7.7 0 0 1-1-.8l1.2-4A9.6 9.6 0 0 1 3 14.3C3 8.6 8.8 4 16 4Z" fill="currentColor"/>
+<circle cx="10.6" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="16" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="21.4" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/>
+</svg></span>
+        <span class="chat-id"><strong data-chat-title>TruPulse AI Assistant</strong><small data-chat-sub><i class="chat-dot"></i>AI assistant</small></span>
+        <span class="chat-head-actions">
+          <button class="chat-icon" type="button" aria-label="Conversation menu" aria-expanded="false" data-chat-menu><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg></button>
+          <button class="chat-icon" type="button" aria-label="Close chat" title="Close chat" data-chat-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+        </span>
+        <div class="chat-menu" data-chat-menu-list hidden role="menu">
+          <button type="button" role="menuitem" data-chat-action="new">Start a new conversation</button>
+          <button type="button" role="menuitem" data-chat-action="clear">Clear this conversation</button>
+          <button type="button" role="menuitem" data-chat-action="demo">Book a demo instead</button>
+        </div>
+      </header>
+
+      <div class="chat-body">
+        <!-- home -->
+        <section class="chat-view is-on" data-view="home">
+          <div class="chat-greet">
+            <p class="chat-hi">Hi! <span class="chat-wave" aria-hidden="true">👋</span></p>
+            <p class="chat-greet-sub">I can help you explore how TruPulse uses AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups—with your team guiding the process.</p>
+          </div>
+          
+          <button class="chat-card chat-card-btn" type="button" data-chat-new>
+            <span><strong>New conversation</strong><small>AI assistant</small></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.6 21 12 3.4 3.4l2.1 7.2 9 1.4-9 1.4-2.1 7.2Z" fill="currentColor"/></svg></i>
+          </button>
+        </section>
+
+        <!-- conversation -->
+        <section class="chat-view" data-view="chat">
+          <div class="chat-log" data-chat-log role="log" aria-live="polite"></div>
+          <form class="chat-form" data-chat-form>
+            <label class="sr-only" for="chat-input">Your message</label>
+            <input id="chat-input" type="text" placeholder="Ask a question about TruPulse…" autocomplete="off">
+            <button class="chat-icon chat-emoji" type="button" aria-label="Insert emoji" title="Insert emoji" data-chat-emoji><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="9.3" cy="10.2" r="1.15" fill="currentColor"/><circle cx="14.7" cy="10.2" r="1.15" fill="currentColor"/><path d="M8.4 14.2a4.4 4.4 0 0 0 7.2 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></button>
+            <button class="chat-send" type="submit" aria-label="Send message" title="Send" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.6 21 12 3.4 3.4l2.1 7.2 9 1.4-9 1.4-2.1 7.2Z" fill="currentColor"/></svg></button>
+          </form>
+          <div class="chat-picker" data-chat-picker hidden>
+            <label class="chat-search">
+              <span class="sr-only">Search emoji</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.8 15.8 20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <input type="search" placeholder="Search emoji" autocomplete="off" data-emoji-search>
+            </label>
+            <div class="chat-emoji-grid" data-emoji-grid></div>
+          </div>
+        </section>
+
+        <!-- messages -->
+        <section class="chat-view" data-view="messages">
+          <p class="chat-section-title">Start a new chat</p>
+          <button class="chat-card chat-card-btn" type="button" data-chat-new>
+            <span><strong>New conversation</strong><small>AI assistant</small></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.6 21 12 3.4 3.4l2.1 7.2 9 1.4-9 1.4-2.1 7.2Z" fill="currentColor"/></svg></i>
+          </button>
+          <p class="chat-section-title">Recent</p>
+          <ul class="chat-threads" data-chat-threads></ul>
+          <p class="chat-empty" data-chat-empty>No conversations yet — start one above.</p>
+        </section>
+      </div>
+
+      <nav class="chat-tabs" aria-label="Assistant sections">
+        <button type="button" class="is-on" data-chat-tab="home" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Home</span></button>
+        <button type="button" data-chat-tab="messages" aria-label="Messages"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12.4c0 3.6-3.6 6.5-8 6.5-.9 0-1.7-.1-2.5-.3L5 21l1-3.2A6.6 6.6 0 0 1 4 12.4C4 8.8 7.6 6 12 6s8 2.8 8 6.4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Messages</span></button>
+      </nav>
+    </div>
+
+    <button class="chat-launch" type="button" aria-expanded="false" aria-label="Open chat" data-chat-launch>
+      <svg class="chat-ring" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+<defs><path id="chat-ring-path" d="M60 12a48 48 0 1 1 0 96 48 48 0 1 1 0-96"/></defs>
+<text text-anchor="start"><textPath href="#chat-ring-path" startOffset="0" textLength="301.6" lengthAdjust="spacing">we're here to help · we're here to help ·</textPath></text>
+</svg>
+      <span class="chat-launch-face" aria-hidden="true"><svg class="ico-bubble" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+<path d="M16 4c7.2 0 13 4.6 13 10.3S23.2 24.6 16 24.6c-1.2 0-2.4-.1-3.5-.4l-6 3a.7.7 0 0 1-1-.8l1.2-4A9.6 9.6 0 0 1 3 14.3C3 8.6 8.8 4 16 4Z" fill="currentColor"/>
+<circle cx="10.6" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="16" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="21.4" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/>
+</svg></span>
+      <span class="chat-launch-down" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="chat-launch-hand" aria-hidden="true">👋</span>
+    </button>
+  </div>
+<script>
+/* ================= TruPulse assistant =================
+   Home → help centre search and a new-conversation card; a conversation with
+   quick replies, a typing beat and an emoji picker; a messages list that keeps
+   what you have already asked. The help centre searches this page's own FAQ,
+   so the answers here and the answers on the page can never drift apart. */
+(function () {
+  var dock = document.querySelector(".chat-dock");
+  if (!dock) return;
+  var panel = dock.querySelector("[data-chat-panel]");
+  var launch = dock.querySelector("[data-chat-launch]");
+  var log = dock.querySelector("[data-chat-log]");
+  var form = dock.querySelector("[data-chat-form]");
+  var input = form.querySelector("input");
+  var sendBtn = form.querySelector(".chat-send");
+  var titleEl = dock.querySelector("[data-chat-title]");
+  var subEl = dock.querySelector("[data-chat-sub]");
+  var backBtn = dock.querySelector("[data-chat-back]");
+  var menuBtn = dock.querySelector("[data-chat-menu]");
+  var menu = dock.querySelector("[data-chat-menu-list]");
+  var picker = dock.querySelector("[data-chat-picker]");
+  var threadsEl = dock.querySelector("[data-chat-threads]");
+  var emptyEl = dock.querySelector("[data-chat-empty]");
+  var view = "home";
+  var threads = [];
+  var current = null;
+
+  /* ---------- the help centre is this page's FAQ ---------- */
+  var FAQ = [].map.call(document.querySelectorAll(".tp-chat-faq details"), function (d) {
+    return { q: d.querySelector("summary").textContent.trim(), a: [].map.call(d.querySelectorAll("p"), function (p) { return p.textContent.trim(); }).filter(Boolean).join("\n\n") };
+  });
+
+  /* ---------- open / close ---------- */
+  function setOpen(open) {
+    panel.hidden = !open;
+    launch.setAttribute("aria-expanded", String(open));
+    launch.setAttribute("aria-label", open ? "Close chat" : "Open chat");
+    launch.setAttribute("title", open ? "Close chat" : "Chat with TruPulse");
+    if (open) setTimeout(function () { (view === "chat" ? input : (dock.querySelector("[data-chat-search]") || dock.querySelector("[data-chat-new]"))).focus(); }, 80);
+    if (!open) closeMenu();
+  }
+  setOpen(false);                       /* closed until the icon is clicked */
+  launch.addEventListener("click", function () { setOpen(panel.hidden); });
+  dock.querySelector("[data-chat-close]").addEventListener("click", function () { setOpen(false); launch.focus(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    if (!picker.hidden) { picker.hidden = true; return; }
+    if (!menu.hidden) { closeMenu(); return; }
+    if (!panel.hidden) { setOpen(false); launch.focus(); }
+  });
+
+  /* ---------- views ---------- */
+  function go(next) {
+    view = next;
+    [].forEach.call(dock.querySelectorAll(".chat-view"), function (v) { v.classList.toggle("is-on", v.dataset.view === next); });
+    [].forEach.call(dock.querySelectorAll("[data-chat-tab]"), function (t) {
+      t.classList.toggle("is-on", t.dataset.chatTab === next || (next === "chat" && t.dataset.chatTab === "messages"));
+    });
+    backBtn.hidden = next === "home";
+    picker.hidden = true;
+    closeMenu();
+    if (next === "chat") {
+      titleEl.textContent = "TruPulse AI Assistant";
+      subEl.innerHTML = '<i class="chat-dot"></i>AI assistant';
+      setTimeout(function () { input.focus(); }, 60);
+    } else if (next === "messages") {
+      titleEl.textContent = "Messages";
+      subEl.innerHTML = '<i class="chat-dot"></i>Your conversations with us';
+      renderThreads();
+    } else {
+      titleEl.textContent = "TruPulse AI Assistant";
+      subEl.innerHTML = '<i class="chat-dot"></i>AI assistant';
+    }
+  }
+  [].forEach.call(dock.querySelectorAll("[data-chat-tab]"), function (t) {
+    t.addEventListener("click", function () { go(t.dataset.chatTab); });
+  });
+  backBtn.addEventListener("click", function () { go(view === "chat" && threads.length > 1 ? "messages" : "home"); });
+
+  /* ---------- the conversation menu ---------- */
+  function closeMenu() { menu.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); }
+  menuBtn.addEventListener("click", function () {
+    menu.hidden = !menu.hidden;
+    menuBtn.setAttribute("aria-expanded", String(!menu.hidden));
+  });
+  document.addEventListener("click", function (e) {
+    if (!menu.hidden && !menu.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) closeMenu();
+  });
+  [].forEach.call(menu.querySelectorAll("[data-chat-action]"), function (b) {
+    b.addEventListener("click", function () {
+      closeMenu();
+      if (b.dataset.chatAction === "new") startConversation();
+      else if (b.dataset.chatAction === "clear") { if (current) { current.msgs = []; } log.innerHTML = ""; greet(); }
+      else { setOpen(false); var od = document.querySelector('[data-open-demo]:not([data-open-demo=video])'); if (od) od.click(); else if (window.__tpOpenDemoDialog) window.__tpOpenDemoDialog(); }
+    });
+  });
+
+  /* ---------- messages ---------- */
+  function bubble(text, mine) {
+    var wrap;
+    if (mine) {
+      wrap = document.createElement("p");
+      wrap.className = "chat-msg me";
+      wrap.textContent = text;
+      log.appendChild(wrap);
+    } else {
+      var who = document.createElement("p");
+      who.className = "chat-who";
+      who.textContent = "TruPulse";
+      var row = document.createElement("div");
+      row.className = "chat-row";
+      row.innerHTML = '<span class="chat-face" aria-hidden="true"><svg class="ico-bubble" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4c7.2 0 13 4.6 13 10.3S23.2 24.6 16 24.6c-1.2 0-2.4-.1-3.5-.4l-6 3a.7.7 0 0 1-1-.8l1.2-4A9.6 9.6 0 0 1 3 14.3C3 8.6 8.8 4 16 4Z" fill="currentColor"/><circle cx="10.6" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="16" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="21.4" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/></svg></span>';
+      wrap = document.createElement("p");
+      wrap.className = "chat-msg bot";
+      wrap.textContent = text;
+      row.appendChild(wrap);
+      log.appendChild(who);
+      log.appendChild(row);
+    }
+    if (current) current.msgs.push({ text: text, mine: !!mine });
+    if (current) { current.last = text; current.at = Date.now(); }
+    log.scrollTop = log.scrollHeight;
+    return wrap;
+  }
+  function chips(list) {
+    var box = document.createElement("div");
+    box.className = "chat-chips";
+    list.forEach(function (t) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = t;
+      b.addEventListener("click", function () { box.remove(); var l = log.querySelector(".chat-try"); if (l) l.remove(); say(t); });
+      box.appendChild(b);
+    });
+    log.appendChild(box);
+    log.scrollTop = log.scrollHeight;
+  }
+  function typing(then) {
+    var row = document.createElement("div");
+    row.className = "chat-row";
+    row.innerHTML = '<span class="chat-face" aria-hidden="true"><svg class="ico-bubble" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4c7.2 0 13 4.6 13 10.3S23.2 24.6 16 24.6c-1.2 0-2.4-.1-3.5-.4l-6 3a.7.7 0 0 1-1-.8l1.2-4A9.6 9.6 0 0 1 3 14.3C3 8.6 8.8 4 16 4Z" fill="currentColor"/><circle cx="10.6" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="16" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/><circle cx="21.4" cy="14.3" r="1.9" fill="var(--bubble-dot,#fff)"/></svg></span>' +
+      '<p class="chat-msg bot chat-typing"><i></i><i></i><i></i></p>';
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+    setTimeout(function () { row.remove(); then(); }, 850);
+  }
+
+  /* INTEGRATION POINT: swap this for your support inbox or assistant endpoint. */
+  function reply(text) {
+    var q = text.toLowerCase();
+    var hit = FAQ.find(function (f) {
+      var words = f.q.toLowerCase().replace(/[^a-z0-9 ]/g, "").split(" ").filter(function (w) { return w.length > 3; });
+      return words.filter(function (w) { return q.indexOf(w) > -1; }).length >= 2;
+    });
+    if (hit) return hit.a;
+    if (/1:1|1 on 1|one.to.one|discussion/.test(q)) return "An AI agent runs the 1:1 itself: it opens with your topic, listens, and asks the follow-up a busy manager would miss. You get the transcript, the themes and the sentiment — the manager keeps the decisions.";
+    if (/report|output|findings|analys/.test(q)) return "A TruPulse report opens with the objective and participation, then the recurring themes, the measures and sentiment, and the transcripts and quotes behind each finding — detailed or summary, for a session, a person or a whole campaign.";
+    if (/survey/.test(q)) return "Surveys here combine scored questions with open text, and the same analysis runs across both — so you get the number and the reason for it in one report.";
+    if (/demo|call|talk|meet/.test(q)) return "Happy to — the Book a Demo button opens the request form, and you can bring one research question to it.";
+    if (/price|cost|plan/.test(q)) return "Pricing depends on how many people you research and how often. I do not have account-specific pricing — book a demo or email sales@trupulse.ai and someone will come back with a number.";
+    if (/hello|hi|hey/.test(q)) return "Hello — I am the TruPulse AI assistant. What would you like to understand about the people your decisions affect?";
+    return "I could not answer that one. Book a demo and we will walk through it with you, or email hello@trupulse.ai and a person will reply.";
+  }
+  function say(text) {
+    bubble(text, true);
+    typing(function () { bubble(reply(text), false); });
+  }
+
+  function greet() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      bubble("Hi! I can explain TruPulse, help you choose a research method, or show you sample reports. What would you like to explore?", false);
+    } else {
+    bubble("Hi! I can help you explore how TruPulse uses AI to create, conduct, and analyze surveys, 1:1 discussions, and focus groups\u2014with your team guiding the process.", false);
+    bubble("What would you like to understand about your employees, customers, students, members, or community?", false);
+    }
+    var tryL = document.createElement("p"); tryL.className = "chat-try"; tryL.textContent = "Try asking\u2026"; log.appendChild(tryL);
+    chips(["How could TruPulse help my organization?", "Which should I use\u2014a survey, 1:1 discussion, or focus group?", "What findings and reports will I get?"]);
+  }
+  function startConversation() {
+    current = { id: Date.now(), title: "TruPulse AI Assistant", msgs: [], last: "", at: Date.now() };
+    threads.unshift(current);
+    log.innerHTML = "";
+    greet();
+    go("chat");
+  }
+  [].forEach.call(dock.querySelectorAll("[data-chat-new]"), function (b) { b.addEventListener("click", startConversation); });
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest && e.target.closest("[data-chat-ask]");
+    if (!t) return;
+    e.preventDefault();
+    setOpen(true);
+    startConversation();
+    var q = t.getAttribute("data-chat-ask");
+    if (q) setTimeout(function () { say(q); }, 420);
+  });
+
+  function renderThreads() {
+    threadsEl.innerHTML = "";
+    emptyEl.hidden = threads.length > 0;
+    threads.forEach(function (t) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.innerHTML = '<span><strong></strong><small></small></span><em></em><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      b.querySelector("strong").textContent = t.title;
+      b.querySelector("small").textContent = t.last || "New conversation";
+      b.querySelector("em").textContent = ago(t.at);
+      b.addEventListener("click", function () { openThread(t); });
+      li.appendChild(b);
+      threadsEl.appendChild(li);
+    });
+  }
+  function ago(ts) {
+    var s = Math.round((Date.now() - ts) / 1000);
+    if (s < 60) return "now";
+    if (s < 3600) return Math.round(s / 60) + "m";
+    return Math.round(s / 3600) + "h";
+  }
+  function openThread(t) {
+    current = t;
+    log.innerHTML = "";
+    t.msgs.forEach(function (m) {
+      var keep = current; current = null;      /* replay without re-recording */
+      bubble(m.text, m.mine);
+      current = keep;
+    });
+    go("chat");
+  }
+
+  /* ---------- composer ---------- */
+  input.addEventListener("input", function () { sendBtn.disabled = !input.value.trim(); });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var text = input.value.trim();
+    if (!text) return;
+    if (!current) startConversation();
+    input.value = "";
+    sendBtn.disabled = true;
+    picker.hidden = true;
+    say(text);
+  });
+
+  /* ---------- emoji ---------- */
+  var EMOJI = [
+    ["grinning face", "\uD83D\uDE00"], ["smile", "\uD83D\uDE03"], ["laughing", "\uD83D\uDE06"], ["wink", "\uD83D\uDE09"],
+    ["blush", "\uD83D\uDE0A"], ["heart eyes", "\uD83D\uDE0D"], ["thinking face", "\uD83E\uDD14"], ["neutral", "\uD83D\uDE10"],
+    ["thumbs up", "\uD83D\uDC4D"], ["thumbs down", "\uD83D\uDC4E"], ["clap hands", "\uD83D\uDC4F"], ["wave hand", "\uD83D\uDC4B"],
+    ["ok hand", "\uD83D\uDC4C"], ["raising hands", "\uD83D\uDE4C"], ["pray thanks", "\uD83D\uDE4F"], ["muscle", "\uD83D\uDCAA"],
+    ["heart", "\u2764\uFE0F"], ["sparkles", "\u2728"], ["star", "\u2B50"], ["fire", "\uD83D\uDD25"],
+    ["rocket", "\uD83D\uDE80"], ["party", "\uD83C\uDF89"], ["bulb idea", "\uD83D\uDCA1"], ["chart data", "\uD83D\uDCCA"],
+    ["memo notes", "\uD83D\uDCDD"], ["calendar", "\uD83D\uDCC5"], ["clock time", "\u23F0"], ["check", "\u2705"],
+    ["question", "\u2753"], ["eyes", "\uD83D\uDC40"], ["speech chat", "\uD83D\uDCAC"], ["email", "\uD83D\uDCE7"],
+    ["people team", "\uD83D\uDC65"], ["handshake", "\uD83E\uDD1D"], ["coffee", "\u2615"], ["hundred", "\uD83D\uDCAF"]
+  ];
+  var grid = dock.querySelector("[data-emoji-grid]");
+  var emojiSearch = dock.querySelector("[data-emoji-search]");
+  function drawEmoji(q) {
+    grid.innerHTML = "";
+    EMOJI.filter(function (e) { return !q || e[0].indexOf(q) > -1; }).forEach(function (e) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = e[1];
+      b.setAttribute("aria-label", e[0]);
+      b.addEventListener("click", function () {
+        input.value += e[1];
+        sendBtn.disabled = !input.value.trim();
+        input.focus();
+      });
+      grid.appendChild(b);
+    });
+  }
+  drawEmoji("");
+  emojiSearch.addEventListener("input", function () { drawEmoji(emojiSearch.value.trim().toLowerCase()); });
+  dock.querySelector("[data-chat-emoji]").addEventListener("click", function () {
+    picker.hidden = !picker.hidden;
+    if (!picker.hidden) emojiSearch.focus();
+  });
+
+  /* ---------- help centre search ---------- */
+  var search = dock.querySelector("[data-chat-search]");
+  var results = dock.querySelector("[data-chat-results]");
+  if (search) search.addEventListener("input", function () {
+    var q = search.value.trim().toLowerCase();
+    results.innerHTML = "";
+    if (q.length < 2) return;
+    var hits = FAQ.filter(function (f) { return (f.q + " " + f.a).toLowerCase().indexOf(q) > -1; }).slice(0, 5);
+    if (!hits.length) {
+      var none = document.createElement("li");
+      none.className = "chat-no-hit";
+      none.textContent = "Nothing matched — start a conversation and we will answer it.";
+      results.appendChild(none);
+      return;
+    }
+    hits.forEach(function (f) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.innerHTML = '<span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      b.querySelector("span").textContent = f.q;
+      b.addEventListener("click", function () {
+        if (!current) { current = { id: Date.now(), title: "TruPulse AI Assistant", msgs: [], last: "", at: Date.now() }; threads.unshift(current); log.innerHTML = ""; }
+        go("chat");
+        bubble(f.q, true);
+        typing(function () { bubble(f.a, false); });
+        search.value = "";
+        results.innerHTML = "";
+      });
+      li.appendChild(b);
+      results.appendChild(li);
+    });
+  });
+})();
+</script>
+<script id="tp-heur-js">(function(){
+function msg(el){var v=el.validity;if(v.valueMissing)return el.type==="email"?"Please enter your email address.":el.type==="password"?"Please enter your password.":"Please fill in this field.";if(v.typeMismatch&&el.type==="email")return "Please enter a valid email address, like name@company.com.";return el.validationMessage||"Please check this field."}
+function clear(el){el.classList.remove("tp-invalid");el.removeAttribute("aria-invalid");var id=el.getAttribute("data-tp-err");if(id){var n=document.getElementById(id);if(n)n.remove();el.removeAttribute("data-tp-err");var d=(el.getAttribute("aria-describedby")||"").split(" ").filter(function(x){return x&&x!==id}).join(" ");if(d)el.setAttribute("aria-describedby",d);else el.removeAttribute("aria-describedby")}}
+var first=null,tm=null;
+document.addEventListener("invalid",function(e){var el=e.target;e.preventDefault();clear(el);var id="tp-err-"+Math.random().toString(36).slice(2,8);var p=document.createElement("span");p.className="tp-err";p.id=id;p.setAttribute("role","alert");p.textContent=msg(el);var host=el.closest(".field,label")||el;if(host===el)el.insertAdjacentElement("afterend",p);else host.appendChild(p);el.classList.add("tp-invalid");el.setAttribute("aria-invalid","true");el.setAttribute("data-tp-err",id);el.setAttribute("aria-describedby",((el.getAttribute("aria-describedby")||"")+" "+id).trim());if(!first){first=el;clearTimeout(tm);tm=setTimeout(function(){try{first.focus({preventScroll:false})}catch(x){}first=null},0)}},true);
+document.addEventListener("input",function(e){var el=e.target;if(el.getAttribute&&el.getAttribute("data-tp-err")&&el.checkValidity())clear(el)},true);
+if(!window.__tpSoon){window.__tpSoon=1;[].forEach.call(document.querySelectorAll(".developer-video-slot"),function(v){if(v.querySelector(".tp-soon"))return;var b=document.createElement("span");b.className="tp-soon";b.textContent="Video coming soon";v.appendChild(b)})}
+function crumb(){var t=document.querySelector(".article-banner-text");if(!t||t.querySelector(".tp-crumb"))return;var m=t.querySelector(".article-meta");if(!m)return;var c=(m.textContent.split("·")[0]||"").trim();var n=document.createElement("nav");n.className="tp-crumb";n.setAttribute("aria-label","Breadcrumb");n.innerHTML='<a href="/blogs" data-single-route="blogs">Resources</a><span aria-hidden="true">›</span><span>'+c.replace(/[&<>]/g,function(x){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[x]})+'</span>';var tags=t.querySelector(".article-tags");t.insertBefore(n,tags||null)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",crumb);else crumb();
+var hero=document.querySelector("[data-hero]");if(hero)new MutationObserver(crumb).observe(hero,{childList:true,subtree:true});
+})();</script><style id="tp-v120">
+@media (max-width:767px){
+ html body .use-case-panel>p.uc-chip-label,html body .use-case-panel .use-case-ways small,html body .bc-eyebrow,html body .tp-sro{font-size:12px!important}
+ .site-footer a,.case-study-link,.tp-sr-link,.linkish,.cs-cta-link{display:inline-flex;align-items:center;min-height:32px}
+ .cs-aside a{display:flex;align-items:center;min-height:32px}
+}
+.tp-cal-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(255,255,255,.94);border-radius:inherit;z-index:3;font-size:14px;color:#475467;text-align:center}
+.tp-cal-loading[hidden]{display:none}
+.tp-cal-spin{width:28px;height:28px;border-radius:50%;border:3px solid rgba(238,133,27,.2);border-top-color:#EE851B;animation:tpspin .8s linear infinite}
+@keyframes tpspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.tp-cal-spin{animation-duration:2.4s}}
+.tp-pick{position:relative}
+</style>
+<script id="tp-v120-js">(function(){
+function wire(){document.querySelectorAll('[data-step="2"]').forEach(function(s2){if(s2.__tpL)return;var pick=s2.querySelector('.tp-pick');if(!pick)return;s2.__tpL=1;
+var L=document.createElement('div');L.className='tp-cal-loading';L.setAttribute('role','status');L.hidden=true;
+L.innerHTML='<span class="tp-cal-spin" aria-hidden="true"></span><span>Loading available times&hellip;</span>';pick.appendChild(L);
+/* DEV NOTE: show this loader until the live calendar (Calendly) has loaded, then hide it. */
+new MutationObserver(function(){if(!s2.hidden){L.hidden=false;clearTimeout(s2.__t);s2.__t=setTimeout(function(){L.hidden=true},900)}}).observe(s2,{attributes:true,attributeFilter:['hidden']});});}
+new MutationObserver(wire).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',wire);wire();})();</script><style id="tp-v121">
+.tp-privnote{margin:8px 0 0;font-size:12px;line-height:1.5;color:var(--muted,#667085);text-align:left}
+.tp-privnote a{color:inherit;text-decoration:underline;font-weight:600}
+.chat-view[data-view="chat"] .tp-privnote{margin:6px 14px 10px;padding:0}
+form .tp-privnote{margin-top:12px;text-align:center}
+.tp-greet-short{display:none}
+@media (max-width:767px){.chat-greet-sub .tp-greet-long{display:none}.chat-greet-sub .tp-greet-short{display:inline}}
+</style>
+<script id="tp-v121-js">(function(){
+var PL='<a href="/privacy" data-single-route="privacy">Privacy Policy</a>';
+function note(t){var p=document.createElement('p');p.className='tp-privnote';p.innerHTML=t+' '+PL;return p}
+function run(){
+ document.querySelectorAll('form[data-chat-form]').forEach(function(f){if(f.nextElementSibling&&f.nextElementSibling.classList.contains('tp-privnote'))return;f.insertAdjacentElement('afterend',note('Conversations are stored and may be reviewed to answer inquiries and improve this assistant. Please don\u2019t share confidential or sensitive information.'))});
+ document.querySelectorAll('[data-pick-a-time]').forEach(function(b){var f=b.closest('form');if(!f||f.querySelector('.tp-privnote'))return;b.insertAdjacentElement('afterend',note('We\u2019ll use your details to arrange your demo and respond to your inquiry.'))});
+ document.querySelectorAll('.chat-greet-sub').forEach(function(g){if(g.querySelector('.tp-greet-long'))return;g.innerHTML='<span class="tp-greet-long">'+g.innerHTML+'</span><span class="tp-greet-short">I can explain TruPulse, help you choose a research method, or show you sample reports. What would you like to explore?</span>'});
+}
+new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',run);run();})();</script><style id="tp-v124">
+@media (min-width:600px) and (max-width:1000px){.tp-sr-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:599px){.tp-sr-grid{grid-template-columns:minmax(0,1fr)!important}}
+.tp-sr-grid>li{min-width:0}
+.tp-sr-card[data-tp-hidden]{display:none!important}
+.tp-opt-pill{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:#efeeff;color:#433eb1;font-size:11px;font-weight:600;letter-spacing:.02em;vertical-align:middle}
+.tp-req{color:#c0362c;font-weight:700}
+.tp-req-legend{margin:0 0 12px;font-size:13px;color:#5b589d}
+.tp-req-legend b{color:#c0362c}
+</style>
+<script id="tp-v124-js">(function(){
+var HIDE=['Focus Group Session Report','Campaign Report'];
+function run(){
+ document.querySelectorAll('.tp-sr-card').forEach(function(c){var t=c.querySelector('strong');if(t&&HIDE.indexOf(t.textContent.trim())>-1)c.setAttribute('data-tp-hidden','')});
+ document.querySelectorAll('form').forEach(function(f){var first=f.querySelector('.tp-f');if(!first||f.querySelector('.tp-req-legend'))return;var p=document.createElement('p');p.className='tp-req-legend';p.innerHTML='Fields marked <b>*</b> are required.';first.parentNode.insertBefore(p,first)});
+}
+new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',run);run();})();</script><style id="tp-v125">@media (min-width:600px){.tp-sr-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}</style></body></html>
